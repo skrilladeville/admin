@@ -7,11 +7,14 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
 
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
     use HasRoles;
+
+    protected $appends = ['role', 'permission'];
 
     /**
      * The attributes that are mass assignable.
@@ -45,5 +48,22 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function getRoleAttribute()
+    {
+        return $this->getRoleNames();
+    }
+
+    public function getPermissionAttribute()
+    {
+        $list =  array();
+        $permissions = $this->getAllPermissions();
+
+        for ($i = 0; $i < count($permissions); $i++) {
+            $list[$i] = $permissions[$i]['name'];
+        }
+
+        return $list;
     }
 }

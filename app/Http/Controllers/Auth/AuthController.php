@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -28,8 +29,13 @@ class AuthController extends Controller
             return response()->json(['error' => 'Could not create token'], 500);
         }
 
+        $role = Role::findById(1);
+        $role->load('permissions');
+
         $user = $request->user();
 
         return response()->json(compact('token', 'user'));
+
+        //return response()->json(compact('token', 'role'));
     }
 }
