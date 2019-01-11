@@ -60,6 +60,13 @@ axios.interceptors.response.use(response => {
 
 Vue.config.productionTip = false
 
+// Vue.component('app', App);
+
+// const app = new Vue({
+// 	router,
+// 	store
+// }).$mount('#app');
+
 new Vue({
   el: '#app',
   router,
