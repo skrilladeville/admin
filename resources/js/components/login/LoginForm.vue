@@ -1,6 +1,15 @@
 <template>
 	<div>
-		<form @submit.prevent="login">
+		<div class="card">
+		
+				<img class="img-responsive" src="/images/logo--Green-Card.svg" alt="">
+		
+			
+
+		
+			<p class="lead">Please Login With your credentials</p>
+			<div class="card-body" style="padding:30px;">
+<form @submit.prevent="login">
 			<div class="form-group">
 				<label for="email">Email</label>
 				<input
@@ -26,15 +35,48 @@
 				/>
 				<div class="invalid-feedback" v-show="error.password">{{ error.password }}</div>
 			</div>
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary btn-block" :disabled="loading">
+			<hr>
+			<div class="form-group row" style="margin-left:30px; margin-right:30px;">
+				<div class="col">
+	<button type="submit" class="btn btn-info btn-block" :disabled="loading">
 					<span v-show="loading">Logging in</span>
 					<span v-show="!loading">Login</span>
 				</button>
+				</div>
+				<div class="col">
+					<button class="btn btn-danger btn-block" @click="clear">
+					Cancel
+				</button>
+				</div>
+			
+					
 			</div>
 		</form>
+		</div>
+		</div>
+		
 	</div>
 </template>
+
+<style scoped>
+
+img{
+	margin-top: 30px;
+width: 100px;
+height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+	p.lead{
+		text-align: center;
+		font-size: 14px!important;
+		margin-top: 20px;
+	}
+	
+</style>
 
 <script>
 	import {api} from "../../config";
@@ -54,6 +96,13 @@
 			}
 		},
 		methods: {
+			clear(){
+
+				this.form.email=null,
+				this.form.password=null,
+					this.error.email = null;
+				this.error.password = null;
+			},
 			login() {
 				this.loading = true;
 				axios.post(api.login, this.form)

@@ -15,20 +15,38 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+
 	if (jwtToken.getToken() && !store.getters.isLoggedIn) {
-		let {data: authUser} = await axios.get(api.currentUser);
+		try{
+			var {data: authUser} = await axios.get(api.currentUser).catch(err=> this.authUser=null);
+		}
+		catch(err){
+			return
+		}
+	
+
+
+	
+		
+		
 		await store.dispatch('setAuthUser', authUser);
 	}
 
 	if (to.meta.requiresAuth) {
 		if (store.getters.isLoggedIn || jwtToken.getToken())
+			
 			return next();
 		else
 			return next({name: 'login'});
 	}
 	if (to.meta.requiresGuest) {
 		if (store.getters.isLoggedIn || jwtToken.getToken())
+		{
+
+			console.log('hello')
 			return next({name: 'index'});
+		}
+		
 		else
 			return next();
 	}

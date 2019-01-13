@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 
 Route::post('authenticate', 'Auth\AuthController@authenticate');
 
+
+
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('user', 'Users\UserController@show');
     Route::post('user/profile/update', 'Users\UserController@updateProfile');

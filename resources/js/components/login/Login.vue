@@ -2,7 +2,7 @@
 	<div class="container">
 		<login-form @loginSuccess="loginSuccess"></login-form>
 	</div>
-	</div>
+	
 </template>
 
 <script>

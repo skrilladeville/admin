@@ -137,6 +137,7 @@ export default [
 	},
 	{
 		path: '/catalog',
+		component: Layout,
 		meta: {requiresAuth: true, title: 'Catalog', icon: 'el-icon-picture', permission: 'product list' },
 		children: [
 			{

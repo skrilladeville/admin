@@ -41,22 +41,21 @@ axios.interceptors.request.use(config => {
 });
 
 axios.interceptors.response.use(response => {
+	console.log("tttt")
 	return response;
 }, error => {
-	let errorResponseData = error.response.data;
+	console.log("ffff"+error)
 
-	const errors = ["token_invalid", "token_expired", "token_not_provided"];
-
-	if (errorResponseData.error && errors.includes(errorResponseData.error)) {
+	if (error.response.status == 401) {	
 		store.dispatch('unsetAuthUser')
-			.then(() => {
-				jwtToken.removeToken();
-				router.push({name: 'login'});
-			});
+		.then(() => {
+			jwtToken.removeToken();
+			router.push({name: 'login'});
+		});
 	}
-
 	return Promise.reject(error);
 });
+
 
 Vue.config.productionTip = false
 
