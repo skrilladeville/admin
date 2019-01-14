@@ -6,6 +6,7 @@ import EditPassword from '../components/profile/edit-password/EditPassword.vue';
 import Layout from '../components/layout/Layout.vue';
 import Dashboard from '../components/dashboard/index.vue';
 import ManageUsers from '../pages/users/manageusers/index.vue';
+import categories from '../pages/catalog/catigories';
 import RolesPermissions from '../pages/users/rolespermissions/index.vue';
 
 export default [
@@ -147,6 +148,7 @@ export default [
 			},
 			{
 				path: 'manage-categories',
+				component:categories,
 				name: 'catalog.manageCategories',
 				meta: {requiresAuth: true, title: 'Manage Categories', permission: 'product categories' },
 			},
