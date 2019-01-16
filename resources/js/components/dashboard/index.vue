@@ -1,20 +1,6 @@
 <template>
   <div class="dashboard-container">
-    qwerqewrasdfasd
-    asf
-    asdf
-    asd
-    fasdfa
-    sdfa
-    sdf
-    asd
-    fas
-    df
-    asd
-    fa
-    sdf
-    asdf
-
+   dashboard
   </div>
 </template>
 
@@ -33,6 +19,10 @@ export default {
   computed: {
   },
   created() {
+    this.createRow();
+  },
+  methods() {
+    
   }
 }
 </script>

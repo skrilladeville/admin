@@ -11191,7 +11191,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 #app .hideSidebar .sidebar-container {
   top: 64px;
-  width: 55px !important;
+  /* width: 55px !important; */
   border-top: 0.4rem solid #D3FFC9;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
@@ -11354,3 +11354,7 @@ a:hover {
   padding: 20px;
 }
 
+.dashboard-container{
+  margin-top: 70px;
+  margin-left:180px!important;
+}
