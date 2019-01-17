@@ -17,7 +17,9 @@ class FeedbackController extends Controller
     {
         $feedback = Feedback::where('profile_doctors_id', $request->user()->id)->get();
 
-        return $feedback;
+        return response()->json([
+            "feedbacks" => $feedback
+        ], 200);
     }
 
 
@@ -40,17 +42,25 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        $feedback = new Feedback;
+        //$data = $request->only('vote','score','works_well', 'not_works_well','other',);
+        $data=$request->only('vote','rate','works_well', 'not_works_well','other','doctor_id','patient_id');
+        
+         $feedback = new Feedback;
+         $feedback->vote = $data["vote"];
+         $feedback->score = $data["rate"];
+         $feedback->what_did_work =$data["works_well"];
+        $feedback->what_did_not_work = $data["not_works_well"];
+        $feedback->why = $data["other"];
+        $feedback->profile_doctors_id =$data["doctor_id"];
+        $feedback->profile_patients_id = $data["patient_id"];
 
-        $feedback->vote = 1;
-        $feedback->score = 5;
-        $feedback->what_did_work = 'It did work!';
-        $feedback->what_did_not_work = 'Somethings dont work!';
-        $feedback->why = 'It depends...';
-        $feedback->profile_doctors_id = 3;
-        $feedback->profile_patients_id = $request->user()->id;
-
-        $feedback->save();
+    $feedback->save();
+    
+    
+       
+        return response()->json([
+            "feedback" => $feedback], 200);
+    
     }
 
     /**
@@ -63,7 +73,11 @@ class FeedbackController extends Controller
     {
         //$feedback = Feedback::where('profile_doctors_id', $id)->get();
 
-        return Feedback::findOrFail($id);
+        $feedback= Feedback::findOrFail($id);
+        
+        return response()->json([
+            "feedback" => $feedback
+        ], 200);
     }
 
     /**
@@ -106,6 +120,20 @@ class FeedbackController extends Controller
      */
     public function destroy($id)
     {
-        return Feedback::destroy($id);
+        Feedback::destroy($id);
+
+        return reponse()->json(["success"=>"ok"],200);
     }
+
+    public function all()
+    {
+        
+            $feedbacks = Feedback::all();
+    
+            return response()->json([
+                "feedbacks" => $feedbacks
+            ], 200);
+    
+}
+
 }

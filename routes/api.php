@@ -15,7 +15,8 @@ use Illuminate\Http\Request;
 
 Route::post('authenticate', 'Auth\AuthController@authenticate');
 
-
+    Route::get('cms/feedback/all', 'ContinuousCare\FeedbackController@all');
+    Route::post('cms/feedback/create', 'ContinuousCare\FeedbackController@store');
 
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('user', 'Users\UserController@show');
@@ -26,11 +27,13 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::post('user/create-role', 'Users\RoleController@createRole');
 
     /* Feedback and Survey */
-    // Route::get('cms/feedback', 'ContinuousCare\FeedbackController@index');
+    //Route::get('cms/feedback', 'ContinuousCare\FeedbackController@index');
     // Route::get('cms/feedback/view/{id}', 'ContinuousCare\FeedbackController@show');
-    // Route::post('cms/feedback/create', 'ContinuousCare\FeedbackController@store');
+     //Route::post('cms/feedback/create', 'ContinuousCare\FeedbackController@store');
+     //Route::get('cms/feedback/all', 'ContinuousCare\FeedbackController@all');
     // Route::post('cms/feedback/update/{id}', 'ContinuousCare\FeedbackController@update');
     // Route::post('cms/feedback/delete/{id}', 'ContinuousCare\FeedbackController@destroy');
 
     // Route::get('cms/survey', 'ContinuousCare\SurveyController@index');
 });
+
