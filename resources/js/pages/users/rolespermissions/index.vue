@@ -1,15 +1,15 @@
 <template>
-  <div class="tab-container">
+  <div class="app-container">
     <div class="button-container">
       <el-button class="filter-item right" type="primary" @click="dialogPermission">Add Permission</el-button>
       <el-button class="filter-item right" type="primary" @click="dialogRole">Add Role</el-button>
     </div>
     <div>
       <el-tabs v-model="activeName" style="margin-top:15px;" type="border-card">
-        <el-tab-pane v-for="item in tabMapOptions" :label="item.label" :key="item.key" :name="item.key">
+        <el-tab-pane v-for="item in roleNames" :label="item.name" :key="item.id" :name="item.name">
           <keep-alive>
-            <table-list/>
-            <!-- <tab-pane v-if="activeName==item.key" :type="item.key"/> -->
+            <tab-pane v-if="activeName==item.name" :type="item.id" @create="showCreatedTimes"/>
+            <check-list/>
           </keep-alive>
         </el-tab-pane>
       </el-tabs>
@@ -47,21 +47,15 @@
 
 <script>
 import axios from 'axios'
-import tableList from './tableList'
+import checkList from './checkList'
 
 export default {
   name: 'Tab',
-  components: { tableList },
+  components: { checkList },
   data() {
     return {
-      tabMapOptions: [
-        { label: 'Super Administrator', key: 'SA' },
-        { label: 'Branch Administrator', key: 'BA' },
-        { label: 'Doctor', key: 'doc' },
-        { label: 'Patient', key: 'Pa' },
-        { label: 'Online User', key: 'OU' }
-      ],
-      activeName: 'CN',
+      roleNames: '',
+      activeName: 'super-admin',
       createdTimes: 0,
       rules: {
         title: [{ required: true, message: 'Role name is required', trigger: 'blur' }]
@@ -76,10 +70,17 @@ export default {
     }
   },
   created() {
-    this.getRolesPermissions()
+     axios.get('/api/roles/get-roles')
+        .then(response => {
+          this.roleNames = response.data
+          console.log(this.roleNames)
+        })
+        .catch(error => {
+          console.log(error)
+        })
   },
   methods: {
-    getRolesPermissions() {
+    getRoles() {
 
     },
     resetTemp() {

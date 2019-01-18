@@ -1,26 +1,16 @@
 <template>
-  <div>
-    <div class="checkList-title">
-      <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="checkAllDashboard">Dashboard</el-checkbox>
-    </div>
-    <div class="checkList-body">
-      <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-        <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
-      </el-checkbox-group>
-    </div>
-    <div class="checkList-title">
-      <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="checkAllUsers">Users</el-checkbox>
-    </div>
-    <div class="checkList-body">
-      <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-        <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
-      </el-checkbox-group>
-    </div>
+  <div class="checklist-container">
+    <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">Check all</el-checkbox>
+    <div style="margin: 15px 0;"></div>
+    <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+      <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+    </el-checkbox-group>
   </div>
 </template>
 <script>
-  const dashboardOptions = ['Chart', 'Doctors', 'Patients', 'Invoices', 'Bookings', 'Catalog'];
-  const usersOptions = ['Manage Users', 'Roles/Permissions', 'Patients', 'Invoices', 'Bookings', 'Catalog'];
+  import axios from 'axios'
+
+  const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
   export default {
     data() {
       return {
@@ -29,6 +19,16 @@
         cities: cityOptions,
         isIndeterminate: true
       };
+    },
+    created() {
+       axios.get('/api/roles/get-roles')
+          .then(response => {
+            this.roleNames = response.data
+            console.log(this.roleNames)
+          })
+          .catch(error => {
+            console.log(error)
+          })
     },
     methods: {
       handleCheckAllChange(val) {
@@ -43,15 +43,8 @@
     }
   };
 </script>
-<style>
-  .el-tabs--border-card>.el-tabs__content {
-    padding:15px;
-  }
-  .checkList-title {
-    padding: 5px 15px 0;
-    background: #f8f8f8;
-  }
-  .checkList-body {
-    margin: 15px 0;
+<style type="text/css">
+  .checklist-container {
+    padding: 30px;
   }
 </style>
