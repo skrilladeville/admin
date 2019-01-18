@@ -1,19 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Catalog;
 
 use Illuminate\Http\Request;
+use App\ProductCategory;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $categories=ProductCategory::all();
+
+        return response()->json([
+            "categories" => $categories
+        ], 200);
+
     }
 
     /**
@@ -34,7 +41,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $category= ProductCategory::create($request->only(["name","product_cat_id","description"]));
+   
+       return response()->json([
+        "category" => $category
+    ], 200);
     }
 
     /**
@@ -45,7 +56,12 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category= ProductCategory::findOrFail($id);
+        
+        return response()->json([
+            "category" => $category
+        ], 200);
+        
     }
 
     /**
@@ -68,7 +84,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category=ProductCategory::find($id);
+
+        $category->update($request->only(["name","product_cat_id","description"]));
+
+        return response()->json([
+            "category" => $category
+        ], 200);
     }
 
     /**
@@ -79,6 +101,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category=ProductCategory::find($id);
+        $category->delete();
+
+        return response()->json([
+            "success" => "ok"
+        ], 200);
+
     }
 }

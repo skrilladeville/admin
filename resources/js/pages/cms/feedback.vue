@@ -13,7 +13,7 @@
         	<div class="form-group">
 			<fieldset class="form-group">
                 <label>Please Select a doctor</label>
-                <el-select v-model="form.doctor_ids" placeholder="Please select a doctor">
+                <el-select v-model="form.profile_doctors_id" placeholder="Please select a doctor">
       <el-option label="Juan dela Cruz" value=1></el-option>
       <el-option label="Pedro Pendoko" value=2></el-option>
     </el-select>
@@ -28,7 +28,7 @@
 		<div class="form-group">
 			<fieldset class="form-group">
 				<label>Rate your satisfaction with the prescribed medication. Between 1 to 5, with 5 as the highest and 1 as lowest.</label>
-				<el-slider :min="0" :max="5"  v-model="form.rate"></el-slider>
+				<el-slider :min="0" :max="5"  v-model="form.score"></el-slider>
 			</fieldset>
 		</div>
 	</div>
@@ -39,7 +39,7 @@
 		<div class="form-group">
 			<fieldset class="form-group">
 				<label>Describe what work well for you?</label>
-				<el-input type="textarea"  v-model="form.works_well" id="" rows="3" placeholder=""></el-input>
+				<el-input type="textarea"  v-model="form.what_did_work" id="" rows="3" placeholder=""></el-input>
 			</fieldset>
 		</div>
 	</div>
@@ -49,7 +49,7 @@
 		<div class="form-group">
 			<fieldset class="form-group">
 				<label>Describe what did not work well for you?</label>
-				<el-input type="textarea"  id="" v-model="form.not_works_well" rows="3" placeholder=""></el-input>
+				<el-input type="textarea"  id="" v-model="form.what_did_not_work" rows="3" placeholder=""></el-input>
 			</fieldset>
 		</div>
 	</div>
@@ -68,7 +68,7 @@
 		<div class="form-group">
 			<fieldset class="form-group">
 				<label>Why?</label>
-				<el-input type="textarea" :disabled="!checked" v-model="form.other" id="otherIssue" rows="3" placeholder=""></el-input>
+				<el-input type="textarea" :disabled="!checked" v-model="form.why" id="otherIssue" rows="3" placeholder=""></el-input>
 			</fieldset>
 		</div>
 	</div>
@@ -140,13 +140,13 @@ import {api} from '../../config'
         feedbacks:[],
           checked:false,
         form: {
-            rate: 0,
+            score: 0,
             vote:0,
-              works_well: '',
-              not_works_well:'',
-              other:'',
-              patient_id:3,
-              doctor_id:4
+              what_did_work: '',
+              what_did_not_work:'',
+              why:'',
+              profile_patients_id:3,
+              profile_doctors_id:4
         }
       }
     },

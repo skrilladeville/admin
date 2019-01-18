@@ -17,6 +17,24 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
 
     Route::get('cms/feedback/all', 'ContinuousCare\FeedbackController@all');
     Route::post('cms/feedback/create', 'ContinuousCare\FeedbackController@store');
+    Route::get('cms/feedback/view/{id}', 'ContinuousCare\FeedbackController@show');
+    Route::post('cms/feedback/update/{id}', 'ContinuousCare\FeedbackController@update');
+    Route::post('cms/feedback/delete/{id}', 'ContinuousCare\FeedbackController@destroy');
+    
+    
+
+
+    
+    Route::get('catalog/category/all', 'Catalog\CategoryController@index');
+    Route::post('catalog/category/create', 'Catalog\CategoryController@store');
+    Route::get('catalog/category/view/{id}', 'Catalog\CategoryController@show');
+    Route::post('catalog/category/update/{id}', 'Catalog\CategoryController@update');
+    Route::post('catalog/category/delete/{id}', 'Catalog\CategoryController@destroy');
+
+    
+
+
+    
 
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('user', 'Users\UserController@show');
