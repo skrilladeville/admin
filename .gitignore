@@ -13,3 +13,6 @@ npm-debug.log
 yarn-error.log
 .env
 .phpunit.result.cache
+bootstrap/cache/packages.php
+bootstrap/cache/services.php
+bootstrap/cache/config.php

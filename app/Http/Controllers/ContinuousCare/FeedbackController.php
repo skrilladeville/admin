@@ -15,11 +15,15 @@ class FeedbackController extends Controller
      */
     public function index(Request $request)
     {
-        $feedback = Feedback::where('profile_doctors_id', $request->user()->id)->get();
+        //if ($_GET['user'] == 'admin') {
+        $feedback = Feedback::all();
 
-        return response()->json([
-            "feedbacks" => $feedback
-        ], 200);
+        return $feedback;
+        // } else {
+        //     $feedback = Feedback::where('profile_doctors_id', 4)->get();
+
+        //     return $feedback;
+        // }
     }
 
 
@@ -31,25 +35,17 @@ class FeedbackController extends Controller
      */
     public function create()
     {
-        //
-    }
+        $feedback = new Feedback;
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $feedback=Feedback::create($request->only(['vote','score','what_did_work', 'what_did_not_work','why','profile_doctors_id','profile_patients_id']));
+        $feedback->vote = 1;
+        $feedback->score = 5;
+        $feedback->what_did_work = 'It did work!';
+        $feedback->what_did_not_work = 'Somethings dont work!';
+        $feedback->why = 'It depends...';
+        $feedback->profile_doctors_id = 3;
+        $feedback->profile_patients_id = 6;
 
-    
-    
-       
-        return response()->json([
-            "feedback" => $feedback], 200);
-    
+        $feedback->save();
     }
 
     /**
@@ -62,22 +58,12 @@ class FeedbackController extends Controller
     {
         //$feedback = Feedback::where('profile_doctors_id', $id)->get();
 
-        $feedback= Feedback::findOrFail($id);
-        
-        return response()->json([
-            "feedback" => $feedback
-        ], 200);
-    }
+        $feedback = Feedback::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        // return response()->json([
+        //     "feedback" => $feedback
+        // ], 200);
+        return  $feedback;
     }
 
     /**
@@ -89,18 +75,26 @@ class FeedbackController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // $feedback = Feedback::find($id);
+
+        // $feedback->update($request->only(['vote','score','what_did_work', 'what_did_not_work','why',
+        //                                 'profile_doctors_id','profile_patients_id']));
+
+
+        // return response()->json([
+        //     "feedback" => $feedback
+        // ], 200);
+
         $feedback = Feedback::find($id);
+        $feedback->vote = 1;
+        $feedback->score = 5;
+        $feedback->what_did_work = 'It did work...';
+        $feedback->what_did_not_work = 'Somethings dont work!';
+        $feedback->why = 'It depends...';
+        $feedback->profile_doctors_id = 3;
+        $feedback->profile_patients_id = $request->user()->id;
 
-        $feedback->update($request->only(['vote','score','what_did_work', 'what_did_not_work','why',
-                                        'profile_doctors_id','profile_patients_id']));
-
-
-        return response()->json([
-            "feedback" => $feedback
-        ], 200);
-        
-      
-
+        $feedback->save();
     }
 
     /**
@@ -109,22 +103,12 @@ class FeedbackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        Feedback::destroy($id);
+        // Feedback::destroy($id);
 
-        return reponse()->json(["success"=>"ok"],200);
+        // return reponse()->json(["success"=>"ok"], 200);
+
+        return Feedback::destroy($id);
     }
-
-    public function all()
-    {
-        
-            $feedbacks = Feedback::all();
-    
-            return response()->json([
-                "feedbacks" => $feedbacks
-            ], 200);
-    
-}
-
 }

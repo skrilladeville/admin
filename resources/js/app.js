@@ -7,7 +7,7 @@ import 'normalize.css/normalize.css';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueGoodTablePlugin from 'vue-good-table';
-// import the styles 
+// import the styles
 import 'vue-good-table/dist/vue-good-table.css'
 
 Vue.use(VueGoodTablePlugin);
@@ -46,12 +46,11 @@ axios.interceptors.request.use(config => {
 });
 
 axios.interceptors.response.use(response => {
-	console.log("tttt")
 	return response;
 }, error => {
 	console.log("ffff"+error)
 
-	if (error.response.status == 401) {	
+	if (error.response.status == 401) {
 		store.dispatch('unsetAuthUser')
 		.then(() => {
 			jwtToken.removeToken();
@@ -60,16 +59,6 @@ axios.interceptors.response.use(response => {
 	}
 	return Promise.reject(error);
 });
-
-
-Vue.config.productionTip = false
-
-// Vue.component('app', App);
-
-// const app = new Vue({
-// 	router,
-// 	store
-// }).$mount('#app');
 
 new Vue({
   el: '#app',
