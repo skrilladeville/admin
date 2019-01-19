@@ -103212,8 +103212,11 @@ var getters = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_catalog_categories___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__pages_catalog_categories__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_cms_feedback__ = __webpack_require__(462);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_cms_feedback___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__pages_cms_feedback__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_users_rolespermissions_index__ = __webpack_require__(467);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_users_rolespermissions_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__pages_users_rolespermissions_index__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_cms_addFeedback__ = __webpack_require__(494);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_cms_addFeedback___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__pages_cms_addFeedback__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_users_rolespermissions_index__ = __webpack_require__(467);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_users_rolespermissions_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__pages_users_rolespermissions_index__);
+
 
 
 
@@ -103259,7 +103262,7 @@ var getters = {
 	}, {
 		path: 'roles-permissions',
 		name: 'roles.permissions',
-		component: __WEBPACK_IMPORTED_MODULE_10__pages_users_rolespermissions_index___default.a,
+		component: __WEBPACK_IMPORTED_MODULE_11__pages_users_rolespermissions_index___default.a,
 		meta: { requiresAuth: true, title: 'Roles/Permissions', permission: 'roles permission' }
 	}]
 }, {
@@ -103381,6 +103384,12 @@ var getters = {
 		component: __WEBPACK_IMPORTED_MODULE_9__pages_cms_feedback___default.a,
 		name: 'feedback',
 		meta: { requiresAuth: true, title: 'Feedback', permission: 'cms feedback' }
+	}, {
+		path: 'feedback/add',
+		component: __WEBPACK_IMPORTED_MODULE_10__pages_cms_addFeedback___default.a,
+		name: 'add feedback',
+		meta: { requiresAuth: true, title: 'Add Feedback', permission: 'add feedback' }
+
 	}, {
 		path: 'survey',
 		name: 'survey',
@@ -108234,6 +108243,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 // import {mapState} from 'vuex';
 // import {api} from '../../config'
@@ -108244,16 +108261,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   created: function created() {
     var _this = this;
 
-    //    console.log('mounted')
-    //     axios.get('/api/cms/feedback')
-    //          .then(res=>{
-    //          this.feedbacks=res.data.feedbacks
-
-    // console.log(res.data.feedbacks)
-    //          }
-
-    //          ).catch(err=>console.log(err))
-
+    console.log('creeate');
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/cms/feedback').then(function (response) {
       _this.feedbacks = response.data;
       console.log(_this.feedbacks);
@@ -108281,37 +108289,72 @@ var render = function() {
     { staticClass: "app-container" },
     [
       _c(
-        "el-table",
-        {
-          staticStyle: { width: "100%" },
-          attrs: { data: _vm.feedbacks, stripe: "" }
-        },
+        "el-card",
         [
-          _c("el-table-column", {
-            attrs: { prop: "vote", label: "Vote", width: "180" }
-          }),
+          _c(
+            "div",
+            {
+              staticClass: "clearfix",
+              attrs: { slot: "header" },
+              slot: "header"
+            },
+            [
+              _c("span", [_vm._v("Feedbacks")]),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  staticStyle: { float: "right" },
+                  attrs: { type: "success", round: "" }
+                },
+                [
+                  _c(
+                    "router-link",
+                    { attrs: { to: { name: "add feedback" } } },
+                    [_vm._v("Add feedback")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
-          _c("el-table-column", {
-            attrs: {
-              prop: "what_did_work",
-              label: "What Did Work",
-              width: "180"
-            }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { prop: "what_did_not_work", label: "What Did Not Work" }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", { attrs: { prop: "why", label: "Why" } }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { prop: "profile_doctors_id", label: "Doctor Name" }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { prop: "profile_patients_id", label: "Patient Name" }
-          })
+          _c(
+            "el-table",
+            {
+              staticStyle: { width: "100%" },
+              attrs: { data: _vm.feedbacks, stripe: "" }
+            },
+            [
+              _c("el-table-column", {
+                attrs: { prop: "vote", label: "Vote", width: "180" }
+              }),
+              _vm._v(" "),
+              _c("el-table-column", {
+                attrs: {
+                  prop: "what_did_work",
+                  label: "What Did Work",
+                  width: "180"
+                }
+              }),
+              _vm._v(" "),
+              _c("el-table-column", {
+                attrs: { prop: "what_did_not_work", label: "What Did Not Work" }
+              }),
+              _vm._v(" "),
+              _c("el-table-column", { attrs: { prop: "why", label: "Why" } }),
+              _vm._v(" "),
+              _c("el-table-column", {
+                attrs: { prop: "doctor_name", label: "Doctor Name" }
+              }),
+              _vm._v(" "),
+              _c("el-table-column", {
+                attrs: { prop: "patient_name", label: "Patient Name" }
+              })
+            ],
+            1
+          )
         ],
         1
       )
@@ -109153,6 +109196,546 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(495)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(497)
+/* template */
+var __vue_template__ = __webpack_require__(498)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-5cab0127"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/pages/cms/addFeedback.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5cab0127", Component.options)
+  } else {
+    hotAPI.reload("data-v-5cab0127", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 495 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(496);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("dd249c62", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5cab0127\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./addFeedback.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5cab0127\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./addFeedback.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 496 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.box-card[data-v-5cab0127]{\n    margin-top: 100px;\n    margin-left: 20px;\n    margin-right: 20px;\n}\n.card-body[data-v-5cab0127]{\n      padding: 10px;\n}\nlabel[data-v-5cab0127]{\n    font-size: 12px !important;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 497 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(33);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      feedbacks: [],
+      checked: false,
+      form: {
+        score: 0,
+        vote: 0,
+        what_did_work: '',
+        what_did_not_work: '',
+        why: '',
+        profile_patients_id: 5,
+        profile_doctors_id: 2
+      }
+    };
+  },
+
+  methods: {
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      axios.post('/api/cms/feedback/create', this.form).then(function (res) {
+        //this.feedbacks.push(res.data.feedback)
+
+        _this.$router.push({ name: 'add feedback' });
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 498 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-card",
+    { staticClass: "box-card" },
+    [
+      _c(
+        "div",
+        { staticClass: "clearfix", attrs: { slot: "header" }, slot: "header" },
+        [_c("span", [_vm._v("Feedback")])]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.onSubmit($event)
+              }
+            }
+          },
+          [
+            _c("p", [
+              _vm._v("Describe recent experience with prescribed medication")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "fieldset",
+                    { staticClass: "form-group" },
+                    [
+                      _c("label", [_vm._v("Please Select a doctor")]),
+                      _vm._v(" "),
+                      _c(
+                        "el-select",
+                        {
+                          attrs: { placeholder: "Please select a doctor" },
+                          model: {
+                            value: _vm.form.profile_doctors_id,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "profile_doctors_id", $$v)
+                            },
+                            expression: "form.profile_doctors_id"
+                          }
+                        },
+                        [
+                          _c("el-option", {
+                            attrs: { label: "Juan dela Cruz", value: "1" }
+                          }),
+                          _vm._v(" "),
+                          _c("el-option", {
+                            attrs: { label: "Pedro Pendoko", value: "2" }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "fieldset",
+                    { staticClass: "form-group" },
+                    [
+                      _c("label", [
+                        _vm._v(
+                          "Rate your satisfaction with the prescribed medication. Between 1 to 5, with 5 as the highest and 1 as lowest."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("el-slider", {
+                        attrs: { min: 0, max: 5 },
+                        model: {
+                          value: _vm.form.score,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "score", $$v)
+                          },
+                          expression: "form.score"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "fieldset",
+                    { staticClass: "form-group" },
+                    [
+                      _c("label", [_vm._v("Describe what work well for you?")]),
+                      _vm._v(" "),
+                      _c("el-input", {
+                        attrs: {
+                          type: "textarea",
+                          id: "",
+                          rows: "3",
+                          placeholder: ""
+                        },
+                        model: {
+                          value: _vm.form.what_did_work,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "what_did_work", $$v)
+                          },
+                          expression: "form.what_did_work"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "fieldset",
+                    { staticClass: "form-group" },
+                    [
+                      _c("label", [
+                        _vm._v("Describe what did not work well for you?")
+                      ]),
+                      _vm._v(" "),
+                      _c("el-input", {
+                        attrs: {
+                          type: "textarea",
+                          id: "",
+                          rows: "3",
+                          placeholder: ""
+                        },
+                        model: {
+                          value: _vm.form.what_did_not_work,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "what_did_not_work", $$v)
+                          },
+                          expression: "form.what_did_not_work"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "fieldset",
+                    { staticClass: "form-group" },
+                    [
+                      _c("label", [_vm._v("Where there unforseen issues? ")]),
+                      _vm._v(" "),
+                      _c(
+                        "el-checkbox",
+                        {
+                          model: {
+                            value: _vm.checked,
+                            callback: function($$v) {
+                              _vm.checked = $$v
+                            },
+                            expression: "checked"
+                          }
+                        },
+                        [_vm._v("Option")]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-8" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "fieldset",
+                    { staticClass: "form-group" },
+                    [
+                      _c("label", [_vm._v("Why?")]),
+                      _vm._v(" "),
+                      _c("el-input", {
+                        attrs: {
+                          type: "textarea",
+                          disabled: !_vm.checked,
+                          id: "otherIssue",
+                          rows: "3",
+                          placeholder: ""
+                        },
+                        model: {
+                          value: _vm.form.why,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "why", $$v)
+                          },
+                          expression: "form.why"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+                [_vm._v("Post")]
+              )
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.feedbacks, function(fb) {
+        return _c("div", { key: fb.id, staticClass: "card text-center" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v("\r\n    Featured\r\n  ")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("h4", { staticClass: "card-title" }, [_vm._v("Works Well")]),
+            _vm._v(" "),
+            _c("p", { staticClass: "card-text" }, [
+              _vm._v(_vm._s(fb.what_did_work))
+            ]),
+            _vm._v(" "),
+            _c("a", { staticClass: "btn btn-primary", attrs: { href: "#" } }, [
+              _vm._v("Go somewhere")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer text-muted" }, [
+            _vm._v("\r\n    2 days ago\r\n  ")
+          ])
+        ])
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5cab0127", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

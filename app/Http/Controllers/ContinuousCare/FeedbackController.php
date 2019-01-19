@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ContinuousCare;
 use App\Feedback;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class FeedbackController extends Controller
 {
@@ -15,15 +16,23 @@ class FeedbackController extends Controller
      */
     public function index(Request $request)
     {
-        //if ($_GET['user'] == 'admin') {
-        $feedback = Feedback::all();
+        
+
+        $feedback = DB::table('feedback')
+            ->select('feedback.*','profile_doctors.first_name as doctor_fname',
+            'profile_doctors.last_name as doctor_lname',
+            'profile_patients.first_name as patient_fname',
+            'profile_patients.last_name as patient_lname')
+            ->join('profile_doctors', 'feedback.profile_doctors_id', '=', 'profile_doctors.id')
+            ->join('profile_patients', 'feedback.profile_patients_id', '=', 'profile_patients.id')
+            ->get();
 
         return $feedback;
-        // } else {
-        //     $feedback = Feedback::where('profile_doctors_id', 4)->get();
+    // } else {
+     //       $feedback = Feedback::where('profile_doctors_id', $id)->get();
 
-        //     return $feedback;
-        // }
+       //     return $feedback;
+      //  }
     }
 
 
@@ -35,16 +44,7 @@ class FeedbackController extends Controller
      */
     public function create()
     {
-        $feedback = new Feedback;
-
-        $feedback->vote = 1;
-        $feedback->score = 5;
-        $feedback->what_did_work = 'It did work!';
-        $feedback->what_did_not_work = 'Somethings dont work!';
-        $feedback->why = 'It depends...';
-        $feedback->profile_doctors_id = 3;
-        $feedback->profile_patients_id = 6;
-
+        $feedback=Feedback::create($request->only(['vote','score','what_did_work', 'what_did_not_work','why','profile_doctors_id','profile_patients_id']));
         $feedback->save();
     }
 

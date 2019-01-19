@@ -8,6 +8,7 @@ import Dashboard from '../components/dashboard/index'
 import ManageUsers from '../pages/users/manageusers/index'
 import Categories from '../pages/catalog/categories'
 import Feedback from '../pages/cms/feedback'
+import AddFeedback from '../pages/cms/addFeedback'
 import RolesPermissions from '../pages/users/rolespermissions/index'
 
 export default [
@@ -221,6 +222,13 @@ export default [
 				component: Feedback,
 				name: 'feedback',
 				meta: {requiresAuth: true, title: 'Feedback', permission: 'cms feedback' },
+			},
+			{
+				path: 'feedback/add',
+				component: AddFeedback,
+				name: 'add feedback',
+				meta: {requiresAuth: true, title: 'Add Feedback', permission: 'add feedback' },
+
 			},
 			{
 				path: 'survey',

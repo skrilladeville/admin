@@ -1,5 +1,12 @@
 <template>
    <div class="app-container">
+
+     <el-card>
+         <div slot="header" class="clearfix">
+    <span>Feedbacks</span>
+    <el-button style="float: right;" type="success" round><router-link :to="{ name:'add feedback'}">Add feedback</router-link></el-button>
+  </div>
+    
     <el-table
         :data="feedbacks"
         stripe
@@ -23,14 +30,15 @@
           label="Why">
         </el-table-column>
         <el-table-column
-          prop="profile_doctors_id"
+          prop="doctor_name"
           label="Doctor Name">
         </el-table-column>
         <el-table-column
-          prop="profile_patients_id"
+          prop="patient_name"
           label="Patient Name">
         </el-table-column>
       </el-table>
+       </el-card>
    </div>
 </template>
 
@@ -43,16 +51,7 @@ import axios from 'axios';
 export default {
 
     created() {
-   //    console.log('mounted')
-   //     axios.get('/api/cms/feedback')
-   //          .then(res=>{
-   //          this.feedbacks=res.data.feedbacks
-
-   // console.log(res.data.feedbacks)
-   //          }
-
-   //          ).catch(err=>console.log(err))
-
+          console.log('creeate')
          axios.get('/api/cms/feedback')
             .then(response => {
               this.feedbacks = response.data

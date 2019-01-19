@@ -123,18 +123,6 @@
 import {mapState} from 'vuex';
 import {api} from '../../config'
   export default {
-
-    created() {
-      console.log('mounted')
-       axios.get('/api/cms/feedback/all')
-            .then(res=>{
-            this.feedbacks=res.data.feedbacks
-
-   console.log(res.data.feedbacks)
-            }
-
-            ).catch(err=>console.log(err))
-      },
     data() {
       return {
         feedbacks:[],
@@ -145,8 +133,8 @@ import {api} from '../../config'
               what_did_work: '',
               what_did_not_work:'',
               why:'',
-              profile_patients_id:3,
-              profile_doctors_id:4
+              profile_patients_id:5,
+              profile_doctors_id:2
         }
       }
     },
@@ -155,6 +143,8 @@ import {api} from '../../config'
         axios.post('/api/cms/feedback/create',this.form)
               .then(res=>{
                //this.feedbacks.push(res.data.feedback)
+
+               this.$router.push({name: 'add feedback'})
                 }).catch(err=>console.log(err));
 
       }
