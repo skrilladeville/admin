@@ -6,6 +6,8 @@ import EditPassword from '../components/profile/edit-password/EditPassword.vue';
 import Layout from '../components/layout/Layout.vue';
 import Dashboard from '../components/dashboard/index.vue';
 import ManageUsers from '../pages/users/manageusers/index.vue';
+import Contact from '../components/contact/ContactForm.vue';
+import MyAccount from '../components/myaccount/MyAccount.vue';
 import RolesPermissions from '../pages/users/rolespermissions/index.vue';
 
 export default [
@@ -294,22 +296,26 @@ export default [
 	// },
 	{
 		path: '/contact',
+		component: Layout,
 		meta: {requiresAuth: true, title: 'Contact', icon: 'el-icon-edit-outline', permission: 'contact' },
 		children: [
 			{
 				path: 'contact',
 				name: 'contact',
+				component: Contact,
 				meta: {requiresAuth: true, title: 'Contact', permission: 'contact' },
 			}
 		]
 	},
 	{
 		path: '/system',
+		component: Layout,
 		meta: {requiresAuth: true, title: 'System', icon: 'el-icon-setting', permission: 'system my account' },
 		children: [
 			{
 				path: 'my-account',
 				name: 'my-account',
+				component: MyAccount,
 				meta: {requiresAuth: true, title: 'My Account', permission: 'system my account' },
 			},
 			{
