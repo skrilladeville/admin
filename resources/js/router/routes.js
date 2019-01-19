@@ -1,16 +1,14 @@
-import Login from '../components/login/Login.vue';
-import ProfileWrapper from '../components/profile/ProfileWrapper.vue';
-import Profile from '../components/profile/Profile.vue';
-import EditProfile from '../components/profile/edit-profile/EditProfile.vue';
-import EditPassword from '../components/profile/edit-password/EditPassword.vue';
-import Layout from '../components/layout/Layout.vue';
-import Dashboard from '../components/dashboard/index.vue';
-import ManageUsers from '../pages/users/manageusers/index.vue';
-import Contact from '../components/contact/ContactForm.vue';
-import MyAccount from '../components/myaccount/MyAccount.vue';
-import categories from '../pages/catalog/catigories';
-import feedback from '../pages/cms/feedback'
-import RolesPermissions from '../pages/users/rolespermissions/index.vue';
+import Login from '../components/login/Login'
+import ProfileWrapper from '../components/profile/ProfileWrapper'
+import Profile from '../components/profile/Profile'
+import EditProfile from '../components/profile/edit-profile/EditProfile'
+import EditPassword from '../components/profile/edit-password/EditPassword'
+import Layout from '../components/layout/Layout'
+import Dashboard from '../components/dashboard/index'
+import ManageUsers from '../pages/users/manageusers/index'
+import Categories from '../pages/catalog/categories'
+import Feedback from '../pages/cms/feedback'
+import RolesPermissions from '../pages/users/rolespermissions/index'
 
 export default [
 	{
@@ -151,7 +149,7 @@ export default [
 			},
 			{
 				path: 'manage-categories',
-				component:categories,
+				component: Categories,
 				name: 'catalog.manageCategories',
 				meta: {requiresAuth: true, title: 'Manage Categories', permission: 'product categories' },
 			},
@@ -220,7 +218,7 @@ export default [
 		children: [
 			{
 				path: 'feedback',
-				component:feedback,
+				component: Feedback,
 				name: 'feedback',
 				meta: {requiresAuth: true, title: 'Feedback', permission: 'cms feedback' },
 			},

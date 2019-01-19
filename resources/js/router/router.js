@@ -23,18 +23,11 @@ router.beforeEach(async (to, from, next) => {
 		catch(err){
 			return
 		}
-	
-
-
-	
-		
-		
 		await store.dispatch('setAuthUser', authUser);
 	}
 
 	if (to.meta.requiresAuth) {
 		if (store.getters.isLoggedIn || jwtToken.getToken())
-			
 			return next();
 		else
 			return next({name: 'login'});
@@ -42,11 +35,8 @@ router.beforeEach(async (to, from, next) => {
 	if (to.meta.requiresGuest) {
 		if (store.getters.isLoggedIn || jwtToken.getToken())
 		{
-
-			console.log('hello')
 			return next({name: 'index'});
 		}
-		
 		else
 			return next();
 	}
