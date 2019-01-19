@@ -17,7 +17,9 @@ class FeedbackController extends Controller
     {
         $feedback = Feedback::where('profile_doctors_id', $request->user()->id)->get();
 
-        return $feedback;
+        return response()->json([
+            "feedbacks" => $feedback
+        ], 200);
     }
 
 
@@ -40,17 +42,14 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        $feedback = new Feedback;
+        $feedback=Feedback::create($request->only(['vote','score','what_did_work', 'what_did_not_work','why','profile_doctors_id','profile_patients_id']));
 
-        $feedback->vote = 1;
-        $feedback->score = 5;
-        $feedback->what_did_work = 'It did work!';
-        $feedback->what_did_not_work = 'Somethings dont work!';
-        $feedback->why = 'It depends...';
-        $feedback->profile_doctors_id = 3;
-        $feedback->profile_patients_id = $request->user()->id;
-
-        $feedback->save();
+    
+    
+       
+        return response()->json([
+            "feedback" => $feedback], 200);
+    
     }
 
     /**
@@ -63,7 +62,11 @@ class FeedbackController extends Controller
     {
         //$feedback = Feedback::where('profile_doctors_id', $id)->get();
 
-        return Feedback::findOrFail($id);
+        $feedback= Feedback::findOrFail($id);
+        
+        return response()->json([
+            "feedback" => $feedback
+        ], 200);
     }
 
     /**
@@ -87,15 +90,17 @@ class FeedbackController extends Controller
     public function update(Request $request, $id)
     {
         $feedback = Feedback::find($id);
-        $feedback->vote = 1;
-        $feedback->score = 5;
-        $feedback->what_did_work = 'It did work...';
-        $feedback->what_did_not_work = 'Somethings dont work!';
-        $feedback->why = 'It depends...';
-        $feedback->profile_doctors_id = 3;
-        $feedback->profile_patients_id = $request->user()->id;
 
-        $feedback->save();
+        $feedback->update($request->only(['vote','score','what_did_work', 'what_did_not_work','why',
+                                        'profile_doctors_id','profile_patients_id']));
+
+
+        return response()->json([
+            "feedback" => $feedback
+        ], 200);
+        
+      
+
     }
 
     /**
@@ -106,6 +111,20 @@ class FeedbackController extends Controller
      */
     public function destroy($id)
     {
-        return Feedback::destroy($id);
+        Feedback::destroy($id);
+
+        return reponse()->json(["success"=>"ok"],200);
     }
+
+    public function all()
+    {
+        
+            $feedbacks = Feedback::all();
+    
+            return response()->json([
+                "feedbacks" => $feedbacks
+            ], 200);
+    
+}
+
 }

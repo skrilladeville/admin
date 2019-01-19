@@ -8,6 +8,8 @@ import Dashboard from '../components/dashboard/index.vue';
 import ManageUsers from '../pages/users/manageusers/index.vue';
 import Contact from '../components/contact/ContactForm.vue';
 import MyAccount from '../components/myaccount/MyAccount.vue';
+import categories from '../pages/catalog/catigories';
+import feedback from '../pages/cms/feedback'
 import RolesPermissions from '../pages/users/rolespermissions/index.vue';
 
 export default [
@@ -149,6 +151,7 @@ export default [
 			},
 			{
 				path: 'manage-categories',
+				component:categories,
 				name: 'catalog.manageCategories',
 				meta: {requiresAuth: true, title: 'Manage Categories', permission: 'product categories' },
 			},
@@ -212,10 +215,12 @@ export default [
 	},
 	{
 		path: '/cms',
+		component:Layout,
 		meta: {requiresAuth: true, title: 'CMS', icon: 'el-icon-edit-outline', permission: 'cms feedback' },
 		children: [
 			{
 				path: 'feedback',
+				component:feedback,
 				name: 'feedback',
 				meta: {requiresAuth: true, title: 'Feedback', permission: 'cms feedback' },
 			},

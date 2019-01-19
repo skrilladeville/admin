@@ -15,7 +15,8 @@ const initialState = {
 	name: null,
 	email: null,
 	role: null,
-	permission: null
+	permission: null,
+	id:null,
 };
 
 /*
@@ -27,6 +28,7 @@ const mutations = {
 	[SET_USER](state, payload) {
 		state.name = payload.user.name;
 		state.email = payload.user.email;
+		state.id=payload.user.id;
 		state.role = payload.user.role;
 		state.permission = payload.user.permission;
 	},
@@ -35,6 +37,7 @@ const mutations = {
 		state.email = null;
 		state.role = null;
 		state.permission = null;
+		state.id=null;
 	}
 };
 

@@ -6,6 +6,7 @@
             </div>
             <div class="card-content"><!-- widgetType-content here -->
                 <div class="card-body">
+                    
                 </div>
             </div>
         </el-card>
