@@ -1,24 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+
+namespace App\Http\Controllers\Catalog;
 
 use Illuminate\Http\Request;
-use App\ProfileDoctor;
+use App\Price;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 
-class ProfileDoctorController extends Controller
+class PriceController extends Controller
 {
-    /**
+      /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $profile_doctors= ProfileDoctor::all();
+        $prices=Price::all();
 
-        return $profile_doctors;
+        return $prices;
+
     }
 
     /**
@@ -39,7 +40,11 @@ class ProfileDoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      //  count	from	to	price	price_preset_id	product_id	show_on_digital	created_at	updated_at
+
+       $price= Price::insert($request->input('prices'));
+        return "hello";
+
     }
 
     /**
@@ -50,7 +55,8 @@ class ProfileDoctorController extends Controller
      */
     public function show($id)
     {
-        //
+
+        
     }
 
     /**
@@ -73,7 +79,7 @@ class ProfileDoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -84,6 +90,8 @@ class ProfileDoctorController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+
     }
+
 }

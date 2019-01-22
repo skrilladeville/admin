@@ -15,11 +15,37 @@ use Illuminate\Http\Request;
 
 Route::post('authenticate', 'Auth\AuthController@authenticate');
 
+    //catalog category
     Route::get('catalog/category/all', 'Catalog\CategoryController@index');
     Route::post('catalog/category/create', 'Catalog\CategoryController@create');
     Route::get('catalog/category/view/{id}', 'Catalog\CategoryController@show');
     Route::post('catalog/category/update/{id}', 'Catalog\CategoryController@update');
     Route::post('catalog/category/delete/{id}', 'Catalog\CategoryController@delete');
+
+
+    //catalog vendor
+    Route::get('catalog/vendor', 'Catalog\VendorController@index');
+    Route::post('catalog/vendor/create', 'Catalog\VendorController@store');
+    Route::get('catalog/vendor/view/{id}', 'Catalog\VendorController@show');
+    Route::post('catalog/vendor/update/{id}', 'Catalog\VendorController@update');
+    Route::post('catalog/vendor/delete/{id}', 'Catalog\VendorController@delete');
+
+    
+
+
+
+
+    //catalog price Preset
+    Route::post('catalog/pricePreset/create','Catalog\PricePresetController@store');
+    Route::get('catalog/pricePreset','Catalog\PricePresetController@index');
+    Route::post('catalog/pricePreset/delete/{id}','Catalog\PricePresetController@destroy');
+
+
+    Route::post('catalog/prices/create','Catalog\PriceController@store');
+
+
+    //profile doctor
+    Route::get('users/profileDoctors', 'Users\ProfileDoctorController@index');
 
 
 

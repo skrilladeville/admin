@@ -14,8 +14,11 @@
             <fieldset class="form-group">
                 <label>Please Select a doctor</label>
                 <el-select v-model="form.profile_doctors_id" placeholder="Please select a doctor">
-      <el-option label="Juan dela Cruz" value=1></el-option>
-      <el-option label="Pedro Pendoko" value=2></el-option>
+      <el-option   v-for="item in optionsDoctor"
+      :key="item.id"
+      :label="item.first_name +' '+item.last_name"
+      :value="item.id"></el-option>
+  
     </el-select>
             </fieldset>
             </div>
@@ -79,23 +82,6 @@
 </form>
 
 </div>
-<template>
-
-  <div class="card text-center" v-for="fb in feedbacks" :key="fb.id">
-  <div class="card-header">
-    Featured
-  </div>
-  <div class="card-body">
-    <h4 class="card-title">Works Well</h4>
-    <p class="card-text">{{fb.what_did_work}}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-  <div class="card-footer text-muted">
-    2 days ago
-  </div>
-</div>
-
-</template>
 
 
 </el-card>
@@ -123,8 +109,19 @@
 import {mapState} from 'vuex';
 import {api} from '../../config'
   export default {
+      created(){
+
+          axios.get('/api/users/profileDoctors')
+                .then(res=>{
+                    console.log(res)
+             this.optionsDoctor=res.data
+                })
+
+      },
     data() {
       return {
+
+           optionsDoctor: [],
         feedbacks:[],
           checked:false,
         form: {
@@ -144,7 +141,8 @@ import {api} from '../../config'
               .then(res=>{
                //this.feedbacks.push(res.data.feedback)
 
-               this.$router.push({name: 'add feedback'})
+               this.$router.push('/cms/feedback')
+               console.log('ni abot dri')
                 }).catch(err=>console.log(err));
 
       }

@@ -7,6 +7,10 @@ import Layout from '../components/layout/Layout'
 import Dashboard from '../components/dashboard/index'
 import ManageUsers from '../pages/users/manageusers/index'
 import Categories from '../pages/catalog/categories'
+import AddPricePreset from '../pages/catalog/addPricePreset'
+import PricePresets from '../pages/catalog/PricePresets'
+import Vendors from '../pages/catalog/vendors'
+import AddVendor from '../pages/catalog/addVendor'
 import Feedback from '../pages/cms/feedback'
 import AddFeedback from '../pages/cms/addFeedback'
 import RolesPermissions from '../pages/users/rolespermissions/index'
@@ -153,6 +157,34 @@ export default [
 				component: Categories,
 				name: 'catalog.manageCategories',
 				meta: {requiresAuth: true, title: 'Manage Categories', permission: 'product categories' },
+			},
+			{
+				path: 'vendors',
+				component: Vendors,
+				name: 'catalog.vendors',
+				meta: {requiresAuth: true, title: 'Vendors', permission: 'product vendors' },
+			
+			},
+			{
+				path: 'addVendors',
+				component: AddVendor,
+				name: 'catalog.addvendors',
+				meta: {requiresAuth: true, title: 'Add Vendor', permission: 'add vendor' },
+			
+			},
+			{
+				path: 'pricePreset',
+				component: PricePresets,
+				name: 'catalog.preset-list',
+				meta: {requiresAuth: true, title: 'Price Presets List', permission: 'preset list' },
+			
+			},
+			{
+				path: 'addPricePreset',
+				component: AddPricePreset,
+				name: 'add pricepreset',
+				meta: {requiresAuth: true, title: 'Add Price Preset', permission: 'add price preset' },
+			
 			},
 			{
 				path: 'attributes',

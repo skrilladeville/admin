@@ -1,24 +1,24 @@
 <?php
-
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\Catalog;
 
 use Illuminate\Http\Request;
-use App\ProfileDoctor;
+use App\Vendor;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 
-class ProfileDoctorController extends Controller
+
+class VendorController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $profile_doctors= ProfileDoctor::all();
+        $vendors=Vendor::all();
 
-        return $profile_doctors;
+        return $vendors;
+
     }
 
     /**
@@ -39,7 +39,9 @@ class ProfileDoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $vendor= Vendor::create($request->only(["name","licence_or_registration_no","profile_patients_id","description","address","phone","fax","email","skype"]));
+   
+     return $vendor;
     }
 
     /**
@@ -50,7 +52,10 @@ class ProfileDoctorController extends Controller
      */
     public function show($id)
     {
-        //
+        $vendor= Vendor::findOrFail($id);
+        
+        return $vendor;
+        
     }
 
     /**
@@ -73,7 +78,11 @@ class ProfileDoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $vendor=Vendor::find($id);
+
+        $vendor= Vendor::create($request->only(["name","licence_or_registration_no","profile_patients_id","description","address","phone","fax","email","skype"]));
+   
+        return $vendor;
     }
 
     /**
@@ -84,6 +93,12 @@ class ProfileDoctorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $vendor=Vendor::find($id);
+        $vendor->delete();
+
+        return response()->json([
+            "success" => "ok"
+        ], 200);
+
     }
 }

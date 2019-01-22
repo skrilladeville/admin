@@ -3,39 +3,39 @@
 
      <el-card>
          <div slot="header" class="clearfix">
-    <span>Feedbacks</span>
-    <el-button style="float: right;" type="success" round><router-link :to="{ name:'add feedback'}">Add feedback</router-link></el-button>
+    <span>Vendors</span>
+    <el-button style="float: right;" type="success" round><router-link :to="{ name:'catalog.addvendors'}">Add vendor</router-link></el-button>
   </div>
     
     <el-table
-        :data="feedbacks"
+        :data="vendors"
         stripe
         style="width: 100%">
         <el-table-column
-          prop="vote"
-          label="Vote"
+          prop="name"
+          label="Name"
           width="180">
         </el-table-column>
         <el-table-column
-          prop="what_did_work"
-          label="What Did Work"
+          prop="licence_or_registration_no"
+          label="licence/registration#"
           width="180">
         </el-table-column>
         <el-table-column
-          prop="what_did_not_work"
-          label="What Did Not Work">
+          prop="phone"
+          label="Phone">
         </el-table-column>
         <el-table-column
-          prop="why"
-          label="Why">
+          prop="email"
+          label="Email">
         </el-table-column>
         <el-table-column
-          prop="doctor_fname + doctor_lname"
-          label="Doctor Name">
+          prop="description"
+          label="Description">
         </el-table-column>
         <el-table-column
-          prop="patient_fname"
-          label="Patient Name">
+         
+          label="Balance">
         </el-table-column>
       </el-table>
        </el-card>
@@ -52,10 +52,10 @@ export default {
 
     created() {
           console.log('creeate')
-         axios.get('/api/cms/feedback')
+         axios.get('/api/catalog/vendor')
             .then(response => {
-              this.feedbacks = response.data
-              console.log(this.feedbacks)
+              this.vendors = response.data
+              console.log(response)
             })
             .catch(error => {
               console.log(error)
@@ -63,7 +63,7 @@ export default {
       },
     data() {
       return {
-        feedbacks:[]
+        vendors:[]
     }
   }
 }
