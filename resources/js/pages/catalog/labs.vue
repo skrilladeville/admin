@@ -3,40 +3,34 @@
 
      <el-card>
          <div slot="header" class="clearfix">
-    <span>Feedbacks</span>
-    <el-button style="float: right;" type="success" round><router-link :to="{ name:'add feedback'}">Add feedback</router-link></el-button>
+    <span>Vendors</span>
+    <el-button style="float: right;" type="success" round><router-link :to="{ name:'add lab'}">Add Lab</router-link></el-button>
   </div>
     
     <el-table
-        :data="feedbacks"
+        :data="labs"
         stripe
         style="width: 100%">
         <el-table-column
-          prop="vote"
-          label="Vote"
+          prop="name"
+          label="Name"
           width="180">
         </el-table-column>
-        <el-table-column
-          prop="what_did_work"
-          label="What Did Work"
-          width="180">
+         <el-table-column
+          prop="description"
+          label="Description">
         </el-table-column>
-        <el-table-column
-          prop="what_did_not_work"
-          label="What Did Not Work">
+            <el-table-column
+          prop="email"
+          label="Email">
         </el-table-column>
+      
         <el-table-column
-          prop="why"
-          label="Why">
+          prop="phone"
+          label="Phone">
         </el-table-column>
-        <el-table-column
-          prop="doctor_fname + doctor_lname"
-          label="Doctor Name">
-        </el-table-column>
-        <el-table-column
-          prop="patient_fname"
-          label="Patient Name">
-        </el-table-column>
+    
+   
       </el-table>
        </el-card>
    </div>
@@ -52,10 +46,10 @@ export default {
 
     created() {
           console.log('creeate')
-         axios.get('/api/cms/feedback')
+         axios.get('/api/catalog/lab')
             .then(response => {
-              this.feedbacks = response.data
-              console.log(this.feedbacks)
+              this.labs = response.data
+              console.log(response)
             })
             .catch(error => {
               console.log(error)
@@ -63,7 +57,7 @@ export default {
       },
     data() {
       return {
-        feedbacks:[]
+        labs:[]
     }
   }
 }
