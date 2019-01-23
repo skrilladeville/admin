@@ -45,4 +45,8 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::post('cms/survey/create', 'ContinuousCare\FeedbackController@create');
     Route::post('cms/survey/update/{id}', 'ContinuousCare\FeedbackController@update');
     Route::post('cms/survey/delete/{id}', 'ContinuousCare\FeedbackController@delete');
+
+    /*Bookings*/
+    Route::get('bookings', 'Booking\BookingController@index');
+
 //});
