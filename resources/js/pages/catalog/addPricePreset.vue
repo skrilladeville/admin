@@ -3,7 +3,7 @@
 <el-card>
     <div slot="header" class="clearfix">
     <span>Add Price Presets</span>
-    <el-button style="float: right; padding: 3px 0" type="text">Back To List</el-button>
+    <el-button style="float: right; padding: 3px 0" type="text"><router-link :to="{name:'catalog.preset-list'}">Back To List</router-link></el-button>
   </div>
     <el-row :gutter="20">
     <el-col :span="18" :offset="3" style="margin:10px;">
@@ -240,6 +240,9 @@ form:{
                     })
                       axios.post('/api/catalog/prices/create',{prices:this.form.prices}).then(response=>{
                       console.log(response)
+                          this.$noty.success('Price Preset Save Successfully!');
+                          this.form.name="";
+                          this.$router.push({name:'catalog.preset-list'})
                   }).catch(err=>console.log(err)) 
                 })
         },

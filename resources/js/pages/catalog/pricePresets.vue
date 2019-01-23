@@ -76,6 +76,21 @@ export default {
         axios.get('/api/catalog/pricePreset')
             .then(res=>{
                 this.price_presets=res.data;
+                this.price_presets.forEach(price=>{
+                    if(price.is_custom_prices ==0){
+                      price.is_custom_prices="no"  
+                    }
+                    else{
+                      price.is_custom_prices="yes"   
+                    }
+
+                     if(price.is_dynamic_preset ==0){
+                      price.is_dynamic_preset="no"  
+                    }
+                    else{
+                      price.is_dynamic_preset="yes"   
+                    }
+                })
             }).catch(err=>{
                 console.log(err)
             })
@@ -87,7 +102,7 @@ export default {
             axios.post(uri)
                 .then(res=>{
                     console.log(res.data)
-                    this.price_presets.splice(index,1);
+                    this.price_presets.splice(index,1)
                 })
         
         }

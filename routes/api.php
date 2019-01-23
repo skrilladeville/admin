@@ -31,6 +31,9 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::post('catalog/vendor/delete/{id}', 'Catalog\VendorController@delete');
 
     
+    //catalog lab
+    Route::post('catalog/lab/create','Catalog\LabController@store');
+    Route::get('catalog/lab','Catalog\LabController@index');
 
 
 
@@ -39,13 +42,15 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::post('catalog/pricePreset/create','Catalog\PricePresetController@store');
     Route::get('catalog/pricePreset','Catalog\PricePresetController@index');
     Route::post('catalog/pricePreset/delete/{id}','Catalog\PricePresetController@destroy');
-
-
     Route::post('catalog/prices/create','Catalog\PriceController@store');
 
 
     //profile doctor
     Route::get('users/profileDoctors', 'Users\ProfileDoctorController@index');
+
+
+    //user patient 
+    Route::get('users/profilePatients', 'Users\ProfilePatientController@index');
 
 
 

@@ -2,7 +2,7 @@
     <div class="app-container">
         <el-card>
     <div slot="header" class="clearfix">
-    <span>Add Vendor</span>
+    <span>Add Lab</span>
     <el-button style="float: right; padding: 3px 0" type="text"><router-link :to="{name:'catalog.vendors'}"> To List</router-link></el-button>
   </div>
     
@@ -13,15 +13,11 @@
                         <el-input v-model="form.name"></el-input>
                     </el-form-item>
           
-                 <el-form-item label="Licence or Registration Number">
-                        <el-input v-model="form.licence_or_registration_no"></el-input>
+                 <el-form-item label="Licence number">
+                        <el-input v-model="form.licence_no"></el-input>
                     </el-form-item> 
      
-                  <el-form-item label="Patient Id">
-    <el-select v-model="form.profile_patients_id"  filterable placeholder="please select Patient Id">
-      <el-option v-for="(patient,index) in profile_patients" :key="index" :label="patient.first_name" :value="patient.id"></el-option>
-    </el-select>
-  </el-form-item>
+                
 
 
    <el-form-item label="Description">
@@ -29,9 +25,7 @@
   </el-form-item>
 
 
-                    <el-form-item label="Address">
-                        <el-input v-model="form.address"></el-input>
-                    </el-form-item>
+                  
          
                  <el-form-item label="Phone Number">
                         <el-input v-model="form.phone"></el-input>
@@ -45,8 +39,8 @@
                         <el-input v-model="form.email"></el-input>
                     </el-form-item> 
                     
-                 <el-form-item label="Skype">
-                        <el-input v-model="form.skype"></el-input>
+                 <el-form-item label="city/state/zip">
+                        <el-input v-model="form.city_state_zip"></el-input>
                     </el-form-item> 
       
         
@@ -69,34 +63,25 @@
           labelPosition:'left',
         form: {
          name:'',
-        licence_or_registration_no:'',
-        profile_patients_id:'',
+        licence_no:'',
         description:'',
-        address:'',
         phone:'',
         fax:'',
         email:'',
-        skype:''
+        city_state_zip:''
         }
       }
     },
     methods: {
       onSubmit() {
-          axios.post('/api/catalog/vendor/create',this.form)
+          axios.post('/api/catalog/lab/create',this.form)
                 .then(res=>{
-                    console.log(res)
+                    console.log(res.data)
 
-                    this.$router.push({name:'catalog.vendors'})
+                   // this.$router.push({name:'catalog.vendors'})
                 })
       }
     },
-    created(){
-            axios.get('/api/users/profilePatients')
-                .then(res=>{
-                    console.log(res)
 
-                    this.profile_patients=res.data
-                })
-    }
   }
 </script>

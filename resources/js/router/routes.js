@@ -11,6 +11,8 @@ import AddPricePreset from '../pages/catalog/addPricePreset'
 import PricePresets from '../pages/catalog/PricePresets'
 import Vendors from '../pages/catalog/vendors'
 import AddVendor from '../pages/catalog/addVendor'
+import AddLab from '../pages/catalog/addLab'
+import Labs from '../pages/catalog/labs'
 import Feedback from '../pages/cms/feedback'
 import AddFeedback from '../pages/cms/addFeedback'
 import RolesPermissions from '../pages/users/rolespermissions/index'
@@ -184,6 +186,20 @@ export default [
 				component: AddPricePreset,
 				name: 'add pricepreset',
 				meta: {requiresAuth: true, title: 'Add Price Preset', permission: 'add price preset' },
+			
+			},
+			{
+				path: 'lab',
+				component: Labs,
+				name: 'labs',
+				meta: {requiresAuth: true, title: 'lab list', permission: 'lab list' },
+			
+			},
+			{
+				path: 'addLab',
+				component: AddLab,
+				name: 'add lab',
+				meta: {requiresAuth: true, title: 'add Lab', permission: 'add lab' },
 			
 			},
 			{

@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users;
 
 use Illuminate\Http\Request;
+use App\ProfilePatient;
+use App\Http\Controllers\Controller;
 
 class ProfilePatientController extends Controller
 {
@@ -13,7 +15,8 @@ class ProfilePatientController extends Controller
      */
     public function index()
     {
-        //
+        $profile_patients= ProfilePatient::all();
+        return $profile_patients; 
     }
 
     /**
