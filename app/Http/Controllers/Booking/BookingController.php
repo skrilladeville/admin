@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Booking;
 
 use \Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
+use App\Bookings;
+use App\Http\Controllers\Controller;
 
 class BookingController extends Controller
 {
@@ -15,6 +17,8 @@ class BookingController extends Controller
     public function index()
     {
         //
+        $bookings=Bookings::all();
+        return $bookings; 
     }
 
     /**
