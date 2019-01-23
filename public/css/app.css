@@ -11346,8 +11346,14 @@ a:hover {
   height: 0;
 }
 
+.sidebar-container {
+  width: 180px !important;
+}
+
 .app-main {
   min-height: 100%;
+  top: 85px;
+  margin-left: 130px;
 }
 
 .app-container {

@@ -5,6 +5,8 @@ import EditProfile from '../components/profile/edit-profile/EditProfile'
 import EditPassword from '../components/profile/edit-password/EditPassword'
 import Layout from '../components/layout/Layout'
 import Dashboard from '../components/dashboard/index'
+import Contact from '../components/contact/ContactForm'
+import MyAccount from '../components/myaccount/MyAccount'
 import ManageUsers from '../pages/users/manageusers/index'
 import Categories from '../pages/catalog/categories'
 import AddPricePreset from '../pages/catalog/addPricePreset'
@@ -355,22 +357,26 @@ export default [
 	// },
 	{
 		path: '/contact',
+		component: Layout,
 		meta: {requiresAuth: true, title: 'Contact', icon: 'el-icon-edit-outline', permission: 'contact' },
 		children: [
 			{
 				path: 'contact',
 				name: 'contact',
+				component: Contact,
 				meta: {requiresAuth: true, title: 'Contact', permission: 'contact' },
 			}
 		]
 	},
 	{
 		path: '/system',
+		component: Layout,
 		meta: {requiresAuth: true, title: 'System', icon: 'el-icon-setting', permission: 'system my account' },
 		children: [
 			{
 				path: 'my-account',
 				name: 'my-account',
+				component: MyAccount,
 				meta: {requiresAuth: true, title: 'My Account', permission: 'system my account' },
 			},
 			{
