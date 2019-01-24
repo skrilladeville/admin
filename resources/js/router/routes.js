@@ -9,7 +9,14 @@ import Contact from '../components/contact/ContactForm'
 import MyAccount from '../components/myaccount/MyAccount'
 import ManageUsers from '../pages/users/manageusers/index'
 import Categories from '../pages/catalog/categories'
+import AddPricePreset from '../pages/catalog/addPricePreset'
+import PricePresets from '../pages/catalog/PricePresets'
+import Vendors from '../pages/catalog/vendors'
+import AddVendor from '../pages/catalog/addVendor'
+import AddLab from '../pages/catalog/addLab'
+import Labs from '../pages/catalog/labs'
 import Feedback from '../pages/cms/feedback'
+import AddFeedback from '../pages/cms/addFeedback'
 import RolesPermissions from '../pages/users/rolespermissions/index'
 
 export default [
@@ -156,6 +163,48 @@ export default [
 				meta: {requiresAuth: true, title: 'Manage Categories', permission: 'product categories' },
 			},
 			{
+				path: 'vendors',
+				component: Vendors,
+				name: 'catalog.vendors',
+				meta: {requiresAuth: true, title: 'Vendors', permission: 'product vendors' },
+			
+			},
+			{
+				path: 'addVendors',
+				component: AddVendor,
+				name: 'catalog.addvendors',
+				meta: {requiresAuth: true, title: 'Add Vendor', permission: 'add vendor' },
+			
+			},
+			{
+				path: 'pricePreset',
+				component: PricePresets,
+				name: 'catalog.preset-list',
+				meta: {requiresAuth: true, title: 'Price Presets List', permission: 'preset list' },
+			
+			},
+			{
+				path: 'addPricePreset',
+				component: AddPricePreset,
+				name: 'add pricepreset',
+				meta: {requiresAuth: true, title: 'Add Price Preset', permission: 'add price preset' },
+			
+			},
+			{
+				path: 'lab',
+				component: Labs,
+				name: 'labs',
+				meta: {requiresAuth: true, title: 'lab list', permission: 'lab list' },
+			
+			},
+			{
+				path: 'addLab',
+				component: AddLab,
+				name: 'add lab',
+				meta: {requiresAuth: true, title: 'add Lab', permission: 'add lab' },
+			
+			},
+			{
 				path: 'attributes',
 				name: 'catalog.attributes',
 				meta: {requiresAuth: true, title: 'Attributes', permission: 'product attributes' },
@@ -223,6 +272,13 @@ export default [
 				component: Feedback,
 				name: 'feedback',
 				meta: {requiresAuth: true, title: 'Feedback', permission: 'cms feedback' },
+			},
+			{
+				path: 'feedback/add',
+				component: AddFeedback,
+				name: 'add feedback',
+				meta: {requiresAuth: true, title: 'Add Feedback', permission: 'add feedback' },
+
 			},
 			{
 				path: 'survey',
