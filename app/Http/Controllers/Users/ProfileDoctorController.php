@@ -51,6 +51,8 @@ class ProfileDoctorController extends Controller
     public function show($id)
     {
         //
+        $patients = ProfileDoctor::patients($id);
+        return $patients;
     }
 
     /**

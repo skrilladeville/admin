@@ -46,9 +46,36 @@ class ProfilePatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user_id)
     {
         //
+        $profile = ProfilePatient::where('user_id', $user_id)->first();
+        return $profile;
+    }
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function patients($doctor_id)
+    {
+        //
+        $patients = ProfilePatient::select('first_name', 'last_name', 'email')
+        ->where('profile_doctors_id', $doctor_id)
+        ->join('users', 'users.id', '=', 'user_id')
+        ->get();
+        return $patients;
+    }
+
+    public function patientsCount($doctor_id)
+    {
+        //
+        $patients_count = ProfilePatient::where('profile_doctors_id', $doctor_id)
+        ->count();
+        return $patients_count;
     }
 
     /**

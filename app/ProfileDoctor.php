@@ -12,4 +12,9 @@ class ProfileDoctor extends Model
     {
         return $this->hasMany('App\Feedback');
     }
+
+    // public function patients($doctor)
+    // {
+    //     return $this->hasMany('App\ProfilePatient');
+    // }
 }

@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Prescription;
 
+use App\Prescription;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class PrescriptionController extends Controller
@@ -21,7 +23,7 @@ class PrescriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create()    
     {
         //
     }
@@ -43,9 +45,15 @@ class PrescriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($patient_id)
     {
         //
+        $prescription = Prescription::where('profile_patients_id', $patient_id)
+        ->select('directions', 'doctor_signature', 'doctor_initial', 'control_no', 'prescriptions.created_at',
+        'first_name as doctor_fname', 'last_name as doctor_lname')
+        ->join('profile_doctors', 'profile_doctors_id','=', 'profile_doctors.user_id')
+        ->orderBy('prescriptions.created_at')->first();
+        return $prescription;
     }
 
     /**
