@@ -15,17 +15,12 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Bookings::class, function (Faker $faker) {
     return [
-        'first_name' => $faker->name,
-        'last_name' => $faker->lastName,
-        'birth_date' => $faker->dateTimeThisCentury->format('Y-m-d'),
-        'home_phone' => $faker->phoneNumber,
-        'cell_phone' => $faker->phoneNumber,
-        'health_card' => $faker->randomNumber($nbDigits = null, $strict = false),
-        'emg_contact' => $faker->text($maxNbChars = 200),
-        'emg_contact_phone' => $faker->phoneNumber,
-        'user_id' => $faker->numberBetween($min = 5, $max = 20),
-        'profile_doctors_id' => $faker->randomElement($array = array('3', '4'), $count = 1),
-        'branches_id' => 1,
+        'book_datetime' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now', $timezone = null)->format('Y-m-d'),
+        'start_datetime' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now', $timezone = null)->format('Y-m-d'),
+        'end_datetime' =>$faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now', $timezone = null)->format('Y-m-d'),
+        'notes' => $faker->text($maxNbChars = 200),
         'status' => 1,
+        'user_id' => $faker->numberBetween($min = 5, $max = 7),
+        'bookings_services_id' => $faker->numberBetween($min = 1, $max = 5)
     ];
 });
