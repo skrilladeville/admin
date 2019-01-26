@@ -11,6 +11,13 @@ class BookingsServiceProvidersSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // factory(App\BookingsServiceProviders::class, 5)->create();
+        App\BookingsServiceProviders::create([
+           'profile_doctors_id' => 3
+        ]);
+
+        App\BookingsServiceProviders::create([
+            'profile_doctors_id' => 4
+        ]);
     }
 }

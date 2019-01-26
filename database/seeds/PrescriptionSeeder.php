@@ -11,6 +11,6 @@ class PrescriptionSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Prescription::class, 20)->create();
     }
 }
