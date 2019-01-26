@@ -13,6 +13,8 @@ class DropFieldPricePresets extends Migration
      */
     public function up()
     {
+        if (Schema::hasColumn('price_presets', 'range_price'))
+        {
         Schema::table('price_presets', function (Blueprint $table) {
             $table->dropColumn('gram_price');
             $table->dropColumn('eight_price');
@@ -24,6 +26,7 @@ class DropFieldPricePresets extends Migration
             $table->dropColumn('range_price');
  
         });
+        }
     }
 
     /**
