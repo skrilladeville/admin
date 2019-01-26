@@ -10,17 +10,18 @@
             'tableComponent' : Table
         },
         created(){
-            // axios.get(this.url)
-            // .then(res=>{
-            //     this.rows=res.data
-            //     }
-            // ).catch(err=>console.log(err))
+            axios.get(this.url+this.user_id)
+            .then(res=>{
+                this.rows=res.data
+                }
+            ).catch(err=>console.log(err))
         },
         props:{
-         
+          url: String
         },
 		data() {
            return {
+            user_id: this.$store.getters.user_id,
             columns: [
               {
                 label: 'First Name',

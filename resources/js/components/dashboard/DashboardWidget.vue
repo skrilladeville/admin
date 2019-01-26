@@ -1,8 +1,7 @@
 <template>
-        <el-card class="box-card" shadow="always">
-            <div class="">
-                <h5 class="card-
-                title">{{title}}</h5>
+        <el-card class="box-card" shadow="always" :class=add>
+            <div slot="header" class="clearfix">
+                <span class="card-title">{{title}}</span>
             </div>
             <div class="card-content" ><!-- widgetType-content here -->
                 <div class="card-body" :class=widgetType>
@@ -17,13 +16,14 @@
     import BookingsTable from './../dashboard/widgets/BookingsTable.vue'
     import Notifications from './../dashboard/widgets/Notifications.vue'
     import NextAppointment from './../dashboard/widgets/NextAppointment.vue'
-    import RecentPrescription from './../dashboard/widgets/NextAppointment.vue'
+    import RecentPrescription from './../dashboard/widgets/RecentPrescription.vue'
     import PatientsTable from './../dashboard/widgets/PatientsTable.vue'
     import SalesReport from './../dashboard/widgets/SalesReport.vue'
     import Statistics from './../dashboard/widgets/Statistics.vue'
     import TopCategories from './../dashboard/widgets/TopCategories.vue'
     import TopSales from './../dashboard/widgets/TopSales.vue'
     import MyProfile from './../dashboard/widgets/MyProfile.vue'
+    import NewMembersTable from './../dashboard/widgets/NewMembersTable.vue'
 
 	export default {
         name: 'DashboardWidget',
@@ -35,9 +35,10 @@
             'patientsTable' : PatientsTable,
             'salesReport' : SalesReport,
             'statistics' : Statistics,
-            'topCategories' : TopCategories,
-            'topSales' : TopSales,
-            'myProfile' : MyProfile
+            'categories' : TopCategories,
+            'sales' : TopSales,
+            'myProfile' : MyProfile,
+            'newMembers' : NewMembersTable
         },
 		data() {
 			return {
@@ -66,10 +67,19 @@
         margin-bottom: 50px;
         border: 1px solid green;
     }
+
 </style>
 
 <style lang="css" scoped>
-.notification-card{border: none!important; height:300px;}
+.card-title{
+    font-weight: 400;
+    color: rgb(5, 57, 34)!important;
+}   
+
+.card-body{
+    padding: 0!important;
+}
+.notification-card{border: none!important; height:700px;}
 
 .notification-card-content{height: 100%; overflow: auto;}
 

@@ -41,7 +41,6 @@ export default {
   computed: {
   },
   created() {
-    console.log(customWidgets[this.userRole[0]])
     this.rows = customWidgets[this.userRole[0]]
   },
   methods: {

@@ -6,15 +6,14 @@
   import Table from './../../common/Table.vue'
 
 	export default {
-        name: 'BookingsTable',
+        name: 'NewMembersTable',
         components: {
             'tableComponent' : Table
         },
         created(){
-            axios.get(this.url+this.user_id)
+            axios.get(this.url)
             .then(res=>{
                 this.rows=res.data
-                this.columns[2].label = this.user_role=='patient'? 'Doctor Name':'Patient Name';
                 }
             ).catch(err=>console.log(err))
         },
@@ -23,36 +22,30 @@
         },
 		    data() {
           return {
-            user_id: this.$store.getters.user_id,
-            user_role: this.$store.getters.role[0],
             columns: [
               {
-                label: 'Start Date',
-                field: 'start_datetime',
+                label: 'Date',
+                field: 'book_datetime',
                 type: 'date',
                 dateInputFormat: 'YYYY-MM-DD',
                 dateOutputFormat: 'MMM DD YYYY'
               },
               {
-                label: 'End Date',
-                field: 'end_datetime',
-                type: 'date',
-                dateInputFormat: 'YYYY-MM-DD',
-                dateOutputFormat: 'MMM DD YYYY'
-              },
-              {
-                label: '',
-                field: 'person_name'
+                label: 'Patient Name',
+                field: 'patient'
               },
               {
                 label: 'Purpose',
-                field: 'name'
+                field: 'note'
               },
             ],
             rows: [],
           };
         },
         methods:{
+          populate(){
+            
+          }
         }
 	}
 </script>

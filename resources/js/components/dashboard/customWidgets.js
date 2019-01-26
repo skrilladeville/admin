@@ -38,13 +38,13 @@ customWidgets['super-admin'] = [
     widgetType: 'table',
     showTitle: 1,
     size: 8,
-    templateName: 'topSales'
+    templateName: 'sales'
 },{ 
   title: 'Top Categories of the Month',
     widgetType: 'table',
     showTitle: 1,
     size: 8,
-    templateName: 'topCategories'
+    templateName: 'categories'
 
 },{
   title: 'Number of Customers',
@@ -58,7 +58,7 @@ customWidgets['super-admin'] = [
     widgetType: 'datatable',
     showTitle: 1,
     size: 24,
-    templateName: 'statistics'
+    templateName: 'newMembers',
   }]
 ]
 
@@ -68,13 +68,13 @@ customWidgets['branch-admin'] = [
     widgetType: 'table',
     showTitle: 1,
     size: 8,
-    templateName: 'topSales'
+    templateName: 'sales'
 },{ 
     title: 'Top Categories of the Month',
     widgetType: 'table',
     showTitle: 1,
     size: 8,
-    templateName: 'topCategories'
+    templateName: 'categories'
 
 },{
     title: 'Number of Customers',
@@ -88,7 +88,7 @@ customWidgets['branch-admin'] = [
     widgetType: 'datatable',
     showTitle: 1,
     size: 24,
-    templateName: 'statistics'
+    templateName: 'newMembers'
     }]
 ]
     
@@ -111,13 +111,15 @@ customWidgets['patient'] = [
             widgetType: '',
             showTitle: 1,
             size: 8,
-            templateName: 'nextAppointment'
+            templateName: 'nextAppointment',
+            url: '/api/bookings/patientRecentBooking/'
         },{
             title: 'Recent Prescription',
             widgetType: '',
             showTitle: 1,
             size: 8,
-            templateName: 'recentPrescription'
+            templateName: 'recentPrescription',
+            url: '/api/prescription/'
         }
     ]
 },{
@@ -125,14 +127,16 @@ customWidgets['patient'] = [
     widgetType: 'my-profile',
     showTitle: 1,
     size: 8,
-    templateName: 'myProfile'
+    templateName: 'myProfile',
+    url: '/api/users/profilePatient/'
 }],
 [{
     title: 'My Appointments',
     widgetType: 'datatable',
     showTitle: 1,
     size: 24,
-    templateName: 'bookings'
+    templateName: 'bookings',
+    url: '/api/bookings/showAllByPatient/'
 }]
 ]
 
@@ -150,17 +154,19 @@ customWidgets['doctor'] = [
     size: 8,
     inner_widgets: [
         {
-            title: 'New Patients',
+            title: 'Patients',
             widgetType: '',
             showTitle: 1,
             size: 8,
-            templateName: 'statistics'
+            templateName: 'statistics',
+            url: '/api/users/patientsCount/'
         },{
             title: 'Appointments Completed',
             widgetType: '',
             showTitle: 1,
             size: 8,
-            templateName: 'statistics'
+            templateName: 'statistics',
+            url: '/api/bookings/bookingsCount/'
         }
     ]
 },{
@@ -168,7 +174,8 @@ customWidgets['doctor'] = [
     widgetType: '',
     showTitle: 1,
     size: 8,
-    templateName: 'nextAppointment'
+    templateName: 'nextAppointment',
+    url: '/api/bookings/doctorRecentBooking/'
 }],
 [{
     title: 'My Appointments',
@@ -176,13 +183,14 @@ customWidgets['doctor'] = [
     showTitle: 1,
     size: 24,
     templateName: 'bookings',
-    url: '/api/bookings'
+    url: '/api/bookings/showAllByDoctor/'
 },{
     title: 'My Patients',
     widgetType: 'datatable',
     showTitle: 1,
     templateName: 'patientsTable',
-    size: 24
+    size: 24,
+    url: '/api/users/patients/'
 }]
 ]
 

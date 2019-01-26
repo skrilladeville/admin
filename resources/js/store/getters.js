@@ -6,7 +6,7 @@ const getters = {
   name: state => state.auth.name,
   role: state => state.auth.role,
   permission: state => state.auth.permission,
-
+  user_id: state  => state.auth.id,
   //catalog getter
   getProducts: state => state.products,
   getVendors:state=> state.vendors,

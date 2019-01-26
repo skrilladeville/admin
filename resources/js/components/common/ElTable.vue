@@ -1,4 +1,5 @@
 <template>
+  <div>
      <el-table
       :data="tableData"
       style="width: 100%">
@@ -17,6 +18,7 @@
         label="Address">
       </el-table-column>
     </el-table>
+  </div>
 </template>
 
 <style>
