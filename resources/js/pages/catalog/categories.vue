@@ -1,54 +1,88 @@
 <template>
-    <div class="content"> 
-        <div class="content-wrapper">
-            <div class="card">
-                <div class="card-header bg-success">
-                <h6 class="text-white">Categories List</h6>  
-                 
-                </div>
-                <div class="card-body">
+   
+      <el-card>
+         <div slot="header" class="clearfix">
+    <span>Category List</span>
+    <el-button @click="centerDialogVisible = true" style="float: right; padding: 3px 0" type="text">Add Category</el-button>
+  </div>
 
-    <vue-good-table
-      :columns="columns"
-      :rows="rows"
-  :groupOptions="{
-  	enabled: true
-  }"
-        :search-options="{
-    enabled: true
-  }"
-      styleClass="vgt-table condensed"
-      :pagination-options="{
-    enabled: true,
-    mode: 'records',
-    perPage: 30,}"
-      >
-     <template slot="table-row" slot-scope="props">
-    <span v-if="props.column.field == 'action'">
-      <button class="btn btn-success btn-sm">view</button>
-    </span>
-    <span v-else>
-      {{props.formattedRow[props.column.field]}}
-    </span>
-  </template>
 
-    <template slot="table-column" slot-scope="props">
-     <span v-html="props.column.label"/>
-  </template>
+   <el-table
+        :data="categories"
+        stripe
+        style="width: 100%">
+        <el-table-column
+          prop="name"
+          label="Category Name"
+          >
+       
+        </el-table-column>
+        
+         <el-table-column
+   
+          label="Total Products">
+        </el-table-column>
+            <el-table-column
+          label="Marijuana/ Non Marijuana">
+        </el-table-column>
       
-      </vue-good-table>
+        <el-table-column
+          prop="description"
+          label="Description">
+        </el-table-column>
+    
+   
+      </el-table>
 
-                </div>
-            </div>
-        </div>
+   
+ 
 
            
 
 
+<el-dialog
+  title="Add Category"
+  :visible.sync="centerDialogVisible"
+  width="30%"
+  center>
+  <el-form :model="form" label-position="top">
+
+ 
+  <el-form-item label="Name">
+
+    <el-input v-model="form.name"></el-input>
+
+  </el-form-item>
+   <el-form-item label="Parent">
+    <el-select v-model="form.product_cat_id" style="width:100%;" placeholder="please select your zone">
+      <el-option label="None" :value="0"></el-option>
+      <el-option v-for="parent in parents" :key="parent.id" :label="parent.name" :value="parent.id"></el-option>
+      
+    </el-select>
+  </el-form-item>
+    <el-form-item label="Description">
+
+    <el-input type="textarea" v-model="form.description"></el-input>
+
+  </el-form-item>
+  
+   </el-form>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="centerDialogVisible = false">Cancel</el-button>
+    <el-button type="primary" @click="save">Add</el-button>
+  </span>
+</el-dialog>
 
 
-        
-    </div>
+
+      </el-card>
+
+
+  
+
+
+
+    
 
 
 
@@ -76,102 +110,66 @@ export default {
     data(){
 
       return{
-          columns: [
-        {
-          label: 'Category Name',
-          field: 'cat_name',
-        },
-        {
-          label: 'Total Products',
-          field: 'total_products',
-    
-        },
-        {
-          label: 'Marijuana / Non Marijuana',
-          field: 'isMarijuana',
 
+        form:{
+          name:'',
+          product_cat_id:0,
+          description:'',
         },
-    
-        {
-          label: 'Description',
-          field: 'description',
+        categories:[],
+        parents:[{
+          name:'0',
+          product_cat_id:0,
+          description:'',
+
+        }],
+        centerDialogVisible: false,
          
-        },
-   
-               {
-          label: 'Action',
-          field: 'action',
-       
-        },
-    
-      ],
-    rows: [{
-            mode: 'span', // span means this header will span all columns
-            label: 'Flowers', // this is the label that'll be used for the header
-            html: false, // if this is true, label will be rendered as html
-            children: [
-                
-              { cat_name: 'Flowers', total_products: 118, isMarijuana: '117 Marijuana / 1 Non Marijuana', description: ""},
-            
-              { cat_name: 'Prepack', total_products: 55, isMarijuana: '1 Marijuana / 0 Non Marijuana', description: ""},
-              { cat_name: 'Prepack', total_products: 55, isMarijuana: '1 Marijuana / 0 Non Marijuana', description: ""},
-              { cat_name: 'Prepack', total_products: 55, isMarijuana: '1 Marijuana / 0 Non Marijuana', description: ""},
-            
-            ]
-          },
-          {
-            mode: 'span', // span means this header will span all columns
-            label: 'Flowers', // this is the label that'll be used for the header
-            html: false, // if this is true, label will be rendered as html
-            children: [
-                
-              { cat_name: 'Flowers', total_products: 118, isMarijuana: '117 Marijuana / 1 Non Marijuana', description: ""},
-            
-              { cat_name: 'Prepack', total_products: 55, isMarijuana: '1 Marijuana / 0 Non Marijuana', description: ""},
-              { cat_name: 'Prepack', total_products: 55, isMarijuana: '1 Marijuana / 0 Non Marijuana', description: ""},
-              { cat_name: 'Prepack', total_products: 55, isMarijuana: '1 Marijuana / 0 Non Marijuana', description: ""},
-            
-            ]
-          },
-          {
-            mode: 'span', // span means this header will span all columns
-            label: 'Flowers', // this is the label that'll be used for the header
-            html: false, // if this is true, label will be rendered as html
-            children: [
-                
-              { cat_name: 'Flowers', total_products: 118, isMarijuana: '117 Marijuana / 1 Non Marijuana', description: ""},
-            
-              { cat_name: 'Prepack', total_products: 55, isMarijuana: '1 Marijuana / 0 Non Marijuana', description: ""},
-              { cat_name: 'Prepack', total_products: 55, isMarijuana: '1 Marijuana / 0 Non Marijuana', description: ""},
-              { cat_name: 'Prepack', total_products: 55, isMarijuana: '1 Marijuana / 0 Non Marijuana', description: ""},
-            
-            ]
-          },
-          {
-            mode: 'span', // span means this header will span all columns
-            label: 'Flowers', // this is the label that'll be used for the header
-            html: false, // if this is true, label will be rendered as html
-            children: [
-                
-              { cat_name: 'Flowers', total_products: 118, isMarijuana: '117 Marijuana / 1 Non Marijuana', description: ""},
-            
-              { cat_name: 'Prepack', total_products: 55, isMarijuana: '1 Marijuana / 0 Non Marijuana', description: ""},
-              { cat_name: 'Prepack', total_products: 55, isMarijuana: '1 Marijuana / 0 Non Marijuana', description: ""},
-              { cat_name: 'Prepack', total_products: 55, isMarijuana: '1 Marijuana / 0 Non Marijuana', description: ""},
-            
-            ]
-          }],
-        
       }  
       
     },
 
     computed:{
+       
+
+    },
+    created(){
+      axios.get('/api/catalog/category/getParent')
+            .then(res=>{
+              this.parents=res.data
+            })
 
 
-          
-        
+           axios.get('/api/catalog/category/all')
+            .then(res=>{
+                      res.data.forEach(element => {
+                  if(element.product_cat_id==0){
+                      this.categories.push(element)
+                      let subCats=res.data.filter(e=>e.product_cat_id == element.id)
+                      subCats.forEach(sub=>{
+                           this.categories.push(sub)
+                      })
+                  }
+              });
+            })
 
+    },
+
+
+    methods:{
+      save(){
+
+        console.log('test')
+        axios.post('/api/catalog/category/create',this.form)
+              .then(res=>{
+                this.centerDialogVisible=false
+
+                //add to parent
+                if(res.data.product_cat_id==0){
+                  this.parents.push(res.data)
+                }
+              })
+      }
     }
 }
 

@@ -17,9 +17,7 @@ class CategoryController extends Controller
     {
         $categories=ProductCategory::all();
 
-        return response()->json([
-            "categories" => $categories
-        ], 200);
+        return $categories;
 
     }
 
@@ -41,11 +39,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-       $category= ProductCategory::create($request->only(["name","product_cat_id","description"]));
+       $category= ProductCategory::create($request->only(["product_cat_id","name","description"]));
    
-       return response()->json([
-        "category" => $category
-    ], 200);
+       return $category;
     }
 
     /**
@@ -107,6 +103,15 @@ class CategoryController extends Controller
         return response()->json([
             "success" => "ok"
         ], 200);
+
+    }
+
+
+    public function getParentCategory(){
+        $categories=ProductCategory::where('product_cat_id',0)
+        ->get();
+
+        return $categories;
 
     }
 }

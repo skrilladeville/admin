@@ -21,6 +21,7 @@ body {
 
 label {
   font-weight: 700;
+  margin-right: 30px;
 }
 
 html {
@@ -74,13 +75,28 @@ a:hover {
     height: 0;
   }
 }
-
-.app-main{
-  min-height: 100%
+.sidebar-container {
+  width: 180px !important;
 }
+
+//.app-main{
+//  min-height: 100%;
+//  top: 85px;
+//  margin-left: 130px;
+//}
 
 .app-container {
-  margin-top: 85px;
+  margin-top: 10px;
   padding: 20px;
 }
+
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+.button-container {
+  padding: 10px 0 50px;
+  height: 0;
+}
+
 

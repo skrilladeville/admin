@@ -4,7 +4,7 @@
      <el-card>
          <div slot="header" class="clearfix">
     <span>Vendors</span>
-    <el-button style="float: right;" type="success" round><router-link :to="{ name:'catalog.addvendors'}">Add vendor</router-link></el-button>
+<router-link :to="{ name:'catalog.addvendors'}">    <el-button style="float: right;" type="success" round>Add vendor</el-button></router-link>
   </div>
     
     <el-table
