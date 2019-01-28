@@ -10,9 +10,7 @@
     :data="price_presets"
     style="width: 100%"
     >
-    <el-table-column
-      type="selection"
-      width="55">
+   
     </el-table-column>
     <el-table-column
       label="Id"

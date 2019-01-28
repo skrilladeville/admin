@@ -15,7 +15,6 @@ class CreatePricesTable extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('is_piece');
             $table->integer('count')->default(0);
             $table->double('from')->default(0.0);
             $table->double('to')->default(0.0);

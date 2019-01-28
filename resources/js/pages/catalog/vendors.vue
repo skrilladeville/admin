@@ -71,17 +71,5 @@ export default {
 </script>
 
 <style scoped>
-   .box-card{
-       margin-top: 100px;
-       margin-left: 20px;
-       margin-right: 20px;
 
-   }
-   .card-body{
-         padding: 10px;
-   }
-
-   label{
-       font-size: 12px !important;
-   }
 </style>

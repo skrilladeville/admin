@@ -5,26 +5,35 @@
     <span>Add Price Presets</span>
     <el-button style="float: right; padding: 3px 0" type="text"><router-link :to="{name:'catalog.preset-list'}">Back To List</router-link></el-button>
   </div>
-    <el-row :gutter="20">
-    <el-col :span="18" :offset="3" style="margin:10px;">
+  
     
-<el-form ref="form" :model="form" label-width="120px"  size="mini">
+<el-form ref="form" :model="form" label-width="120px" label-position="top" size="small">
   <el-form-item label="name">
     <el-input v-model="form.name"></el-input>
   </el-form-item>
+    <el-row :gutter="20">
+    <el-col :span="6">
   <el-form-item label="Price Type">
     <el-select @change="clearPrices" v-model="form.price_type" placeholder="please select a price type">
       <el-option label="piece" value="piece"></el-option>
       <el-option label="weight" value="weight"></el-option>
     </el-select>
   </el-form-item>
+    </el-col>
+  <el-col :span="6">
 
   <el-form-item label="Custom Price">
       <el-checkbox @change="clearPrices" label="Use Custom Price" v-model="form.is_custom_prices" name="type"></el-checkbox>
   </el-form-item>
+  </el-col>
+  <el-col :span="12">
     <el-form-item label="Dynamic Preset">
       <el-checkbox label="Any changes made to this preset will affect ALL products using this preset pricing." v-model="form.is_dynamic_preset" name="type"></el-checkbox>
   </el-form-item>
+  </el-col>
+
+      </el-col>
+    </el-row>
 
 
   <el-form-item  label="Price" v-if="!form.is_custom_prices && form.price_type == 'piece'">
@@ -164,8 +173,7 @@
     
 
 </el-form>
-    </el-col>
-    </el-row>
+
 
 
            

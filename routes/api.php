@@ -41,6 +41,7 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     //catalog price Preset
     Route::post('catalog/pricePreset/create', 'Catalog\PricePresetController@store');
     Route::get('catalog/pricePreset', 'Catalog\PricePresetController@index');
+    Route::get('catalog/pricePreset/getPrices/{id}', 'Catalog\PricePresetController@getPrices');
     Route::post('catalog/pricePreset/delete/{id}', 'Catalog\PricePresetController@destroy');
     Route::post('catalog/prices/create', 'Catalog\PriceController@store');
 

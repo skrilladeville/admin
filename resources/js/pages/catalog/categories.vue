@@ -1,5 +1,5 @@
 <template>
-   
+      <div class="app-container">
       <el-card>
          <div slot="header" class="clearfix">
     <span>Category List</span>
@@ -82,7 +82,7 @@
 
 
 
-    
+      </div>
 
 
 

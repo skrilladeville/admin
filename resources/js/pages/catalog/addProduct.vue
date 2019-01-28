@@ -1,5 +1,5 @@
 <template>
-   
+   <div class="app-container">
       <el-card>
          <div slot="header" class="clearfix">
     <span>Add Product</span>
@@ -256,7 +256,7 @@
       </el-card>
 
 
-  
+  </div>
 
 
 
@@ -371,6 +371,7 @@ per_weight_presets:[],
 
     methods:{
         getPreset(id){
+            console.log("sadsad"+id)
             axios.get('/api/catalog/pricePreset/getPrices/'+id)
                 .then(res=>{
                     console.log(res.data)
