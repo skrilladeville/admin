@@ -106,8 +106,8 @@
   
       <el-option  v-for="range in per_weight_presets" :key="range.id" :label="range.name" :value="range.id"></el-option>
       
-    </el-select>
-     </el-form-item>
+</el-select>
+</el-form-item>
 
   <div  v-if="measurement == 'Weight'">
       <template >

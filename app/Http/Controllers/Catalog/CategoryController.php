@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Catalog;
 
 use Illuminate\Http\Request;
 use App\ProductCategory;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller

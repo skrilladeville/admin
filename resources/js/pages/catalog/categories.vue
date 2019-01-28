@@ -164,7 +164,14 @@ export default {
               .then(res=>{
                 this.centerDialogVisible=false
 
+                    this.name=''
+                    this.product_cat_id=0
+                    this.description=''
+
                 //add to parent
+
+                this.categories.push(res.data)
+                
                 if(res.data.product_cat_id==0){
                   this.parents.push(res.data)
                 }
