@@ -95,8 +95,10 @@ class BookingController extends Controller
         ->join('bookings_service_providers', 'bookings_service_providers.id', '=', 'bookings_services.bookings_service_providers_id')
         ->join ('profile_doctors', 'profile_doctors.user_id', '=', 'bookings_service_providers.profile_doctors_id')
         ->orderBy('start_datetime', 'asc')
-        ->where('bookings.user_id', $patient_id)->first();
-
+        ->where([
+            ['bookings.user_id', '=', $patient_id],
+            ['bookings.status', '=', '0']
+        ])->orderBy('start_datetime', 'asc')->first();
         return $bookings;
     }
 
@@ -108,7 +110,10 @@ class BookingController extends Controller
         ->join('bookings_services', 'bookings_services_id', '=', 'bookings_services.id')
         ->join('bookings_service_providers', 'bookings_service_providers.id', '=', 'bookings_services.bookings_service_providers_id')
         ->join ('profile_patients', 'profile_patients.user_id', '=', 'bookings.user_id')
-        ->where('bookings_service_providers.profile_doctors_id', $doctor_id)->orderBy('start_datetime', 'asc')->first();
+        ->where([
+            ['bookings_service_providers.profile_doctors_id', '=', $doctor_id],
+            ['bookings.status', '=', '0']
+        ])->orderBy('start_datetime', 'asc')->first();
 
         return $bookings;
     }
