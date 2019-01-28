@@ -39,19 +39,10 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
 
 
     //catalog price Preset
-<<<<<<< HEAD
-    Route::post('catalog/pricePreset/create','Catalog\PricePresetController@store');
-    Route::get('catalog/pricePreset/all','Catalog\PricePresetController@index');
-    Route::get('catalog/pricePreset/getPrices/{id}','Catalog\PricePresetController@getPrices');
-    Route::post('catalog/pricePreset/delete/{id}','Catalog\PricePresetController@destroy');
-    Route::post('catalog/prices/create','Catalog\PriceController@store');
-    
-=======
     Route::post('catalog/pricePreset/create', 'Catalog\PricePresetController@store');
     Route::get('catalog/pricePreset', 'Catalog\PricePresetController@index');
     Route::post('catalog/pricePreset/delete/{id}', 'Catalog\PricePresetController@destroy');
     Route::post('catalog/prices/create', 'Catalog\PriceController@store');
->>>>>>> 4dbc29465d8987e897d9c8ecce4691b20280bfa3
 
 
     //profile doctor
