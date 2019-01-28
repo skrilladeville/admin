@@ -10,6 +10,8 @@ import MyAccount from '../components/myaccount/MyAccount'
 import ManageUsers from '../pages/users/manageusers/index'
 import Categories from '../pages/catalog/categories'
 import AddPricePreset from '../pages/catalog/addPricePreset'
+import AddProduct from '../pages/catalog/addProduct'
+import Products from '../pages/catalog/products'
 import PricePresets from '../pages/catalog/PricePresets'
 import Vendors from '../pages/catalog/vendors'
 import AddVendor from '../pages/catalog/addVendor'
@@ -153,8 +155,15 @@ export default [
 		children: [
 			{
 				path: 'manage-products',
+				component:Products,
 				name: 'catalog.manageProducts',
-				meta: {requiresAuth: true, title: 'Manage Products', permission: 'product list' },
+				meta: {requiresAuth: true, title: 'Products', permission: 'product list' },
+			},
+			{
+			path: 'add-product',
+				component:AddProduct,
+				name: 'catalog.addProduct',
+				meta: {requiresAuth: true, title: 'Add Product', permission: 'add product' },
 			},
 			{
 				path: 'manage-categories',

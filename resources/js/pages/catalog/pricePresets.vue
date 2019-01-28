@@ -73,7 +73,7 @@ export default {
         
     }, 
     created(){
-        axios.get('/api/catalog/pricePreset')
+        axios.get('/api/catalog/pricePreset/all')
             .then(res=>{
                 this.price_presets=res.data;
                 this.price_presets.forEach(price=>{

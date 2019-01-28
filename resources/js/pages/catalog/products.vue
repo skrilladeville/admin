@@ -3,8 +3,8 @@
       <el-card>
          <div slot="header" class="clearfix">
     <span>Category List</span>
-    <el-button @click="centerDialogVisible = true" style="float: right; padding: 3px 0" type="text">Add Category</el-button>
-  </div>
+    <router-link :to="{name:'catalog.addProduct'}"><el-button style="float: right; padding: 3px 0" type="text">Add Product</el-button>
+  </router-link></div>
 
 
    <el-table
@@ -15,9 +15,7 @@
           prop="name"
           label="Category Name"
           >
-       
         </el-table-column>
-        
          <el-table-column
    
           label="Total Products">
@@ -56,7 +54,7 @@
    <el-form-item label="Parent">
     <el-select v-model="form.product_cat_id" style="width:100%;" placeholder="please select your zone">
       <el-option label="None" :value="0"></el-option>
-      <el-option v-for="parent in parents" :key="parent.id" :label="parent.name" :value="parent.id"></el-option>
+      <el-option v-for="parent in parents" :key="parent.product_cat_id" :label="parent.name" :value="parent.id"></el-option>
       
     </el-select>
   </el-form-item>
@@ -142,15 +140,7 @@ export default {
 
            axios.get('/api/catalog/category/all')
             .then(res=>{
-                      res.data.forEach(element => {
-                  if(element.product_cat_id==0){
-                      this.categories.push(element)
-                      let subCats=res.data.filter(e=>e.product_cat_id == element.id)
-                      subCats.forEach(sub=>{
-                           this.categories.push(sub)
-                      })
-                  }
-              });
+              this.categories=res.data
             })
 
     },
@@ -163,11 +153,7 @@ export default {
         axios.post('/api/catalog/category/create',this.form)
               .then(res=>{
                 this.centerDialogVisible=false
-
-                //add to parent
-                if(res.data.product_cat_id==0){
-                  this.parents.push(res.data)
-                }
+                console.log(res.data)
               })
       }
     }

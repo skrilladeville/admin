@@ -10,11 +10,16 @@ use App\Http\Controllers\Controller;
 class PricePresetController extends Controller
 {
     public function store(Request $request)
-    {
-       
+    {   
        $pricePreset= PricePreset::create($request->only(["name","price_type","is_custom_prices","is_dynamic_preset"]));
-   
        return $pricePreset;
+    }
+
+
+
+    public function getPrices($id){
+        $price_preset= PricePreset::find($id);
+        return $price_preset->prices;
     }
 
 

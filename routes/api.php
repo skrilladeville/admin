@@ -17,11 +17,11 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
 
     //catalog category
     Route::get('catalog/category/all', 'Catalog\CategoryController@index');
-    Route::post('catalog/category/create', 'Catalog\CategoryController@create');
+    Route::get('catalog/category/getParent', 'Catalog\CategoryController@getParentCategory');
+    Route::post('catalog/category/create', 'Catalog\CategoryController@store');
     Route::get('catalog/category/view/{id}', 'Catalog\CategoryController@show');
     Route::post('catalog/category/update/{id}', 'Catalog\CategoryController@update');
     Route::post('catalog/category/delete/{id}', 'Catalog\CategoryController@delete');
-
 
     //catalog vendor
     Route::get('catalog/vendor', 'Catalog\VendorController@index');
@@ -40,9 +40,11 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
 
     //catalog price Preset
     Route::post('catalog/pricePreset/create','Catalog\PricePresetController@store');
-    Route::get('catalog/pricePreset','Catalog\PricePresetController@index');
+    Route::get('catalog/pricePreset/all','Catalog\PricePresetController@index');
+    Route::get('catalog/pricePreset/getPrices/{id}','Catalog\PricePresetController@getPrices');
     Route::post('catalog/pricePreset/delete/{id}','Catalog\PricePresetController@destroy');
     Route::post('catalog/prices/create','Catalog\PriceController@store');
+    
 
 
     //profile doctor

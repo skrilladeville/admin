@@ -28,8 +28,7 @@
 
 
   <el-form-item  label="Price" v-if="!form.is_custom_prices && form.price_type == 'piece'">
-
-      <div v-for="(perPiece,index) in form.prices" :key="index">
+ <div v-for="(perPiece,index) in form.prices" :key="index">
 <el-input v-model="perPiece.piece_price" type="number"></el-input>
       </div>
       
