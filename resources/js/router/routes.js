@@ -228,10 +228,6 @@ export default [
 				component:AddProduct,
 				name: 'catalog.addProduct',
 				meta: {requiresAuth: true, title: 'Add Product', permission: 'add product' },
-
-				component: ManageProducts,
-				meta: {requiresAuth: true, title: 'Manage Products', permission: 'product list' },
-
 			},
 			{
 				path: 'manage-categories',

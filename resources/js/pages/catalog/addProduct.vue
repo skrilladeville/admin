@@ -40,7 +40,7 @@
               </el-form-item>
           </el-col>
           <el-col :span="18">
-              <el-form-item label="Strain">
+        <el-form-item label="Strain">
     <el-radio-group  v-model="form.strain" size="medium">
                     
       <el-radio-button label="None" ></el-radio-button>
@@ -346,7 +346,7 @@ per_weight_presets:[],
               });
             })
 
-            axios.get('/api/catalog/pricePreset/all')
+            axios.get('/api/catalog/pricePreset')
                 .then(res=>{
                     let weight_range_presets=res.data.filter(e=> e.price_type=='weight'
                     ).filter(e=>e.is_custom_prices ==1);
