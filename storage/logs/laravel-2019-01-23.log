@@ -72,7 +72,11 @@
 #32 C:\\xampp\\htdocs\\projects\\primie\\laravel\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #33 {main}
 "} 
+<<<<<<< HEAD
 [2019-01-23 09:17:05] production.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php:44)
+=======
+[2019-01-23 09:10:30] production.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php:44)
+>>>>>>> raymundo_brach
 [stacktrace]
 #0 C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(1027): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}(NULL)
 #1 C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php(48): tap(NULL, Object(Closure))
@@ -117,7 +121,11 @@
 #40 C:\\xampp\\htdocs\\projects\\primie\\laravel\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #41 {main}
 "} 
+<<<<<<< HEAD
 [2019-01-23 09:17:05] production.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php:44)
+=======
+[2019-01-23 09:10:30] production.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php:44)
+>>>>>>> raymundo_brach
 [stacktrace]
 #0 C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(1027): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}(NULL)
 #1 C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php(48): tap(NULL, Object(Closure))
@@ -137,7 +145,11 @@
 #15 C:\\xampp\\htdocs\\projects\\primie\\laravel\\public\\index.php(60): Illuminate\\Foundation\\Http\\Kernel->terminate(Object(Illuminate\\Http\\Request), Object(Illuminate\\Http\\Response))
 #16 {main}
 "} 
+<<<<<<< HEAD
 [2019-01-23 09:17:05] production.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php:44)
+=======
+[2019-01-23 09:10:31] production.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php:44)
+>>>>>>> raymundo_brach
 [stacktrace]
 #0 C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(1027): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}(NULL)
 #1 C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php(48): tap(NULL, Object(Closure))
@@ -182,6 +194,7 @@
 #40 C:\\xampp\\htdocs\\projects\\primie\\laravel\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #41 {main}
 "} 
+<<<<<<< HEAD
 [2019-01-23 09:17:05] production.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php:44)
 [stacktrace]
 #0 C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(1027): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}(NULL)
@@ -248,6 +261,9 @@
 #41 {main}
 "} 
 [2019-01-23 13:03:00] production.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php:44)
+=======
+[2019-01-23 09:10:31] production.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php:44)
+>>>>>>> raymundo_brach
 [stacktrace]
 #0 C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(1027): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}(NULL)
 #1 C:\\xampp\\htdocs\\projects\\primie\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php(48): tap(NULL, Object(Closure))

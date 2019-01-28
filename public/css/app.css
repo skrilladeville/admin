@@ -11292,6 +11292,7 @@ body {
 
 label {
   font-weight: 700;
+  margin-right: 30px;
 }
 
 html {
@@ -11350,15 +11351,18 @@ a:hover {
   width: 180px !important;
 }
 
-.app-main {
-  min-height: 100%;
-  top: 85px;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
 .app-container {
   margin-top: 10px;
   padding: 20px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.button-container {
+  padding: 10px 0 50px;
+  height: 0;
 }
 

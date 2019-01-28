@@ -220,7 +220,7 @@ export default [
 				path: 'manage-products',
 				component:Products,
 				name: 'catalog.manageProducts',
-<<<<<<< HEAD
+
 				meta: {requiresAuth: true, title: 'Products', permission: 'product list' },
 			},
 			{
@@ -228,10 +228,10 @@ export default [
 				component:AddProduct,
 				name: 'catalog.addProduct',
 				meta: {requiresAuth: true, title: 'Add Product', permission: 'add product' },
-=======
+
 				component: ManageProducts,
 				meta: {requiresAuth: true, title: 'Manage Products', permission: 'product list' },
->>>>>>> 4dbc29465d8987e897d9c8ecce4691b20280bfa3
+
 			},
 			{
 				path: 'manage-categories',
