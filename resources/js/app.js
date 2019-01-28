@@ -12,10 +12,11 @@ import 'vue-good-table/dist/vue-good-table.css'
 
 /*Font-Awesome Icons*/
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faCalendarCheck, faUser, 
+	faStore, faClock, faFileInvoice } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faCoffee)
+library.add(faCoffee, faCalendarCheck, faUser, faStore, faClock, faFileInvoice)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(VueGoodTablePlugin);
 
