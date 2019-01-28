@@ -3,13 +3,23 @@
 namespace App\Http\Controllers\Users;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
+use App\User;
 
 class UserController extends Controller
 {
     public function show(Request $request)
     {
         return $request->user();
+    }
+
+    public function viewAll(Request $request)
+    {
+        $users = User::paginate(10);
+        //$users = User::all();
+        return $users;
     }
 
     public function updateProfile(Request $request)

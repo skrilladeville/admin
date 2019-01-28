@@ -32,9 +32,10 @@ class CreateProfileDoctorsTable extends Migration
             $table->string('emg_contact_phone');
             $table->integer('profile_branch_admins_id');
             $table->integer('branches_id');
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned();
             $table->integer('status');
             $table->timestamps();
+            //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

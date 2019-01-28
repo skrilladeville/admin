@@ -2,46 +2,52 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class PermissionController extends Controller
 {
-    public function show(Request $request)
+    public function getAdminPermission()
     {
-        return $request->user();
+        $permissions = Role::findById(1);
+        $permissions->load('permissions');
+
+        return $permissions;
     }
 
-    public function updateProfile(Request $request)
+    public function getBranchAdminPermission()
     {
-        $rules = [
-            'name'  => 'required',
-            'email' => 'required|email|',
-        ];
+        $permissions = Role::findById(2);
+        $permissions->load('permissions');
 
-        $this->validate($request, $rules);
-
-        $user = $request->user();
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->save();
-
-        return response()->json(compact('user'));
+        return $permissions;
     }
 
-    public function updatePassword(Request $request)
+    public function getDoctorPermission()
     {
-        $rules = [
-            'new_password'         => 'required',
-            'confirm_new_password' => 'required|same:new_password'
-        ];
+        $permissions = Role::findById(3);
+        $permissions->load('permissions');
 
-        $this->validate($request, $rules);
+        return $permissions;
+    }
 
-        $user = $request->user();
-        $user->password = bcrypt($request->input('new_password'));
-        $user->saveOrFail();
+    public function getPatientPermission()
+    {
+        $permissions = Role::findById(4);
+        $permissions->load('permissions');
 
-        return response()->json(compact('user'));
+        return $permissions;
+    }
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+    public function destroy($id)
+    {
+        //
     }
 }

@@ -29,8 +29,8 @@ class AuthController extends Controller
             return response()->json(['error' => 'Could not create token'], 500);
         }
 
-        $role = Role::findById(1);
-        $role->load('permissions');
+        //$role = Role::findById(1);
+        //$role->load('permissions');
 
         $user = $request->user();
 
