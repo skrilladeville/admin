@@ -1,12 +1,7 @@
 <template>
 	<div>
 		<div class="card">
-		
-				<img class="img-responsive" src="/images/logo--Green-Card.svg" alt="">
-		
-			
-
-		
+			<img class="img-responsive" src="/images/logo--Green-Card.svg" alt="">
 			<p class="lead">Please Login With your credentials</p>
 			<div class="card-body" style="padding:30px;">
 <form @submit.prevent="login">
@@ -48,13 +43,13 @@
 					Cancel
 				</button>
 				</div>
-			
-					
+
+
 			</div>
 		</form>
 		</div>
 		</div>
-		
+
 	</div>
 </template>
 
@@ -75,7 +70,7 @@ height: 100px;
 		font-size: 14px!important;
 		margin-top: 20px;
 	}
-	
+
 </style>
 
 <script>

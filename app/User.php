@@ -50,6 +50,11 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function profile()
+    {
+        return $this->hasOne(ProfileAdmin::class);
+    }
+
     public function getRoleAttribute()
     {
         return $this->getRoleNames();
@@ -65,5 +70,10 @@ class User extends Authenticatable implements JWTSubject
         }
 
         return $list;
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->profile();
     }
 }
