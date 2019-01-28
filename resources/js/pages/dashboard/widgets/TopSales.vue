@@ -8,8 +8,8 @@
        >
       </el-table-column>
       <el-table-column
-        prop="category"
-        label="Category"
+        prop="product"
+        label="Name"
         >
       </el-table-column>
       <el-table-column
@@ -20,11 +20,10 @@
 </template>
 
 <script>
-  import ElTable from './../../common/ElTable.vue'
 
 	export default {
-        name: 'TopCategories',
-       methods: {
+        name: 'TopSales',
+        methods: {
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
           return 'warning-row';
@@ -35,27 +34,27 @@
       }
     },
     data() {
-       return {
+      return {
         tableData:  [{
           rank: '1',
-          category: 'Category_1',
+          product: 'Product_1',
           sales: '$0.00'
         }, {
           rank: '2',
-          category: 'Category_2',
+          product: 'Product_2',
           sales: '$0.00'
         }, {
           rank: '3',
-          category: 'Category_3',
+          product: 'Product_3',
           sales: '$0.00'
         }, {
          rank: '4',
-          category: 'Category_4',
+          product: 'Product_4',
           sales: '$0.00'
         },
         {
           rank: '5',
-          category: 'Category_5',
+          product: 'Product_5',
           sales: '$0.00'
         }]
       }

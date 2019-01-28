@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div v-if="data">
         <p class="text-info text-sm-right">{{createdDate}} </p>
         <blockquote class="blockquote prescription-blockquote">
             <p class="mb-0 prescription-blockquote-text">{{data.directions}}</p>
@@ -11,6 +12,8 @@
                 <!-- <cite title="Source Title">Entrepreneur</cite> -->
             </footer>
         </blockquote>
+        </div>
+        <div v-else> You don't have any prescriptions yet.</div>
     </div>
 </template>
 <script>

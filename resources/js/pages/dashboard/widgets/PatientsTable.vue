@@ -2,7 +2,7 @@
     <tableComponent v-bind:columns="this.columns" v-bind:rows="this.rows"></tableComponent>
 </template>
 <script>
-    import Table from './../../common/Table.vue'
+    import Table from './../../../components/common/Table.vue'
 
 	export default {
         name: 'PatientsTable',

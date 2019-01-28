@@ -2,9 +2,10 @@
     <div class="card-block notification-card-content">  
         <div class="notification-list-group list-group">
             <a href="#" class="list-group-item list-group-item-action" v-for="(notif, index) in notification_list" :key=index>
-                 <i class=icons[notif.category] ></i>
-				<span>{{notif.event}}</span>
-				<small class="float-xs-right">{{notif.date}}</small>
+
+				<span class="event-text"><font-awesome-icon :icon="icons[notif.category]" size="xs"/>
+                {{notif.event}}</span>
+				<small class="day-text">{{calculateDays(notif.date)}} days ago</small>
 			</a>
         </div>
     </div>
@@ -29,9 +30,9 @@
           return {
             notification_list: [],
             icons : {
-                Booking : 'fas fa-clock',
-		        Invoice : 'fas fa-file-invoice',
-		        Store : 'fas fa-store'
+                Booking : 'clock',
+		        Invoice : 'file-invoice',
+		        Store : 'store'
             }
             };
         },
@@ -46,34 +47,75 @@
                     var notification = {
                         category: category[Math.floor(Math.random()*category.length)],
                         event: purpose[Math.floor(Math.random()*purpose.length)],
-                        date: new Date(new Date(2018, 0, 1).getTime() + Math.random() * (new Date().getTime() - new Date(2018, 0, 1).getTime()))
+                        date: new Date(new Date(2019, 0, 1).getTime() + Math.random() * (new Date().getTime() - new Date(2019, 0, 1).getTime()))
                     }
                     this.notification_list.push(notification);
+                }
+            },
+            calculateDays(notif_date){
+                var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+
+                var dif = Math.round(
+                    Math.abs((new Date(notif_date).getTime() - new Date().getTime())/(oneDay)));
+
+                if(dif<=0){
+
+                }else{
+                    return dif;
                 }
             }
         }
 	}
 </script>
 <style lang="css" scoped>
-.notification-card{border: none!important; height:500px;}
+.notification-card{
+    border: none!important; 
+    height:700px;
+    }
 
-.notification-card-content{height: 100%; overflow: auto;}
+.notification-card-content{
+    height: 100%; 
+    overflow: hidden;
+}
+
+.notification-card-content:hover{
+    overflow: auto;
+}
 
 .notification-card-content::-webkit-scrollbar-track
 {
+    position:absolute;
+    transition: 0.8s;
 	border-radius: 10px;
 	background-color: transparent;
 }
 
 .notification-card-content::-webkit-scrollbar
 {
-	width: 12px;
+	width: 6px;
 	background-color: transparent;
 }
 
 .notification-card-content::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
-	background-color: rgba(163, 161, 161, 0.808);
+	background-color: rgba(144,147,153,.3);
 }
+
+.list-group-item{
+    color: #067144;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.event-text{
+    float: left;
+  clear: left;
+}
+
+.day-text{
+    float: left;
+  clear: left;
+}
+
 </style>

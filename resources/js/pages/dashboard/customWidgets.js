@@ -4,6 +4,7 @@ customWidgets['super-admin'] = [
 [{
     title: 'Notifications',
     widgetType: 'notification-card',
+    class: 'notif-no-border notification-card',
     showTitle: 1,
     size: 8,
     templateName: 'notifications'
@@ -98,6 +99,7 @@ customWidgets['patient'] = [
     title: 'Notifications',
     widgetType: 'notification-card',
     showTitle: 1,
+    class: 'notif-no-border notification-card',
     size: 8,
     templateName: 'notifications'
 },{
@@ -144,6 +146,7 @@ customWidgets['doctor'] = [
 [{
     title: 'Notifications',
     widgetType: 'notification-card',
+    class: 'notif-no-border notification-card',
     showTitle: 1,
     size: 8,
     templateName: 'notifications'
@@ -155,14 +158,18 @@ customWidgets['doctor'] = [
     inner_widgets: [
         {
             title: 'Patients',
-            widgetType: '',
+            widgetType: 'no-header',
+            class: 'bg-orange white',
+            icon: 'user',
             showTitle: 1,
             size: 8,
             templateName: 'statistics',
             url: '/api/users/patientsCount/'
         },{
             title: 'Appointments Completed',
-            widgetType: '',
+            widgetType: 'no-header',
+            class: 'bg-yellow white',
+            icon: 'calendar-check',
             showTitle: 1,
             size: 8,
             templateName: 'statistics',

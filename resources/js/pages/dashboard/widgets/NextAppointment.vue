@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="data">
+        <div v-if="data.length!=0">
             <h4 class="text-bold-200 text-muted">{{weekday}}</h4>
             <h3>{{monthAndDay}}</h3>
             <h5 class="text-muted">{{year}}</h5>
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div v-else>Nothing to display.</div>
+        <div v-else>You have no upcoming appointments.</div>
     </div>
 </template>
 <script>
@@ -29,6 +29,7 @@
         created(){
             axios.get(this.url+this.user_id)
             .then(res=>{
+                console.log(res.data)
                 this.data=res.data
                 }
             ).catch(err=>console.log(err))

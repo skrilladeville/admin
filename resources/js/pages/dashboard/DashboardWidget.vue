@@ -1,12 +1,13 @@
 <template>
-        <el-card class="box-card" shadow="always" :class=add>
-            <div slot="header" class="clearfix">
-                <span class="card-title">{{title}}</span>
+        <el-card class="box-card" shadow="always">
+            <div slot="header" class="clearfix" v-if="widgetType!='no-header'">
+                <span class="card-title" >{{title}}</span>
             </div>
             <div class="card-content" ><!-- widgetType-content here -->
                 <div class="card-body" :class=widgetType>
-                    <component v-bind:is="templateName" v-bind:url="url"></component>
+                    <component v-bind:is="templateName" v-bind:url="url" :icon="icon"></component>
                 </div>
+                <p v-if="widgetType=='no-header'">{{title}}</p>
             </div>
         </el-card>
 </template>
@@ -57,7 +58,8 @@
             widgetType: String,
             size: Number,
             templateName: String,
-            url: String
+            url: String,
+            icon: String|null
         }
 	}
 </script>
@@ -79,7 +81,7 @@
 .card-body{
     padding: 0!important;
 }
-.notification-card{border: none!important; height:700px;}
+.notification-card{border: none!important; height:500px;}
 
 .notification-card-content{height: 100%; overflow: auto;}
 
@@ -100,4 +102,9 @@
 	border-radius: 10px;
 	background-color: rgba(163, 161, 161, 0.808);
 }
+
+.notif-no-border{
+    border:1px solid #ebeef5!important;
+}
+
 </style>

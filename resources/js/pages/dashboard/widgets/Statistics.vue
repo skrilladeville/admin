@@ -10,8 +10,8 @@
             <div class="media-body text-xs-left">
                 <h3 class="white">{{data}}</h3>
             </div>
-            <div class="media-right media-middle">
-                <i class="fas fa-calendar-check white font-large-2 float-xs-right"></i>
+            <div class="media-right media-middle icon-div">
+                <font-awesome-icon :icon="icon" size="lg"/>
             </div>
         </div>
     </div>
@@ -29,7 +29,8 @@
             ).catch(err=>console.log(err))
         },
         props:{
-            url: String
+            url: String,
+            icon: String
         },
 		data() {
           return {
@@ -42,7 +43,21 @@
 </script>
 
 <style lang="css">
-    .stat-box .yellow{
-        background-color: lightgoldenrodyellow;
+    .bg-orange {
+        border:1px solid #ebeef5!important;
+        background-color: #FF9100 !important;
+    }
+
+    .bg-yellow{
+        border:1px solid #ebeef5!important;
+        background-color: #FFD600 !important;
+    }
+
+    .white{
+        color: white!important;
+    }
+
+    .icon-div{
+        font-size: 30px;
     }
 </style>
