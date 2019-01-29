@@ -31,6 +31,9 @@
           label="Description">
         </el-table-column>
 
+     <el-table-column
+      label="Operations">
+      <template slot-scope="scope">
         <el-button
           size="mini"
           type="success"
@@ -38,8 +41,10 @@
         <el-button
           size="mini"
           type="danger"
-        @click="handleDelete(scope.$index, scope.row)"
+     
           >Delete</el-button>
+      </template>
+    </el-table-column>
     
    
       </el-table>

@@ -38,6 +38,10 @@
           label="Balance">
         </el-table-column>
 
+      <el-table-column
+       width="180"
+      label="Operations">
+      <template slot-scope="scope">
         <el-button
           size="mini"
           type="success"
@@ -45,8 +49,10 @@
         <el-button
           size="mini"
           type="danger"
-      
+     
           >Delete</el-button>
+      </template>
+    </el-table-column>
       </el-table>
        </el-card>
    </div>
