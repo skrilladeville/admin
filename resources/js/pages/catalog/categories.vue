@@ -30,6 +30,16 @@
           prop="description"
           label="Description">
         </el-table-column>
+
+        <el-button
+          size="mini"
+          type="success"
+          >Edit</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+        @click="handleDelete(scope.$index, scope.row)"
+          >Delete</el-button>
     
    
       </el-table>
@@ -164,7 +174,7 @@ export default {
               .then(res=>{
                 this.centerDialogVisible=false
 
-                    this.name=''
+                this.name=''
                     this.product_cat_id=0
                     this.description=''
 
