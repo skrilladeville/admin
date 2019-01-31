@@ -2,8 +2,8 @@
       <div class="app-container">
       <el-card>
          <div slot="header" class="clearfix">
-    <span>Category List</span>
-    <el-button @click="centerDialogVisible = true" style="float: right; padding: 3px 0" type="text">Add Category</el-button>
+    <span>Categories</span>
+    <el-button @click="dialogAdd = true" style="float: right;" icon="el-icon-plus" type="success" size="small">Add Category</el-button>
   </div>
 
 
@@ -41,7 +41,8 @@
         <el-button
           size="mini"
           type="danger"
-     
+            
+        @click="openDialog(scope.$index, scope.row)"
           >Delete</el-button>
       </template>
     </el-table-column>
@@ -57,13 +58,13 @@
 
 <el-dialog
   title="Add Category"
-  :visible.sync="centerDialogVisible"
+  :visible.sync="dialogAdd"
   width="30%"
   center>
-  <el-form :model="form" label-position="top">
+  <el-form  status-icon :rules="rule" ref="form" :model="form" label-position="top">
 
  
-  <el-form-item label="Name">
+  <el-form-item label="Name" prop="name">
 
     <el-input v-model="form.name"></el-input>
 
@@ -83,8 +84,8 @@
   
    </el-form>
   <span slot="footer" class="dialog-footer">
-    <el-button @click="centerDialogVisible = false">Cancel</el-button>
-    <el-button type="primary" @click="save">Add</el-button>
+    <el-button @click="dialogAdd = false">Cancel</el-button>
+    <el-button type="primary" @click="save('form')">Add</el-button>
   </span>
 </el-dialog>
 
@@ -93,7 +94,18 @@
       </el-card>
 
 
-  
+  <el-dialog
+  title="Warning"
+  :visible.sync="centerDialogVisible"
+  width="30%"
+  center>
+  <span>Are you sure you want to delete</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="centerDialogVisible = false">Cancel</el-button>
+    <el-button type="danger" @click="Delete">Confirm</el-button>
+  </span>
+</el-dialog>
+
 
 
 
@@ -124,12 +136,28 @@ export default {
     },
     data(){
 
+      var validateName = (rule,value,callback)=>{
+         if (value === '') {
+          callback(new Error('Please input name Again'));
+        }
+        else{
+          callback()
+        }
+      }
+
       return{
+        centerDialogVisible:false,
+        id:'',
+        index:'',
 
         form:{
           name:'',
           product_cat_id:0,
           description:'',
+        },
+        rule:{
+          name:[{ validator: validateName, trigger: 'blur' }]
+          
         },
         categories:[],
         parents:[{
@@ -138,7 +166,7 @@ export default {
           description:'',
 
         }],
-        centerDialogVisible: false,
+        dialogAdd: false,
          
       }  
       
@@ -172,12 +200,33 @@ export default {
 
 
     methods:{
-      save(){
+       openDialog(index,row){
+          this.centerDialogVisible=true
+          this.id=row.id
+          this.index=index
 
-        console.log('test')
+            
+        
+        },
+
+        Delete(){
+          // console.log(row.id)
+          this.centerDialogVisible=false
+            let uri=`/api/catalog/category/delete/${this.id}`
+            axios.post(uri)
+                .then(res=>{
+                    console.log(res.data)
+                    this.categories.splice(this.index,1)
+
+                })
+        },
+      save(formName){
+         this.$refs[formName].validate((valid) => {
+          if (valid) {
+                    console.log('test')
         axios.post('/api/catalog/category/create',this.form)
               .then(res=>{
-                this.centerDialogVisible=false
+                this.dialogAdd=false
 
                 this.name=''
                     this.product_cat_id=0
@@ -191,7 +240,15 @@ export default {
                   this.parents.push(res.data)
                 }
               })
-      }
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+
+
+      },
+    
     }
 }
 

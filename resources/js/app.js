@@ -7,6 +7,8 @@ import 'normalize.css/normalize.css';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/en'
 import 'element-ui/lib/theme-chalk/index.css';
+
+
 import VueGoodTablePlugin from 'vue-good-table';
 // import the styles
 import 'vue-good-table/dist/vue-good-table.css'

@@ -52,7 +52,7 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-        $vendor= Vendor::findOrFail($id);
+        $vendor= Vendor::find($id);
         
         return $vendor;
         
@@ -80,7 +80,7 @@ class VendorController extends Controller
     {
         $vendor=Vendor::find($id);
 
-        $vendor= Vendor::create($request->only(["name","licence_or_registration_no","profile_patients_id","description","address","phone","fax","email","skype"]));
+        $vendor->update($request->only(["name","licence_or_registration_no","profile_patients_id","description","address","phone","fax","email","skype"]));
    
         return $vendor;
     }

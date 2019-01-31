@@ -21,19 +21,26 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::post('catalog/category/create', 'Catalog\CategoryController@store');
     Route::get('catalog/category/view/{id}', 'Catalog\CategoryController@show');
     Route::post('catalog/category/update/{id}', 'Catalog\CategoryController@update');
-    Route::post('catalog/category/delete/{id}', 'Catalog\CategoryController@delete');
+    Route::post('catalog/category/delete/{id}', 'Catalog\CategoryController@destroy');
 
     //catalog vendor
     Route::get('catalog/vendor', 'Catalog\VendorController@index');
     Route::post('catalog/vendor/create', 'Catalog\VendorController@store');
     Route::get('catalog/vendor/view/{id}', 'Catalog\VendorController@show');
     Route::post('catalog/vendor/update/{id}', 'Catalog\VendorController@update');
-    Route::post('catalog/vendor/delete/{id}', 'Catalog\VendorController@delete');
+    Route::post('catalog/vendor/delete/{id}', 'Catalog\VendorController@destroy');
 
 
     //catalog lab
     Route::post('catalog/lab/create', 'Catalog\LabController@store');
     Route::get('catalog/lab', 'Catalog\LabController@index');
+    Route::post('catalog/lab/delete/{id}', 'Catalog\LabController@destroy');
+
+
+    //product catalog
+    Route::post('catalog/product/create', 'Catalog\ProductController@store');
+    Route::get('catalog/product', 'Catalog\ProductController@index');
+
 
 
 

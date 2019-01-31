@@ -11023,6 +11023,63 @@ a.text-dark:hover, a.text-dark:focus {
 .noty_theme__nest.noty_type__success {
   background-color: #06D6A0;
   color: #fff; }
+/*fade*/
+
+.fade-enter-active,
+.fade-leave-active {
+  -webkit-transition: opacity 0.28s;
+  transition: opacity 0.28s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+
+/*fade-transform*/
+
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+
+.fade-transform-enter {
+  opacity: 0;
+  -webkit-transform: translateX(-30px);
+          transform: translateX(-30px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  -webkit-transform: translateX(30px);
+          transform: translateX(30px);
+}
+
+/*fade*/
+
+.breadcrumb-enter-active,
+.breadcrumb-leave-active {
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+
+.breadcrumb-enter,
+.breadcrumb-leave-active {
+  opacity: 0;
+  -webkit-transform: translateX(20px);
+          transform: translateX(20px);
+}
+
+.breadcrumb-move {
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+
+.breadcrumb-leave-active {
+  position: absolute;
+}
+
 .el-upload input[type="file"] {
   display: none !important;
 }
@@ -11091,6 +11148,11 @@ a.text-dark:hover, a.text-dark:focus {
 
 .button-container {
   height: 40px;
+}
+
+.el-form-item--mini.el-form-item,
+.el-form-item--small.el-form-item {
+  margin-bottom: 0px;
 }
 
 #app .main-container {
@@ -11291,8 +11353,8 @@ body {
 }
 
 label {
-  font-weight: 700;
-  margin-right: 30px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
 
 html {
