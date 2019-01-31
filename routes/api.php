@@ -47,11 +47,13 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
 
     //profile doctor
     Route::get('users/profileDoctors', 'Users\ProfileDoctorController@index');
-
+    Route::put('users/profileDoctor/{user_id}', 'Users\ProfileDoctorController@update');
+    Route::get('users/profileDoctor/{user_id}', 'Users\ProfileDoctorController@show');
 
     //user patient 
     Route::get('users/profilePatients', 'Users\ProfilePatientController@index');
     Route::get('users/profilePatient/{user_id}', 'Users\ProfilePatientController@show');
+    Route::put('users/profilePatient/{user_id}', 'Users\ProfilePatientController@update');
     Route::get('users/patients/{doctor_id}', 'Users\ProfilePatientController@patients');
     Route::get('users/patientsCount/{doctor_id}', 'Users\ProfilePatientController@patientsCount');
     Route::resource('users', 'Users\ProfilePatientController');
@@ -89,5 +91,8 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
 
     /*Prescription*/
     Route::get('prescription/{patient_id}', 'Prescription\PrescriptionController@show');
+
+    /*Contact*/
+    Route::post('contact/create', 'Contact\ContactController@store');
 
 //});
