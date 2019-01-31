@@ -1,5 +1,5 @@
 import Login from '../components/login/Login'
-import Layout from '../components/layout/Layout'
+import Layout from '../components/layout--v2/Layout'
 
 /* Dashboard */
 import Dashboard from '../pages/dashboard/index'
