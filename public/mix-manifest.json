@@ -1,4 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app--v2.css": "/css/app--v2.css",
+    "/css/gcis.css": "/css/gcis.css",
+    "/css/robust-admin.css": "/css/robust-admin.css",
+    "/js/robust-admin.js": "/js/robust-admin.js",
+    "/favicon.ico": "/favicon.ico"
 }
