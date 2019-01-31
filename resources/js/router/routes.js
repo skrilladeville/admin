@@ -7,7 +7,7 @@ import Dashboard from '../pages/dashboard/index'
 // import DashboardDoctor from '../pages/dashboard/DashboardDoctor'
 // import DashboardPatient from '../pages/dashboard/DashboardPatient'
 
-import Contact from '../pages/contact/Contact'
+import Contact from '../pages/contact/ContactForm'
 import MyAccount from '../pages/myaccount/MyAccount'
 
 /* Users Folder */

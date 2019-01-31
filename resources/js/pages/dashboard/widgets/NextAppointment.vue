@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="data.length!=0">
-            <h4 class="text-bold-200 text-muted">{{weekday}}</h4>
+            <h4 class="text-bold-200 text-muted day">{{weekday}}</h4>
             <h3>{{monthAndDay}}</h3>
             <h5 class="text-muted">{{year}}</h5>
             <blockquote class="blockquote border-left-yellow darken-2 border-left-3">
@@ -67,6 +67,9 @@
 	}
 </script>
 <style lang="scss">
+.day{
+    margin:0!important;
+}
 .border-left-3 {
     border-left-width: 3px !important;
 }

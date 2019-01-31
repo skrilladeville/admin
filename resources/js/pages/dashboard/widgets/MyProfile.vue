@@ -5,7 +5,7 @@
     </div>
     <div class="profile-info-div">
         <p id="profile-healthcard">{{data.health_card}}</p>
-        <h4>{{data.first_name+ ' '+ data.last_name}}</h4>
+        <h4 class="name">{{data.first_name+ ' '+ data.last_name}}</h4>
         <p id="profile-email">{{data.email}}</p>
         <p id="profile-contact">{{data.emg_contact_phone}}</p>
     </div>
@@ -40,6 +40,9 @@
 </script>
 
 <style lang="css" scoped>
+.name{
+    margin: 0!important;
+}
 .image-cropper {
     width: 100px;
     height: 100px;

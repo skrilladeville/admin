@@ -39,7 +39,7 @@
 		created(){
             axios.get(this.get_url[this.user_role]+this.user_id)
             .then(res=>{
-                this.form[this.user_role]=res.data
+                this.form=res.data
             }
             ).catch(err=>console.log(err))
         },
@@ -62,10 +62,10 @@
 			};
 			var checkMI = (rule, value, callback) => {
 				setTimeout(() => {
-				if (!(/^[a-z]+$/).test(value)) {
+				if (!(/^[a-zA-Z]+$/).test(value)) {
 					callback(new Error('Please input only a letter.'));
 				} else {
-					if (value.length > 1) {
+					if (value!=null&&value.length > 1) {
 					callback(new Error('Please input only 1 letter.'));
 					} else {
 					callback();
@@ -86,7 +86,6 @@
 			var checkPhone = (rule, value, callback) => {
 				 var re = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
     			 setTimeout(() => {
-					 console.log(value)
 					if (!re.test(String(value))) { 
 						callback(new Error('Please enter a valid phone number.'));
 					}else{
@@ -106,7 +105,6 @@
 			 user_id: this.$store.getters.user_id,
 			 user_role: this.$store.getters.role[0],
 			 form: {
-				 patient:{
 					first_name: '',
 					mi: '',
 					last_name: '',
@@ -122,23 +120,18 @@
 					fax_phone: '',
 					address_1: '',
 					address_1: '',
-					home_phone: ''
-				 },
-				 doctor:{
-					first_name: '',
-					last_name: '',
+					home_phone: '',
+
+					
 					profession: '',
 					license_no: '',
 					clinic_name: '',
-					address_1: '',
 					city: '',
 					province: '',
 					postal_code: '',
 					telephone: '',
-					extension: '',
-					emg_contact_phone: '',
-					email: ''
-				 }
+					extension: ''
+
 			 },
 			 rules: {
 				 mi: [
@@ -161,8 +154,7 @@
 		},
 		methods:{
         onSubmit(){
-			console.log(this.form[this.user_role])
-            axios.put(this.put_url[this.user_role]+this.user_id,this.form[this.user_role])
+            axios.put(this.put_url[this.user_role]+this.user_id,this.form)
                 .then(res=>{
                     alert('success')
                 }).catch(err=>console.log(err))

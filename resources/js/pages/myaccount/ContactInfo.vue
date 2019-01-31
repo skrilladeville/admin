@@ -58,15 +58,17 @@ export default {
     name: 'ContactInfo',
     props:{
         form: {
-            emg_contact_phone: String,
-            emg_contact: String,
-            email:String,
-            passport_num: String,
-            drivers_license:String,
-            fax_phone: String,
-            address_1: String,
-            address_1: String,
-            home_phone: String
+
+        emg_contact_phone: String,
+        emg_contact: String,
+        email:String,
+        passport_num: String,
+        drivers_license:String,
+        fax_phone: String,
+        address_1: String,
+        address_1: String,
+        home_phone: String
+
         }
     }
 	}

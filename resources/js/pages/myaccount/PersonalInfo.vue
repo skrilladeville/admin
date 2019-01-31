@@ -8,34 +8,34 @@
             <el-row :gutter="20">
                     <el-col :span="10">
                         <el-form-item class="personal-form-item" label="First Name" required>
-                        <el-input placeholder="First Name" v-model="form.patient.first_name"></el-input>
+                        <el-input placeholder="First Name" v-model="form.first_name"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="4">
                         <el-form-item class="personal-form-item" label="Middle Initial" prop="mi">
-                        <el-input placeholder="Middle Initial" v-model="form.patient.mi" ></el-input>
+                        <el-input placeholder="Middle Initial" v-model="form.mi" ></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="10">
                         <el-form-item class="personal-form-item" label="Last Name" required>
-                        <el-input placeholder="Last Name" v-model="form.patient.last_name"></el-input>
+                        <el-input placeholder="Last Name" v-model="form.last_name"></el-input>
                         </el-form-item>
                     </el-col>
             </el-row> 
             <el-row :gutter="20">
                     <el-col :span="10">
                         <el-form-item class="personal-form-item" label="Date of Birth" required>
-                        <el-date-picker type="date" placeholder="Pick a date" v-model="form.patient.birth_date" style="width: 100%;"></el-date-picker>
+                        <el-date-picker type="date" placeholder="Pick a date" v-model="form.birth_date" style="width: 100%;"></el-date-picker>
                         </el-form-item>
                     </el-col>
                     <el-col :span="4">
                         <el-form-item class="personal-form-item" label="Weight" prop="weight">
-                        <el-input placeholder="Weight" v-model="form.patient.weight" ></el-input>
+                        <el-input placeholder="Weight" v-model="form.weight" ></el-input>
                         </el-form-item>
                     </el-col>
                      <el-col :span="4">
                        <el-form-item class="personal-form-item" label="Unit(kg/lb)">
-							<el-select placeholder="Unit" v-model="form.patient.weight_unit">
+							<el-select placeholder="Unit" v-model="form.weight_unit">
 							<el-option label="lb" value="lb"></el-option>
 							<el-option label="kg" value="kg"></el-option>
 							</el-select>
@@ -45,21 +45,21 @@
                 <el-row :gutter="20">
                      <el-col :span="10">
                         <el-form-item class="personal-form-item" label="Health Card" required>
-                        <el-input placeholder="Health Card" v-model="form.patient.health_card"></el-input>
+                        <el-input placeholder="Health Card" v-model="form.health_card"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row :gutter="20">
                      <el-col :span="10">
                         <el-form-item class="personal-form-item" label="Passport No.">
-                        <el-input placeholder="Passport No." v-model="form.patient.passport_num"></el-input>
+                        <el-input placeholder="Passport No." v-model="form.passport_num"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row :gutter="20">
                      <el-col :span="10">
                         <el-form-item class="personal-form-item" label="Driver's License">
-                        <el-input placeholder="Driver's License" v-model="form.patient.drivers_license"></el-input>
+                        <el-input placeholder="Driver's License" v-model="form.drivers_license"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -72,23 +72,21 @@ export default {
     name: 'PersonalInfo',
     props:{
         form: {
-            patient: {
-                first_name: String,
-                mi: CharacterData,
-                last_name: String,
-                birth_date: String,
-                weight: Number,
-                weight_unit: String,
-                health_card: String,
-                emg_contact_phone: String,
-                emg_contact: String,
-                email:String,
-                passport_num: String,
-                drivers_license: String,
-                fax_phone: String,
-                address_1: String,
-                address_1: String
-            }
+            first_name: String,
+            mi: CharacterData,
+            last_name: String,
+            birth_date: String,
+            weight: Number,
+            weight_unit: String,
+            health_card: String,
+            emg_contact_phone: String,
+            emg_contact: String,
+            email:String,
+            passport_num: String,
+            drivers_license: String,
+            fax_phone: String,
+            address_1: String,
+            address_1: String
         }
     }
 	}
