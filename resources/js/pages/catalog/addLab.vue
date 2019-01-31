@@ -6,7 +6,7 @@
     <el-button style="float: right; padding: 3px 0" type="text"><router-link :to="{name:'catalog.vendors'}"> To List</router-link></el-button>
   </div>
     
-    <el-form ref="form" :label-position="labelPosition" :model="form" label-width="250px"  size="mini">
+    <el-form ref="form" label-position="top" :model="form" label-width="250px"  size="mini">
 
 
                     <el-form-item label="Name">

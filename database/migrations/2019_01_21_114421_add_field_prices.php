@@ -22,9 +22,6 @@ class AddFieldPrices extends Migration
             $table->double('joint_price')->default(0.0);
             $table->double('piece_price')->default(0.0);
             $table->double('range_price')->default(0.0);
-            
-            
- 
         });
     }
 

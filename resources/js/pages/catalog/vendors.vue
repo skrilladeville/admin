@@ -4,7 +4,7 @@
      <el-card>
          <div slot="header" class="clearfix">
     <span>Vendors</span>
-    <el-button style="float: right;" type="success" round><router-link :to="{ name:'catalog.addvendors'}">Add vendor</router-link></el-button>
+<router-link :to="{ name:'catalog.addvendors'}">    <el-button style="float: right;" type="success" round>Add vendor</el-button></router-link>
   </div>
     
     <el-table
@@ -37,6 +37,22 @@
          
           label="Balance">
         </el-table-column>
+
+      <el-table-column
+       width="180"
+      label="Operations">
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          type="success"
+          >Edit</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+     
+          >Delete</el-button>
+      </template>
+    </el-table-column>
       </el-table>
        </el-card>
    </div>
@@ -71,17 +87,5 @@ export default {
 </script>
 
 <style scoped>
-   .box-card{
-       margin-top: 100px;
-       margin-left: 20px;
-       margin-right: 20px;
 
-   }
-   .card-body{
-         padding: 10px;
-   }
-
-   label{
-       font-size: 12px !important;
-   }
 </style>

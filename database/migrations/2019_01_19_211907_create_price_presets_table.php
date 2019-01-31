@@ -19,13 +19,6 @@ class CreatePricePresetsTable extends Migration
             $table->string('price_type');
             $table->boolean('is_custom_prices')->nullable();
             $table->boolean('is_dynamic_preset')->nullable();
-            $table->double('gram_price')->default(0.0);
-            $table->double('eight_price')->default(0.0);
-            $table->double('quarter_price')->default(0.0);
-            $table->double('half_price')->default(0.0);
-            $table->double('ounce_price')->default(0.0);
-            $table->double('joint_price')->default(0.0);
-            $table->double('piece_price')->default(0.0);
             $table->timestamps();
         });
     }
