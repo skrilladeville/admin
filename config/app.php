@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://laravel.primie.loc'),
+    'url' => env('APP_URL', 'http://git-admin.primie.loc'),
 
     'asset_url' => env('ASSET_URL', null),
 

@@ -4,6 +4,7 @@ import VueNoty from 'vuejs-noty';
 import axios from 'axios';
 import 'normalize.css/normalize.css';
 import ElementUI from 'element-ui';
+import locale from 'element-ui/lib/locale/lang/en'
 import 'element-ui/lib/theme-chalk/index.css';
 import VueGoodTablePlugin from 'vue-good-table';
 // import the styles
@@ -30,14 +31,19 @@ Vue.use( VueNoty, {
 	timeout: 3000
 });
 
-Vue.use( ElementUI );
+Vue.use( ElementUI, { locale } );
 
 import router from './router/router';
 import store from './store/index';
+import SvgIcon from './components/SvgIcon'
 import App from './components/App.vue';
 import jwtToken from './helpers/jwt-token';
 
-Vue.config.productionTip = false;
+Vue.component('svg-icon', SvgIcon)
+
+const req = require.context('./icons/svg', false, /\.svg$/)
+const requireAll = requireContext => requireContext.keys().map(requireContext)
+requireAll(req)
 
 axios.interceptors.request.use(config => {
 	config.headers['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
@@ -55,17 +61,32 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
 	return response;
 }, error => {
-	console.log("ffff"+error)
+	// console.log(error)
 
-	if (error.response.status == 401) {
+	// if (error.response.status == 401) {
+	// 	store.dispatch('unsetAuthUser')
+	// 	.then(() => {
+	// 		jwtToken.removeToken();
+	// 		router.push({name: 'login'});
+	// 	});
+	// }
+	// return Promise.reject(error);
+	let errorResponseData = error.response.data;
+
+	const errors = ["token_invalid", "token_expired", "token_not_provided"];
+
+	if (errorResponseData.error && errors.includes(errorResponseData.error)) {
 		store.dispatch('unsetAuthUser')
-		.then(() => {
-			jwtToken.removeToken();
-			router.push({name: 'login'});
-		});
+			.then(() => {
+				jwtToken.removeToken();
+				router.push({name: 'login'});
+			});
 	}
+
 	return Promise.reject(error);
 });
+
+Vue.config.productionTip = false;
 
 new Vue({
   el: '#app',

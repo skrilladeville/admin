@@ -14,8 +14,7 @@ class DropIsPiecePricesColumn extends Migration
     public function up()
     {
         Schema::table('prices', function (Blueprint $table) {
-            $table->dropColumn('is_piece');
- 
+            //$table->dropColumn('is_piece');
         });
     }
 
@@ -27,8 +26,7 @@ class DropIsPiecePricesColumn extends Migration
     public function down()
     {
         Schema::table('prices', function (Blueprint $table) {
-            $table->boolean('is_piece');
- 
+            //$table->boolean('is_piece');
         });
     }
 }

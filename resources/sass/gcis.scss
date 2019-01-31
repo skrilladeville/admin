@@ -1,0 +1,147 @@
+/* Load this CSS file last to over-ride default styles */
+
+/* TYPOGRAPHY */
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600');
+/*body{font-size:1.2rem}*/
+*,.h1, .h2, .h3, .h4, .h5, .h6, code, h1, h2, h3, h4, h5, h6, kbd, pre, samp{font-family: 'Poppins', sans-serif;letter-spacing:inherit}
+h3, .h3{font-size:2.51rem}
+a,.text-danger,.help-block,.el-submenu__title{font-weight:bold}
+.help-block em{font-weight:normal;font-style:normal}
+
+.navigation,.el-menu-item,.el-submenu__title{font-size:1.4rem}.main-menu.menu-dark .navigation > li ul{font-size:1.2rem}
+.card .card-title{font-size:1.82rem;margin:0}
+.ft-align-center:before{content:""}
+label{text-transform:uppercase}
+
+/* LAYOUT */
+h5{margin-bottom: 2rem;}
+input[type="radio"],input[type="checkbox"]{margin:-4px 1em 0 0;vertical-align: middle;}
+h4{margin:3.2rem 0 1rem}
+label{margin:1.2rem 0 0.2rem}
+
+[class*=" ft-"], [class^=ft-],.ft-align-center:before{margin:0 0.5em}
+
+/* Hide the browser's default checkbox
+.checkbox input{opacity:0;cursor:pointer;} */
+/* and replace it with a dummy checkbox
+.checkbox .skin{position:absolute;cursor:pointer;height:1.5em;width:1.5em;margin:0 0 0 -2.5em;} */
+/* with a magical checkmark
+.checkbox .skin:after{content:"";position:absolute;left:0.5em;top:0.2em;width:5px;height:10px;border:solid white;border-width:0 3px 3px 0;-webkit-transform: rotate(45deg);-ms-transform: rotate(45deg);transform: rotate(45deg);} */
+.door{text-align:center}.door .col-12{padding:0}.door .mr-1{margin:1rem}
+.helpbox{text-align:center}.help{padding:1rem}
+.door label{display:none}label#rememberMe{display:inline;}.door fieldset p{width:70%;margin:auto}
+
+html body.fixed-navbar{padding-top:7.57rem}
+.header-navbar{min-height:7.57rem}
+/*.header-navbar .navbar-header{height:7.57rem}*/
+body.vertical-layout.vertical-menu.menu-collapsed .navbar .navbar-brand{/*height:4.57em*/padding:0}
+.navbar-nav .d-md-none{margin-top:1.5rem}
+
+.main-menu.menu-fixed{top:7.57rem}
+body.vertical-layout.vertical-menu.menu-expanded .main-menu{width:20rem}
+body.vertical-layout.vertical-menu.menu-expanded .content, body.vertical-layout.vertical-menu.menu-expanded .footer{margin:0 0 0 20rem}
+.main-menu .main-menu-content{height:94%}/*fix nav scroll hidden bottom*/
+
+.dropdown-menu{min-width:20rem;border:none}
+.main-menu li{line-height:2.45}
+.main-menu.menu-dark .navigation > li > a{height:3.8em}
+.menu-title{height:6em;line-height:3em}
+
+/*icons*/
+.nav a i:before{font-size:1.8em}
+.navigation > li > a > i:before{font-size:1.8em;margin:8px -7px 0;display:block}
+.input-group-text{padding:0.5rem 0.7rem;font-size:2rem}
+
+.card form.sign{margin:4rem 0}
+.fa{margin:0 0.8rem 0 0.1rem}
+.card-profile-image{width:18.2%;position:relative;z-index:10;margin-top:-2.5%;}
+.board{padding:1rem 1rem 0.5rem 1rem;text-align:center}
+.headboard{width:136.5%;margin:0 0 1% -30%;padding:1rem 1rem 0rem 13.7rem;position:relative;z-index:0}.headboard h5{margin-bottom:1rem}
+.block-area{padding: 0.5rem 0.9rem;display: block;}
+
+/* login */
+.blank-page .content-wrapper .flexbox-container{height:100%/* 138vh*/;padding:4%}
+.card-footer,.card-header{background:none;}
+.card,.box-shadow-2,table.dataTable{border-radius:0.77rem}
+.door #logoArea{width:172px/*50%*/;padding:1em;margin:auto}
+#logoArea img{display:block;margin:0.5em}
+.door #logoArea img:nth-child(2),.hide{display:none}
+h6.font-small-3{font-size:0.9rem !important;}
+/*fieldset{text-align:center}
+.form-control,fieldset{margin:0.4em 0}*/
+
+.help-block ul{list-style:none;}
+
+.header-navbar .nav-item + .nav-item{/*margin:-2rem 0*/}
+.nav-link, .navbar,.header-navbar .navbar-header,.header-navbar .navbar-header .navbar-brand{padding:0}
+.header-navbar .navbar-header .navbar-brand .brand-logo{width:274px;/*margin:-2px 0*/}
+
+/* datatable */
+.dataTables_filter label{width:100%}
+.dataTables_paginate ul.pagination{float:right}
+.pagination li{min-width:2.5em;text-align:center}
+.pagination .page-link,.pagination .page-item.active .page-link,.table-bordered, .table-bordered td, .table-bordered th{border:1px solid #097244;margin:0}
+.page-item.next .page-link,.page-item.previous .page-link,.page-item.disabled .page-link{border:none}
+table.dataTable tbody td{vertical-align:middle;padding:1rem}
+.table a.btn.edit{float:right;padding:0.2rem 0.6rem}
+
+div.DTED_Lightbox_Background,div.DTED_Lightbox_Wrapper{z-index:1000}
+
+/* COLOR */
+html body{background:#E3EBD8}
+a:link,a:visited,.main-menu li{color:#097244 !important}.h1, .h2, .h3, .h4, .h5, .h6, code, h1, h2, h3, h4, h5, h6, kbd, pre, samp,form label{color:#053922}
+.main-menu.menu-dark .navigation{background:none}
+body .content-detached.content-right{background:#E2EAD8}
+body.vertical-layout.vertical-menu.menu-expanded .main-menu,.navbar-nav .dropdown-menu,.dropdown-menu.show,.card .card,.table-hover tbody tr:hover,.table-striped tbody tr:nth-of-type(odd){background:#CDE2D9}
+input:required::placeholder,.help-block{color:red}input:required{border-color:red !important}
+
+.navbar,.main-menu.menu-dark .navigation > li.active > a,.main-menu.menu-dark .navigation > li .active > a,button.btn,thead,a.btn,.board,.headboard.first{background:#067144;color:#D3FFC9 !important}
+.board h2,.headboard.first h2,.headboard.first h5{color:white}
+.main-menu.menu-dark .navigation > li.open > a,li.is-opened{background:#9CD192}
+.main-menu.menu-dark .navigation > li.active > a span,.main-menu.menu-dark .navigation > li .active > a{color:#D3FFC9 !important}
+.main-menu.menu-dark .navigation > li.hover > a, .main-menu.menu-dark .navigation > li:hover > a, .main-menu.menu-dark .navigation > li.active > a,
+.main-menu.menu-dark .navigation > li.open .hover > a,.dropdown-item:hover,#app .el-submenu__title:hover,.page-link:hover,.table-striped tbody tr.odd.selected, .table-striped tbody tr.even.selected,.el-menu-item:hover{background:#8CB160 !important}
+body.vertical-layout.vertical-menu.menu-expanded .main-menu .navigation > li > a > i:before {
+      font-size: 2rem; }
+.btn-primary:hover{border-color:#09B28D !important;background:#09B28D !important;}
+.btn-primary{border-color:#067144 !important;background:#067144 !important;}
+
+.navbar{display:block; border-bottom:0.4rem solid #D3FFC9}.table thead th{border-bottom:0.2rem solid #D3FFC9;cursor:pointer}
+.dropdown-item:focus,.dropdown-item:hover{background:#3D5D51;cursor:pointer;color:#B2F61F}
+/* .main-menu.menu-dark .navigation > li.open > ul, */.main-menu ul ul{background:#D2FEC9;}
+
+
+.header-navbar a,.navbar-nav .dropdown-menu a:hover{color:wheat !important}
+.navbar-nav .dropdown-menu a,.help-block.good,.input-group-text{color:#097244 !important}
+
+.pagination .page-item.active .page-link,.page-link a,tfoot,.block-area{background:#54987A;color:white !important}
+.card-profile-image img{width:111px;border:5px solid #D2FEC9;}
+
+/* login */
+.card{background:#FFF;}.help{background:#F9FEBD}
+.form-control,.checkbox .skin{border:1px solid #39B54A !important;background:#E3EBD8 !important}
+.checkbox .skin:hover,.checkbox input:checked ~ .skin{background:#39B54A !important}
+.border-grey.border-lighten-3,.card{border:1px solid #097244 !important}
+.btn-warning:hover{background:#CD8C09 !important}
+
+.modal-content{background:none;border:none}
+/* Desktop Layout: 769px to a max of 1232px.  Inherits styles from: Mobile Layout and Tablet Layout. */
+@media (max-width: 767.98px) {
+.header-navbar .navbar-header .navbar-brand .brand-logo{width:274px;/*margin:-2px 0*/}
+	.header-navbar.navbar-with-menu .navbar-container{background:#8CB160}
+	body.vertical-layout.vertical-menu .content{top: 1.7rem}
+.menu-title{height:5.5em;line-height:3.5em;cursor: pointer}
+.blank-page .content-wrapper .flexbox-container{padding:0}
+}
+
+@media (max-width: 991.98px){
+	.navbar-nav{/*margin:21px*/}
+	.header-navbar .navbar-header .navbar-brand .brand-logo{/*margin:-2px 0*/}
+body.vertical-layout.vertical-menu .main-menu {width:16rem;}
+}
+
+// override elementUI inline styles
+.el-menu-item:hover{background:inherit}
+.el-submenu__title{color:inherit}
+
+.tab-container[data-v-fa309b34]{margin:inherit}

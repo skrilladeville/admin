@@ -30,7 +30,15 @@
           label="Phone">
         </el-table-column>
     
-   
+   <el-button
+          size="mini"
+          type="success"
+          >Edit</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+     
+          >Delete</el-button>
       </el-table>
        </el-card>
    </div>
