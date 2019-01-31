@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\Contact;
 
 use Illuminate\Http\Request;
-use App\ProfileDoctor;
-use App\User;
+use App\Contact;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 
-class ProfileDoctorController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,7 @@ class ProfileDoctorController extends Controller
      */
     public function index()
     {
-        $profile_doctors= ProfileDoctor::all();
-
-        return $profile_doctors;
+        //
     }
 
     /**
@@ -41,6 +37,19 @@ class ProfileDoctorController extends Controller
     public function store(Request $request)
     {
         //
+        $contact = new Contact;
+
+        $contact->user_id = $request->input('user_id');
+        $contact->related_service = $request->input('related_service');
+        $contact->priority = $request->input('priority');
+        $contact->name = $request->input('name');
+        $contact->email = $request->input('email');
+        $contact->subject = $request->input('subject');
+        $contact->message = $request->input('message');
+        $contact->save();
+        // if($contact->save()){
+        //     return new ArticleResource($contact);
+        // }
     }
 
     /**
@@ -49,14 +58,9 @@ class ProfileDoctorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($user_id)
+    public function show($id)
     {
         //
-        $profile = ProfileDoctor::select('profile_doctors.*', 'email')
-        ->where('user_id', $user_id)
-        ->join('users', 'users.id', '=', 'user_id')
-        ->first();
-        return $profile;
     }
 
     /**
@@ -80,20 +84,6 @@ class ProfileDoctorController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $profile = ProfileDoctor::where('user_id', $id)->firstOrFail();
-        $data = $request->except('_token');
-        foreach($data as $key => $value){
-            if(array_key_exists($key, $profile)){
-                $profile[$key] = $value;
-            }
-        }
-
-        $user = User::findOrFail($id);
-        $user->email = $request->email;
-        // $profile = $request;
-        if($profile->save()){
-            $user->save();
-        }
     }
 
     /**

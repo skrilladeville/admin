@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use Illuminate\Http\Request;
 use App\ProfilePatient;
+use App\User;
 use App\Http\Controllers\Controller;
 
 class ProfilePatientController extends Controller
@@ -49,7 +50,10 @@ class ProfilePatientController extends Controller
     public function show($user_id)
     {
         //
-        $profile = ProfilePatient::where('user_id', $user_id)->first();
+        $profile = ProfilePatient::select('profile_patients.*', 'email')
+        ->where('user_id', $user_id)
+        ->join('users', 'users.id', '=', 'user_id')
+        ->first();
         return $profile;
     }
 
@@ -99,6 +103,22 @@ class ProfilePatientController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $profile = ProfilePatient::where('user_id', $id)->firstOrFail();
+        $data = $request->except('_token');
+        foreach($data as $key => $value){
+            if(array_key_exists($key, $profile)){
+                $profile[$key] = $value;
+            }
+        }
+
+        $user = User::findOrFail($id);
+        $user->email = $request->email;
+        // $profile = $request;
+        if($profile->save()){
+            $user->save();
+        }
+        // return $profile;
     }
 
     /**
