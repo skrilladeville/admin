@@ -5,7 +5,7 @@ import EditProfile from '../components/profile/edit-profile/EditProfile'
 import EditPassword from '../components/profile/edit-password/EditPassword'
 import Layout from '../components/layout/Layout'
 import Dashboard from '../pages/dashboard/index'
-import Contact from '../pages/contact/ContactForm'
+import ContactForm from '../pages/contact/ContactForm'
 import MyAccount from '../pages/myaccount/MyAccount'
 import ManageUsers from '../pages/users/manageusers/index'
 import Categories from '../pages/catalog/categories'
@@ -363,7 +363,7 @@ export default [
 			{
 				path: 'contact',
 				name: 'contact',
-				component: Contact,
+				component: ContactForm,
 				meta: {requiresAuth: true, title: 'Contact', permission: 'contact' },
 			}
 		]

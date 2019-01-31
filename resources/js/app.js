@@ -2,7 +2,6 @@ import $ from 'jquery';
 import Vue from 'vue';
 import VueNoty from 'vuejs-noty';
 import axios from 'axios';
-
 import 'normalize.css/normalize.css';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -13,10 +12,10 @@ import 'vue-good-table/dist/vue-good-table.css'
 /*Font-Awesome Icons*/
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee, faCalendarCheck, faUser, 
-	faStore, faClock, faFileInvoice } from '@fortawesome/free-solid-svg-icons'
+	faStore, faClock, faFileInvoice, faThumbsUp, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faCoffee, faCalendarCheck, faUser, faStore, faClock, faFileInvoice)
+library.add(faCoffee, faCalendarCheck, faUser, faStore, faClock, faFileInvoice, faThumbsUp, faTimes)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(VueGoodTablePlugin);
 

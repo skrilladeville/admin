@@ -1,258 +1,173 @@
 <template>
- <el-row :gutter="20" class="row">
-    <el-col :span="24" :key="index">
-	<el-card class="box-card">
-		<div slot="header" class="clearfix">
-    		<span>Personal Information</span>
-  		</div>
-		<form action="" method="post">
-			<div class="form-body" v-if="userRole=='patient'">
-				<section> <!--Personal Info-->
-					<div class="row">
-						<div class="form-group col-md-5 mb-2">
-							<label for="projectinput1">First Name</label>
-							<input type="text" id="projectinput1" class="form-control" placeholder="First Name" name="fname" required data-validation-required-message="Please enter your first name.">
-						</div>
-						<div class="form-group col-md-2 mb-2">
-							<label for="eventInput3">Middle Initial</label>
-							<input type="text" id="eventInput3" class="form-control" placeholder="MI" name="middle-initial">
-						</div>
-						<div class="form-group col-md-5 mb-2">
-							<label for="projectinput2">Last Name</label>
-							<input type="text" id="projectinput2" class="form-control" placeholder="Last Name" name="lname" required data-validation-required-message="Please enter your last name.">
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-5">
-							<div class="form-group">
-								<label for="issueinput3">Date of Birth</label>
-								<input type="date" id="issueinput3" class="form-control" name="dateopened" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Date of Birth" data-original-title="" title="" required data-validation-required-message="Please enter your birth date.">
-							</div>
-						</div>
-						<div class="form-group col-md-2 mb-2">
-							<label for="eventInput3">Weight</label>
-							<input type="text" id="eventInput3" class="form-control" placeholder="Weight" name="middle-initial">
-						</div>
-						<div class="form-group col-md-2 mb-2">
-							<label for="issueinput6">lbs/kg</label>
-							<select id="issueinput6" name="status" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Unit" data-original-title="" title="">
-								<option value="not started" selected>lbs</option>
-								<option value="started">kg</option>
-							</select>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="form-group col-md-5 mb-2">
-							<label for="projectinput1">Health Card</label>
-							<input type="text" id="projectinput1" class="form-control" placeholder="Health Card" name="fname" required data-validation-required-message="Please enter your Health Card.">
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="form-group col-md-5 mb-2">
-							<label for="projectinput1">Passport No.</label>
-							<input type="text" id="projectinput1" class="form-control" placeholder="Passport No." name="fname">
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="form-group col-md-5 mb-2">
-							<label for="projectinput1">Driver's License</label>
-							<input type="text" id="projectinput1" class="form-control" placeholder="Driver's License" name="fname">
-						</div>
-					</div>
-				</section>
-				<section><!--Contact Info-->
-					<div class="row">
-						<div class="form-group col-md-5 mb-2">
-							<label for="projectinput1">Best Contact #</label>
-							<input type="text" id="projectinput1" class="form-control" placeholder="Mobile Phone No." name="fname">
-						</div>
-						<div class="form-group col-md-5 mb-2">
-							<label for="projectinput2">Alternate Phone</label>
-							<input type="text" id="projectinput2" class="form-control" placeholder="Home Phone No." name="lname">
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="form-group col-md-5 mb-2">
-								<label for="projectinput2">Fax Phone No.</label>
-								<input type="text" id="projectinput2" class="form-control" placeholder="Fax Phone No." name="lname">
-						</div>
-						<div class="form-group col-md">
-							<label for="donationinput2">Email</label>
-							<input type="email" id="donationinput2" class="form-control square" placeholder="email" name="email">
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="form-group col-md">
-							<label>Address 1</label>
-							<input class="form-control border-primary" id="userinput7" type="" placeholder="Address 1" required data-validation-required-message="Please enter your address.">
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-md">
-							<label>Address 2</label>
-							<input class="form-control border-primary" id="userinput7" type="" placeholder="Address 1">
-						</div>
-					</div>
-				</section>
-			</div>
-			<div class="form-body" v-else> <!--Doctor's-->
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>First name</label>
-							<fieldset class="form-group">
-						<input type="text" id="doc_fname" class="form-control" placeholder="First name" name="fname" tabindex="1" required data-validation-required-message="Please enter your first name." value="">
-							</fieldset>
-						</div>
-					</div>
-
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Last name</label>
-							<fieldset class="form-group">
-						<input type="text" id="doc_lname" class="form-control" placeholder="Last name" name="lname" tabindex="1" required data-validation-required-message="Please enter your last name." value="">
-							</fieldset>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Profession</label>
-							<fieldset class="form-group">
-						<input type="text" id="doc_profession" class="form-control" placeholder="Profession" name="profession" tabindex="1" required data-validation-required-message="Please enter your profession." value="">
-							</fieldset>
-						</div>
-					</div>
-
-					<div class="col-md-6">
-						<div class="form-group">
-							<fieldset class="form-group">
-								<label>Medical licence number</label>
-						<input type="text" id="doc_licensenumber" class="form-control" placeholder="Medical licence number" name="license_num" tabindex="1" required data-validation-required-message="Please enter your license number." value="">
-								<p class="badge-default badge-info block-tag text-left"><small class="block-area white">Identify licensing province if different than that of your clinic</small></p>
-							</fieldset>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<fieldset class="form-group">
-								<label>Clinic/Business name</label>
-						<input type="text" id="doc_clinicname" class="form-control" placeholder="Clinic/Business name" name="clinic_name" tabindex="1" required data-validation-required-message="Please enter your clinic or business name."
-								value="">
-							</fieldset>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<fieldset class="form-group">
-								<label>Street address</label>
-						<input type="text" id="doc_street_add" class="form-control" placeholder="Street address" name="street_address" tabindex="1" required data-validation-required-message="Please enter clinic street address."
-								value="">
-							</fieldset>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-5">
-						<div class="form-group">
-							<fieldset class="form-group">
-								<label>City</label>
-						<input type="text" id="doc_city" class="form-control" placeholder="City" name="city" tabindex="1" required data-validation-required-message="Please enter city." value="">
-							</fieldset>
-						</div>
-					</div>
-					<div class="col-md-5">
-						<div class="form-group">
-							<fieldset class="form-group">
-								<label>Province</label>
-						<input type="text" id="doc_province" class="form-control" placeholder="Province" name="province" tabindex="1" required data-validation-required-message="Please enter province." value="">
-							</fieldset>
-						</div>
-					</div>	
-					<div class="col-md-2">
-						<div class="form-group">
-							<fieldset class="form-group">
-								<label>Postal code</label>
-						<input type="text" id="doc_postal_code" class="form-control" placeholder="Postal Code" name="postal_code" tabindex="1" required data-validation-required-message="Please enter postal code." value="">
-							</fieldset>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-3">
-						<div class="form-group">
-							<fieldset class="form-group">
-								<label>Telephone</label>
-						<input type="text" id="doc_telephone" class="form-control" placeholder="###-####" name="telephone" tabindex="1" required data-validation-required-message="Please enter telephone number." value="">
-							</fieldset>
-						</div>
-					</div>
-					<div class="col-md-2">
-						<div class="form-group">
-							<fieldset class="form-group">
-								<label>Ext.</label>
-						<input type="text" id="doc_extension" class="form-control" placeholder="123" name="extension" tabindex="1"
-								value="">
-							</fieldset>
-						</div>
-					</div>	
-					<div class="col-md-3">
-						<div class="form-group">
-							<fieldset class="form-group">
-								<label>Fax</label>
-						<input type="text" id="doc_fax" class="form-control" placeholder="Fax" name="doc_fax" tabindex="1" value="" >
-							</fieldset>
-						</div>
-					</div>	
-					<div class="col-md-4">
-						<div class="form-group">
-							<fieldset class="form-group">
-								<label>Email</label>
-						<input type="text" id="doc_email" class="form-control" placeholder="myemail@email.com" name="email" tabindex="1" required data-validation-required-message="Please enter email address." value="">
-							</fieldset>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="form-actions">
-				<div class="text-center">
-					<button type="submit" class="btn btn-primary">
-						<i class="fa fa-check-square-o"></i>Save
-					</button>
-				</div>
-			</div>
-		</form>
-	</el-card>
-    </el-col>
- </el-row>
+	<div>
+		<el-form ref="form" :model="form" :rules="rules" label-width="120px" label-position="top" v-if="user_role=='patient'">
+			<personal-info :form = form></personal-info>
+			<contact-info :form = form></contact-info>
+			<el-row type="flex" justify="center">
+				<el-form-item>
+    				<el-button type="primary" @click="onSubmit">
+						 <font-awesome-icon :icon="'thumbs-up'" size="xs"/> Save
+					</el-button>
+  				</el-form-item>
+			</el-row>
+		</el-form>
+		<el-form ref="form" :model="form" label-width="120px" label-position="top" v-else>
+			<doctor-info :form = form></doctor-info>
+			<el-row type="flex" justify="center">
+				<el-form-item>
+    				<el-button type="primary" @click="onSubmit">
+						 <font-awesome-icon :icon="'thumbs-up'" size="xs"/> Save
+					</el-button>
+  				</el-form-item>
+			</el-row>
+		</el-form>
+	</div>
 </template>
 
 <script>
+	import PersonalInfo from './PersonalInfo.vue'
+	import ContactInfo from './ContactInfo.vue'
+	import DoctorInfo from './DoctorInfo.vue'
 
 	export default {
+		name: 'MyAccount',
+		components:{
+			'personal-info': PersonalInfo,
+			'contact-info': ContactInfo,
+			'doctor-info': DoctorInfo
+		},
+		created(){
+            axios.get(this.get_url[this.user_role]+this.user_id)
+            .then(res=>{
+                this.form[this.user_role]=res.data
+            }
+            ).catch(err=>console.log(err))
+        },
 		data() {
+			var checkWeight = (rule, value, callback) => {
+				if (!value) {
+				return callback(new Error('Please input the weight.'));
+				}
+				setTimeout(() => {
+				if (!Number.isInteger(parseInt(value))) {
+					callback(new Error('Please input digits.'));
+				} else {
+					if (value == 0) {
+					callback(new Error('Please enter valid weight.'));
+					} else {
+					callback();
+					}
+				}
+				}, 1000);
+			};
+			var checkMI = (rule, value, callback) => {
+				setTimeout(() => {
+				if (!(/^[a-z]+$/).test(value)) {
+					callback(new Error('Please input only a letter.'));
+				} else {
+					if (value.length > 1) {
+					callback(new Error('Please input only 1 letter.'));
+					} else {
+					callback();
+					}
+				}
+				}, 1000);
+			};
+			var checkEmail = (rule, value, callback) => {
+				 var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    			 setTimeout(() => {
+					if (!re.test(String(value).toLowerCase())) { 
+						callback(new Error('Please enter a valid email address.'));
+					}else{
+						callback();
+					}
+				}, 1000)
+			};
+			var checkPhone = (rule, value, callback) => {
+				 var re = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
+    			 setTimeout(() => {
+					 console.log(value)
+					if (!re.test(String(value))) { 
+						callback(new Error('Please enter a valid phone number.'));
+					}else{
+						callback();
+					}
+				}, 1000)
+			};
 			return {
-			 userRole: this.$store.getters.role
+			 get_url: {
+				 patient: '/api/users/profilePatient/',
+				 doctor: '/api/users/profileDoctor/'
+			 },
+			 put_url: {
+				 patient: '/api/users/profilePatient/',
+				 doctor: '/api/users/profileDoctor/'
+			 },
+			 user_id: this.$store.getters.user_id,
+			 user_role: this.$store.getters.role[0],
+			 form: {
+				 patient:{
+					first_name: '',
+					mi: '',
+					last_name: '',
+					birth_date: '',
+					weight: 0,
+					weight_unit: '',
+					health_card: '',
+					emg_contact_phone: '',
+					emg_contact: '',
+					email:'',
+					passport_num: '',
+					drivers_license: '',
+					fax_phone: '',
+					address_1: '',
+					address_1: '',
+					home_phone: ''
+				 },
+				 doctor:{
+					first_name: '',
+					last_name: '',
+					profession: '',
+					license_no: '',
+					clinic_name: '',
+					address_1: '',
+					city: '',
+					province: '',
+					postal_code: '',
+					telephone: '',
+					extension: '',
+					emg_contact_phone: '',
+					email: ''
+				 }
+			 },
+			 rules: {
+				 mi: [
+					{ validator: checkMI, trigger: 'change' },
+				],
+				email: [
+					{ validator: checkEmail, trigger: 'blur' },
+				],
+				weight: [
+					{validator: checkWeight, trigger: 'blur'}
+				],
+				emg_contact_phone: [
+					{validator: checkPhone, trigger: 'blur'}
+				],
+				home_phone: [
+					{validator: checkPhone, trigger: 'blur'}
+				]
+			}
 			}
 		},
-		methods: {
-        },
+		methods:{
+        onSubmit(){
+			console.log(this.form[this.user_role])
+            axios.put(this.put_url[this.user_role]+this.user_id,this.form[this.user_role])
+                .then(res=>{
+                    alert('success')
+                }).catch(err=>console.log(err))
+		}
+    }
 	}
 </script>
 
