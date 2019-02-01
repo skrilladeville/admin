@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Catalog;
-
+use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 class ProductController extends Controller
@@ -13,7 +13,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products=Product::all();
+
+        return $products;
     }
 
     /**
@@ -34,8 +36,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            
+            $product=Product::create($request->only(['name','symbol','sku','category_id',
+                                    'strain','is_marijuana','image','product_type',
+                                    'is_each','net_weight','is_self_distributed',
+                                    'is_lab_results','is_show_on_weedmaps','is_show_on_potify',
+                                    'is_print_label','description']));
+
+            return $product;
     }
+
+
 
     /**
      * Display the specified resource.

@@ -3,7 +3,7 @@
 <el-card>
     <div slot="header" class="clearfix">
     <span>Add Price Presets</span>
-    <el-button style="float: right; padding: 3px 0" type="text"><router-link :to="{name:'catalog.preset-list'}">Back To List</router-link></el-button>
+    <el-button style="float: right;" icon="el-icon-tickets" size="small" type="success"><router-link :to="{name:'catalog.preset-list'}">Back To List</router-link></el-button>
   </div>
   
     
@@ -12,33 +12,35 @@
     <el-input v-model="form.name"></el-input>
   </el-form-item>
     <el-row :gutter="20">
-    <el-col :span="6">
-  <el-form-item label="Price Type">
+    <el-col :md="6">
+  <el-form-item label="Price Type" style="width:100%;">
     <el-select @change="clearPrices" v-model="form.price_type" placeholder="please select a price type">
       <el-option label="piece" value="piece"></el-option>
       <el-option label="weight" value="weight"></el-option>
     </el-select>
   </el-form-item>
     </el-col>
-  <el-col :span="6">
+  <el-col :md="6">
 
   <el-form-item label="Custom Price">
       <el-checkbox @change="clearPrices" label="Use Custom Price" v-model="form.is_custom_prices" name="type"></el-checkbox>
   </el-form-item>
   </el-col>
-  <el-col :span="12">
+  <el-col :md="12">
     <el-form-item label="Dynamic Preset">
       <el-checkbox label="Any changes made to this preset will affect ALL products using this preset pricing." v-model="form.is_dynamic_preset" name="type"></el-checkbox>
   </el-form-item>
   </el-col>
 
-      </el-col>
+     
     </el-row>
 
 
   <el-form-item  label="Price" v-if="!form.is_custom_prices && form.price_type == 'piece'">
  <div v-for="(perPiece,index) in form.prices" :key="index">
-<el-input v-model="perPiece.piece_price" type="number"></el-input>
+<el-input v-model="perPiece.piece_price" type="number"><template slot="prepend">
+        $
+    </template></el-input>
       </div>
       
   </el-form-item>
@@ -50,40 +52,52 @@
 
   
       <el-row>
-    <el-col :span="12">
+    <el-col :md="12">
             <el-form-item label="Gram Price">
-            <el-input v-model="perPiece.gram_price" type="number"></el-input>
+            <el-input v-model="perPiece.gram_price" type="number"><template slot="prepend">
+        $
+    </template></el-input>
             </el-form-item>
       </el-col>
 
-      <el-col :span="12">
+      <el-col :md="12">
             <el-form-item label="Eight Price">
-            <el-input v-model="perPiece.eight_price" type="number"></el-input>
+            <el-input v-model="perPiece.eight_price" type="number"><template slot="prepend">
+        $
+    </template></el-input>
             </el-form-item>
       </el-col>
       </el-row>
       <el-row>
-      <el-col :span="12">
+      <el-col :md="12">
             <el-form-item label="Quarter Price">
-            <el-input v-model="perPiece.quarter_price" type="number"></el-input>
+            <el-input v-model="perPiece.quarter_price" type="number"><template slot="prepend">
+        $
+    </template></el-input>
             </el-form-item>
       </el-col>
-      <el-col :span="12">
+      <el-col :md="12">
             <el-form-item label="Half Price">
-            <el-input v-model="perPiece.half_price" type="number"></el-input>
+            <el-input v-model="perPiece.half_price" type="number"><template slot="prepend">
+        $
+    </template></el-input>
             </el-form-item>
       </el-col>
       
 </el-row>
 <el-row>
-          <el-col :span="12">
+          <el-col :md="12">
             <el-form-item label="Ounce Price">
-            <el-input v-model="perPiece.ounce_price" type="number"></el-input>
+            <el-input v-model="perPiece.ounce_price" type="number"><template slot="prepend">
+        $
+    </template></el-input>
             </el-form-item>
       </el-col>
-            <el-col :span="12">
+            <el-col :md="12">
             <el-form-item label="Joint Price">
-            <el-input v-model="perPiece.joint_price" type="number"></el-input>
+            <el-input v-model="perPiece.joint_price" type="number">    <template slot="prepend">
+        $
+    </template></el-input>
             </el-form-item>
       </el-col>
 </el-row>
@@ -109,11 +123,19 @@
                  <td> <el-input
     placeholder="0.0"
     v-model="perPiece.count"
-    /></td>
+    >    <template slot="append">
+        pcs
+    </template></el-input></td>
                  <td> <el-input
     placeholder="0.0"
     v-model="perPiece.piece_price"
-    /></td>
+    >
+        <template slot="prepend">
+        $
+    </template>
+    </el-input>
+    
+    </td>
     <td> <el-button type="danger" icon="el-icon-delete" @click="deletePriceForm(index)" circle></el-button></td>
     <td>  <el-switch v-model="perPiece.show_on_digital"></el-switch></td>
     
@@ -142,19 +164,36 @@
          <tbody>
            <br>
              <tr v-for="(perPiece,index) in form.prices" :key="index">
-                 <td> <el-input
+                 <td> 
+    <el-input
     placeholder="0.0"
     v-model="perPiece.from"
-    /></td>
+    >    <template slot="prepend">
+        g
+    </template>
+    </el-input>
+    
+    </td>
     <td> <el-input
     placeholder="0.0"
     v-model="perPiece.to"
-    /></td>
+    >
+    <template slot="prepend">
+        g
+    </template>
+    
+    </el-input>
+    </td>
     
     <td><el-input
     placeholder="0.0"
     v-model="perPiece.range_price"
-    /></td>
+    >
+        <template slot="append">
+        $
+    </template>
+    </el-input>
+    </td>
     <td> <el-button type="danger" icon="el-icon-delete" @click="deletePriceForm(index)" circle></el-button></td>
     <td>  <el-switch v-model="perPiece.show_on_digital"></el-switch></td>
     
@@ -169,7 +208,7 @@
      </table>
           </el-form-item>
 
-    <el-button type="success" @click="onSubmit" round style="margin-top: 20px;">Submit</el-button>
+    <el-button type="success" @click="onSubmit" size="small"round style="margin-top: 20px;">Save</el-button>
     
 
 </el-form>

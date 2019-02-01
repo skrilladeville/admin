@@ -3,23 +3,23 @@
       <el-card>
          <div slot="header" class="clearfix">
     <span>Add Product</span>
-    <el-button  style="float: right;" type="success" round>Back to list</el-button>
+    <router-link :to="{name:'catalog.manageProducts'}"><el-button  style="float: right;" type="success" round>Back to list</el-button></router-link>
   </div>
   <el-form label-position="top" size="small">
       <p>Overview</p>
       <el-form-item label="Name">
-          <el-input></el-input>
+          <el-input v-model="form.name"></el-input>
       </el-form-item>
       <el-row :gutter="10">
           <el-col :span="6">
               <el-form-item label="Symbol">
-   <el-input></el-input>
+   <el-input v-model="form.symbol"></el-input>
               </el-form-item>
 
           </el-col>
           <el-col :span="18">
               <el-form-item label="SKU">
- <el-input></el-input>
+ <el-input v-model="form.sku"></el-input>
               </el-form-item>
           </el-col>
       </el-row>
@@ -72,7 +72,16 @@
       </el-row>
 
       <el-form-item label="Product Image">
-<el-input  type="file"></el-input>
+<el-upload
+action="https://jsonplaceholder.typicode.com/posts/"
+  class="upload-demo"
+  :on-preview="handlePreview"
+  :on-remove="handleRemove"
+  :file-list="fileList2"
+  list-type="picture">
+  <el-button size="small" type="primary">Click to upload</el-button>
+  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
+</el-upload>
       </el-form-item>
 
       <p>Prices</p>
@@ -88,18 +97,45 @@
 
        <el-form-item v-if="measurement == 'Per Unit'"  label="Presets">
 <el-select v-model="preset_weight_range" @change="getPreset(preset_weight_range)" placeholder="please select preset">
-  
+
       <el-option  v-for="range in per_unit_presets" :key="range.id" :label="range.name" :value="range.id"></el-option>
       
     </el-select>
      </el-form-item>
 
-      <el-form-item  label="Price" v-if="measurement == 'Per Unit'">
+         <div v-if="measurement == 'Per Unit'">
+             <el-row :gutter="10">
+<el-col :span="6">
+           <el-form-item  label="Price">
  <div v-for="(perPiece,index) in form.prices" :key="index">
 <el-input v-model="perPiece.piece_price" type="number"></el-input>
       </div>
+        
+  </el-form-item> 
+      </el-col> 
+      <el-col :span="6">
+
+          <el-form-item label="Net Weight">
+              <el-input v-model="form.net_weight" type="number">
+
+              </el-input>
+          </el-form-item>
+            
+      </el-col>
+
+      <el-col :span="6">
+          <el-switch
+style="display: block"
+  v-model="form.is_each"
+  inactive-text="Is Each">
+</el-switch>
+    </el-col>
+    </el-row>
+                
+         </div>
+    
+
       
-  </el-form-item>
 
    <el-form-item v-if="measurement == 'Weight'"  label="Presets">
 <el-select v-model="preset_weight_range" @change="getPreset(preset_weight_range)" placeholder="please select preset">
@@ -247,6 +283,183 @@
      </table>
 
 
+<p>Other Information</p>
+<hr style="width:100%;">
+
+<el-switch
+style="display: block"
+  v-model="form.is_self_distributed"
+  inactive-text="Self Distributed">
+</el-switch><br>
+<el-switch
+style="display: block"
+  v-model="form.is_lab_results"
+  inactive-text="Lab Results">
+  
+</el-switch>
+
+<el-card style="margin-top:10px;" v-if="form.is_lab_results">
+
+      <el-form-item>
+    <el-col :md="6">
+    <el-form-item label="Lab">
+    <el-select v-model="formLab.lab_id"  placeholder="please select lab">
+      <el-option  v-for="lab in labs" :key="lab.id" :label="lab.name" :value="lab.id"></el-option>
+    </el-select>
+    </el-form-item>
+      
+    </el-col>
+  
+    <el-col :md="11">
+      <el-form-item label="Test Date">
+         <el-date-picker
+      v-model="formLab.test_date"
+      type="datetime"
+      placeholder="Select date and time"
+     >
+    </el-date-picker>
+      </el-form-item>
+    </el-col>
+  </el-form-item>
+
+<el-row :gutter="10">
+   <el-col :md="6">
+    <el-form-item label="Measurement">
+    <el-radio-group v-model="formLab.lab_mesurement" size="medium" style="margin:0px;">
+      <el-radio-button label="%" ></el-radio-button>
+      <el-radio-button label="Mg"></el-radio-button>
+    </el-radio-group>
+    </el-form-item>
+</el-col>
+
+    <el-col :span="2">
+            <el-form-item label="Indica">
+            <el-input v-model="formLab.indica" type="number"></el-input>
+            </el-form-item>
+      </el-col>
+
+      <el-col :span="2">
+            <el-form-item label="Sativa">
+            <el-input v-model="formLab.sativa" type="number"></el-input>
+            </el-form-item>
+      </el-col>
+    
+      <el-col :span="2">
+            <el-form-item label="THC">
+            <el-input v-model="formLab.thc" type="number"></el-input>
+            </el-form-item>
+      </el-col>
+      <el-col :span="2">
+            <el-form-item label="CBD">
+            <el-input v-model="formLab.cbd" type="number"></el-input>
+            </el-form-item>
+      </el-col>
+
+
+          <el-col :span="2">
+            <el-form-item label="CBN">
+            <el-input v-model="formLab.cbn" type="number"></el-input>
+            </el-form-item>
+      </el-col>
+
+
+
+
+
+</el-row>
+
+
+  </el-card>
+  
+<br>
+<el-switch
+style="display: block"
+  v-model="form.is_show_on_weedmaps"
+  inactive-text="Show On Weedmaps">
+</el-switch>
+
+
+<el-card style="margin-top:10px;" v-if="measurement != 'Weight' && form.is_show_on_weedmaps">
+ <el-row :gutter="5">
+    <el-col :span="2">
+            <el-form-item label="1g">
+            <el-input v-model="weed_map_price.one_g" type="number"></el-input>
+            </el-form-item>
+      </el-col>
+
+      <el-col :span="2">
+            <el-form-item label="2g">
+            <el-input v-model="weed_map_price.two_g" type="number"></el-input>
+            </el-form-item>
+      </el-col>
+    
+      <el-col :span="2">
+            <el-form-item label="1/8oz">
+            <el-input v-model="weed_map_price.eight_oz" type="number"></el-input>
+            </el-form-item>
+      </el-col>
+      <el-col :span="2">
+            <el-form-item label="1/4oz">
+            <el-input v-model="weed_map_price.four_oz" type="number"></el-input>
+            </el-form-item>
+      </el-col>
+
+
+          <el-col :span="2">
+            <el-form-item label="1/2oz">
+            <el-input v-model="weed_map_price.half_oz" type="number"></el-input>
+            </el-form-item>
+      </el-col>
+            <el-col :span="2">
+            <el-form-item label="1oz">
+            <el-input v-model="weed_map_price.one_oz" type="number"></el-input>
+            </el-form-item>
+      </el-col>
+</el-row>
+</el-card>
+
+    
+<br>
+<el-switch
+style="display: block"
+  v-model="form.is_show_on_potify"
+  inactive-text="Show On Potify">
+</el-switch><br>
+<el-switch
+style="display: block"
+  v-model="form.is_print_label"
+  inactive-text="Print Label">
+</el-switch><br>
+
+<el-form-item label="Tag">
+  <el-tag
+  :key="index"
+  v-for="(tag,index) in form.tags"
+  closable
+  :disable-transitions="false"
+  @close="handleClose(index)">
+  {{tag}}
+</el-tag>
+<el-input
+  class="input-new-tag"
+  v-if="inputVisible"
+  v-model="inputValue"
+  ref="saveTagInput"
+  size="mini"
+  @keyup.enter.native="handleInputConfirm"
+  @blur="handleInputConfirm"
+>
+</el-input>
+<el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+</el-form-item>
+
+<el-form-item label="Description">
+
+    <el-input v-model="form.description" type="textarea"></el-input>
+</el-form-item>
+
+<el-button @click="saveProduct" type="success" size="small">Save</el-button>
+
 
   </el-form>
 
@@ -269,9 +482,7 @@
 </template>
 
 <style scoped>
-.el-form-item__label{
-    font-size: 40px;
-}
+
 
 </style>
 
@@ -283,19 +494,57 @@ export default {
     data(){
 
       return{
+        inputVisible: false,
+        inputValue: '',
 
-measurement:'Weight',
-preset_weight_range:'',
-weight_range_presets:[],
-per_unit_range_presets:[],
-per_unit_presets:[],
-per_weight_presets:[],
+        measurement:'Weight',
+        preset_weight_range:'',
+        weight_range_presets:[],
+        per_unit_range_presets:[],
+        per_unit_presets:[],
+        per_weight_presets:[],
+        fileList2: [],
+        labs:[],
+
+        weed_map_price:{
+        one_g:0,
+        two_g:0,
+        eight_oz:0,
+        four_oz:0,
+        half_oz:0,
+        one_oz:0,
+        },
+
+        formLab:{
+        lab_id:null,
+        cbn:'',
+        cbd:'',
+        thc:'',
+        sativa:'',
+        indica:'',
+        lab_mesurement:''
+        },
+
 
         form:{
-        strain: '',
+            name:'',
+            symbol:'',
+            sku:'',
+            image:'',
+        strain: 'None',
          is_marijuana:true,
          product_type:'',
          category_id:'',
+         is_self_distributed:false,
+        is_lab_results:false,
+        lab_mesurement:'',
+        is_show_on_weedmaps:false,
+        is_show_on_potify:false,
+        is_print_label:true,
+        net_weight:'',
+        is_each:false,
+        tags:[],
+        description:'',
          prices:[{
             from:0,
             to:0,
@@ -330,6 +579,15 @@ per_weight_presets:[],
        
     },
     created(){
+
+        axios.get('/api/catalog/lab')
+            .then(response => {
+              this.labs = response.data
+              console.log(response)
+            })
+            .catch(error => {
+              console.log(error)
+            })
     
            axios.get('/api/catalog/category/all')
             .then(res=>{
@@ -370,6 +628,43 @@ per_weight_presets:[],
 
 
     methods:{
+
+
+    saveProduct(){
+         console.log(this.form)
+        axios.post('/api/catalog/product/create',this.form)
+            .then(res=>{
+                console.log(res.data)
+            })
+    },
+
+handleClose(index) {
+        this.form.tags.splice(index, 1);
+      },
+
+      showInput() {
+        this.inputVisible = true;
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
+      },
+
+      handleInputConfirm() {
+        let inputValue = this.inputValue;
+        if (inputValue) {
+          this.form.tags.push(inputValue);
+        }
+        this.inputVisible = false;
+        this.inputValue = '';
+      },
+
+
+         handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      },
         getPreset(id){
             console.log("sadsad"+id)
             axios.get('/api/catalog/pricePreset/getPrices/'+id)
@@ -428,7 +723,10 @@ per_weight_presets:[],
             show_on_digital:true
                 }];
         }
-    }
+    },
+
+    
+    
 }
 
 

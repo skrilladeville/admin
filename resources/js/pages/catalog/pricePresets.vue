@@ -2,8 +2,8 @@
  <div class="app-container">
      <el-card>
     <div slot="header" class="clearfix">
-    <span>Add Price Presets</span>
-    <el-button style="float: right; padding: 3px 0" type="text"><router-link :to="{ name:'add pricepreset'}">New Preset</router-link></el-button>
+    <span>Price Presets</span>
+    <router-link :to="{ name:'add pricepreset'}"><el-button style="float: right;" icon="el-icon-plus" type="success" size="small">New Preset</el-button></router-link>
   </div>
   <el-table
     ref="multipleTable"
@@ -11,7 +11,7 @@
     style="width: 100%"
     >
    
-    </el-table-column>
+  
     <el-table-column
       label="Id"
       width="55">
@@ -20,7 +20,7 @@
     <el-table-column
       property="name"
       label="Name"
-      width="120">
+      >
     </el-table-column>
     <el-table-column
       property="price_type"
@@ -48,7 +48,9 @@
         <el-button
           size="mini"
           type="danger"
-        @click="handleDelete(scope.$index, scope.row)"
+
+        
+        @click="openDialog(scope.$index, scope.row)"
           >Delete</el-button>
       </template>
     </el-table-column>
@@ -59,6 +61,22 @@
   </div> -->
 
      </el-card>
+
+     
+
+<el-dialog
+  title="Warning"
+  :visible.sync="centerDialogVisible"
+  width="30%"
+  center>
+  <span>Are you sure you want to delete</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="centerDialogVisible = false">Cancel</el-button>
+    <el-button type="danger" @click="Delete">Confirm</el-button>
+  </span>
+</el-dialog>
+
+
  </div>
 </template>
 
@@ -67,6 +85,9 @@ export default {
 
     data(){
         return{
+centerDialogVisible:false,
+          index:'',
+          id:'',
             price_presets:[]
         }
         
@@ -95,15 +116,25 @@ export default {
             })
     },
     methods:{
-        handleDelete(index,row){
-            console.log(row.id)
-            let uri=`/api/catalog/pricePreset/delete/${row.id}`
+        openDialog(index,row){
+          this.centerDialogVisible=true
+          this.id=row.id
+          this.index=index
+
+            
+        
+        },
+
+        Delete(){
+          // console.log(row.id)
+          this.centerDialogVisible=false
+            let uri=`/api/catalog/pricePreset/delete/${this.id}`
             axios.post(uri)
                 .then(res=>{
                     console.log(res.data)
-                    this.price_presets.splice(index,1)
+                    this.price_presets.splice(this.index,1)
+
                 })
-        
         }
     }
     

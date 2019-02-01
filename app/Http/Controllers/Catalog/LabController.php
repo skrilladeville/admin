@@ -21,4 +21,14 @@ class LabController extends Controller
         $lab= Lab::create($request->only(["name","licence_no","description","phone","fax","email","city_state_zip"]));
         return $lab;
     }
+
+    public function destroy($id){
+        $lab=Lab::find($id);
+        $lab->delete();
+
+        
+        return response()->json([
+            "success" => "ok"
+        ], 200);
+    }
 }
