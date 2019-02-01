@@ -41,6 +41,7 @@ import Products from '../pages/catalog/products'
 import PricePresets from '../pages/catalog/PricePresets'
 import Vendors from '../pages/catalog/vendors'
 import AddVendor from '../pages/catalog/addVendor'
+import EditVendor from '../pages/catalog/editVendor'
 import AddLab from '../pages/catalog/addLab'
 import Labs from '../pages/catalog/labs'
 
@@ -226,6 +227,7 @@ export default [
 			{
 			path: 'add-product',
 				component:AddProduct,
+				hidden:true,
 				name: 'catalog.addProduct',
 				meta: {requiresAuth: true, title: 'Add Product', permission: 'add product' },
 			},
@@ -233,7 +235,7 @@ export default [
 				path: 'manage-categories',
 				component: Categories,
 				name: 'catalog.manageCategories',
-				meta: {requiresAuth: true, title: 'Manage Categories', permission: 'product categories' },
+				meta: {requiresAuth: true, title: 'Categories', permission: 'product categories' },
 			},
 			{
 				path: 'vendors',
@@ -245,20 +247,30 @@ export default [
 			{
 				path: 'addVendors',
 				component: AddVendor,
+				hidden:true,
 				name: 'catalog.addvendors',
 				meta: {requiresAuth: true, title: 'Add Vendor', permission: 'add vendor' },
+
+			},
+			{
+				path: 'vendors/edit/:id',
+				component: EditVendor,
+				hidden:true,
+				name: 'catalog.editvendors',
+				meta: {requiresAuth: true, title: 'Update Vendor', permission: 'update vendor' },
 
 			},
 			{
 				path: 'pricePreset',
 				component: PricePresets,
 				name: 'catalog.preset-list',
-				meta: {requiresAuth: true, title: 'Price Presets List', permission: 'preset list' },
+				meta: {requiresAuth: true, title: 'Price Presets', permission: 'preset list' },
 
 			},
 			{
 				path: 'addPricePreset',
 				component: AddPricePreset,
+				hidden:true,
 				name: 'add pricepreset',
 				meta: {requiresAuth: true, title: 'Add Price Preset', permission: 'add price preset' },
 
@@ -267,12 +279,13 @@ export default [
 				path: 'lab',
 				component: Labs,
 				name: 'labs',
-				meta: {requiresAuth: true, title: 'lab list', permission: 'lab list' },
+				meta: {requiresAuth: true, title: 'labs', permission: 'lab list' },
 
 			},
 			{
 				path: 'addLab',
 				component: AddLab,
+				hidden:true,
 				name: 'add lab',
 				meta: {requiresAuth: true, title: 'add Lab', permission: 'add lab' },
 
@@ -283,6 +296,7 @@ export default [
 				component: Attributes,
 				meta: {requiresAuth: true, title: 'Attributes', permission: 'product attributes' },
 			}
+
 		]
 	},
 	{
