@@ -7,6 +7,51 @@
   </div>
 
 
+   <el-table
+        :data="products"
+        stripe
+        style="width: 100%">
+        <el-table-column
+          prop="name"
+          label="Name"
+          width="180">
+        </el-table-column>
+        <el-table-column
+          prop="symbol"
+          label="Symbol"
+          width="180">
+        </el-table-column>
+        <el-table-column
+          prop="sku"
+          label="SKU">
+        </el-table-column>
+     
+        <el-table-column
+          prop="description"
+          label="Description">
+        </el-table-column>
+     
+
+      <el-table-column
+       width="180"
+      label="Operations">
+      <template slot-scope="scope">
+     
+        <el-button
+          size="mini"
+          type="success"
+          >Edit</el-button>
+  
+        <el-button
+          size="mini"
+          type="danger"
+        
+          >Delete</el-button>
+      </template>
+    </el-table-column>
+      </el-table>
+
+
    
  
 
@@ -17,9 +62,6 @@
 
 
       </el-card>
-
-
-  
 
 
 
@@ -45,6 +87,19 @@
 
 export default {
  name: 'product-categories',
+data(){
+    return{
+products:[]
+    }
+
+},
+
+ created(){
+     axios.get('/api/catalog/product')
+            .then(res=>{console.log(res.data)
+            this.products=res.data
+             } )
+ }
    
 }
 

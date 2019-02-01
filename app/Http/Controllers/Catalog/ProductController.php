@@ -38,7 +38,7 @@ class ProductController extends Controller
     {
             
             $product=Product::create($request->only(['name','symbol','sku','category_id',
-                                    'strain','is_marijuana','image','product_type',
+                                    'strain','is_marijuana','image','product_type_id',
                                     'is_each','net_weight','is_self_distributed',
                                     'is_lab_results','is_show_on_weedmaps','is_show_on_potify',
                                     'is_print_label','description']));

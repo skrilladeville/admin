@@ -35,6 +35,6 @@ class CreateLabResultTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lab_result');
+        Schema::dropIfExists('lab_results');
     }
 }

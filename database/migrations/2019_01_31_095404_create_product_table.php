@@ -22,7 +22,7 @@ class CreateProductTable extends Migration
             $table->string('strain');
             $table->boolean('is_marijuana');
             $table->string('image')->nullable(); 
-            $table->string('product_type')->nullable();
+            $table->integer('product_type_id')->nullable();
             $table->boolean('is_each');
             $table->double('net_weight')->nullable();
             $table->boolean('is_self_distributed');

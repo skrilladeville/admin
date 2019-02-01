@@ -27,7 +27,7 @@
           <el-col :span="6">
               <el-form-item label="Category">
               
-             <el-select style="width:100%;"  v-model="form.category_id" placeholder="please select a price type">
+             <el-select style="width:100%; margin-top:18px;"  v-model="form.category_id" placeholder="please select a price type">
        <template v-for="cat in categories">
  <el-option :label="cat.name" :value="cat.id" v-if="cat.product_cat_id == 0" :key="cat.id"></el-option>
    <el-option style="padding-left:40px;" :label="cat.name" :value="cat.id" v-if="cat.product_cat_id != 0" :key="cat.id"></el-option>
@@ -63,9 +63,22 @@
           </el-col>
           <el-col :span="18">
               <el-form-item label="Product Type" v-if="form.is_marijuana">
-             <el-select style="width:100%;"  v-model="form.product_type" placeholder="please select a price type">
-      <el-option label="piece" value="piece"></el-option>
-      <el-option label="weight" value="weight"></el-option>
+             <el-select style="width:100%;"  v-model="form.product_type_id" placeholder="please select a price type">
+<el-option value="" selected="selected">Select product type</el-option>
+<el-option value="1">Usable marijuana</el-option>
+<el-option value="2">Cannabinoid edibles</el-option>
+<el-option value="3">Cannabinoid topicals</el-option>
+<el-option value="4">Cannabinoid tinctures</el-option>
+<el-option value="5">Cannabinoid capsules</el-option>
+<el-option value="6">Cannabinoid suppositories</el-option>
+<el-option value="7">Cannabinoid transdermal patches</el-option>
+<el-option value="8">Cannabinoid product other than product listed above</el-option>
+<el-option value="9">Cannabinoid concentrate in solid form</el-option>
+<el-option value="10">Cannabinoid concentrate in liquid form</el-option>
+<el-option value="11">Cannabinoid extract in solid form</el-option>
+<el-option value="12">Cannabinoid extract in liquid form</el-option>
+<el-option value="13">Immature marijuana plants</el-option>
+<el-option value="14">Seeds</el-option>
     </el-select>
               </el-form-item>
           </el-col>
@@ -94,8 +107,9 @@ action="https://jsonplaceholder.typicode.com/posts/"
       <el-radio-button label="Per Unit Range"></el-radio-button>
     </el-radio-group>
     </el-form-item>
-
-       <el-form-item v-if="measurement == 'Per Unit'"  label="Presets">
+        <el-row v-if="measurement == 'Per Unit'" :gutter="10">
+            <el-col :md="6">
+    <el-form-item  label="Presets">
 <el-select v-model="preset_weight_range" @change="getPreset(preset_weight_range)" placeholder="please select preset">
 
       <el-option  v-for="range in per_unit_presets" :key="range.id" :label="range.name" :value="range.id"></el-option>
@@ -103,32 +117,39 @@ action="https://jsonplaceholder.typicode.com/posts/"
     </el-select>
      </el-form-item>
 
-         <div v-if="measurement == 'Per Unit'">
-             <el-row :gutter="10">
-<el-col :span="6">
-           <el-form-item  label="Price">
+            </el-col>
+            <el-col :md="6">
+        <el-form-item  label="Price">
  <div v-for="(perPiece,index) in form.prices" :key="index">
 <el-input v-model="perPiece.piece_price" type="number"></el-input>
       </div>
         
   </el-form-item> 
-      </el-col> 
-      <el-col :span="6">
+            </el-col>
+        </el-row>
+   
+    <div v-if="measurement == 'Per Unit'">
+    <el-row :gutter="10">
+
+      <el-col :span="4">
 
           <el-form-item label="Net Weight">
-              <el-input v-model="form.net_weight" type="number">
+              <el-input :disabled="form.is_each" v-model="form.net_weight" type="number">
 
               </el-input>
           </el-form-item>
             
       </el-col>
 
-      <el-col :span="6">
-          <el-switch
+<el-col :span="4">
+<el-form-item label="Is Each">
+<el-switch
 style="display: block"
   v-model="form.is_each"
-  inactive-text="Is Each">
+  >
 </el-switch>
+</el-form-item>
+
     </el-col>
     </el-row>
                 
@@ -230,9 +251,33 @@ style="display: block"
             
         <tr><el-button  @click="addPriceForm">Add</el-button></tr>
          </tbody>
-
-
      </table>
+        <div v-if="measurement == 'Per Unit Range'">
+    <el-row :gutter="10">
+
+      <el-col :span="4">
+
+          <el-form-item label="Net Weight">
+              <el-input :disabled="form.is_each" v-model="form.net_weight" type="number">
+
+              </el-input>
+          </el-form-item>
+            
+      </el-col>
+
+<el-col :span="4">
+<el-form-item label="Is Each">
+<el-switch
+style="display: block"
+  v-model="form.is_each"
+  >
+</el-switch>
+</el-form-item>
+
+    </el-col>
+    </el-row>
+                
+         </div>
      <el-form-item v-if="measurement == 'Weight Range'"  label="Presets">
 <el-select v-model="preset_weight_range" @change="getPreset(preset_weight_range)" placeholder="please select preset">
   
@@ -532,7 +577,7 @@ export default {
             image:'',
         strain: 'None',
          is_marijuana:true,
-         product_type:'',
+         product_type_id:'',
          category_id:'',
          is_self_distributed:false,
         is_lab_results:false,
@@ -634,6 +679,8 @@ export default {
         axios.post('/api/catalog/product/create',this.form)
             .then(res=>{
                 console.log(res.data)
+
+                this.$router.push({name:'catalog.manageProducts'})
             })
     },
 
