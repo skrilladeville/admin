@@ -12,21 +12,21 @@
     <el-input v-model="form.name"></el-input>
   </el-form-item>
     <el-row :gutter="20">
-    <el-col :md="6">
+    <el-col :md="5">
   <el-form-item label="Price Type" style="width:100%;">
-    <el-select @change="clearPrices" v-model="form.price_type" placeholder="please select a price type">
+    <el-select style="margin-top:18px;" @change="clearPrices" v-model="form.price_type" placeholder="please select a price type">
       <el-option label="piece" value="piece"></el-option>
       <el-option label="weight" value="weight"></el-option>
     </el-select>
   </el-form-item>
     </el-col>
-  <el-col :md="6">
+  <el-col :md="5">
 
   <el-form-item label="Custom Price">
       <el-checkbox @change="clearPrices" label="Use Custom Price" v-model="form.is_custom_prices" name="type"></el-checkbox>
   </el-form-item>
   </el-col>
-  <el-col :md="12">
+  <el-col :md="14">
     <el-form-item label="Dynamic Preset">
       <el-checkbox label="Any changes made to this preset will affect ALL products using this preset pricing." v-model="form.is_dynamic_preset" name="type"></el-checkbox>
   </el-form-item>

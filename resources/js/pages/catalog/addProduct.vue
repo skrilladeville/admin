@@ -65,20 +65,20 @@
               <el-form-item label="Product Type" v-if="form.is_marijuana">
              <el-select style="width:100%;"  v-model="form.product_type_id" placeholder="please select a price type">
 <el-option value="" selected="selected">Select product type</el-option>
-<el-option value="1">Usable marijuana</el-option>
-<el-option value="2">Cannabinoid edibles</el-option>
-<el-option value="3">Cannabinoid topicals</el-option>
-<el-option value="4">Cannabinoid tinctures</el-option>
-<el-option value="5">Cannabinoid capsules</el-option>
-<el-option value="6">Cannabinoid suppositories</el-option>
-<el-option value="7">Cannabinoid transdermal patches</el-option>
-<el-option value="8">Cannabinoid product other than product listed above</el-option>
-<el-option value="9">Cannabinoid concentrate in solid form</el-option>
-<el-option value="10">Cannabinoid concentrate in liquid form</el-option>
-<el-option value="11">Cannabinoid extract in solid form</el-option>
-<el-option value="12">Cannabinoid extract in liquid form</el-option>
-<el-option value="13">Immature marijuana plants</el-option>
-<el-option value="14">Seeds</el-option>
+<el-option value="1" label="Usable marijuana"></el-option>
+<el-option value="2" label="Cannabinoid edibles"></el-option>
+<el-option value="3" label="Cannabinoid topicals"></el-option>
+<el-option value="4" label="Cannabinoid tinctures"></el-option>
+<el-option value="5" label="Cannabinoid capsules"></el-option>
+<el-option value="6" label="Cannabinoid suppositories"></el-option>
+<el-option value="7" label="Cannabinoid transdermal patches"></el-option>
+<el-option value="8" label="Cannabinoid product other than product listed above"></el-option>
+<el-option value="9" label="Cannabinoid concentrate in solid form"></el-option>
+<el-option value="10" label="Cannabinoid concentrate in liquid form"></el-option>
+<el-option value="11" label="Cannabinoid extract in solid form"></el-option>
+<el-option value="12" label="Cannabinoid extract in liquid form"></el-option>
+<el-option value="13" label="Immature marijuana plants"></el-option>
+<el-option value="14" label="Seeds"></el-option>
     </el-select>
               </el-form-item>
           </el-col>
