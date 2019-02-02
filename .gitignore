@@ -16,3 +16,13 @@ yarn-error.log
 bootstrap/cache/packages.php
 bootstrap/cache/services.php
 bootstrap/cache/config.php
+public/js/app.js
+public/js/robust-admin.js
+/storage/framework/cache/**/b
+/storage/framework/views
+/storage/logs
+/storage/framework/sessions
+public/css/app--v2.css
+public/css/gcis.css
+public/css/robust-admin.css
+public/js/app.js
