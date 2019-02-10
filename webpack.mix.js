@@ -16,7 +16,8 @@ mix.styles([
    'resources/css/robust-admin/bootstrap-extended.css',
    'resources/css/robust-admin/colors.css',
    'resources/css/robust-admin/components.css',
-   'resources/css/components.css'
+   'resources/css/components.css',
+   'resources/fonts/font-awesome/css/all.css'
 ], 'public/css/robust-admin.css');
 mix.scripts([
    'resources/js/robust-admin/vendors.min.js',
@@ -32,4 +33,5 @@ mix.js('resources/js/app.js', 'public/js')
 
 // Images
 mix.copy('resources/icons/favicon.ico', 'public')
-   .copy('resources/images', 'public/images');
+   .copy('resources/images', 'public/images')
+   .copy('resources/fonts/font-awesome/fonts', 'public/fonts/font-awesome');
