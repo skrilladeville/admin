@@ -27,7 +27,7 @@
           <el-col :span="6">
               <el-form-item label="Category">
               
-             <el-select style="width:100%; margin-top:18px;"  v-model="form.category_id" placeholder="please select a price type">
+             <el-select style="width:100%; margin-top:18px;"  v-model="form.product_category_id" placeholder="please select a price type">
        <template v-for="cat in categories">
  <el-option :label="cat.name" :value="cat.id" v-if="cat.product_cat_id == 0" :key="cat.id"></el-option>
    <el-option style="padding-left:40px;" :label="cat.name" :value="cat.id" v-if="cat.product_cat_id != 0" :key="cat.id"></el-option>
@@ -90,6 +90,7 @@ action="https://jsonplaceholder.typicode.com/posts/"
   class="upload-demo"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
+  
   :file-list="fileList2"
   list-type="picture">
   <el-button size="small" type="primary">Click to upload</el-button>
@@ -100,14 +101,14 @@ action="https://jsonplaceholder.typicode.com/posts/"
       <p>Prices</p>
 <hr style="width:100%;">
 <el-form-item label="Measurement">
-    <el-radio-group @change="clearPrices"  v-model="measurement" size="medium">
+    <el-radio-group @change="clearPrices"  v-model="form.price_measurement" size="medium">
       <el-radio-button label="Weight" ></el-radio-button>
       <el-radio-button label="Weight Range"></el-radio-button>
       <el-radio-button label="Per Unit"></el-radio-button>
       <el-radio-button label="Per Unit Range"></el-radio-button>
     </el-radio-group>
     </el-form-item>
-        <el-row v-if="measurement == 'Per Unit'" :gutter="10">
+        <el-row v-if="form.price_measurement == 'Per Unit'" :gutter="10">
             <el-col :md="6">
     <el-form-item  label="Presets">
 <el-select v-model="preset_weight_range" @change="getPreset(preset_weight_range)" placeholder="please select preset">
@@ -121,21 +122,27 @@ action="https://jsonplaceholder.typicode.com/posts/"
             <el-col :md="6">
         <el-form-item  label="Price">
  <div v-for="(perPiece,index) in form.prices" :key="index">
-<el-input v-model="perPiece.piece_price" type="number"></el-input>
+<el-input v-model="perPiece.piece_price" type="number">
+                   <template slot="prepend">
+        $
+    </template>
+</el-input>
       </div>
         
   </el-form-item> 
             </el-col>
         </el-row>
    
-    <div v-if="measurement == 'Per Unit'">
+    <div v-if="form.price_measurement == 'Per Unit'">
     <el-row :gutter="10">
 
       <el-col :span="4">
 
           <el-form-item label="Net Weight">
               <el-input :disabled="form.is_each" v-model="form.net_weight" type="number">
-
+                      <template slot="append">
+        g
+    </template>
               </el-input>
           </el-form-item>
             
@@ -158,7 +165,7 @@ style="display: block"
 
       
 
-   <el-form-item v-if="measurement == 'Weight'"  label="Presets">
+   <el-form-item v-if="form.price_measurement == 'Weight'"  label="Presets">
 <el-select v-model="preset_weight_range" @change="getPreset(preset_weight_range)" placeholder="please select preset">
   
       <el-option  v-for="range in per_weight_presets" :key="range.id" :label="range.name" :value="range.id"></el-option>
@@ -166,45 +173,67 @@ style="display: block"
 </el-select>
 </el-form-item>
 
-  <div  v-if="measurement == 'Weight'">
+  <div  v-if="form.price_measurement == 'Weight'">
       <template >
       
       <div v-for="(perPiece,index) in form.prices" :key="index">
 
   
       <el-row :gutter="5">
-    <el-col :span="2">
+    <el-col :span="3">
             <el-form-item label="1g">
-            <el-input v-model="perPiece.gram_price" type="number"></el-input>
+            <el-input v-model="perPiece.gram_price" type="number">
+                <template slot="prepend">
+        $
+    </template>
+            </el-input>
             </el-form-item>
       </el-col>
 
-      <el-col :span="2">
+      <el-col :span="3">
             <el-form-item label="1/8oz">
-            <el-input v-model="perPiece.eight_price" type="number"></el-input>
+            <el-input v-model="perPiece.eight_price" type="number">
+                <template slot="prepend">
+        $
+    </template>
+            </el-input>
             </el-form-item>
       </el-col>
     
-      <el-col :span="2">
+      <el-col :span="3">
             <el-form-item label="1/4oz">
-            <el-input v-model="perPiece.quarter_price" type="number"></el-input>
+            <el-input v-model="perPiece.quarter_price" type="number">
+                <template slot="prepend">
+        $
+    </template>
+            </el-input>
             </el-form-item>
       </el-col>
-      <el-col :span="2">
+      <el-col :span="3">
             <el-form-item label="1/2oz">
-            <el-input v-model="perPiece.half_price" type="number"></el-input>
+            <el-input v-model="perPiece.half_price" type="number">
+                <template slot="prepend">
+        $
+    </template>
+            </el-input>
             </el-form-item>
       </el-col>
       
 
-          <el-col :span="2">
+          <el-col :span="3">
             <el-form-item label="1oz">
-            <el-input v-model="perPiece.ounce_price" type="number"></el-input>
+            <el-input v-model="perPiece.ounce_price" type="number">
+                <template slot="prepend">
+        $
+    </template>
+            </el-input>
             </el-form-item>
       </el-col>
-            <el-col :span="2">
+            <el-col :span="3">
             <el-form-item label="Pre-Roll">
-            <el-input v-model="perPiece.joint_price" type="number"></el-input>
+            <el-input v-model="perPiece.joint_price" type="number"> <template slot="prepend">
+        $
+    </template></el-input>
             </el-form-item>
       </el-col>
 </el-row>
@@ -212,7 +241,7 @@ style="display: block"
 </template>
   </div>
 
-      <el-form-item v-if="measurement == 'Per Unit Range'"  label="Presets">
+      <el-form-item v-if="form.price_measurement == 'Per Unit Range'"  label="Presets">
 <el-select v-model="preset_weight_range" @change="getPreset(preset_weight_range)" placeholder="please select preset">
   
       <el-option  v-for="range in per_unit_range_presets" :key="range.id" :label="range.name" :value="range.id"></el-option>
@@ -220,7 +249,7 @@ style="display: block"
     </el-select>
      </el-form-item>
 
-  <table v-if="measurement == 'Per Unit Range'">
+  <table v-if="form.price_measurement == 'Per Unit Range'">
 
          <tr>
              <th>count</th>
@@ -237,11 +266,15 @@ style="display: block"
                  <td> <el-input
     placeholder="0.0"
     v-model="perPiece.count"
-    /></td>
+    ><template slot="append">
+        pcs
+    </template></el-input></td>
                  <td> <el-input
     placeholder="0.0"
     v-model="perPiece.piece_price"
-    /></td>
+    > <template slot="prepend">
+        $
+    </template></el-input></td>
     <td> <el-button type="danger" icon="el-icon-delete" @click="deletePriceForm(index)" circle></el-button></td>
     <td>  <el-switch v-model="perPiece.show_on_digital"></el-switch></td>
     
@@ -252,14 +285,16 @@ style="display: block"
         <tr><el-button  @click="addPriceForm">Add</el-button></tr>
          </tbody>
      </table>
-        <div v-if="measurement == 'Per Unit Range'">
+        <div v-if="form.price_measurement == 'Per Unit Range'">
     <el-row :gutter="10">
 
       <el-col :span="4">
 
           <el-form-item label="Net Weight">
               <el-input :disabled="form.is_each" v-model="form.net_weight" type="number">
-
+ <template slot="append">
+        g
+    </template>
               </el-input>
           </el-form-item>
             
@@ -278,7 +313,7 @@ style="display: block"
     </el-row>
                 
          </div>
-     <el-form-item v-if="measurement == 'Weight Range'"  label="Presets">
+     <el-form-item v-if="form.price_measurement == 'Weight Range'"  label="Presets">
 <el-select v-model="preset_weight_range" @change="getPreset(preset_weight_range)" placeholder="please select preset">
   
       <el-option  v-for="weight_range in weight_range_presets" :key="weight_range.id" :label="weight_range.name" :value="weight_range.id"></el-option>
@@ -286,7 +321,7 @@ style="display: block"
     </el-select>
      </el-form-item>
     
-      <table  v-if="measurement == 'Weight Range'">
+      <table  v-if="form.price_measurement == 'Weight Range'">
 
          <tr>
              <th>from</th>
@@ -304,16 +339,22 @@ style="display: block"
                  <td> <el-input
     placeholder="0.0"
     v-model="perPiece.from"
-    /></td>
+    >  <template slot="append">
+        g
+    </template></el-input></td>
     <td> <el-input
     placeholder="0.0"
     v-model="perPiece.to"
-    /></td>
+    > <template slot="append">
+        g
+    </template></el-input></td>
     
     <td><el-input
     placeholder="0.0"
     v-model="perPiece.range_price"
-    /></td>
+    > <template slot="prepend">
+        $
+    </template></el-input></td>
     <td> <el-button type="danger" icon="el-icon-delete" @click="deletePriceForm(index)" circle></el-button></td>
     <td>  <el-switch v-model="perPiece.show_on_digital"></el-switch></td>
     
@@ -360,6 +401,7 @@ style="display: block"
          <el-date-picker
       v-model="formLab.test_date"
       type="datetime"
+      
       placeholder="Select date and time"
      >
     </el-date-picker>
@@ -370,8 +412,8 @@ style="display: block"
 <el-row :gutter="10">
    <el-col :md="6">
     <el-form-item label="Measurement">
-    <el-radio-group v-model="formLab.lab_mesurement" size="medium" style="margin:0px;">
-      <el-radio-button label="%" ></el-radio-button>
+    <el-radio-group v-model="formLab.lab_mesurement" size="medium">
+      <el-radio-button label="%"></el-radio-button>
       <el-radio-button label="Mg"></el-radio-button>
     </el-radio-group>
     </el-form-item>
@@ -379,31 +421,31 @@ style="display: block"
 
     <el-col :span="2">
             <el-form-item label="Indica">
-            <el-input v-model="formLab.indica" type="number"></el-input>
+            <el-input  v-model="formLab.indica" type="number" style="padding-top:18px;"></el-input>
             </el-form-item>
       </el-col>
 
       <el-col :span="2">
             <el-form-item label="Sativa">
-            <el-input v-model="formLab.sativa" type="number"></el-input>
+            <el-input v-model="formLab.sativa" type="number" style="padding-top:18px;"></el-input>
             </el-form-item>
       </el-col>
     
       <el-col :span="2">
             <el-form-item label="THC">
-            <el-input v-model="formLab.thc" type="number"></el-input>
+            <el-input v-model="formLab.thc" type="number" style="padding-top:18px;"></el-input>
             </el-form-item>
       </el-col>
       <el-col :span="2">
             <el-form-item label="CBD">
-            <el-input v-model="formLab.cbd" type="number"></el-input>
+            <el-input v-model="formLab.cbd" type="number" style="padding-top:18px;"></el-input>
             </el-form-item>
       </el-col>
 
 
           <el-col :span="2">
             <el-form-item label="CBN">
-            <el-input v-model="formLab.cbn" type="number"></el-input>
+            <el-input v-model="formLab.cbn" type="number" style="padding-top:18px;"></el-input>
             </el-form-item>
       </el-col>
 
@@ -424,7 +466,7 @@ style="display: block"
 </el-switch>
 
 
-<el-card style="margin-top:10px;" v-if="measurement != 'Weight' && form.is_show_on_weedmaps">
+<el-card style="margin-top:10px;" v-if="form.price_measurement != 'Weight' && form.is_show_on_weedmaps">
  <el-row :gutter="5">
     <el-col :span="2">
             <el-form-item label="1g">
@@ -483,7 +525,7 @@ style="display: block"
   closable
   :disable-transitions="false"
   @close="handleClose(index)">
-  {{tag}}
+  {{tag.name}}
 </el-tag>
 <el-input
   class="input-new-tag"
@@ -506,7 +548,26 @@ style="display: block"
 <el-button @click="saveProduct" type="success" size="small">Save</el-button>
 
 
+
+
   </el-form>
+
+    <template v-if="errors.length">
+        <el-col :md="12">
+    
+
+              <el-alert style="margin: 10px;"
+    v-for="error in errors"
+    :title="error"
+    type="error"
+    :key="error" :closable="false">
+  </el-alert>
+    </el-col>
+
+  </template>
+
+
+  
 
 
   
@@ -538,10 +599,9 @@ export default {
     data(){
 
       return{
+          errors:[],
         inputVisible: false,
         inputValue: '',
-
-        measurement:'Weight',
         preset_weight_range:'',
         weight_range_presets:[],
         per_unit_range_presets:[],
@@ -551,6 +611,7 @@ export default {
         labs:[],
 
         weed_map_price:{
+        product_id:0,
         one_g:0,
         two_g:0,
         eight_oz:0,
@@ -560,13 +621,15 @@ export default {
         },
 
         formLab:{
+        product_id:0,
+        test_date:'',
         lab_id:null,
         cbn:'',
         cbd:'',
         thc:'',
         sativa:'',
         indica:'',
-        lab_mesurement:''
+        lab_mesurement:'%'
         },
 
 
@@ -578,7 +641,8 @@ export default {
         strain: 'None',
          is_marijuana:true,
          product_type_id:'',
-         category_id:'',
+         product_category_id:'',
+         price_measurement:'Weight',
          is_self_distributed:false,
         is_lab_results:false,
         lab_mesurement:'',
@@ -673,15 +737,106 @@ export default {
 
     methods:{
 
-
     saveProduct(){
-         console.log(this.form)
+        this.errors=[];
+        if(this.form.name==''){
+            this.errors.push('name must not empty');
+        }
+
+        if(this.form.is_marijuana){
+
+            if(this.form.product_category_id == ''){
+              this.errors.push('category type must not empty');  
+            }
+        }
+   if(this.form.symbol==''){
+            this.errors.push('symbol must not empty');
+        }
+
+       if(this.form.sku==''){
+            this.errors.push('sku must not empty');
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if(this.errors.length==0){
+            console.log('nka abot dri')
+            console.log(this.form)
         axios.post('/api/catalog/product/create',this.form)
             .then(res=>{
                 console.log(res.data)
 
+            //save prices
+            this.form.prices.forEach(price=>{
+                        price.product_id=res.data.id
+                    })
+                      axios.post('/api/catalog/prices/create',{prices:this.form.prices}).then(response=>{
+                      console.log(response)                   
+                  }).catch(err=>console.log(err))
+
+
+            //save tags
+            if(this.form.tags.length > 0){
+            this.form.tags.forEach(tag=>{
+                tag.product_id=res.data.id
+            })
+            console.log(this.form.tags)
+            axios.post('/api/catalog/tags/create',{tags:this.form.tags})
+                .then(res=>{
+                    console.log(res)
+                }).catch(err=>console.log(err))
+            }
+
+            if(this.form.is_lab_results)
+            {
+            this.formLab.product_id=res.data.id
+            axios.post('/api/catalog/labResult/create',this.formLab)
+                .then(res=>console.log(res))   
+            }
+
+            if(this.form.is_show_on_weedmaps && this.form.price_measurement!="Weight")
+                {
+            this.weed_map_price.product_id=res.data.id
+            axios.post('/api/catalog/weedMapPrice/create',this.weed_map_price)
+                .then(res=>{
+                    console.log(res)
+                })
+
+                }
+           
+
+            
+            
+
+
+
+    
+
+     this.$noty.success('Product Save Successfully!');
+
+
                 this.$router.push({name:'catalog.manageProducts'})
             })
+
+        }
+         
     },
 
 handleClose(index) {
@@ -698,7 +853,7 @@ handleClose(index) {
       handleInputConfirm() {
         let inputValue = this.inputValue;
         if (inputValue) {
-          this.form.tags.push(inputValue);
+          this.form.tags.push({name:inputValue});
         }
         this.inputVisible = false;
         this.inputValue = '';

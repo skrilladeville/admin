@@ -24,6 +24,7 @@ class CreateVendorsTable extends Migration
             $table->string('fax')->nullable();
             $table->string('email')->nullable();
             $table->string('skype')->nullable();
+            $table->boolean('is_archieve')->default(false);
             $table->timestamps();
         });
     }

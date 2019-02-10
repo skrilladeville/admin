@@ -15,13 +15,15 @@ class CreateLabResultTable extends Migration
     {
         Schema::create('lab_results', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('test_date');  
             $table->integer('lab_id');
-            $table->string('cbn');
-            $table->string('cbd');
-            $table->string('thc');
-            $table->string('sativa');
-            $table->string('indica');
-            $table->string('lab_mesurement');
+            $table->double('cbn');
+            $table->double('cbd');
+            $table->double('thc');
+            $table->double('sativa');
+            $table->double('indica');
+            $table->integer('product_id');
+            $table->string('lab_mesurement')->nullable();
             $table->timestamps();
         });
     }

@@ -237,9 +237,7 @@ td{
     text-align: center !important;
 }
 
-th{
 
-}
     
 </style>
 
@@ -280,7 +278,8 @@ form:{
                 .then(res=>{
                     console.log(res)
                     console.log('naka abot')
-
+                    
+                    //save prices
                     this.form.prices.forEach(price=>{
                         price.price_preset_id=res.data.id
                     })

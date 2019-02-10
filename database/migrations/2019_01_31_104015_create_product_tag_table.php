@@ -17,6 +17,7 @@ class CreateProductTagTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('product_id');
+            $table->boolean('is_archieve')->default(false);
             $table->timestamps();
         });
     }

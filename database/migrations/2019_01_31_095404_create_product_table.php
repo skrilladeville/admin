@@ -18,19 +18,21 @@ class CreateProductTable extends Migration
             $table->string('name');
             $table->string('symbol');
             $table->string('sku');
-            $table->integer('category_id');
+            $table->integer('product_category_id');
             $table->string('strain');
             $table->boolean('is_marijuana');
             $table->string('image')->nullable(); 
             $table->integer('product_type_id')->nullable();
             $table->boolean('is_each');
             $table->double('net_weight')->nullable();
+            $table->string('price_measurement');
             $table->boolean('is_self_distributed');
             $table->boolean('is_lab_results');
             $table->boolean('is_show_on_weedmaps');
             $table->boolean('is_show_on_potify');
             $table->boolean('is_print_label');
             $table->string('description')->nullable();
+            $table->boolean('is_archieve')->default(false);
             $table->timestamps();
         });
     }

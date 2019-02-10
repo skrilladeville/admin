@@ -19,6 +19,7 @@ class CreatePricePresetsTable extends Migration
             $table->string('price_type');
             $table->boolean('is_custom_prices')->nullable();
             $table->boolean('is_dynamic_preset')->nullable();
+            $table->boolean('is_archieve')->default(false);
             $table->timestamps();
         });
     }

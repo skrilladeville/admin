@@ -13,5 +13,10 @@ class Price extends Model
         return $this->belongsTo('App\PricePreset');
     }
 
+    public function product()
+    {
+        return $this->belongTo('App\Product');
+    }
+
 
 }

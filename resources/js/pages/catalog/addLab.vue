@@ -61,20 +61,13 @@
 </el-row> 
                  
                     
-             
-                    
-              
-              
-      
-        
-
-
   <el-form-item>
     <el-button type="success" @click="onSubmit" size="small" round>Create</el-button>
     <el-button type="danger" size="small" round>Cancel</el-button>
   </el-form-item>
 </el-form>
         </el-card>
+        
     </div>
 </template>
 
@@ -108,3 +101,6 @@
 
   }
 </script>
+
+
+

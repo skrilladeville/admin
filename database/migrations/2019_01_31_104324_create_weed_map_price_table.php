@@ -22,6 +22,7 @@ class CreateWeedMapPriceTable extends Migration
             $table->double('four_oz')->nullable();
             $table->double('half_oz')->nullable();
             $table->double('one_oz')->nullable();
+            
             $table->timestamps();
         });
     }

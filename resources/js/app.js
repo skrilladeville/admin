@@ -6,6 +6,10 @@ import 'normalize.css/normalize.css';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/en'
 import 'element-ui/lib/theme-chalk/index.css';
+//import vue-tables-2
+import {ServerTable, ClientTable, Event} from 'vue-tables-2';
+Vue.use(ClientTable, {}, false, 'bootstrap4');
+Vue.use(ServerTable, {}, false, 'bootstrap4');
 
 
 import VueGoodTablePlugin from 'vue-good-table';
@@ -35,6 +39,9 @@ Vue.use( VueNoty, {
 
 Vue.use( ElementUI, { locale } );
 
+
+
+
 import router from './router/router';
 import store from './store/index';
 import SvgIcon from './components/SvgIcon'
@@ -42,6 +49,8 @@ import App from './components/App.vue';
 import jwtToken from './helpers/jwt-token';
 
 Vue.component('svg-icon', SvgIcon)
+
+
 
 const req = require.context('./icons/svg', false, /\.svg$/)
 const requireAll = requireContext => requireContext.keys().map(requireContext)

@@ -145,3 +145,10 @@ body.vertical-layout.vertical-menu .main-menu {width:16rem;}
 .el-submenu__title{color:inherit}
 
 .tab-container[data-v-fa309b34]{margin:inherit}
+
+.el-form-item--mini .el-form-item__content, .el-form-item--mini .el-form-item__label {
+    line-height: 2px;
+}
+.el-form-item--small .el-form-item__content, .el-form-item--small .el-form-item__label {
+    line-height: 2px;
+}

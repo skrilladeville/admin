@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="author" content="Team Primie">
         <meta name="description" content="Green Card Information System">
-
+  
         <title>{{ config('app.name') }} - Green Card Information System <3</title>
 
         <link href="{{ mix('/css/app.css') }}" rel="stylesheet">

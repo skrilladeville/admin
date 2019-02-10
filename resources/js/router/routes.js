@@ -37,13 +37,16 @@ import Attributes from '../pages/catalog/Attributes'
 import Categories from '../pages/catalog/categories'
 import AddPricePreset from '../pages/catalog/addPricePreset'
 import AddProduct from '../pages/catalog/addProduct'
+import EditProduct from '../pages/catalog/editProduct'
 import Products from '../pages/catalog/products'
 import PricePresets from '../pages/catalog/PricePresets'
 import Vendors from '../pages/catalog/vendors'
 import AddVendor from '../pages/catalog/addVendor'
 import EditVendor from '../pages/catalog/editVendor'
 import AddLab from '../pages/catalog/addLab'
+import EditLab from '../pages/catalog/editLab'
 import Labs from '../pages/catalog/labs'
+import EditPricePreset from '../pages/catalog/editPricePreset'
 
 /* Sales Folder */
 import BillingAgreements from '../pages/sales/BillingAgreements'
@@ -232,6 +235,13 @@ export default [
 				meta: {requiresAuth: true, title: 'Add Product', permission: 'add product' },
 			},
 			{
+				path: 'product/edit/:id',
+					component:EditProduct,
+					hidden:true,
+					name: 'catalog.editProduct',
+					meta: {requiresAuth: true, title: 'Edit Product', permission: 'edit product' },
+				},
+			{
 				path: 'manage-categories',
 				component: Categories,
 				name: 'catalog.manageCategories',
@@ -276,6 +286,15 @@ export default [
 
 			},
 			{
+				path: 'pricePresets/edit/:id',
+				component: EditPricePreset,
+				hidden:true,
+				name: 'edit pricepreset',
+				meta: {requiresAuth: true, title: 'Edit Price Preset', permission: 'edit price preset' },
+
+			},
+			
+			{
 				path: 'lab',
 				component: Labs,
 				name: 'labs',
@@ -288,6 +307,14 @@ export default [
 				hidden:true,
 				name: 'add lab',
 				meta: {requiresAuth: true, title: 'add Lab', permission: 'add lab' },
+
+			},
+			{
+				path: 'lab/edit/:id',
+				component: EditLab,
+				hidden:true,
+				name: 'edit lab',
+				meta: {requiresAuth: true, title: 'edit Lab', permission: 'edit lab' },
 
 			},
 			{

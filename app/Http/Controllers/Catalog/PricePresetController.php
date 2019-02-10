@@ -22,6 +22,12 @@ class PricePresetController extends Controller
         return $price_preset->prices;
     }
 
+    public function view($id)
+    {
+        $price_preset= PricePreset::with('prices')->find($id);
+        return $price_preset->toArray();
+
+    }
 
     public function index(){
         $price_presets=PricePreset::all();
@@ -37,6 +43,26 @@ class PricePresetController extends Controller
             "success" => "ok"
         ], 200);
 
+    }
+
+    public function archieve($id)
+    {
+        $preset=PricePreset::find($id);
+        $preset->is_archieve=true;
+        $preset->save();
+        return response()->json([
+            "success" => "ok"
+        ], 200);
+    }
+
+    public function unarchieve($id)
+    {
+        $preset=PricePreset::find($id);
+        $preset->is_archieve=false;
+        $preset->save();
+        return response()->json([
+            "success" => "ok"
+        ], 200);
     }
 
 }

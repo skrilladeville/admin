@@ -16,9 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories=ProductCategory::all();
-
-        return $categories;
+        $categories=ProductCategory::with('products','marijuanaProducts','nonmarijuanaProducts')->get();
+        return $categories->toArray();
 
     }
 
@@ -60,6 +59,31 @@ class CategoryController extends Controller
         ], 200);
         
     }
+
+
+    public function archieve($id)
+    {
+        $category=ProductCategory::find($id);
+        $category->is_archieve=true;
+        $category->save();
+        return response()->json([
+            "success" => "ok"
+        ], 200);
+    }
+
+    public function unarchieve($id)
+    {
+        $category=ProductCategory::find($id);
+        $category->is_archieve=false;
+        $category->save();
+        return response()->json([
+            "success" => "ok"
+        ], 200);
+    }
+
+    
+
+
 
     /**
      * Show the form for editing the specified resource.

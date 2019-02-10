@@ -23,35 +23,46 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::post('catalog/category/update/{id}', 'Catalog\CategoryController@update');
     Route::post('catalog/category/delete/{id}', 'Catalog\CategoryController@destroy');
 
+    
+    Route::post('catalog/tags/create', 'Catalog\TagController@store');
+    Route::post('catalog/labResult/create', 'Catalog\LabResultController@store');
+    Route::post('catalog/weedMapPrice/create', 'Catalog\WeedMapPriceController@store');
+    
     //catalog vendor
     Route::get('catalog/vendor', 'Catalog\VendorController@index');
     Route::post('catalog/vendor/create', 'Catalog\VendorController@store');
     Route::get('catalog/vendor/view/{id}', 'Catalog\VendorController@show');
     Route::post('catalog/vendor/update/{id}', 'Catalog\VendorController@update');
     Route::post('catalog/vendor/delete/{id}', 'Catalog\VendorController@destroy');
-
+    Route::post('catalog/vendor/archieve/{id}', 'Catalog\VendorController@archieve');
+    Route::post('catalog/vendor/unarchieve/{id}', 'Catalog\VendorController@unarchieve');
 
     //catalog lab
     Route::post('catalog/lab/create', 'Catalog\LabController@store');
+    Route::post('catalog/lab/update/{id}', 'Catalog\LabController@update');
     Route::get('catalog/lab', 'Catalog\LabController@index');
+    Route::get('catalog/lab/view/{id}', 'Catalog\LabController@show');
     Route::post('catalog/lab/delete/{id}', 'Catalog\LabController@destroy');
-
-
+    Route::post('catalog/lab/archieve/{id}', 'Catalog\LabController@archieve');
+    Route::post('catalog/lab/unarchieve/{id}', 'Catalog\LabController@unarchieve');
+  
     //product catalog
     Route::post('catalog/product/create', 'Catalog\ProductController@store');
+    Route::post('catalog/product/upload', 'Catalog\ProductController@upload');
     Route::get('catalog/product', 'Catalog\ProductController@index');
+    Route::get('catalog/product/view/{id}', 'Catalog\ProductController@show');
+    
 
-
-
-
+    Route::post('catalog/product/archieve/{id}', 'Catalog\ProductController@archieve');
+    Route::post('catalog/product/unarchieve/{id}', 'Catalog\ProductController@unarchieve');
 
     //catalog price Preset
     Route::post('catalog/pricePreset/create', 'Catalog\PricePresetController@store');
     Route::get('catalog/pricePreset', 'Catalog\PricePresetController@index');
     Route::get('catalog/pricePreset/getPrices/{id}', 'Catalog\PricePresetController@getPrices');
+    Route::get('catalog/pricePreset/view/{id}', 'Catalog\PricePresetController@view');
     Route::post('catalog/pricePreset/delete/{id}', 'Catalog\PricePresetController@destroy');
     Route::post('catalog/prices/create', 'Catalog\PriceController@store');
-
 
     //profile doctor
     Route::get('users/profileDoctors', 'Users\ProfileDoctorController@index');

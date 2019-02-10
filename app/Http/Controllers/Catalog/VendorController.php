@@ -101,4 +101,25 @@ class VendorController extends Controller
         ], 200);
 
     }
+
+
+    public function archieve($id)
+    {
+        $vendor=Vendor::find($id);
+        $vendor->is_archieve=true;
+        $vendor->save();
+        return response()->json([
+            "success" => "ok"
+        ], 200);
+    }
+
+    public function unarchieve($id)
+    {
+        $vendor=Vendor::find($id);
+        $vendor->is_archieve=false;
+        $vendor->save();
+        return response()->json([
+            "success" => "ok"
+        ], 200);
+    }
 }
