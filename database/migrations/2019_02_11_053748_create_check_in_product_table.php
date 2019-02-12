@@ -16,7 +16,6 @@ class CreateCheckInProductTable extends Migration
         Schema::create('check_in_products', function (Blueprint $table) {
             $table->integer('product_id');
             $table->integer('branch_id');
-            $table->integer('branch_id');
             $table->string('batch_id')->nullable();
             $table->string('date');
             $table->string('uid')->nullable();
