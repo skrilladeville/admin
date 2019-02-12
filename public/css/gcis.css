@@ -217,11 +217,15 @@ body.vertical-layout.vertical-menu.menu-expanded .footer {
   text-align: center;
 }
 
-.card-profile-image {
+#patientInfo .card-profile-image {
   width: 18.2%;
   position: relative;
   z-index: 10;
   margin-top: -2.5%;
+}
+
+.avatar-sm {
+  width: 64px;
 }
 
 .board {
@@ -481,7 +485,7 @@ body.vertical-layout.vertical-menu.menu-expanded .main-menu .navigation > li > a
   background: #067144 !important;
 }
 
-.navbar {
+.header-navbar {
   display: block;
   border-bottom: 0.4rem solid #D3FFC9;
 }
@@ -610,6 +614,10 @@ tfoot,
 
 .el-submenu__title {
   color: inherit;
+}
+
+.el-menu--horizontal {
+  border: inherit;
 }
 
 .tab-container[data-v-fa309b34] {

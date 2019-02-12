@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+
+RewriteRule ^(.*).html$ 					index.php?pagename=$1 [L,QSA]
+RewriteRule ^(.*).json$ 					jsonize--v2.json.php?pagename=$1 [L,QSA]
+</IfModule>

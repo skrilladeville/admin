@@ -1,0 +1,30 @@
+<p>Are you currently experiencing any of the following? Check all that apply:</p>
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+	<?php
+	checkmarkize($list['mentalConditions']);
+	?>
+	</div>
+</div>
+
+<p>Do you have a history of substance abuse? Check all that apply:</p>
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+	<?php
+	checkmarkize($list['substanceAbuses']);
+	?>
+		<fieldset class="form-group">
+			<p class="text-muted">Please list the prescriptions and/or over-the-counter supplements that you are currently taking:</p>
+			<textarea class="form-control" id="descTextarea" rows="3" placeholder=""></textarea>
+		</fieldset>
+	</div>
+</div>
+
+<p>Previous medications tried? Check all that apply:</p>
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+	<?php
+	checkmarkize($list['previousMedications']);
+	?>
+	</div>
+</div>

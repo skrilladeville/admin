@@ -1,0 +1,37 @@
+<p class="badge-default badge-info block-tag text-left"><small class="block-area white"></small>FOR OFFICE USE ONLY</p>
+<div class="row">
+	<div class="col-md-5">
+		<div class="form-group">
+			<fieldset class="form-group">
+				<label>Prescription #<?= $fv['id'] ?></label>
+				<!--<input type="text" class="form-control" id="text" name="rx_id" value="">-->
+			</fieldset>
+		</div>
+	</div>
+	<div class="col-md-5">
+		<div class="form-group">
+			<fieldset class="form-group">
+				<label>Date and Time</label>
+				<input type="datetime" class="form-control" id="text" name="date_rx_modified" value="<?= SERVER_TIME ?>">
+			</fieldset>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-5">
+		<div class="form-group">
+			<fieldset class="form-group">
+				<label>Received By:</label>
+				<input type="text" class="form-control" id="text" value="<?= $fv['receiver'] ?>" name="receiver" placeholder="Full Name">
+			</fieldset>
+		</div>
+	</div>
+	<div class="col-md-5">
+		<div class="form-group">
+			<fieldset class="form-group">
+				<label>Verified BY:</label>
+				<input type="text" class="form-control" id="text" name="verifier" placeholder="Full Name" value="<?= $fv['verifier'] ?>">
+			</fieldset>
+		</div>
+	</div>
+</div>

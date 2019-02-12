@@ -1,0 +1,49 @@
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+		<p>Is there a family history of substance abuse? Check all that Apply.</p>
+		<fieldset>
+			<div class="float-left col-md">
+				<?php
+					checkmarkize(array(
+						"Alcohol",
+						"Illegal drugs",
+						"Prescription drugs"
+						)
+					);
+				?>
+		</fieldset>
+	</div>
+</div>
+	
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+		<p>Do you have a history of preadolescent sexual abuse?</p>
+		<fieldset>
+			<div class="float-left col-md">
+				<div class="form-group">
+					<input type="checkbox" class="switch" id="switch5" data-group-cls="btn-group-sm" />
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+		<p>Is there a family history of psychological disease? Check all that Apply.</p>
+		<fieldset>
+			<div class="float-left col-md">
+				<?php
+					checkmarkize(array(
+						"ADD",
+						"OCD",
+						"Bipolar",
+						"Schizophrenia",
+						"Depression"
+						)
+					);
+				?>
+			</div>
+		</fieldset>
+	</div>
+</div>

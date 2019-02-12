@@ -1,6 +1,3 @@
-<?php
-//include dirname(__DIR__) .'\..\..\GCCv1\config.php'
-?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <head>
@@ -23,9 +20,9 @@
 		]) !!}
 	</script>
 </head>
-<body class="vertical-layout vertical-menu content-detached-left-sidebar fixed-navbar  menu-expanded pace-done>">
+<body id="blade" class="vertical-layout vertical-menu content-detached-left-sidebar menu-expanded pace-done>">
 	<div id="app">
-			<app></app>
+		<app></app>
 	</div>
 	@if (app()->isLocal())
 		<script src="{{ mix('js/app.js') }}"></script>

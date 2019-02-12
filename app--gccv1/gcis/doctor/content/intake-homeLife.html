@@ -1,0 +1,45 @@
+<p>Please check all that apply:</p>
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+	<?php
+		checkmarkize(array('You have children in the house or who visit. If yes, how old are they?'));
+	?>
+	</div>
+	<div class="form-group col-md-5 mb-2">
+		<textarea class="form-control" id="descTextarea" rows="3" placeholder=""></textarea>
+	</div>
+</div>
+
+<div class="row skin skin-flat">
+	<div class="form-group col-md-5 mb-2">
+	<?php
+		checkmarkize(array(
+		 "You work outside of the home",
+		 "You work in a safety sensitive or cognitively demanding occupation (such as construction, heavy machinery, police officer)",
+		 "You drive a car",
+		 "You travel outside of Canada"
+		)
+	);
+	?>
+	</div>
+</div>
+
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+	<?php
+		checkmarkize(array("You are on disability. If so, which one? (PWD, CPP, WORKPLAN)"));
+	?>
+	</div>
+		<div class="form-group col-md-5 mb-2">
+		<textarea class="form-control" id="descTextarea" rows="3" placeholder=""></textarea>
+	</div>
+</div>
+
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+	<?php
+		checkmarkize(array("Your annual income is less than $30,000. 
+If so, bring in a notice of assessment and you will qualify for compassionate pricing."));
+	?>
+	</div>
+</div>

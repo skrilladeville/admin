@@ -1,0 +1,20 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<fieldset class="form-group">
+				<textarea rows="2" type="text" class="form-control" Placeholder="*Medical diagnosis" name="medical_diagnosis" id="med_diagnosis" required><?= $fv['medical_diagnosis'] ?></textarea>
+			</fieldset>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<fieldset class="form-group">
+				<p>The Applicant may access 
+					<input type="text" class="form-control" Placeholder="*Medication" name="med_amt" id="medication" style="display:inline;width:10em" value="<?= $fv['med_amt'] ?>" required> grams of medical marijuana per day for 
+					<input type="text" class="form-control" name="med_months" id="med_month" placeholder="*" style="display:inline;width:10em" value="<?= $fv['med_months'] ?>" required> months.</p>
+			</fieldset>
+		</div>
+	</div>
+</div>

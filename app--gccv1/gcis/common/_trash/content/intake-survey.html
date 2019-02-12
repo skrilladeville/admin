@@ -1,0 +1,51 @@
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+		<p>Where did you hear about us? Check all that Apply.</p>
+		<fieldset>
+			<div class="float-left col-md">
+				<?php
+					checkmarkize(array(
+							"Family / friends",
+							"Newspaper / magazine",
+							"TV / Online advertisements"
+						)
+					);
+				?>
+				<label>Others:</label>
+				<textarea class="form-control" id="descTextarea" rows="3" placeholder="Example: Billboards, Google, Ads, etc..."></textarea>
+		</fieldset>
+	</div>
+</div>
+	
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+		<p>Do you have a history of preadolescent sexual abuse?</p>
+		<fieldset>
+			<div class="float-left col-md">
+				<div class="form-group">
+					<input type="checkbox" class="switch" id="switch5" data-group-cls="btn-group-sm" />
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+		<p>Is there a family history of psychological disease? Check all that Apply.</p>
+		<fieldset>
+			<div class="float-left col-md">
+				<?php
+					checkmarkize(array(
+						"ADD",
+						"OCD",
+						"Bipolar",
+						"Schizophrenia",
+						"Depression"
+						)
+					);
+				?>
+			</div>
+		</fieldset>
+	</div>
+</div>

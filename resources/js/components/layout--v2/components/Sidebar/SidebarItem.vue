@@ -15,9 +15,9 @@
         <i :class="item.meta.icon"></i><item v-if="item.meta" :title="item.meta.title" />
       </template>
 
-      <template v-for="child in item.children" v-if="!child.hidden">
+      <template v-for="child in item.children">
         <sidebar-item
-          v-if="child.children&&child.children.length>0"
+          v-if="!child.hidden&&child.children&&child.children.length>0"
           :is-nest="true"
           :item="child"
           :key="child.path"
