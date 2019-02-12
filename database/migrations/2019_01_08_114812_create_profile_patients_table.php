@@ -27,6 +27,14 @@ class CreateProfilePatientsTable extends Migration
             $table->integer('branches_id');
             $table->integer('user_id');
             $table->integer('status');
+            $table->char('mi', 1)->nullable();
+            $table->double('weight')->default(0.0);
+            $table->char('weight_unit', 2)->nullable();
+            $table->string('passport_num')->nullable();
+            $table->string('drivers_license')->nullable();
+            $table->string('fax_phone')->nullable();
+            $table->string('address_1');
+            $table->longText('address_2')->nullable();
             $table->timestamps();
             //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
