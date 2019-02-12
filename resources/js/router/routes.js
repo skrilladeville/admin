@@ -54,7 +54,7 @@ import Shipments from '../pages/sales/Shipments'
 import TermsOfCondition from '../pages/sales/TermsOfCondition'
 import SalesOrders from '../pages/sales/SalesOrder'
 import SalesTax from '../pages/sales/SalesTax'
-
+import Sales from '../pages/sales/Sales'
 /* Reports Folder */
 import CustomerReport from '../pages/reports/CustomerReport'
 import ProductReport from '../pages/reports/ProductReport'
@@ -290,6 +290,12 @@ export default [
 		component: Layout,
 		meta: {requiresAuth: true, title: 'Sales', icon: 'el-icon-goods', permission: 'sales orders' },
 		children: [
+			{
+				path: 'sales',
+				name: 'sales.sales',
+				component: Sales,
+				meta: {requiresAuth: true, title: 'Sales', permission: 'sales orders' },
+			},
 			{
 				path: 'orders',
 				name: 'sales.orders',
