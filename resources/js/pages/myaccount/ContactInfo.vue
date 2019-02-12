@@ -7,12 +7,12 @@
             </div>
             <el-row :gutter="20">
                     <el-col :span="8">
-                        <el-form-item class="contactinfo-form-item" label="Best Contact No." prop="emg_contact_phone">
+                        <el-form-item class="contactinfo-form-item" label="Best Contact No." prop="emg_contact_phone" >
                         <el-input placeholder="Best Contact No." v-model="form.emg_contact_phone"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="8">
-                        <el-form-item class="contactinfo-form-item" label="Best Contact Person">
+                        <el-form-item class="contactinfo-form-item" label="Best Contact Person" prop="emg_contact" >
                         <el-input placeholder="Best Contact Person" v-model="form.emg_contact"></el-input>
                         </el-form-item>
                     </el-col>
@@ -24,19 +24,19 @@
             </el-row> 
             <el-row :gutter="20">
                     <el-col :span="10">
-                        <el-form-item class="contactinfo-form-item" label="Fax Phone No.">
+                        <el-form-item class="contactinfo-form-item" label="Fax Phone No." prop="fax_phone" >
                         <el-input placeholder="Fax Phone No." v-model="form.fax_phone"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="14">
-                        <el-form-item class="contactinfo-form-item" label="Email" prop="email">
+                        <el-form-item class="contactinfo-form-item" label="Email" prop="email" >
                         <el-input placeholder="Email" v-model="form.email"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row :gutter="20">
                      <el-col :span="24">
-                        <el-form-item class="contactinfo-form-item" label="Address 1" required>
+                        <el-form-item class="contactinfo-form-item" label="Address 1" prop="address_1" >
                         <el-input placeholder="Address 1" v-model="form.address_1"></el-input>
                         </el-form-item>
                     </el-col>
@@ -86,7 +86,7 @@ export default {
         margin-bottom:0px!important;
     }
 
-      .is-required > .el-form-item__content > .el-input > .el-input__inner{
+      .is-error > .el-form-item__content > .el-input > .el-input__inner{
 		border: 1px solid red!important;
     }
 </style>
