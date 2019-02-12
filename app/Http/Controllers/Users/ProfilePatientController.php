@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ProfilePatient;
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfilePatientStoreRequest;
 
 class ProfilePatientController extends Controller
 {
@@ -100,7 +101,7 @@ class ProfilePatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProfilePatientStoreRequest $request, $id)
     {
         //
 
@@ -112,11 +113,13 @@ class ProfilePatientController extends Controller
             }
         }
 
-        $user = User::findOrFail($id);
-        $user->email = $request->email;
-        // $profile = $request;
-        if($profile->save()){
-            $user->save();
+        if($request->validated()){
+            $user = User::findOrFail($id);
+            $user->email = $request->email;
+            // $profile = $request;
+            if($profile->save()){
+                $user->save();
+            }
         }
         // return $profile;
     }
