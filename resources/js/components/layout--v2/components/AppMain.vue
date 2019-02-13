@@ -19,8 +19,25 @@ export default {
     // key() {
     //   return this.$route.name !== undefined ? this.$route.name + +new Date() : this.$route + +new Date()
     // }
+  },
+  methods: {
+    insertScriptTag(){
+      let scriptTag = document.createElement('script');    
+      scriptTag.setAttribute('src',"/js/robust-admin-init.js");
+
+      //var appMain=document.getElementById("appMain");
+      document.body.appendChild(scriptTag);
+      //appMain.appendChild(scriptTag);
+    }
+  },
+  mounted () {
+    this.insertScriptTag()
   }
 }
+
+// for logged in app CSS --WA
+var element = document.getElementById("blade");
+element.classList.add("fixed-navbar");
 </script>
 
 <style scoped>

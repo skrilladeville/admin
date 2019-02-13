@@ -1,0 +1,2 @@
+<?php
+widgetize( 'Coming Soon','' );

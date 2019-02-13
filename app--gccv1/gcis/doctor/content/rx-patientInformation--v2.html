@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-md-6">
+		<div class="form-group">
+			<fieldset class="form-group">
+				<label>First name</label>
+        <input type="text" id="p_fname" class="form-control" placeholder="*First name" name="patient_fname" tabindex="1" required data-validation-required-message="Please enter your first name." value="<?= $fv['patient_fname'] ?>">
+			</fieldset>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			<fieldset class="form-group">
+				<label>Last name</label>
+        <input type="text" id="p_lname" class="form-control" placeholder="*Last name" name="patient_lname" tabindex="1" required data-validation-required-message="Please enter your last name." value="<?= $fv['patient_lname'] ?>">
+			</fieldset>
+		</div>
+	</div>	
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<div class="form-group">
+			<fieldset class="form-group">
+				<label>Date of Birth</label>
+        <input type="date" id="p_birth" class="form-control" name="patient_bday" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Date of Birth" required data-original-title="" title="" value="<?= $fv['patient_bday'] ?>">
+			</fieldset>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			<fieldset class="form-group">
+				<label>Contact Information</label>
+        <input type="text" id="p_contact" class="form-control" placeholder="*###-####" name="patient_contact" tabindex="1" required data-validation-required-message="Please enter contact number." value="<?= $fv['patient_contact'] ?>">
+			</fieldset>
+		</div>
+	</div>
+</div>

@@ -54,7 +54,8 @@ body.vertical-layout.vertical-menu.menu-expanded .content, body.vertical-layout.
 
 .card form.sign{margin:4rem 0}
 .fa{margin:0 0.8rem 0.5rem -0.9rem;font-size:2.1rem;width:2.6rem;text-align:center;}
-.card-profile-image{width:18.2%;position:relative;z-index:10;margin-top:-2.5%;}
+#patientInfo .card-profile-image{width:18.2%;position:relative;z-index:10;margin-top:-2.5%;}
+.avatar-sm{width: 64px;}
 .board{padding:1rem 1rem 0.5rem 1rem;text-align:center}
 .headboard{width:136.5%;margin:0 0 1% -30%;padding:1rem 1rem 0rem 13.7rem;position:relative;z-index:0}.headboard h5{margin-bottom:1rem}
 .block-area{padding: 0.5rem 0.9rem;display: block;}
@@ -107,7 +108,7 @@ body.vertical-layout.vertical-menu.menu-expanded .main-menu .navigation > li > a
 .btn-primary:hover{border-color:#09B28D !important;background:#09B28D !important;}
 .btn-primary{border-color:#067144 !important;background:#067144 !important;}
 
-.navbar{display:block; border-bottom:0.4rem solid #D3FFC9}.table thead th{border-bottom:0.2rem solid #D3FFC9;cursor:pointer}
+.header-navbar{display:block; border-bottom:0.4rem solid #D3FFC9}.table thead th{border-bottom:0.2rem solid #D3FFC9;cursor:pointer}
 .dropdown-item:focus,.dropdown-item:hover{background:#3D5D51;cursor:pointer;color:#B2F61F}
 /* .main-menu.menu-dark .navigation > li.open > ul, */.main-menu ul ul{background:#D2FEC9;}
 
@@ -144,12 +145,13 @@ body.vertical-layout.vertical-menu .main-menu {width:16rem;}
 // override elementUI inline styles
 .el-menu-item:hover{background:inherit}
 .el-submenu__title{color:inherit}
+.el-menu--horizontal{border:inherit}
 
 .tab-container[data-v-fa309b34]{margin:inherit}
 
 .el-form-item--mini .el-form-item__content, .el-form-item--mini .el-form-item__label {
-    line-height: 2px;
+	line-height: 2px;
 }
 .el-form-item--small .el-form-item__content, .el-form-item--small .el-form-item__label {
-    line-height: 2px;
+	line-height: 2px;
 }

@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app--v2.css": "/css/app--v2.css",
     "/css/gcis.css": "/css/gcis.css",
+    "/js/robust-admin-init.js": "/js/robust-admin-init.js",
     "/css/robust-admin.css": "/css/robust-admin.css",
     "/js/robust-admin.js": "/js/robust-admin.js",
     "/favicon.ico": "/favicon.ico"
