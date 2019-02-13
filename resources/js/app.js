@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import VueGoodTablePlugin from 'vue-good-table';
 import VueCharts from 'vue-chartjs'
 import { Bar, Line } from 'vue-chartjs'
+import {ClientTable, Event} from 'vue-tables-2';
 
 // import the styles
 import 'vue-good-table/dist/vue-good-table.css'
@@ -38,6 +39,7 @@ Vue.use( VueNoty, {
 });
 
 Vue.use( ElementUI, { locale } );
+Vue.use(ClientTable, {}, false, 'bootstrap4', 'default');
 
 import router from './router/router';
 import store from './store/index';
