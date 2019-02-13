@@ -15,9 +15,10 @@
         <i :class="item.meta.icon"></i><item v-if="item.meta" :title="item.meta.title" />
       </template>
 
-      <template v-for="child in item.children">
-        <sidebar-item
-          v-if="!child.hidden&&child.children&&child.children.length>0"
+      <template v-for="child in item.children" >
+        <template v-if="!child.hidden">
+            <sidebar-item
+          v-if="child.children && child.children.length > 0"
           :is-nest="true"
           :item="child"
           :key="child.path"
@@ -28,6 +29,8 @@
             <i :class="child.meta.icon"></i><item v-if="child.meta" :title="child.meta.title" />
           </el-menu-item>
         </app-link>
+        </template>
+ 
       </template>
     </el-submenu>
 
