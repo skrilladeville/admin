@@ -14,6 +14,7 @@ class CreateCheckInProductTable extends Migration
     public function up()
     {
         Schema::create('check_in_products', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('product_id');
             $table->integer('branch_id');
             $table->string('batch_id')->nullable();
@@ -23,7 +24,8 @@ class CreateCheckInProductTable extends Migration
             $table->string('harvest_date')->nullable();
             $table->decimal('total_cost', 12, 2);
             $table->string('note');
-            $table->increments('id');
+            $table->integer('user_id');
+
             $table->timestamps();
         });
     }

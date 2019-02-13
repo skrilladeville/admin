@@ -822,14 +822,33 @@ export default {
     },
     confirm(){
 
-      if(this.form.product_id=='' || this.form.vendor_id=='' || this.form.branch_id==''){
+      if(this.form.product_id==''){
         this.$notify({
           title: 'Warning',
-          message: 'Product or vendor or check in to is required',
+          message: 'Product is required',
           position: 'top-left',
           type:'warning'
         });
       }
+      else if(this.form.vendor_id==''){
+        this.$notify({
+          title: 'Warning',
+          message: 'vendor  is required',
+          position: 'top-left',
+          type:'warning'
+        });
+      }
+
+      else if(this.form.branch_id==''){
+         this.$notify({
+          title: 'Warning',
+          message: 'check in to  is required',
+          position: 'top-left',
+          type:'warning'
+        });
+      
+      }
+
       else{
       console.log('nka abot')
       this.dialogCheckIn=false
