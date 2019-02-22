@@ -23,6 +23,7 @@ $factory->define(App\ProfilePatient::class, function (Faker $faker) {
         'health_card' => $faker->randomNumber($nbDigits = null, $strict = false),
         'emg_contact' => $faker->text($maxNbChars = 200),
         'emg_contact_phone' => $faker->phoneNumber,
+        'address_1' => $faker->address,
         'user_id' => $faker->numberBetween($min = 5, $max = 20),
         'profile_doctors_id' => $faker->randomElement($array = array('3', '4'), $count = 1),
         'branches_id' => 1,
