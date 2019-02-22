@@ -1,0 +1,108 @@
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+		<p>How often do you use cannabis?</p>
+		<fieldset>
+			<div class="float-left col-md">
+				<?php
+					checkmarkize(array(
+							"Every day",
+							"Every other day",
+							"1-2 times per week",
+							"More than twice per month"
+						)
+					);
+				?>
+				<div class="form-group">
+					<label>Other:</label>
+					<input type="text" class="form-control" placeholder="Other">
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+		<p>How have you used cannabis? Check all that apply.</p>
+		<fieldset>
+			<div class="float-left col-md">
+				<?php
+					checkmarkize(array(
+						 "Smoking joints",
+						 "Vaporizing",
+						 "Ingestion",
+						 "Topical"
+						)
+					);
+				?>
+				<div class="form-group">
+					<label>If you own a vaporizer, which ones do you own?</label>
+					<input type="text" class="form-control" placeholder="Vaporizers you own">
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+		<p>What do you use your vaporizer for?</p>
+		<fieldset>
+			<div class="float-left col-md">
+				<?php
+					checkmarkize(array(
+							"Recreation",
+ 							"Medical reasons"
+						)
+					);
+				?>
+			</div>
+		</fieldset>
+	</div>
+</div>
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+		<p>Which strains have you used?</p>
+		<fieldset>
+			<div class="float-left col-md">
+				<?php
+					checkmarkize(array(
+							"Indica",
+							"Sativa",
+							"Hybrid"
+						)
+					);
+				?>
+			</div>
+		</fieldset>
+	</div>
+</div>
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+		<p>How much marijuana do you currently use per day, in grams?</p>
+		<fieldset>
+			<div class="float-left">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="grams">
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+<div class="row skin skin-flat">
+	<div class="form-group col-md">
+		<p>Have you had any serious reactions to cannabis?</p>
+		<fieldset>
+			<div class="float-left col-md">
+				<?php
+					checkmarkize(array(
+							"No",
+							"Yes, please explain:"
+						)
+					);
+				?>
+				<div class="form-group">
+					<textarea class="form-control" id="descTextarea" rows="3" placeholder=""></textarea>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>

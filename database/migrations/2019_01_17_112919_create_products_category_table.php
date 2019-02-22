@@ -18,6 +18,7 @@ class CreateProductsCategoryTable extends Migration
             $table->string('name');
             $table->integer('product_cat_id')->nullable();
             $table->longText('description');
+            $table->boolean('is_archieve')->default(false);
             $table->timestamps();
         });
     }

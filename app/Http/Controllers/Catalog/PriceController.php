@@ -93,7 +93,9 @@ class PriceController extends Controller
     public function destroy($id)
     {
 
-
+        $price=Price::find($id);
+        $price->delete();
+        
     }
 
 }

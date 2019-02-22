@@ -1,0 +1,27 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<fieldset class="form-group">
+				<label>Search by LAST NAME, FIRST NAME</label>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="fas fa-search"></i></span>
+					</div>
+					<input type="hidden" name="patient_id" id="patientID" />
+					<!-- Auto Complete mystery for .ac-multiple-values -->
+					<input type="hidden" class="ac-project" />
+					<!-- Auto Complete mystery -->			
+					<input type="text" class="form-control ac-multiple-remote" />
+				</div>
+				<p class="badge-default badge-info block-tag text-left"><small class="block-area white">NOTE: Search results are available only by dropdown selection. Type at least the first two letters, eg. "ma" to see a dropdown list of found last names. Select one, then continue typing the first name and selecting from a dropdown list of matching first names.</small></p>
+			</fieldset>
+		</div>
+		<div id="patientInfo" class="hide">
+<?php
+//$widgetOpts = array( 'content' => 'loading' );
+//rx-patientProfile
+widgetize( 'Patient Information','loading' );
+?>
+		</div>
+	</div>
+</div>

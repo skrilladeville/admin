@@ -7,9 +7,11 @@
 // custom
 @import "variables";
 @import "mixin";
-//@import "transition";
+@import "transition";
 @import "element-ui";
 @import "sidebar";
+
+
 
 body {
   height: 100%;
@@ -20,8 +22,8 @@ body {
 }
 
 label {
-  font-weight: 700;
-  margin-right: 30px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
 
 html {
@@ -100,3 +102,6 @@ a:hover {
 }
 
 
+div.el-radio-group{
+  padding-top: 0px;
+}

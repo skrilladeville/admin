@@ -52,7 +52,7 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-        $vendor= Vendor::findOrFail($id);
+        $vendor= Vendor::find($id);
         
         return $vendor;
         
@@ -80,7 +80,7 @@ class VendorController extends Controller
     {
         $vendor=Vendor::find($id);
 
-        $vendor= Vendor::create($request->only(["name","licence_or_registration_no","profile_patients_id","description","address","phone","fax","email","skype"]));
+        $vendor->update($request->only(["name","licence_or_registration_no","profile_patients_id","description","address","phone","fax","email","skype"]));
    
         return $vendor;
     }
@@ -100,5 +100,26 @@ class VendorController extends Controller
             "success" => "ok"
         ], 200);
 
+    }
+
+
+    public function archieve($id)
+    {
+        $vendor=Vendor::find($id);
+        $vendor->is_archieve=true;
+        $vendor->save();
+        return response()->json([
+            "success" => "ok"
+        ], 200);
+    }
+
+    public function unarchieve($id)
+    {
+        $vendor=Vendor::find($id);
+        $vendor->is_archieve=false;
+        $vendor->save();
+        return response()->json([
+            "success" => "ok"
+        ], 200);
     }
 }

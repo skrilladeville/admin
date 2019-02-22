@@ -177,7 +177,7 @@ body.vertical-layout.vertical-menu.menu-expanded .footer {
 }
 
 .main-menu li {
-  line-height: 2.45;
+  line-height: 4rem;
 }
 
 .main-menu.menu-dark .navigation > li > a {
@@ -211,14 +211,21 @@ body.vertical-layout.vertical-menu.menu-expanded .footer {
 }
 
 .fa {
-  margin: 0 0.8rem 0 0.1rem;
+  margin: 0 0.8rem 0.5rem -0.9rem;
+  font-size: 2.1rem;
+  width: 2.6rem;
+  text-align: center;
 }
 
-.card-profile-image {
+#patientInfo .card-profile-image {
   width: 18.2%;
   position: relative;
   z-index: 10;
   margin-top: -2.5%;
+}
+
+.avatar-sm {
+  width: 64px;
 }
 
 .board {
@@ -381,6 +388,11 @@ form label {
   color: #053922;
 }
 
+a .fa,
+i.fa {
+  color: #519c4e;
+}
+
 .main-menu.menu-dark .navigation {
   background: none;
 }
@@ -424,7 +436,8 @@ button.btn,
 thead,
 a.btn,
 .board,
-.headboard.first {
+.headboard.first,
+.el-menu-item.is-active {
   background: #067144;
   color: #D3FFC9 !important;
 }
@@ -472,7 +485,7 @@ body.vertical-layout.vertical-menu.menu-expanded .main-menu .navigation > li > a
   background: #067144 !important;
 }
 
-.navbar {
+.header-navbar {
   display: block;
   border-bottom: 0.4rem solid #D3FFC9;
 }
@@ -603,7 +616,21 @@ tfoot,
   color: inherit;
 }
 
+.el-menu--horizontal {
+  border: inherit;
+}
+
 .tab-container[data-v-fa309b34] {
   margin: inherit;
+}
+
+.el-form-item--mini .el-form-item__content,
+.el-form-item--mini .el-form-item__label {
+  line-height: 2px;
+}
+
+.el-form-item--small .el-form-item__content,
+.el-form-item--small .el-form-item__label {
+  line-height: 2px;
 }
 

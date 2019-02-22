@@ -6,6 +6,12 @@ import 'normalize.css/normalize.css';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/en'
 import 'element-ui/lib/theme-chalk/index.css';
+//import vue-tables-2
+import {ServerTable, ClientTable, Event} from 'vue-tables-2';
+Vue.use(ClientTable, {}, false, 'bootstrap4');
+Vue.use(ServerTable, {}, false, 'bootstrap4');
+
+
 import VueGoodTablePlugin from 'vue-good-table';
 import VueCharts from 'vue-chartjs'
 import { Bar, Line } from 'vue-chartjs'
@@ -41,10 +47,8 @@ Vue.use( VueNoty, {
 });
 
 Vue.use( ElementUI, { locale } );
-Vue.use(ClientTable, {}, true, 'bootstrap4', 'default');
-Vue.use(VueTables.Event);
-const EventBus = VueTables.Event;
-import router from './router/router';
+
+import router from './router--v2/router';
 import store from './store/index';
 import SvgIcon from './components/SvgIcon'
 import App from './components/App.vue';

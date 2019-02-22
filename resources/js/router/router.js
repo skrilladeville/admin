@@ -5,7 +5,7 @@ import jwtToken from '../helpers/jwt-token';
 Vue.use(VueRouter);
 
 import store from '../store/index';
-import routes from './routes';
+import routes from './routes--v2';
 
 import {api} from "../config";
 

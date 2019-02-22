@@ -3,55 +3,71 @@
         <el-card>
     <div slot="header" class="clearfix">
     <span>Add Lab</span>
-    <el-button style="float: right; padding: 3px 0" type="text"><router-link :to="{name:'catalog.vendors'}"> To List</router-link></el-button>
+    <el-button style="float: right;" type="success" icon="el-icon-tickets" size="small"><router-link :to="{name:'labs'}"> To List</router-link></el-button>
   </div>
     
     <el-form ref="form" label-position="top" :model="form" label-width="250px"  size="mini">
-
-
-                    <el-form-item label="Name">
+      <el-row :gutter="10">
+<el-col :md="12">
+<el-form-item label="Name">
                         <el-input v-model="form.name"></el-input>
                     </el-form-item>
           
-                 <el-form-item label="Licence number">
+</el-col>
+<el-col :md="12">
+ <el-form-item label="Licence number">
                         <el-input v-model="form.licence_no"></el-input>
                     </el-form-item> 
-     
+</el-col>
+      </el-row>
+
+                    
                 
+     
+              
 
 
    <el-form-item label="Description">
     <el-input type="textarea" v-model="form.description"></el-input>
   </el-form-item>
 
-
-                  
-         
-                 <el-form-item label="Phone Number">
+<el-row :gutter="10">
+  <el-col :md="12">
+<el-form-item label="Phone Number">
                         <el-input v-model="form.phone"></el-input>
                     </el-form-item> 
-                    
-                 <el-form-item label="Fax">
+  </el-col >
+  <el-col :md="12">
+    <el-form-item label="Fax">
                         <el-input v-model="form.fax"></el-input>
                     </el-form-item> 
-                    
-                 <el-form-item label="Email">
+  </el-col>
+  
+</el-row> 
+
+<el-row :gutter="10">
+  <el-col :md="12">
+   <el-form-item label="Email">
                         <el-input v-model="form.email"></el-input>
                     </el-form-item> 
-                    
-                 <el-form-item label="city/state/zip">
+                     
+  </el-col >
+  <el-col :md="12">
+   <el-form-item label="city/state/zip">
                         <el-input v-model="form.city_state_zip"></el-input>
                     </el-form-item> 
-      
-        
-
-
+  </el-col>
+  
+</el-row> 
+                 
+                    
   <el-form-item>
-    <el-button type="primary" @click="onSubmit">Create</el-button>
-    <el-button>Cancel</el-button>
+    <el-button type="success" @click="onSubmit" size="small" round>Create</el-button>
+    <el-button type="danger" size="small" round>Cancel</el-button>
   </el-form-item>
 </el-form>
         </el-card>
+        
     </div>
 </template>
 
@@ -78,10 +94,13 @@
                 .then(res=>{
                     console.log(res.data)
 
-                   // this.$router.push({name:'catalog.vendors'})
+                   this.$router.push({name:'labs'})
                 })
       }
     },
 
   }
 </script>
+
+
+

@@ -43,7 +43,7 @@ body.vertical-layout.vertical-menu.menu-expanded .content, body.vertical-layout.
 .main-menu .main-menu-content{height:94%}/*fix nav scroll hidden bottom*/
 
 .dropdown-menu{min-width:20rem;border:none}
-.main-menu li{line-height:2.45}
+.main-menu li{line-height:4rem}
 .main-menu.menu-dark .navigation > li > a{height:3.8em}
 .menu-title{height:6em;line-height:3em}
 
@@ -53,8 +53,9 @@ body.vertical-layout.vertical-menu.menu-expanded .content, body.vertical-layout.
 .input-group-text{padding:0.5rem 0.7rem;font-size:2rem}
 
 .card form.sign{margin:4rem 0}
-.fa{margin:0 0.8rem 0 0.1rem}
-.card-profile-image{width:18.2%;position:relative;z-index:10;margin-top:-2.5%;}
+.fa{margin:0 0.8rem 0.5rem -0.9rem;font-size:2.1rem;width:2.6rem;text-align:center;}
+#patientInfo .card-profile-image{width:18.2%;position:relative;z-index:10;margin-top:-2.5%;}
+.avatar-sm{width: 64px;}
 .board{padding:1rem 1rem 0.5rem 1rem;text-align:center}
 .headboard{width:136.5%;margin:0 0 1% -30%;padding:1rem 1rem 0rem 13.7rem;position:relative;z-index:0}.headboard h5{margin-bottom:1rem}
 .block-area{padding: 0.5rem 0.9rem;display: block;}
@@ -90,12 +91,13 @@ div.DTED_Lightbox_Background,div.DTED_Lightbox_Wrapper{z-index:1000}
 /* COLOR */
 html body{background:#E3EBD8}
 a:link,a:visited,.main-menu li{color:#097244 !important}.h1, .h2, .h3, .h4, .h5, .h6, code, h1, h2, h3, h4, h5, h6, kbd, pre, samp,form label{color:#053922}
+a .fa,i.fa{color:#519c4e}
 .main-menu.menu-dark .navigation{background:none}
 body .content-detached.content-right{background:#E2EAD8}
 body.vertical-layout.vertical-menu.menu-expanded .main-menu,.navbar-nav .dropdown-menu,.dropdown-menu.show,.card .card,.table-hover tbody tr:hover,.table-striped tbody tr:nth-of-type(odd){background:#CDE2D9}
 input:required::placeholder,.help-block{color:red}input:required{border-color:red !important}
 
-.navbar,.main-menu.menu-dark .navigation > li.active > a,.main-menu.menu-dark .navigation > li .active > a,button.btn,thead,a.btn,.board,.headboard.first{background:#067144;color:#D3FFC9 !important}
+.navbar,.main-menu.menu-dark .navigation > li.active > a,.main-menu.menu-dark .navigation > li .active > a,button.btn,thead,a.btn,.board,.headboard.first,.el-menu-item.is-active{background:#067144;color:#D3FFC9 !important}
 .board h2,.headboard.first h2,.headboard.first h5{color:white}
 .main-menu.menu-dark .navigation > li.open > a,li.is-opened{background:#9CD192}
 .main-menu.menu-dark .navigation > li.active > a span,.main-menu.menu-dark .navigation > li .active > a{color:#D3FFC9 !important}
@@ -106,7 +108,7 @@ body.vertical-layout.vertical-menu.menu-expanded .main-menu .navigation > li > a
 .btn-primary:hover{border-color:#09B28D !important;background:#09B28D !important;}
 .btn-primary{border-color:#067144 !important;background:#067144 !important;}
 
-.navbar{display:block; border-bottom:0.4rem solid #D3FFC9}.table thead th{border-bottom:0.2rem solid #D3FFC9;cursor:pointer}
+.header-navbar{display:block; border-bottom:0.4rem solid #D3FFC9}.table thead th{border-bottom:0.2rem solid #D3FFC9;cursor:pointer}
 .dropdown-item:focus,.dropdown-item:hover{background:#3D5D51;cursor:pointer;color:#B2F61F}
 /* .main-menu.menu-dark .navigation > li.open > ul, */.main-menu ul ul{background:#D2FEC9;}
 
@@ -143,5 +145,13 @@ body.vertical-layout.vertical-menu .main-menu {width:16rem;}
 // override elementUI inline styles
 .el-menu-item:hover{background:inherit}
 .el-submenu__title{color:inherit}
+.el-menu--horizontal{border:inherit}
 
 .tab-container[data-v-fa309b34]{margin:inherit}
+
+.el-form-item--mini .el-form-item__content, .el-form-item--mini .el-form-item__label {
+	line-height: 2px;
+}
+.el-form-item--small .el-form-item__content, .el-form-item--small .el-form-item__label {
+	line-height: 2px;
+}

@@ -22,6 +22,7 @@ class CreateLabTable extends Migration
             $table->string('fax')->nullable();
             $table->string('email')->nullable();
             $table->string('city_state_zip')->nullable();
+            $table->boolean('is_archieve')->default(false);
             
             
             

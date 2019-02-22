@@ -16,14 +16,8 @@
                 <ul class="nav navbar-nav mr-auto float-left">
                 </ul>
                 <ul class="nav navbar-nav float-right">         
-                    <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title=""><i class=""></i><span>Hi, User</span><span class="selected-language"></span></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown-flag">
-                            <a class="dropdown-item" href="./?role=patient"><i class="fas fa-child"></i>Patient</a>
-                            <a class="dropdown-item" href="./?role=doctor"><i class="fas fa-user-md"></i>Doctor</a>
-                            <a class="dropdown-item" href="./?role=admin"><i class="fas fa-crown"></i>Admin</a>
-                            <a class="dropdown-item" href="?logout"><i class="fas fa-lock"></i>Logout</a>
-                            <!--<a class="dropdown-item" href="./?role=member"><i class="flag-icon flag-icon-de"></i> Member</a>-->
-                        </div>
+                    <li class="dropdown dropdown-language nav-item">
+                        <user-nav/>
                     </li>
                 </ul>
             </div>
@@ -34,7 +28,10 @@
 
 </template>
 <script>
+import UserNav from './UserNav'
+
 export default {
+    components: { UserNav },
     data() {
         return {
             logo:['/images/logo--GCIS-h.svg']

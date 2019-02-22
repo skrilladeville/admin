@@ -3,24 +3,24 @@
         <el-card>
     <div slot="header" class="clearfix">
     <span>Add Vendor</span>
-    <el-button style="float: right; padding: 3px 0" type="text"><router-link :to="{name:'catalog.vendors'}"> To List</router-link></el-button>
+    <router-link :to="{name:'catalog.vendors'}"> <el-button style="float: right;" icon="el-icon-tickets" size="small" type="success">To List</el-button></router-link>
   </div>
     
     <el-form ref="form" label-position="top" :model="form" label-width="250px"  size="small">
 
 <el-row :gutter="10">
-    <el-col :span="8">
+    <el-col :md="8">
 <el-form-item label="Name">
                         <el-input v-model="form.name" placeholder="Name Here"></el-input>
                     </el-form-item>
     </el-col>
-    <el-col :span="8">
+    <el-col :md="8">
         
                  <el-form-item label="Licence or Registration Number">
                         <el-input v-model="form.licence_or_registration_no" placeholder="Licence or Registration Number"></el-input>
                     </el-form-item> 
     </el-col>
-    <el-col :span="8">
+    <el-col :md="8">
         
     <el-form-item label="Patient Id">
     <el-select style="width:100%;" v-model="form.profile_patients_id"  filterable placeholder="please select Patient Id">
@@ -39,12 +39,12 @@
   </el-form-item>
 
 <el-row :gutter="10">
-    <el-col :span="12">
+    <el-col :md="12">
  <el-form-item label="Address">
                         <el-input v-model="form.address" placeholder="Address"></el-input>
                     </el-form-item>
     </el-col>
-    <el-col :span="12">
+    <el-col :md="12">
 
                  <el-form-item label="Phone Number">
                         <el-input v-model="form.phone" placeholder="Phone Number"></el-input>
@@ -54,13 +54,13 @@
 </el-row>
 
              <el-row :gutter="10">
-    <el-col :span="12">
+    <el-col :md="12">
 <el-form-item label="Fax">
                         <el-input v-model="form.fax" placeholder="Fax Here"></el-input>
                     </el-form-item> 
                     
     </el-col>
-    <el-col :span="12">
+    <el-col :md="12">
 
                 <el-form-item label="Email">
                         <el-input v-model="form.email" placeholder="Email Here"></el-input>
