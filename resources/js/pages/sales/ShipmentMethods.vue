@@ -1,31 +1,30 @@
 <template>
-    
-      <router-view/>
+  <div class="app-container">
+    <el-row>
+      <el-col :span="24">
+        <el-card class="box-card" shadow="always">
+            <div slot="header" class="clearfix">
+                <span class="card-title" >Sales</span>
+            </div>
+            <div class="card-content" ><!-- widgetType-content here -->
+                <div class="card-body" >
 
+                    <v-client-table name='orderTable' ref="table" :columns="columns" :data="data">
+                      
+                    </v-client-table>
+                </div>
+            </div>
+        </el-card>
+      </el-col>
+    </el-row>
+     <router-view/>
+  </div>
 </template>
-
 <script>
-import axios from 'axios'
-import Event from 'vue-tables-2'
-import path from 'path'
-import VueRouter from 'vue-router'
-import Vue from 'vue';
-import ViewOrder from './ViewOrder'
-import OrderList from './OrderList'
-// import router from './order-router.js'
-
-Vue.use(VueRouter)
-const router = new VueRouter({
-  routes: [
-    { name: 'order', path: '/order', component: ViewOrder },
-    { name: 'orders', path: '/', component: OrderList },
-    { path: '*', redirect: '/'}
-  ]
-})
 export default {
-  router,
-  name: 'SalesOrder',
-  components: { ViewOrder, OrderList },
+
+  name: 'ShipmentMethods',
+  components: {  },
   data() {
     return {
       tag_new:{
@@ -35,7 +34,7 @@ export default {
       filters:[{
         label: 'Status',
         value: 'status',
-        items: ['Pending', 'Pending Pickup', 'Pickup', 'Declined', 'Processing', 'In Transit',
+        items: ['Pending', 'Pending Pickup', 'Picked up', 'Declined', 'Processing', 'In Transit',
         'Rejected', 'Not Home', 'Cancelled', 'Delivered', 'Returned', 'Completed', 'Partial', 'Unpaid'],
       },{
         label: 'Register',
@@ -84,37 +83,9 @@ export default {
     }
   },
    methods: {
-      handleClose(tag) {
-        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-      },
-
-      addTag: function(event) {
-        if(this.tag_new.key&&this.tag_new.value){
-          this.dynamicTags.push({key: this.tag_new.key, value: this.tag_new.value});
-          this.tag_new.key = '';
-          this.tag_new.value = '';
-          this.popover_visible = false;
-          // console.log(this.$refs.table)
-          // this.$store.commit('orderTable/SET_CUSTOM_FILTER', {filter:'all_fields', value:this.filter_list})
-          // this.$store.commit('orderTable/FILTER', {filter:'all_fields', value:this.filter_list})
-          // Event.$emit('vue-tables.orderTable.filter::all_fields', this.filter_list);
-        }
-      },
-
-      resolvePath(routePath) {
-      if (/^(https?:|mailto:|tel:)/.test(routePath)) {
-        return routePath
-      }
-      return path.resolve('/sales/orders', routePath)
-    },
+      
     },
   computed: {
-    items(){
-      if(this.tag_new.key){
-        var result = this.filters.filter(obj=>obj.value==this.tag_new.key);
-        return result[0].items;
-      }
-    }
   }
   }
 
@@ -143,64 +114,3 @@ function getData() {
     return list;
 }
 </script>
-
-<style>
-  .el-tag + .el-tag {
-    margin-left: 10px;
-  }
-  .button-new-tag {
-    margin-left: 10px;
-    height: 32px;
-    line-height: 30px;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .input-new-tag {
-    width: 90px;
-    margin-left: 10px;
-    vertical-align: bottom;
-  }
-
-  .VueTables__search, 
-  .VueTables__search-field,
-  .VueTables__search-field > input {
-    width: 100%!important;
-  }
-
-  .key-text{
-    text-transform: capitalize;
-  }
-
-  .filters-row{
-    margin-top: 10px;
-  }
-
-  .el-button:active {
-    color: #097244;
-    border-color: #097244;
-    outline: 0;
-}
-
-.el-button:focus, .el-button:hover {
-    color: #097244;
-    border-color: #14bd74;
-    background-color: #CDE2D9;
-}
-
-.el-tag {
-    color: #097244;
-    border-color: #14bd74;
-    background-color: #CDE2D9;
-}
-
-.el-icon-close{
-    color: #097244!important; 
-}
-
-.el-icon-close:hover{
-    background-color: #097244!important;
-    color: #fff!important;
-}
-
-</style>
-

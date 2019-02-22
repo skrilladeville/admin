@@ -10,7 +10,7 @@ import VueGoodTablePlugin from 'vue-good-table';
 import VueCharts from 'vue-chartjs'
 import { Bar, Line } from 'vue-chartjs'
 import {ClientTable, Event} from 'vue-tables-2';
-
+import VueTables from 'vue-tables-2'
 // import the styles
 import 'vue-good-table/dist/vue-good-table.css'
 
@@ -19,11 +19,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee, faCalendarCheck, faUser, 
 	faStore, faClock, faFileInvoice, faThumbsUp, faTimes,
 	faShoppingCart, faMoneyBillWave, faTags, faFileInvoiceDollar, 
-	faLandmark, faPercent } from '@fortawesome/free-solid-svg-icons'
+	faLandmark, faPercent, faEye, faEllipsisH, faTimesCircle,
+	faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faCoffee, faCalendarCheck, faUser, faStore, faClock, faFileInvoice, faThumbsUp, faTimes,
-	faShoppingCart, faMoneyBillWave,faTags, faFileInvoiceDollar, faLandmark, faPercent)
+	faShoppingCart, faMoneyBillWave,faTags, faFileInvoiceDollar, faLandmark, faPercent,faEye, faEllipsisH,
+	faTimesCircle, faCheckCircle)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(VueGoodTablePlugin);
 
@@ -39,8 +41,9 @@ Vue.use( VueNoty, {
 });
 
 Vue.use( ElementUI, { locale } );
-Vue.use(ClientTable, {}, false, 'bootstrap4', 'default');
-
+Vue.use(ClientTable, {}, true, 'bootstrap4', 'default');
+Vue.use(VueTables.Event);
+const EventBus = VueTables.Event;
 import router from './router/router';
 import store from './store/index';
 import SvgIcon from './components/SvgIcon'

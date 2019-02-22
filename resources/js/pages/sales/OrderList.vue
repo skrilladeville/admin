@@ -1,31 +1,87 @@
 <template>
-    
-      <router-view/>
+  <div class="app-container">
+    <el-row>
+      <el-col :span="24">
+        <el-card class="box-card" shadow="always">
+            <div slot="header" class="clearfix">
+                <span class="card-title" >Sales</span>
+            </div>
+            <div class="card-content" ><!-- widgetType-content here -->
+                <div class="card-body" >
 
+                    <v-client-table name='orderTable' ref="table" :columns="columns" :data="data">
+                      <router-link slot="uri" slot-scope="props" :to="{name:'order'}">
+                      <!-- <a slot="uri" slot-scope="props" target="_blank" :href="props.row.uri"> -->
+                        <font-awesome-icon :icon="'eye'" size="sm"/>
+                      </router-link>
+                      <div slot="child_row" slot-scope="props">
+                        The link to {{props.row.name}} is <a :href="props.row.uri">{{props.row.uri}}</a>
+                      </div>
+                      <el-row :class="'filters-row'" slot="afterFilter">
+                        <el-tag
+                          :key="index"
+                          v-for="(tag, index) in dynamicTags"
+                          closable
+                          :disable-transitions="false"
+                          @close="handleClose(tag)">
+                          <span class="key-text">{{tag.key}} </span> 
+                          is 
+                          <span class="value-text">{{tag.value}}</span>
+                        </el-tag>
+                      <el-popover
+                        placement="bottom"
+                        width="200"
+                        trigger="click"
+                        v-model="popover_visible">
+                         <el-form :model="tag_new">
+                              <el-form-item label="Add filter">
+                                <el-select v-model="tag_new.key" placeholder="Select">
+                                  <el-option :label="filter.label" :value="filter.value" v-for="(filter, index) in filters" :key="index"></el-option>
+                                </el-select>
+                              </el-form-item>
+                                <el-form-item label="" v-show="tag_new.key">
+                                <el-select v-model="tag_new.value" placeholder="Select value">
+                                  <el-option :label="item" :value="item" v-for="(item, index) in items" :key="index"></el-option>
+                                </el-select>
+                              </el-form-item>
+                              <el-button  v-show="tag_new.value" size="small" @click="addTag($event)">Add Tag</el-button>
+                          </el-form>
+                        <el-button slot="reference" class="button-new-tag">
+                          Add Filter Tags<i class="el-icon-arrow-down el-icon--right"></i>
+                        </el-button>
+                      </el-popover>
+                      </el-row>
+                    </v-client-table>
+                </div>
+            </div>
+        </el-card>
+      </el-col>
+    </el-row>
+     <router-view/>
+  </div>
 </template>
 
 <script>
 import axios from 'axios'
 import Event from 'vue-tables-2'
-import path from 'path'
-import VueRouter from 'vue-router'
-import Vue from 'vue';
+// import path from 'path'
+// import VueRouter from 'vue-router'
+// import Vue from 'vue';
 import ViewOrder from './ViewOrder'
-import OrderList from './OrderList'
-// import router from './order-router.js'
-
-Vue.use(VueRouter)
-const router = new VueRouter({
-  routes: [
-    { name: 'order', path: '/order', component: ViewOrder },
-    { name: 'orders', path: '/', component: OrderList },
-    { path: '*', redirect: '/'}
-  ]
-})
+// const User = {
+//   template: '<div>Order here</div>'
+// }
+// Vue.use(VueRouter)
+// const router = new VueRouter({
+//   routes: [
+//     { name: 'orders', path: '/', component: SalesOrder },
+//     { name: 'order', path: '/order/', component: ViewOrder }
+//   ]
+// })
 export default {
-  router,
-  name: 'SalesOrder',
-  components: { ViewOrder, OrderList },
+//   router,
+  name: 'OrderList',
+  components: { ViewOrder },
   data() {
     return {
       tag_new:{
@@ -35,7 +91,7 @@ export default {
       filters:[{
         label: 'Status',
         value: 'status',
-        items: ['Pending', 'Pending Pickup', 'Pickup', 'Declined', 'Processing', 'In Transit',
+        items: ['Pending', 'Pending Pickup', 'Picked up', 'Declined', 'Processing', 'In Transit',
         'Rejected', 'Not Home', 'Cancelled', 'Delivered', 'Returned', 'Completed', 'Partial', 'Unpaid'],
       },{
         label: 'Register',
