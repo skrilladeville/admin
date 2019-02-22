@@ -15,8 +15,7 @@ Vue.use(ServerTable, {}, false, 'bootstrap4');
 import VueGoodTablePlugin from 'vue-good-table';
 import VueCharts from 'vue-chartjs'
 import { Bar, Line } from 'vue-chartjs'
-import {ClientTable, Event} from 'vue-tables-2';
-import VueTables from 'vue-tables-2'
+
 // import the styles
 import 'vue-good-table/dist/vue-good-table.css'
 
