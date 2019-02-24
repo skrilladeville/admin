@@ -9,9 +9,9 @@ $page = array(
 	'width' => 4 // 1 to 12
 );
 
-$page['configFile'] = 'gcis/common/config/'.$pagename.'.php';
+/* $page['configFile'] = 'gcis/common/config/'.$pagename.'.php';
 $page['contentFile'] = 'gcis/common/content/'.$pagename.'.php';
-$page['scriptEndFile'] = 'gcis/common/scripts/'.$pagename.'.js.php';
+$page['scriptEndFile'] = 'gcis/common/scripts/'.$pagename.'.js.php'; */
 
 // reformat page values
 //reconfigurePage( $page );

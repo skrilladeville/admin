@@ -82,6 +82,8 @@ import TransactionEmails from '../pages/system/TransactionEmails'
 // GCCv1
 import GCCv1page from '../pages/GCCv1/index'
 
+import Reporter from '../pages/reports--v2/index'
+
 export default [
 	// parametric route for GCCv1 requests
 	{ 
@@ -93,6 +95,18 @@ export default [
 				path: ':pagename',
 				component: GCCv1page,
 				meta: { requiresAuth: true }
+			}
+		]
+	},
+	{
+		path: '/reports/:role',
+		component: Layout,
+		hidden: true,
+		children: [
+			{
+				path: ':pagename',
+				component: Reporter,
+				meta: { requiresAuth: true, title: 'Balita' }
 			}
 		]
 	},
@@ -235,7 +249,7 @@ export default [
 
 	{
 		path: 'doctor-care',
-		meta: { title: 'Continuous Care' },
+		meta: { title: 'Continuous Care', icon: 'fa fa-leaf' },
 		children: [
 			{
 				path: '/gccv1/doctor/feedback',
@@ -453,6 +467,32 @@ export default [
 		]
 	},
 	{
+		path: 'reports',
+		meta: { title: 'Reports', icon: 'fa fa-chart-bar' },
+		children: [
+			{
+				path: '/reports/admin/sales',
+				meta: { title: 'Sales' },
+			},
+			{
+				path: '/reports/admin/products',
+				meta: { title: 'Products' },
+			},
+			{
+				path: '/reports/admin/inventory',
+				meta: { title: 'Inventory' },
+			},
+			{
+				path: '/reports/admin/patients',
+				meta: { title: 'Patients' },
+			},
+			{
+				path: '/reports/admin/state-compliance',
+				meta: { title: 'State Compliance' },
+			}
+		]
+	},
+	/* {
 		path: '/reports',
 		component: Layout,
 		meta: {requiresAuth: true, title: 'Reports', icon: 'fa fa-chart-pie', permission: 'reports sales' },
@@ -500,7 +540,7 @@ export default [
 				meta: {requiresAuth: true, title: 'Search Term', permission: 'reports search term' },
 			}
 		]
-	},
+	}, */
 	{
 		path: '/contact',
 		component: Layout,

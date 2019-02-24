@@ -1,8 +1,9 @@
 <?php
 // PAGE
-$pagename = isset($_REQUEST['pagename']) ? $_REQUEST['pagename'] : 'dashboard';
+if( !$pagename )
+	$pagename = isset($_REQUEST['pagename']) ? $_REQUEST['pagename'] : 'dashboard';
 
-include('../config.php');
+include(__DIR__. '/../config.php');
 include('includes/init.php');
 include('includes/functions-html.php');
 include('includes/functions.php');
@@ -11,8 +12,9 @@ if( !userIsLoggedIn() ){
 	//$page['errors'][] = 'Connected but not logged in.';
 }
 
+/* moved to config-loader.php
 // default page values
-$page = array(
+ $page = array(
 	'content' => '',
 );
 
@@ -20,7 +22,7 @@ if( in_array( $pagename,array( 'register--v2' ) ) )
 	$page['configFile'] = 'common/config/'.$pagename.'.php';
 else
 	$page['configFile'] = $user['role'].'/config/'.$pagename.'.php';
-
+ */
 include_once('config-loader.php');
 
 if( empty( $_POST ) )
@@ -32,11 +34,14 @@ if( empty( $_POST ) )
 </div>
 <?php
 
-if($page['content']){
-	$page['contentFile'] = $user['role'].'/content/'.$page['content'].'.html.php';
-	@include($page['contentFile']);
+//echo 'image path is '.$page['imgPath'];
+if( $page['content'] ){
+	$page['contentFile'] = __DIR__. '/' .$user['role'].'/content/'.$page['content'].'.html.php';
+	//echo 'content: '. $page['contentFile'];
+	@include( $page['contentFile'] );
 }
 //$page['errors'][] = 'ha';
+$_SESSION['page'] = $page['cache'];
 
 if( $page['errors'] || $page['help'] ){
 ?>
@@ -47,5 +52,5 @@ if( $page['errors'] || $page['help'] ){
 																			 
 } // if errors/help
 
-$_SESSION['page'] = $page['cache'];
-echo '$_SESSION: ';echo '<pre>';print_r( $_SESSION );echo '</pre>';
+/* echo '$_SESSION: ';echo '<pre>';
+print_r( $_SESSION );echo '</pre>'; */

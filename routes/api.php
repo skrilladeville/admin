@@ -56,7 +56,7 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
 
     // GCCv1 pages and files
     Route::get('gccv1/{role}/{pagename}','GCCv1\PageController@gccPage');
-    Route::get('gccv1/src/{role}/{pagename}.{ext}','GCCv1\FileController@index');
+    Route::any('gccv1/src/{role}/{pagename}.{ext}','GCCv1\FileController@index');
     
     //catalog price Preset
     Route::post('catalog/pricePreset/create', 'Catalog\PricePresetController@store');
