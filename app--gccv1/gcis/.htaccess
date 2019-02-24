@@ -2,5 +2,6 @@
 RewriteEngine on
 
 RewriteRule ^(.*).html$ 					index.php?pagename=$1 [L,QSA]
+RewriteRule ^(.*).htm$ 					  submit.html.php?pagename=$1 [L,QSA]
 RewriteRule ^(.*).json$ 					jsonize--v2.json.php?pagename=$1 [L,QSA]
 </IfModule>

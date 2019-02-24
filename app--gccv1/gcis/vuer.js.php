@@ -1,9 +1,9 @@
 <?php
 //$pagename = isset( $_REQUEST['pagename'] ) ? $_REQUEST['pagename'] : '';
 
-function userIsLoggedIn(){
+/* function userIsLoggedIn(){
 	return true;
-}
+} */
 
 include(__DIR__. '/../config.php');
 include('includes/functions-html.php');
@@ -14,6 +14,9 @@ $page['autoFillForm'] = 0;
 include_once('config-loader.php');
 
 $page['jsFiles'] = array( 
+  'jQueryUI' => array(
+    'app-assets/js/core/libraries/jquery_ui/jquery-ui.min.js'
+  ),
   /* 'dataTablesEdit' => array(
     'assets\datatables-editor\js\jquery.dataTables.min.js',
     'assets\datatables-editor\js\dataTables.buttons.min.js',
@@ -22,6 +25,10 @@ $page['jsFiles'] = array(
     'assets\datatables-editor\js\buttons.print.min.js',
     'assets\datatables-editor\js\dataTables.editor.min.js'
   ), */
+  'formRepeater' => array(
+    'app-assets/vendors/js/forms/repeater/jquery.repeater.min.js',
+    'gcis/common/scripts/forms/form-repeater.js'
+  ),
   'robustAdmin' => array(
     'assets\js\robust-admin-init.js'
   )
@@ -46,5 +53,6 @@ $page['apiPath'] = env('APP_URL', false) .$page['apiPath'];
 if( $page['dataTablesEdit'] )
   include ( 'common/scripts/dataTablesEdit.js.php' ); 
 
-/* if( $page['scriptEnd'] )
-	include ( $page['scriptEndFile'] ); */
+if( $page['scriptEnd'] ){
+  scriptEnder( true );
+}

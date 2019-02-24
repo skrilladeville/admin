@@ -17,6 +17,7 @@ export default {
   methods: {
     removeScriptTag(){
       // not working. scriptSrc returns undefined
+      // VueJs: Uncaught (in promise) TypeError: Cannot read property 'endsWith' of undefined
       var scriptSrc = '';
       $( "script" ).each( function(){
         scriptSrc = $( this ).attr('src');
@@ -29,9 +30,10 @@ export default {
       let scriptTag = document.createElement('script');    
       scriptTag.setAttribute('src',"/api/gccv1/src/"+ this.$route.params.role +'/'+ this.$route.params.pagename +'.js');
       document.body.appendChild(scriptTag);
-      this.removeScriptTag();
+      //this.removeScriptTag();
     },
     getContent(){
+      this.$emit( 'gccv1loading' )
       this.loading = true
       axios
         .get('/api/gccv1/'+ this.$route.params.role +'/'+ this.$route.params.pagename)

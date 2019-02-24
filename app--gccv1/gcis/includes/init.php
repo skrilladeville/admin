@@ -1,6 +1,4 @@
 <?php
-global $ezSQL;
-
 // ezSQL
 include_once "class-ezSQLmysqli.php";
 
