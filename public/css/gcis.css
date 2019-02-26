@@ -67,18 +67,10 @@ label {
 
 /* LAYOUT */
 
-h5 {
-  margin-bottom: 2rem;
-}
-
 input[type="radio"],
 input[type="checkbox"] {
   margin: -4px 1em 0 0;
   vertical-align: middle;
-}
-
-h4 {
-  margin: 3.2rem 0 1rem;
 }
 
 label {
@@ -359,7 +351,7 @@ div.DTED_Lightbox_Wrapper {
 /* COLOR */
 
 html body {
-  background: #E3EBD8;
+  background: #f7f8f6;
 }
 
 a:link,
@@ -626,11 +618,11 @@ tfoot,
 
 .el-form-item--mini .el-form-item__content,
 .el-form-item--mini .el-form-item__label {
-  line-height: 2px;
+  line-height: 3px;
 }
 
 .el-form-item--small .el-form-item__content,
 .el-form-item--small .el-form-item__label {
-  line-height: 2px;
+  line-height: 3px;
 }
 

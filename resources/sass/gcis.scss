@@ -14,9 +14,9 @@ a,.text-danger,.help-block,.el-submenu__title{font-weight:bold}
 label{text-transform:uppercase}
 
 /* LAYOUT */
-h5{margin-bottom: 2rem;}
+
 input[type="radio"],input[type="checkbox"]{margin:-4px 1em 0 0;vertical-align: middle;}
-h4{margin:3.2rem 0 1rem}
+
 label{margin:1.2rem 0 0.2rem}
 
 [class*=" ft-"], [class^=ft-],.ft-align-center:before{margin:0 0.5em}
@@ -32,6 +32,8 @@ label{margin:1.2rem 0 0.2rem}
 .door label{display:none}label#rememberMe{display:inline;}.door fieldset p{width:70%;margin:auto}
 
 html body.fixed-navbar{padding-top:7.57rem}
+
+
 .header-navbar{min-height:7.57rem}
 /*.header-navbar .navbar-header{height:7.57rem}*/
 body.vertical-layout.vertical-menu.menu-collapsed .navbar .navbar-brand{/*height:4.57em*/padding:0}
@@ -89,7 +91,7 @@ table.dataTable tbody td{vertical-align:middle;padding:1rem}
 div.DTED_Lightbox_Background,div.DTED_Lightbox_Wrapper{z-index:1000}
 
 /* COLOR */
-html body{background:#E3EBD8}
+html body{background:rgb(247, 248, 246)}
 a:link,a:visited,.main-menu li{color:#097244 !important}.h1, .h2, .h3, .h4, .h5, .h6, code, h1, h2, h3, h4, h5, h6, kbd, pre, samp,form label{color:#053922}
 a .fa,i.fa{color:#519c4e}
 .main-menu.menu-dark .navigation{background:none}
@@ -150,8 +152,8 @@ body.vertical-layout.vertical-menu .main-menu {width:16rem;}
 .tab-container[data-v-fa309b34]{margin:inherit}
 
 .el-form-item--mini .el-form-item__content, .el-form-item--mini .el-form-item__label {
-	line-height: 2px;
+	line-height: 3px;
 }
 .el-form-item--small .el-form-item__content, .el-form-item--small .el-form-item__label {
-	line-height: 2px;
+	line-height: 3px;
 }

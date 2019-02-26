@@ -85,17 +85,8 @@
       </el-row>
 
       <el-form-item label="Product Image">
-<el-upload
-action="https://jsonplaceholder.typicode.com/posts/"
-  class="upload-demo"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  
-  :file-list="fileList2"
-  list-type="picture">
-  <el-button size="small" type="primary">Click to upload</el-button>
-  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
-</el-upload>
+        <input type="file" class="form-control" @change="imageChange" accept="image/x-png,image/gif,image/jpeg">
+
       </el-form-item>
 
       <p>Prices</p>
@@ -736,6 +727,19 @@ export default {
 
 
     methods:{
+
+      imageChange(e){
+        console.log(e.target.files[0])
+        let fileReader= new FileReader()
+        fileReader.readAsDataURL(e.target.files[0]) 
+
+
+        fileReader.onload=(e)=>{
+          this.form.image=e.target.result
+        }
+
+
+      },
 
     saveProduct(){
         this.errors=[];

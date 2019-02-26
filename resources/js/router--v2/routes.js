@@ -31,6 +31,16 @@ import ViewBooking from '../pages/bookings/ViewBooking'
 import CalendarSetup from '../pages/bookings/CalendarSetup'
 import BookingArchive from '../pages/bookings/BookingArchive'
 
+
+/* Online Store */
+import LayoutStore from '../components/onlineStoreLayout/LayoutStore'
+import StoreHome from '../pages/onlineStore/onlineStore'
+import Shop from '../pages/onlineStore/shop'
+import About from '../pages/onlineStore/about'
+import Checkout from '../pages/onlineStore/checkout'
+import BillingInfo from '../pages/onlineStore/billingInfo'
+
+
 /* Catalog Folder */
 import ManageProducts from '../pages/catalog/ManageProducts'
 import Attributes from '../pages/catalog/Attributes'
@@ -109,6 +119,42 @@ export default [
 		hidden: true,
 		meta: {requiresGuest: true, title: 'Login' }
 	},
+	{
+		path: '/onlineStore',
+		name: 'online store',
+		component: LayoutStore,
+		hidden: true,
+		meta: {requiresGuest: true, title: 'Online Store' },
+		children:[
+			{
+				path: '',
+				name: 'Store Home',
+				component: StoreHome,
+				meta: {requiresGuest: true, title: 'Online Store'},
+			},
+			{
+				path: 'shop',
+				name: 'Shop',
+				component: Shop,
+				meta: {requiresGuest: true, title: 'Shop'},
+			},
+			{
+				path: 'about',
+				name: 'About',
+				component: About,
+				meta: {requiresGuest: true, title: 'About'},
+			},
+			{
+				path: 'checkout',
+				name: 'checkout',
+				component: Checkout,
+				meta: {requiresGuest: true, title: 'Checkout'},
+				
+			},
+
+		]
+	}
+	,
 	{
 		path: '/dashboard',
 		component: Layout,

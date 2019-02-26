@@ -45,7 +45,7 @@ class PriceController extends Controller
       //  count	from	to	price	price_preset_id	product_id	show_on_digital	created_at	updated_at
 
        $price= Price::insert($request->input('prices'));
-        return "hello";
+        return "success";
 
     }
 
