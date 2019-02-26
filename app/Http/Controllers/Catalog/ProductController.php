@@ -48,47 +48,6 @@ class ProductController extends Controller
     }
 
 
-    public function upload(Request $request)
-    {
-    //     if(!$request->hasFile('file'))
-    //     return response()->json([
-    //         'error' => 'No File Uploaded'
-    //     ]);
-
-    // $file = $request->file('file');
-
-    // if(!$file->isValid())
-    //     return response()->json([
-    //         'error' => 'File is not valid!'
-    //     ]);;
-
-        if ( $files =  $request->file('file')) {
-            foreach ($request->file('file') as $key => $file) {
-                $name = time() . $key . $file->getClientOriginalName();
-                $filename = $file->move('files', $name);
-    
-            }
-        }
-
-    return response()->json([
-        'success' => "ok"
-    ]);
-    
-    }
-
-    public function deleteImage(Upload $upload)
-    {
-        if (!(empty($upload->file))) {
-            if (file_exists(public_path() . '/files/' . $upload->file)) {
-                unlink(public_path() . '/files/' . $upload->file);
-            }
-            Upload::where('id', $upload->id)->delete();
-        }
-        return response()->json(null, 204);
-    }
-
-
-
     /**
      * Display the specified resource.
      *
