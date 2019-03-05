@@ -3,9 +3,9 @@
         <el-col :span="24">
             <el-card class="box-card">
             <div slot="header" class="clearfix">
-                <span>Add Shipment Method</span>
+                <span>Edit Shipment Method</span>
             </div>
-            <el-form ref="form" :model="form" class="shipping-method-form" label-width="200px">
+            <el-form ref="form" :model="form" :rules="rules" class="shipping-method-form" label-width="200px">
                 <el-form-item class="" label="Shipping Method Name" prop="" >
                 <el-input v-model="form.method_name"></el-input>
                 </el-form-item>
@@ -56,7 +56,7 @@
 import axios from 'axios'
 
 export default {
-  name: 'AddShipmentMethod',
+  name: 'EditShipmentMethod',
   components: { },
   data() {
     return {
@@ -80,7 +80,6 @@ export default {
                 message: 'Successfully saved!',
                 type: 'success'
             });
-            this.$router.push({name: 'sales.add-shipment-method'});
       }
   }
 }
