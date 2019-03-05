@@ -174,7 +174,7 @@ export default {
       prescriptions: ['View Prescriptions', 'Add Prescription', 'Edit Prescription', 'Delete Prescription'],
       bookings: ['Setup Calendar', 'View Bookings', 'Create Booking', 'Edit Booking', 'Delete Booking'],
       catalog: ['View Catalog', 'Modify Users', 'View Roles and Permissions', 'Modify Roles and Permissions'],
-      sales: ['Sales Orders', 'Sales Invoices', 'Shipments', 'Transactions', 'Credit Memos', 'Billing Agreements', 'Terms of Condition', 'Recurring Profiles', 'Sales Tax'],
+      sales: ['Sales','Sales Orders', 'Sales Invoices', 'Shipments', 'Transactions', 'Credit Memos', 'Billing Agreements', 'Terms of Condition', 'Recurring Profiles', 'Sales Tax'],
       cms: ['View Feedback' , 'Add Feedback', 'Edit Feedback', 'Delete Feedback', 'View Survey', 'Add Survey', 'Edit Survey', 'Delete Survey', 'Widgets'],
       reports: ['Sales', 'Shopping Card', 'Products', 'Customers', 'Tags', 'Reviews', 'Search Term'],
       system: ['My Account', 'Tools', 'Notifications', 'Manage Currency', 'Transaction Emails', 'Custom Variables', 'Manage Store'],

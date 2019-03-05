@@ -7,6 +7,7 @@ use App\ProfileDoctor;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ProfileDoctorStoreRequest;
 
 class ProfileDoctorController extends Controller
 {
@@ -77,7 +78,7 @@ class ProfileDoctorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProfileDoctorStoreRequest $request, $id)
     {
         //
         $profile = ProfileDoctor::where('user_id', $id)->firstOrFail();
@@ -88,11 +89,13 @@ class ProfileDoctorController extends Controller
             }
         }
 
-        $user = User::findOrFail($id);
-        $user->email = $request->email;
-        // $profile = $request;
-        if($profile->save()){
-            $user->save();
+        if($request->validated()){
+            $user = User::findOrFail($id);
+            $user->email = $request->email;
+            // $profile = $request;
+            if($profile->save()){
+                $user->save();
+            }
         }
     }
 

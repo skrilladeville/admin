@@ -1,10 +1,8 @@
 <template>
   <div class="shop" style="margin-top:20px;">
+
+    <div v-if="getIslegalAge">
     <v-container fluid>
-
-   
-
-      
       <el-row>
         <el-col>
           <el-card style="margin-bottom:20px;">
@@ -48,6 +46,14 @@
                   </span>
                   <br>
                 </template>
+                    <template v-if="prod.price_measurement=='Per Unit Range'">
+                  <span>
+                    For Low As $ {{Math.min.apply(Math, prod.prices.map(function (o) {
+                    return o.piece_price;
+                    }))}}
+                  </span>
+                  <br>
+                </template>
                 <template v-if="prod.price_measurement=='Per Unit'">
                   <span>Price $ {{prod.prices[0].piece_price}}</span>
                   <br>
@@ -55,19 +61,18 @@
               </div>
             </v-card-title>
             <v-card-actions>
-              <v-flex xs12 sm3>
-                <v-btn @click="viewDetails(index)" flat icon color="warning">
-                  <v-icon large>shopping_cart</v-icon>
+                 <v-layout row align-end>
+              <v-flex>
+                  <v-btn style="float:right;" @click="viewDetails(index)" flat icon color="primary">
+                  <v-icon>shopping_cart</v-icon>
                 </v-btn>
               </v-flex>
+              </v-layout>
             </v-card-actions>
           </v-card>
         </v-flex>
 
         <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-
-         
-           
           <v-card hover raised>
             <v-toolbar dark color="primary">
               <v-btn icon dark @click="dialog = false">
@@ -79,187 +84,300 @@
             </v-toolbar>
             <br>
 
-               <!-- <v-layout row>
+<template v-if="product.price_measurement=='Weight'">
+            <v-layout row>
+              <v-flex sm5 pa-2 ml-5>
+                <v-img
+                  v-if="product.image!=''"
+                  height="300px"
+                  :src="`/uploadedImages/`+product.image"
+                ></v-img>
+                <h3>{{product.name}}</h3>
+                <p>{{product.description}}</p>
+              </v-flex>
+              <v-flex sm7>
+                <v-layout row class="pa-1">
+                  <v-flex sm12 md3 class="ml-5 pa-3">
+                    <h4>Weight</h4>
+                  </v-flex>
 
-        <v-flex sm5>
-            <v-img
-            v-if="product.image!=''"
-             height="300px"
-        :src="`/uploadedImages/`+product.image">
-              
-            </v-img>
-        </v-flex>
-        <v-flex sm7>
-          <v-layout row>
-              <v-flex sm3>
-            weight
-          </v-flex>
-          <v-flex sm3>
-          <v-select
-          :items="getPriceRanges"
-          item-text="weight_range"
-          item-value="price"
-          box
-          label="Box style"
-        >
-      
-        </v-select>
- </v-flex>
-            </v-layout> 
-          
-         
-          <v-flex sm6>
-
-          </v-flex>
-
-        </v-flex>
-      </v-layout> -->
-
-            <el-row>
-              <el-col :md="10">
-                <img :src="`/uploadedImages/${product.image}`" class="image">
-                <br>
-                <h2>{{product.name}}</h2>
-                <p class="lead">{{product.description}}</p>
-              </el-col>
-              <el-col :md="14">
-                <!-- <center> <h4 style="margin-top:0px; float:center;">{{product.name}}</h4></center> -->
-                <center>
-                  <template v-if="product.price_measurement=='Weight'">
-                    <center>
-                      <h5 style="margin-bottom:0px;">Select Weight</h5>
-                    </center>
-
-                    <div>
-                      <el-radio-group v-model="weight_selected">
-                        <el-radio-button :label="`1g@${product.prices[0].gram_price}`">1g
-                          <br>
-                          ${{product.prices[0].gram_price}}
-                        </el-radio-button>
-                        <el-radio-button :label="`1/8oz@${product.prices[0].eight_price}`">1/8oz
-                          <br>
-                          ${{product.prices[0].eight_price}}
-                        </el-radio-button>
-                        <el-radio-button :label="`1/4oz@${product.prices[0].quarter_price}`">1/4oz
-                          <br>
-                          ${{product.prices[0].quarter_price}}
-                        </el-radio-button>
-                        <el-radio-button :label="`1/2oz@${product.prices[0].half_price}`">1/2oz
-                          <br>
-                          ${{product.prices[0].half_price}}
-                        </el-radio-button>
-                        <el-radio-button :label="`1oz@${product.prices[0].ounce_price}`">1oz
-                          <br>
-                          ${{product.prices[0].ounce_price}}
-                        </el-radio-button>
-                        <el-radio-button
-                          :label="`Pre-roll@${product.prices[0].joint_price}`"
-                        >Pre-roll
-                          <br>
-                          ${{product.prices[0].joint_price}}
-                        </el-radio-button>
-                      </el-radio-group>
-
-                      <br>
-                      <el-col :md="12" :offset="6">
-                        <el-row :gutter="5">
-                          <el-col :md="12">
-                            
-                         
-                            <div class="input-group">
-      <input type="number" v-model="quantity" class="form-control" placeholder="qty" aria-label="Search for...">
-      <span class="input-group-btn">
-        <button class="btn btn-warning" :disabled="quantity <= 0 || weight_selected==''"
-                              @click="addTocart(product,weight_selected,quantity)" type="button">Add to Cart</button>
-      </span>
-    </div>
-                          </el-col>&nbsp;
-                          <el-col style="margin-top:30px;" :md="8">
-                 
-                          </el-col>
-                        </el-row>
-                      </el-col>
-                    </div>
-                  </template>
-                </center>
-                <center>
-                  <template v-if="product.price_measurement=='Weight Range'">
-                    <div>
-                      <center>
-                        <h5 style="margin-bottom:0px;">Select Weight Range</h5>
-                      </center>
-                      <el-radio-group v-model="weight_range_selected">
-                        <el-radio-button
-                          v-for="price in product.prices"
-                          :label="`${price.from}g to ${price.to}g@${price.range_price}`"
-                          :key="price.id"
-                        >{{price.from}}gram to {{price.to}}gram ${{price.range_price}}</el-radio-button>
-                      </el-radio-group>
-                      <br>
-                      <el-col :md="12" :offset="6">
-                        <el-row :gutter="5">
-                          <el-col :md="12">
-                             <div class="input-group">
-      <input type="number" v-model="quantity" class="form-control" placeholder="qty" aria-label="Search for...">
-      <span class="input-group-btn">
-        <button class="btn btn-warning" :disabled="quantity <= 0 || weight_range_selected==''"
-                              @click="addTocart(product,weight_range_selected,quantity)" type="button">Add To Cart</button>
-      </span>
-    </div>
-                          </el-col>&nbsp;
-                          <el-col style="margin-top:30px;" :md="8">
+                  <v-flex sm12 md6>
+                    <v-select
                    
-                          </el-col>
-                        </el-row>
-                      </el-col>
-                    </div>
-                  </template>
-                </center>
+                      v-model="weight_selected"
+                      :items="weigths"
+                      item-value="labelWeight"
+                      item-text="label"
+                      
+                
+                    ></v-select>
+                  </v-flex>
+              
+                </v-layout>
+                   <v-layout row class="pa-1">
+                  <v-flex sm12 md3 class="ml-5 pa-3">
+                    <h4>Price</h4>
+                  </v-flex>
 
-                <center>
-                  <template v-if="product.price_measurement=='Per Unit'">
-                    <div>
-                      <center>
-                        <h5 style="margin-bottom:0px;">Select Unit Price</h5>
-                      </center>
-                      <el-radio-group v-model="per_unit">
-                        <el-radio-button
-                          :label="`pc@${product.prices[0].piece_price}`"
-                        >${{product.prices[0].piece_price}}</el-radio-button>
-                      </el-radio-group>
-                      <br>
-                      <el-col :md="12" :offset="6">
-                        <el-row :gutter="5">
-                          <el-col :md="12">
-                              <div class="input-group">
-      <input type="number" v-model="quantity" class="form-control" placeholder="qty" aria-label="Search for...">
-      <span class="input-group-btn">
-        <button class="btn btn-warning"  :disabled="quantity <= 0"
-                              @click="addTocart(product,`pc@${product.prices[0].piece_price}`,quantity)"
-                          type="button">Add to Cart</button>
-      </span>
-    </div>
+                  <v-flex sm12 md6>
+                    <h2>{{countItem}}</h2>
+              
+                  <h2>${{getPriceWeight}}</h2>
+               
+                      </v-flex>
+                </v-layout>
+                <v-layout row class="pa-1">
+                  <v-flex sm12 md3 class="ml-5 pa-3">
+                    <h4>Quantity</h4>
+                  </v-flex>
+
+                  <v-flex sm12 md6>
+                    <v-text-field v-model="quantity" type="number" single-line outline></v-text-field>
+                  </v-flex>
+                </v-layout>
+                <v-layout row>
+                  <v-flex md3></v-flex>
+                  <v-flex sm12 md6 class="ml-5">
+                      <v-btn color="error" :disabled="quantity < 1 || weight_selected==''" @click="addTocart(product,weight_selected,quantity)" block>Add To Cart</v-btn>
+                  </v-flex>
+                </v-layout>
+
+            
+              </v-flex>
+            </v-layout>
+
+</template>
 
 
-                          </el-col>&nbsp;
-                          <el-col style="margin-top:30px;" :md="8">
-                            
-                          </el-col>
-                        </el-row>
-                      </el-col>
-                    </div>
-                  </template>
-                </center>
+<template v-if="product.price_measurement=='Per Unit Range'">
+            <v-layout row>
+              <v-flex sm5 sm5 pa-2 ml-5>
+                <v-img
+                  v-if="product.image!=''"
+                  height="300px"
+                  :src="`/uploadedImages/`+product.image"
+                ></v-img>
+                  <h3>{{product.name}}</h3>
+                <p>{{product.description}}</p>
+              </v-flex>
+              <v-flex sm7>
+                <v-layout row class="pa-1">
+                  <v-flex sm12 md3 class="ml-5 pa-3">
+                    <h4>Count</h4>
+                  </v-flex>
+
+                  <v-flex sm12 md6>
+                    <v-select
+                   
+                      v-model="count_range_selected"
+                      :items="pieceCounts"
+                      item-value="count_price"
+                      item-text="count_range"
+                 
+                      
+                
+                    ></v-select>
+                  </v-flex>
+              
+                </v-layout>
+                   <v-layout row class="pa-1">
+                  <v-flex sm12 md3 class="ml-5 pa-3">
+                    <h4>Price</h4>
+                  </v-flex>
+
+                  <v-flex sm12 md6>
+                   <h2>{{countItem}}</h2>
+                    
+                  <h2>${{getPriceCountRange}}</h2>
+               
+                      </v-flex>
+                </v-layout>
+                <v-layout row class="pa-1">
+                  <v-flex sm12 md3 class="ml-5 pa-3">
+                    <h4>Quantity</h4>
+                  </v-flex>
+
+                  <v-flex sm12 md6>
+                    <v-text-field v-model="quantity" type="number" single-line outline></v-text-field>
+                  </v-flex>
+                </v-layout>
+                <v-layout row>
+                  <v-flex md3></v-flex>
+                  <v-flex sm12 md6 class="ml-5">
+                      <v-btn color="error" :disabled="quantity < 1 || count_range_selected ==''" @click="addTocart(product,count_range_selected,quantity)" block>Add To Cart</v-btn>
+                  </v-flex>
+                </v-layout>
+
+            
+              </v-flex>
+            </v-layout>
+
+</template>
+
+
+
+<template v-if="product.price_measurement=='Weight Range'">
+            <v-layout row>
+              <v-flex sm5 sm5 pa-2 ml-5>
+                <v-img
+                  v-if="product.image!=''"
+                  height="300px"
+                  :src="`/uploadedImages/`+product.image"
+                ></v-img>
+                  <h3>{{product.name}}</h3>
+                <p>{{product.description}}</p>
+              </v-flex>
+              <v-flex sm7>
+                <v-layout row class="pa-1">
+                  <v-flex sm12 md3 class="ml-5 pa-3">
+                    <h4>Weight</h4>
+                  </v-flex>
+
+                  <v-flex sm12 md6>
+                    <v-select
+                   
+                      v-model="weight_range_selected"
+                      :items="getPriceRanges"
+                      item-text="weight_range"
+                      item-value="price"
+                    
+                  
+                    ></v-select>
+                  </v-flex>
+              
+                </v-layout>
+                   <v-layout row class="pa-1">
+                  <v-flex sm12 md3 class="ml-5 pa-3">
+                    <h4>Price</h4>
+                  </v-flex>
+
+                  <v-flex sm12 md6>
+               
+                  <h2>{{countItem}}</h2>
+                     <h2>${{getPrice}}</h2>
+
+               
+                      </v-flex>
+                </v-layout>
+                <v-layout row class="pa-1">
+                  <v-flex sm12 md3 class="ml-5 pa-3">
+                    <h4>Quantity</h4>
+                  </v-flex>
+
+                  <v-flex sm12 md6>
+                    <v-text-field v-model="quantity" type="number" single-line outline></v-text-field>
+                  </v-flex>
+                </v-layout>
+                <v-layout row>
+                  <v-flex md3></v-flex>
+                  <v-flex sm12 md6 class="ml-5">
+                      <v-btn color="error" :disabled="quantity < 1 || weight_range_selected ==''" block @click="addTocart(product,weight_range_selected,quantity)">Add To Cart</v-btn>
+                  </v-flex>
+                </v-layout>
+
+            
+              </v-flex>
+            </v-layout>
+
+</template>
+
+<template v-if="product.price_measurement=='Per Unit'">
+            <v-layout row>
+              <v-flex sm5 sm5 pa-2 ml-5>
+                <v-img
+                  v-if="product.image!=''"
+                  height="300px"
+                  :src="`/uploadedImages/`+product.image"
+                ></v-img>
+                  <h3>{{product.name}}</h3>
+                <p>{{product.description}}</p>
+              </v-flex>
+              <v-flex sm7>
+                <v-layout row class="pa-1">
+                  <v-flex sm12 md3 class="ml-5 pa-3">
+                    <h4>Weight</h4>
+                  </v-flex>
+
+                  <v-flex sm12 md6>
+                  <h4>PC</h4>
+                  </v-flex>
+              
+                </v-layout>
+                   <v-layout row class="pa-1">
+                  <v-flex sm12 md3 class="ml-5 pa-3">
+                    <h4>Price</h4>
+                  </v-flex>
+
+                  <v-flex sm12 md6>
+                  <h2>${{product.prices[0].piece_price}}</h2>
+               
+                      </v-flex>
+                </v-layout>
+                <v-layout row class="pa-1">
+                  <v-flex sm12 md3 class="ml-5 pa-3">
+                    <h4>Quantity</h4>
+                  </v-flex>
+
+                  <v-flex sm12 md6>
+                    <v-text-field v-model="quantity" type="number" single-line outline></v-text-field>
+                  </v-flex>
+                </v-layout>
+                <v-layout row>
+                  <v-flex md3></v-flex>
+                  <v-flex sm12 md6 class="ml-5">
+                      <v-btn color="error" :disabled="quantity < 1" block @click="addTocart(product,`pc@${product.prices[0].piece_price}`,quantity)"
+                                >Add To Cart</v-btn>
+                  </v-flex>
+                </v-layout>
+
+            
+              </v-flex>
+            </v-layout>
+
+              </template>
+
               </el-col>
             </el-row>
           </v-card>
-     
         </v-dialog>
-        
       </v-layout>
-      
+
       <el-dialog title="Cart" :visible.sync="cartDialog" width="80%"></el-dialog>
     </v-container>
+</div>
+
+
+      <v-layout v-if="getIslegalAge==false" row justify-center>
+    <v-dialog v-model="dialogAgree"
+     width="500"
+     persistent>
+
+      <v-card style="padding:10px 10px;">
+        <v-card-title class="headline">Legal Age Verification</v-card-title>
+    
+
+          <v-flex md12><h2>Mandatory 19+ to enter</h2></v-flex>
+          <p>This website offers cannabis products and information and is restricted to adults aged 19 years and older.</p>
+
+        <v-checkbox
+          v-model="allowage"
+          label="Yes I am atleast 19 years old up."
+        ></v-checkbox>
+  
+  
+
+
+
+           <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn  :disabled="!allowage" color="error" @click="setAge(true)">Enter Site</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+</v-layout>
+   
+
+
   </div>
 </template>
 
@@ -329,21 +447,29 @@ button {
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex'
 export default {
-  data() {
+
+
+    data(){
     return {
+      dialogAgree:true,
+      allowage:false,
       products: [],
       cartDialog: false,
-      product: { image: '',prices:[] },
+      product:{ image: '', prices: [],price_measurement:'',},
       weight_selected: '',
       weight_range_selected: '',
+      count_range_selected:'',
       per_unit: 0,
       dialog: false,
+      out_stock_mes:'',
 
       quantity: 1,
       weight: '',
-      carts: []
-    }
+      price:0,
+      carts: [],
+         }
   },
+
 
   created() {
     axios.get('/api/catalog/product').then(res => {
@@ -367,21 +493,152 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getCarts', 'getCartCount']),
-getPriceRanges(){
-let price_ranges=[]
-this.product.prices.forEach(element => {
-  price_ranges.push({weight_range:`${element.from}g to ${element.to}g@${element.range_price}`,price:element.range_price})
-});
-return price_ranges
+    ...mapGetters(['getCarts', 'getCartCount','getIslegalAge']),
+
+
+    countItem(){
+  let splitUnit = this.weight_range_selected.split('@')
+    let count=0
+if(splitUnit[0]=='1g'){
+
+  this.product.checkin_products.forEach(e=>{
+    count=count+e.one_g
+  })
+}
+if(splitUnit[0]=='1/8oz'){
+
+  this.product.checkin_products.forEach(e=>{
+    count=count+e.eight_oz
+  })
+}
+if(splitUnit[0]=='1/4oz'){
+
+  this.product.checkin_products.forEach(e=>{
+    count=count+e.fourth_oz
+  })
+}
+
+if(splitUnit[0]=='1oz'){
+
+  this.product.checkin_products.forEach(e=>{
+    count=count+e.one_oz
+  })
+}
+
+if(splitUnit[0]=='1/8oz'){
+
+  this.product.checkin_products.forEach(e=>{
+    count=count+e.eight_oz
+  })
+}
+
+if(splitUnit[0]=='Pre-roll'){
+
+  this.product.checkin_products.forEach(e=>{
+    count=count+e.jar_g
+  })
+
+  if(this.product.price_measurement=='Weight Range'){
+      count=count+e.total_weight
+  }
+
+  if(this.product.price_measurement=='Per Unit' || this.product.price_measurement=='Per Unit Range'){
+      count=count+e.total_quantity
+  }
+
+  console.log(`ihap: ${count}`)
+
+  if(count < 0){
+    return "Out of Stock"
+  }
+  
+}
 },
+
+
+
+
+    weigths(){
+      return [{label:"1g",labelWeight:"1g@"+this.product.prices[0].gram_price},{label:"1/8oz",labelWeight:"1/8oz@"+this.product.prices[0].eight_price},{label:"1/4oz",
+      labelWeight:"1/4oz@"+this.product.prices[0].quarter_price},{label:"1/2oz",labelWeight:"1/2oz@"+this.product.prices[0].half_price}
+      ,{label:"1oz",labelWeight:"1oz@"+this.product.prices[0].ounce_price},{label:"Pre-roll",labelWeight:"Pre-roll@"+this.product.prices[0].joint_price}]
+    },
+
+        pieceCounts(){
+
+          let price_ranges = []
+      this.product.prices.forEach(element => {
+        price_ranges.push({
+          count_range: `${element.count}pcs`,
+          count_price: `${element.count}pcs@${element.piece_price}`
+        })
+      })
+      return price_ranges
+         },
+ 
+    getPriceRanges() {
+      let price_ranges = []
+      this.product.prices.forEach(element => {
+        price_ranges.push({
+          weight_range: `${element.from}g to ${element.to}g`,
+          price: `${element.from}g to ${element.to}g@${element.range_price}`
+        })
+      })
+      return price_ranges
+    },
     getDialogstate() {
       console.log(this.dialogCart)
       return this.dialogCart
+    },
+
+        getPrice(){
+      try{
+             let splitUnit = this.weight_range_selected.split('@')
+    return splitUnit[1]
+      }catch(err){
+        return 0
+      }
+  
+    },
+
+    getPriceWeight(){
+          try{
+             let splitUnit = this.weight_selected.split('@')
+    return splitUnit[1]
+
+    console.log(splitUnit[1])
+    
+      }catch(err){
+        return 0
+      }
+    },
+        getPriceCountRange(){
+          try{
+             let splitUnit = this.count_range_selected.split('@')
+    return splitUnit[1]
+      }catch(err){
+        return 0
+      }
     }
   },
 
   methods: {
+
+
+    ...mapMutations(['SET_LEGAL_AGE']),
+
+
+    
+    
+    setAge(isLegal){
+        this.SET_LEGAL_AGE(isLegal)
+        this.dialogAgree=false
+    },    
+
+       getprice(weight){
+         console.log(weight)
+      return this.price=weight
+    },
     viewCart() {
       console.log('ni abot dri')
     },
@@ -398,6 +655,8 @@ return price_ranges
     },
 
     ...mapMutations(['ADD_TO_CART', 'UPDATE_CART', 'ADD_CART_COUNT']),
+
+
 
     addTocart(product, unitAndPrice, count) {
       console.log(this.getCartCount)

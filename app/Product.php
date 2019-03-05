@@ -18,6 +18,11 @@ class Product extends Model
         return $this->hasMany('App\ProductTag');   
     }
 
+    public function checkinProducts()
+    {
+        return $this->hasMany('App\CheckInProduct');   
+    }
+
     public function weedMapPrices()
     {
         return $this->hasMany('App\WeedMapPrice');   

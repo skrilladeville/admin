@@ -1,7 +1,16 @@
+
+
+var isLegalAge=localStorage.getItem("isAgeValid");
+if(isLegalAge==null){
+  isLegalAge=false
+}
+
+
 export default {
     state: {
         carts:[],
-        cart_count:0
+        cart_count:0,
+        isLegalAge:isLegalAge
 
       },
         
@@ -25,6 +34,10 @@ export default {
         REMOVE_CART_COUNT:function(state,payload){
           state.cart_count=parseInt(state.cart_count) - parseInt(payload)
         },
+        SET_LEGAL_AGE:function(state,payload){
+          localStorage.setItem("isAgeValid", payload);
+          state.isLegalAge=payload
+        }
         
 
     },

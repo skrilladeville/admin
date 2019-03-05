@@ -23,6 +23,16 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::post('catalog/category/update/{id}', 'Catalog\CategoryController@update');
     Route::post('catalog/category/delete/{id}', 'Catalog\CategoryController@destroy');
 
+    //catalog checkin product
+    Route::get('catalog/product/checkin/all', 'Catalog\CheckInProductController@index');
+    Route::post('catalog/product/checkin/create', 'Catalog\CheckInProductController@store');
+
+        //catalog checkin product
+    Route::get('catalog/product/checkinpayment/all', 'Catalog\CheckInProductPaymentController@index');
+    Route::post('catalog/product/checkinpayment/create', 'Catalog\CheckInProductPaymentController@store');
+
+
+
      
     Route::post('catalog/tags/create', 'Catalog\TagController@store');
     Route::post('catalog/labResult/create', 'Catalog\LabResultController@store');
@@ -56,7 +66,7 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
 
     // GCCv1 pages and files
     Route::get('gccv1/{role}/{pagename}','GCCv1\PageController@gccPage');
-    Route::get('gccv1/src/{role}/{pagename}.{ext}','GCCv1\FileController@index');
+    Route::any('gccv1/src/{role}/{pagename}.{ext}','GCCv1\FileController@index');
     
     //catalog price Preset
     Route::post('catalog/pricePreset/create', 'Catalog\PricePresetController@store');

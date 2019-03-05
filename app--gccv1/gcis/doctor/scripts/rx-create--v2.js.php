@@ -1,5 +1,3 @@
-<script language="javascript">
-
 // Multiple Remote
 function split_r(val) {
 		return val.split(/,\s*/);
@@ -19,7 +17,7 @@ function showPatientProfile( userID ){
 	var dataObj = {};
 	dataObj[ 'id' ] = userID;
 	$.ajax({
-		url : '<?php echo ROOT_PATH; ?>gcis/submit.html.php?pagename=rx-patientProfile',
+		url : '<?php echo $page['apiPath']; //submit.html.php?pagename=rx-patientProfile ?>rx-patientProfile.htm',
 		method : 'POST',
 		data : dataObj,
 		success : function( html ){
@@ -64,7 +62,7 @@ if( $Rx['patient_id'] ){
 				if( index === 1 )
 					tfname = value;
 			});
-			$.getJSON("patients-searchNames.json", {
+			$.getJSON("<?php echo $page['apiPath']; ?>patients-searchNames.json", {
 					//term: extractLast_r(request.term)
 					term: tlname,
 					fname: tfname
@@ -99,4 +97,3 @@ if( $Rx['patient_id'] ){
 	});
 
 });
-</script>

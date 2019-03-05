@@ -18,16 +18,24 @@ import {ServerTable, ClientTable, Event} from 'vue-tables-2';
 Vue.use(ClientTable, {}, false, 'bootstrap4');
 Vue.use(ServerTable, {}, false, 'bootstrap4');
 import VueGoodTablePlugin from 'vue-good-table';
+import VueCharts from 'vue-chartjs'
+import { Bar, Line } from 'vue-chartjs'
+
 // import the styles
 import 'vue-good-table/dist/vue-good-table.css'
 
 /*Font-Awesome Icons*/
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee, faCalendarCheck, faUser, 
-	faStore, faClock, faFileInvoice, faThumbsUp, faTimes } from '@fortawesome/free-solid-svg-icons'
+	faStore, faClock, faFileInvoice, faThumbsUp, faTimes,
+	faShoppingCart, faMoneyBillWave, faTags, faFileInvoiceDollar, 
+	faLandmark, faPercent, faEye, faEllipsisH, faTimesCircle,
+	faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faCoffee, faCalendarCheck, faUser, faStore, faClock, faFileInvoice, faThumbsUp, faTimes)
+library.add(faCoffee, faCalendarCheck, faUser, faStore, faClock, faFileInvoice, faThumbsUp, faTimes,
+	faShoppingCart, faMoneyBillWave,faTags, faFileInvoiceDollar, faLandmark, faPercent,faEye, faEllipsisH,
+	faTimesCircle, faCheckCircle)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(VueGoodTablePlugin);
 

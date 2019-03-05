@@ -55,9 +55,12 @@ import RecurringProfiles from '../pages/sales/RecurringProfiles'
 import SalesInvoices from '../pages/sales/SalesInvoices'
 import SalesTransactions from '../pages/sales/SalesTransaction'
 import Shipments from '../pages/sales/Shipments'
+import ShipmentMethods from '../pages/sales/ShipmentMethods'
+import AddShipmentMethod from '../pages/sales/AddShipmentMethod'
 import TermsOfCondition from '../pages/sales/TermsOfCondition'
 import SalesOrders from '../pages/sales/SalesOrder'
 import SalesTax from '../pages/sales/SalesTax'
+import Sales from '../pages/sales/Sales'
 
 /* Reports Folder */
 import CustomerReport from '../pages/reports/CustomerReport'
@@ -332,6 +335,12 @@ export default [
 		meta: {requiresAuth: true, title: 'Sales', icon: 'el-icon-goods', permission: 'sales orders' },
 		children: [
 			{
+				path: 'sales',
+				name: 'sales.sales',
+				component: Sales,
+				meta: {requiresAuth: true, title: 'Sales', permission: 'sales orders' },
+			},
+			{
 				path: 'orders',
 				name: 'sales.orders',
 				component: SalesOrders,
@@ -348,6 +357,18 @@ export default [
 				name: 'sales.shipments',
 				component: Shipments,
 				meta: {requiresAuth: true, title: 'Shipments', permission: 'sales shipments' },
+			},
+			{
+				path: 'shipmentMethods',
+				name: 'sales.shipmentMethods',
+				component: ShipmentMethods,
+				meta: {requiresAuth: true, title: 'Shipment Methods', permission: 'sales shipments' },
+			},
+			{
+				path: 'addShipmentMethod',
+				name: 'sales.addShipmentMethod',
+				component: AddShipmentMethod,
+				meta: {requiresAuth: true, title: 'Add Shipment Method', permission: 'sales shipments' },
 			},
 			{
 				path: 'transactions',

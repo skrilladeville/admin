@@ -7,7 +7,7 @@
             </div>
             <el-row :gutter="20">
                     <el-col :span="10">
-                        <el-form-item class="personal-form-item" label="First Name" required>
+                        <el-form-item class="personal-form-item" label="First Name" prop="first_name" >
                         <el-input placeholder="First Name" v-model="form.first_name"></el-input>
                         </el-form-item>
                     </el-col>
@@ -17,19 +17,19 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="10">
-                        <el-form-item class="personal-form-item" label="Last Name" required>
+                        <el-form-item class="personal-form-item" label="Last Name" prop="last_name" >
                         <el-input placeholder="Last Name" v-model="form.last_name"></el-input>
                         </el-form-item>
                     </el-col>
             </el-row> 
             <el-row :gutter="20">
                     <el-col :span="10">
-                        <el-form-item class="personal-form-item" label="Date of Birth" required>
+                        <el-form-item class="personal-form-item" label="Date of Birth" prop="birth_date" >
                         <el-date-picker type="date" placeholder="Pick a date" v-model="form.birth_date" style="width: 100%;"></el-date-picker>
                         </el-form-item>
                     </el-col>
                     <el-col :span="4">
-                        <el-form-item class="personal-form-item" label="Weight" prop="weight">
+                        <el-form-item class="personal-form-item" label="Weight" prop="weight" >
                         <el-input placeholder="Weight" v-model="form.weight" ></el-input>
                         </el-form-item>
                     </el-col>
@@ -44,7 +44,7 @@
             </el-row>
                 <el-row :gutter="20">
                      <el-col :span="10">
-                        <el-form-item class="personal-form-item" label="Health Card" required>
+                        <el-form-item class="personal-form-item" label="Health Card" prop="health_card">
                         <el-input placeholder="Health Card" v-model="form.health_card"></el-input>
                         </el-form-item>
                     </el-col>
@@ -105,7 +105,7 @@ export default {
         margin-bottom:0px!important;
     }
 
-     .is-required > .el-form-item__content > .el-input > .el-input__inner{
+     .is-error > .el-form-item__content > .el-input > .el-input__inner{
 		border: 1px solid red!important;
     }
 </style>

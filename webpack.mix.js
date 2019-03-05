@@ -17,19 +17,24 @@ mix.styles([
    'resources/fonts/font-awesome/css/font-awesome.css',
    'resources/fonts/font-awesome/css/all.css',
    'resources/fonts/feather/style.css',
+   // 'app--gccv1/app-assets/css/bootstrap.min.css',
    'resources/css/robust-admin/bootstrap-extended.css',
    'resources/css/robust-admin/colors.css',
    'resources/css/robust-admin/components.css',
-   'resources/css/components.css',
+   //'resources/css/components.css',
+   'app--gccv1/app-assets/css/plugins/ui/jqueryui.css',
+   'app--gccv1/app-assets/vendors/css/extensions/pace.css',
    'app--gccv1/assets/datatables-editor/css/jquery.dataTables.min.css',
    'app--gccv1/assets/datatables-editor/css/buttons.dataTables.min.css',
    'app--gccv1/assets/datatables-editor/css/select.dataTables.min.css',
    'app--gccv1/assets/datatables-editor/css/editor.dataTables.min.css'
-], 'public/css/robust-admin.css');
+], 'public/css/robust-admin.css')
+   .styles([
+   'node_modules/jqwidgets-scripts/jqwidgets/styles/jqx.base.css'
+], 'public/css/jqwidgets/jqx.base.css');
 mix.scripts([
    'resources/js/robust-admin/vendors.min.js',
    'resources/js/robust-admin/core/app-menu.js',
-   /* 'resources/js/robust-admin/core/app.js' */
    'app--gccv1/assets/datatables-editor/js/jquery.dataTables.min.js',
    'app--gccv1/assets/datatables-editor/js/dataTables.buttons.min.js',
    'app--gccv1/assets/datatables-editor/js/dataTables.select.min.js',
@@ -50,6 +55,6 @@ mix.js('resources/js/app.js', 'public/js')
 
 // Images + Fonts
 mix.copy('resources/icons/favicon.ico', 'public')
-   .copy('resources/images', 'public/images')
+   .copy('app--gccv1/assets/images', 'public/images/gccv1')
    .copy('resources/fonts/font-awesome/fonts', 'public/fonts/font-awesome')
    .copy('resources/fonts/feather/fonts', 'public/fonts/feather');

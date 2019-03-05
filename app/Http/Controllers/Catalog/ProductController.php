@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=Product::with('prices')->get();
+        $products=Product::with('prices','checkinProducts')->get();
 
         return $products->toArray();
     }

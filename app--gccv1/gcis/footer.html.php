@@ -1,17 +1,7 @@
-<?php if( $page['scriptSubmit'] || $page['modalOn'] ){ ?>
-<div class="modal animated fadeIn text-left" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<?php 
-			$modal = array( 
-				'widgetType' => 'modbox',
-				'buttonsHide' => 1
-			);
-			widgetize( $page['titleContent'],'modal.html',$modal ); ?>
-		</div>
-	</div>
-</div>
-<?php }
+<?php
+if( $page['scriptSubmit'] || $page['modalOn'] ){
+	modalize( $page['titleContent'] );
+}
 
 $_SESSION['page'] = $page['cache'];
 //echo '$_SESSION: ';echo '<pre>';print_r( $_SESSION );echo '</pre>';
@@ -101,7 +91,8 @@ if( $page['dataTablesEdit'] )
 	include ( 'common/scripts/dataTablesEdit.js.php' ); 
 
 if( $page['scriptEnd'] )
-	@include ( $page['scriptEndFile'] ); 
+	//@include ( $page['scriptEndFile'] ); 
+	scriptEnder();
 ?>
 
 <script language="javascript">

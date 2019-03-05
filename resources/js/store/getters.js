@@ -9,7 +9,8 @@ const getters = {
   user_id: state  => state.auth.id,
   //online Store getter
   getCarts:state=>state.onlineStore.carts,
-  getCartCount:state=>state.onlineStore.cart_count
+  getCartCount:state=>state.onlineStore.cart_count,
+  getIslegalAge:state=>state.onlineStore.isLegalAge
 
 
       

@@ -34,7 +34,7 @@ export default {
     components: { UserNav },
     data() {
         return {
-            logo:['/images/logo--GCIS-h.svg']
+            logo:['/images/gccv1/logo--GCIS-h.svg']
         }
     }
 }

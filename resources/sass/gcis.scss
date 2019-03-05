@@ -8,7 +8,8 @@ h3, .h3{font-size:2.51rem}
 a,.text-danger,.help-block,.el-submenu__title{font-weight:bold}
 .help-block em{font-weight:normal;font-style:normal}
 
-.navigation,.el-menu-item,.el-submenu__title{font-size:1.4rem}.main-menu.menu-dark .navigation > li ul{font-size:1.2rem}
+/* .navigation,.el-submenu__title */li.el-menu-item.nav-item,li .el-submenu__title{font-size:1.4rem}
+.main-menu.menu-dark .navigation > li ul{font-size:1.2rem}
 .card .card-title{font-size:1.82rem;margin:0}
 .ft-align-center:before{content:""}
 label{text-transform:uppercase}
@@ -37,7 +38,9 @@ html body.fixed-navbar{padding-top:7.57rem}
 .header-navbar{min-height:7.57rem}
 /*.header-navbar .navbar-header{height:7.57rem}*/
 body.vertical-layout.vertical-menu.menu-collapsed .navbar .navbar-brand{/*height:4.57em*/padding:0}
-.navbar-nav .d-md-none{margin-top:1.5rem}
+.navbar-nav .d-md-none{margin:1.5rem}
+.pace .pace-progress{position:relative;margin-top:-0.4rem;height:0.4rem}
+/* .app-content.content{position:absolute} */
 
 .main-menu.menu-fixed{top:7.57rem}
 body.vertical-layout.vertical-menu.menu-expanded .main-menu{width:20rem}
@@ -72,6 +75,7 @@ body.vertical-layout.vertical-menu.menu-expanded .content, body.vertical-layout.
 h6.font-small-3{font-size:0.9rem !important;}
 /*fieldset{text-align:center}
 .form-control,fieldset{margin:0.4em 0}*/
+.btn{border-radius:2rem}
 
 .help-block ul{list-style:none;}
 
@@ -89,6 +93,8 @@ table.dataTable tbody td{vertical-align:middle;padding:1rem}
 .table a.btn.edit{float:right;padding:0.2rem 0.6rem}
 
 div.DTED_Lightbox_Background,div.DTED_Lightbox_Wrapper{z-index:1000}
+
+.header-navbar .navbar-header,.navbar-wrapper{content:"";clear:both;display:table}
 
 /* COLOR */
 html body{background:rgb(247, 248, 246)}
@@ -144,11 +150,15 @@ body.vertical-layout.vertical-menu.menu-expanded .main-menu .navigation > li > a
 body.vertical-layout.vertical-menu .main-menu {width:16rem;}
 }
 
-// override elementUI inline styles
-.el-menu-item:hover{background:inherit}
-.el-submenu__title{color:inherit}
-.el-menu--horizontal{border:inherit}
+// override app--v2.scss
+button,input,optgroup,select,textarea{font-family:inherit;}
+.form-control{height:inherit}
 
+// override elementUI inline styles
+.el-menu-item,.el-submenu__title{color:inherit;font-size:inherit}
+.el-menu-item:hover{background:inherit}
+/* .el-submenu__title{} */
+.el-menu--horizontal{border:inherit}
 .tab-container[data-v-fa309b34]{margin:inherit}
 
 .el-form-item--mini .el-form-item__content, .el-form-item--mini .el-form-item__label {

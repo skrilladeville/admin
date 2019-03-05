@@ -125,9 +125,9 @@
         </el-row>
    
     <div v-if="form.price_measurement == 'Per Unit'">
-    <el-row :gutter="10">
+    <el-row :gutter="5">
 
-      <el-col :span="4">
+      <el-col :span="6">
 
           <el-form-item label="Net Weight">
               <el-input :disabled="form.is_each" v-model="form.net_weight" type="number">
@@ -140,9 +140,10 @@
       </el-col>
 
 <el-col :span="4">
+
 <el-form-item label="Is Each">
 <el-switch
-style="display: block"
+
   v-model="form.is_each"
   >
 </el-switch>
@@ -279,7 +280,7 @@ style="display: block"
         <div v-if="form.price_measurement == 'Per Unit Range'">
     <el-row :gutter="10">
 
-      <el-col :span="4">
+      <el-col :span="6">
 
           <el-form-item label="Net Weight">
               <el-input :disabled="form.is_each" v-model="form.net_weight" type="number">
@@ -760,6 +761,54 @@ export default {
        if(this.form.sku==''){
             this.errors.push('sku must not empty');
         }
+
+        if(this.form.price_measurement=='Weight' && (this.form.prices[0].gram_price ==0 ||
+         this.form.prices[0].eight_price ==0 || this.form.prices[0].quarter_price ==0 ||
+         this.form.prices[0].half_price ==0 || this.form.prices[0].ounce_price ==0 ||
+         this.form.prices[0].joint_price ==0)){
+               this.errors.push('Prices  must not equal to zero');
+
+        }
+
+        if(this.form.price_measurement=='Weight Range'){
+          this.form.prices.forEach(e=>{
+            if(e.from > e.to){
+                 this.errors.push('Invalid Range')
+            }
+            if(e.range_price == 0){
+              this.errors.push('Prices must not equal to zero')
+            }
+
+          })
+        }
+
+      if(this.form.price_measurement=='Per Unit' && this.form.prices[0].piece_price==0){
+         this.errors.push('Price must not equal to zero')
+        }
+
+      
+      if(this.form.price_measurement=='Per Unit Range'){
+         this.form.prices.forEach(e=>{
+            if(e.count ==0){
+                 this.errors.push('Invalid count')
+            }
+            if(e.piece_price == 0){
+              this.errors.push('Price must not equal to zero')
+            }
+
+          })
+        }
+
+        if(this.form.image==''){
+             this.errors.push('Please upload image')
+        }
+
+        
+
+
+
+        
+
 
 
 

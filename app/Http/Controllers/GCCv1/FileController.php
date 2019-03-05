@@ -14,16 +14,16 @@ class FileController extends Controller
      */
     public function index(Request $request, $role, $pagename, $ext)
     {
+        global $ezSQL,$page,$user;
+
         $user['role'] = $role;
         $user['id'] = 27;
+        $page['ext'] = $ext;
         $page['robustAdmin'] = 1;
         $page['apiPath'] = '/api/gccv1/src/'. $user['role'] .'/';
         $bridgePath = base_path() .'/app--gccv1/gcis/';
         
-        if( $ext == 'js' )
-            include( $bridgePath. 'vuer.js.php' );
-        elseif( $ext == 'json' )
-            include( $bridgePath. 'vuer.json.php' );
+        include( $bridgePath. 'vuer.php' );
  
         return;
     }

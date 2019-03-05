@@ -14,7 +14,8 @@ class CheckInProductPaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payments=CheckInProductPayment::all();
+        return $payments;
     }
 
     /**
@@ -24,7 +25,8 @@ class CheckInProductPaymentController extends Controller
      */
     public function create()
     {
-        //
+        $payment=CheckInProductPayment::create($request->only(['account_id','check_in_product_id','payment_amount']));
+        return $payment;
     }
 
     /**

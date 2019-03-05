@@ -13,6 +13,8 @@
 	<title>v2</title>
   <link href="<?php echo e(mix('/css/app--v2.css')); ?>" rel="stylesheet">
   <link id="robust" href="<?php echo e(mix('/css/robust-admin.css')); ?>" rel="stylesheet">
+  <link href="<?php echo e(mix('/css/robust-admin.css')); ?>" rel="stylesheet">
+  <link href="<?php echo e(mix('/css/jqwidgets/jqx.base.css')); ?>" rel="stylesheet">
 	<script>
 		window.Laravel = <?php echo json_encode([
 			'csrfToken' => csrf_token(),

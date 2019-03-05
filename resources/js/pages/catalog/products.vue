@@ -66,7 +66,10 @@
         <p>{{getAccount_name}}</p>
       </el-col>
     </el-row>
+
+      <template v-if="product.price_measurement=='Weight'">
     <el-card>
+
       <table class="table table-sm">
         <thead>
            <tr>
@@ -93,77 +96,180 @@
        
         <tbody>
           <tr>
-            <td v-if="form.by_weight.jar_g > 0">
-              {{form.by_weight.jar_g}} pc
+            <td v-if="form.jar_g > 0">
+              {{form.jar_g}} pc
             </td>
             <td v-else>-</td>
-             <td v-if="form.by_weight.one_g > 0">
-              {{form.by_weight.one_g}} pc
+             <td v-if="form.one_g > 0">
+              {{form.one_g}} pc
             </td>
             <td v-else>-</td>
-             <td v-if="form.by_weight.eight_oz > 0">
-                 {{form.by_weight.eight_oz}} pc
+             <td v-if="form.eight_oz > 0">
+                 {{form.eight_oz}} pc
             </td>
             <td v-else>-</td>
-             <td v-if="form.by_weight.fourth_oz > 0">
-              {{form.by_weight.fourth_oz}} pc
+             <td v-if="form.fourth_oz > 0">
+              {{form.fourth_oz}} pc
             </td>
             <td v-else>-</td>
-             <td v-if="form.by_weight.half_oz > 0">
-              {{form.by_weight.half_oz}} pc
+             <td v-if="form.half_oz > 0">
+              {{form.half_oz}} pc
             </td>
             <td v-else>-</td>
-             <td v-if="form.by_weight.one_oz > 0">
-              {{form.by_weight.one_oz}} pc
+             <td v-if="form.one_oz > 0">
+              {{form.one_oz}} pc
             </td>
             <td v-else>-</td>
           </tr>
 
                     <tr>
-            <td v-if="form.by_weight.jar_g > 0">
-                     {{form.by_weight.jar_g}} g
+            <td v-if="form.jar_g > 0">
+                     {{form.jar_g}} g
             </td>
             <td v-else>-</td>
-             <td v-if="form.by_weight.one_g > 0">
+             <td v-if="form.one_g > 0">
                {{one_g_cal}} g
             </td>
             <td v-else>-</td>
-             <td v-if="form.by_weight.eight_oz > 0">
+             <td v-if="form.eight_oz > 0">
                 {{eigth_oz_to_g}} g
             </td>
             <td v-else>-</td>
-             <td v-if="form.by_weight.fourth_oz > 0">
+             <td v-if="form.fourth_oz > 0">
                   {{fourth_oz_to_g}} g
             </td>
             <td v-else>-</td>
-             <td v-if="form.by_weight.half_oz > 0">
+             <td v-if="form.half_oz > 0">
               {{half_oz_to_g}} g
             </td>
             <td v-else>-</td>
-             <td v-if="form.by_weight.one_oz > 0">
+             <td v-if="form.one_oz > 0">
            {{one_oz_to_g}} g
             </td>
             <td v-else>-</td>
           </tr>
 
 
+
+
           
         </tbody>
       </table>
-    </el-card>
+          </el-card>
+
+          <el-row :gutter="5">
+            <el-col :md="8">
+            <el-card>
+            <p>Check In Weight:</p>
+            <h1><b>{{form.total_weight}} g</b></h1>
+            <h5>{{parseFloat(form.total_weight * 0.00220462262)}} lb</h5>
+          </el-card>
+            </el-col>
+
+                    <el-col :md="8">
+                  <el-card>
+            <p>Vendor Price:</p>
+            <h1><b>{{form.total_cost}} g</b></h1>
+            <h5 class="warning">per Gram ${{form.cost_per_gram}}</h5>
+          </el-card>
+            </el-col>
+                    <el-col :md="8">
+                  <el-card>
+            <p>Balance:</p>
+            <h1><b>{{parseFloat(form.total_cost - form.pament_info.payment_amount)}}</b></h1>
+            <h5 v-if="parseFloat(form.total_cost - form.pament_info.payment_amount) == 0" class="primary">Paid</h5>
+            <h5 v-else>Partial(${{form.payment_amount}})</h5>
+          </el-card>
+            </el-col>
+
+      
+
+          </el-row>
+      </template>
+      <template v-if="product.price_measurement=='Weight Range'">
+        <div>
+          <el-row :gutter="5">
+            <el-col :md="8">
+            <el-card>
+            <p>Check In Weight:</p>
+            <h1><b>{{form.total_weight}} g</b></h1>
+            <h5>{{parseFloat(form.total_weight * 0.00220462262)}} lb</h5>
+          </el-card>
+            </el-col>
+
+                    <el-col :md="8">
+                  <el-card>
+            <p>Vendor Price:</p>
+            <h1><b>{{form.total_cost}} g</b></h1>
+            <h5 class="warning">per Gram ${{form.cost_per_gram}}</h5>
+          </el-card>
+            </el-col>
+                    <el-col :md="8">
+                  <el-card>
+            <p>Balance:</p>
+            <h1><b>{{parseFloat(form.total_cost - form.pament_info.payment_amount)}}</b></h1>
+            <h5 v-if="parseFloat(form.total_cost - form.pament_info.payment_amount) == 0" class="primary">Paid</h5>
+            <h5 v-else>Partial(${{form.payment_amount}})</h5>
+          </el-card>
+            </el-col>
+
+      
+
+          </el-row>
+          
+        </div>
+      </template>
+
+
+      <template v-if="product.price_measurement=='Per Unit' || product.price_measurement=='Per Unit Range'">
+        <div>
+          <el-row :gutter="5">
+            <el-col :md="8">
+            <el-card>
+            <p>Check In Quantity:</p>
+            <h1><b>{{form.total_quantity}} pcs</b></h1>
+            <h5>&nbsp;</h5>
+          </el-card>
+            </el-col>
+
+                    <el-col :md="8">
+                  <el-card>
+            <p>Vendor Price:</p>
+            <h1><b>{{form.total_cost}} g</b></h1>
+            <h5 class="warning">per Unit ${{form.cost_per_piece}}</h5>
+          </el-card>
+            </el-col>
+                    <el-col :md="8">
+                  <el-card>
+            <p>Balance:</p>
+            <h1><b>{{parseFloat(form.total_cost - form.pament_info.payment_amount)}}</b></h1>
+            <h5 v-if="parseFloat(form.total_cost - form.pament_info.payment_amount) == 0" class="primary">Paid</h5>
+            <h5 v-else>Partial(${{form.payment_amount}})</h5>
+          </el-card>
+            </el-col>
+
+      
+
+          </el-row>
+          
+        </div>
+      </template>
+
+
 
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="cancelConfirmation" type="danger">Edit</el-button>
-        <el-button type="primary" @click="cancelConfirmation">Continue</el-button>
+        <el-button type="primary" @click="confirmCheckIn">Confirm</el-button>
       </span>
     </el-dialog>
+    
 
     <el-dialog
       title="Check In Product"
       :before-close="clearData"
       :visible.sync="dialogCheckIn"
-      width="60%"
+      width="80%"
       center
     >
       <el-form label-position="top" size="mini" :model="form" ref="form">
@@ -255,14 +361,14 @@
             <el-row :gutter="5">
               <el-col :md="4">
                 <el-form-item label="Jar,g">
-                  <el-input type="number" v-model="form.by_weight.jar_g">
+                  <el-input type="number" v-model="form.jar_g">
                     <template slot="append">g</template>
                   </el-input>
                 </el-form-item>
               </el-col>
               <el-col :md="4">
                 <el-form-item label="1 g">
-                  <el-input type="number" v-model="form.by_weight.one_g">
+                  <el-input type="number" v-model="form.one_g">
                     <template slot="append">pcs</template>
                   </el-input>
                   <p class="convert">{{one_g_cal}} g</p>
@@ -270,7 +376,7 @@
               </el-col>
               <el-col :md="4">
                 <el-form-item label="1/8 0z">
-                  <el-input type="number" v-model="form.by_weight.eight_oz">
+                  <el-input type="number" v-model="form.eight_oz">
                     <template slot="append">pcs</template>
                   </el-input>
                   <p class="convert">{{eigth_oz_to_g}} g</p>
@@ -278,7 +384,7 @@
               </el-col>
               <el-col :md="4">
                 <el-form-item label="1/4 oz">
-                  <el-input type="number" v-model="form.by_weight.fourth_oz">
+                  <el-input type="number" v-model="form.fourth_oz">
                     <template slot="append">pcs</template>
                   </el-input>
                   <p class="convert">{{fourth_oz_to_g}} g</p>
@@ -286,7 +392,7 @@
               </el-col>
               <el-col :md="4">
                 <el-form-item label="1/2 oz">
-                  <el-input type="number" v-model="form.by_weight.half_oz">
+                  <el-input type="number" v-model="form.half_oz">
                     <template slot="append">pcs</template>
                   </el-input>
                   <p class="convert">{{half_oz_to_g}} g</p>
@@ -294,7 +400,7 @@
               </el-col>
               <el-col :md="4">
                 <el-form-item label="1 oz">
-                  <el-input type="number" v-model="form.by_weight.one_oz">
+                  <el-input type="number" v-model="form.one_oz">
                     <template slot="append">pcs</template>
                   </el-input>
                   <p class="convert">{{one_oz_to_g}} g</p>
@@ -306,7 +412,7 @@
                 <el-form-item label="Weight">
                   <el-input
                     disabled
-                    v-model="form.by_weight.total_weight"
+                    v-model="form.total_weight"
                     type="number"
                     :value="total_weight"
                   >
@@ -316,7 +422,7 @@
               </el-col>
               <el-col :md="6">
                 <el-form-item label="Cost Per Gram">
-                  <el-input type="number" v-model="form.by_weight.cost_per_gram">
+                  <el-input type="number" v-model="form.cost_per_gram">
                     <template slot="prepend">$</template>
                   </el-input>
                 </el-form-item>
@@ -382,14 +488,14 @@
             <el-row :gutter="5">
               <el-col :md="6">
                 <el-form-item label="Weight">
-                  <el-input v-model="form.by_weight_range.total_weight" type="number">
+                  <el-input v-model="form.total_weight" type="number">
                     <template slot="append">g</template>
                   </el-input>
                 </el-form-item>
               </el-col>
               <el-col :md="6">
                 <el-form-item label="Cost Per Gram">
-                  <el-input type="number" v-model="form.by_weight_range.cost_per_gram">
+                  <el-input type="number" v-model="form.cost_per_gram">
                     <template slot="prepend">$</template>
                   </el-input>
                 </el-form-item>
@@ -456,14 +562,14 @@
             <el-row :gutter="5">
               <el-col :md="6">
                 <el-form-item label="Total Quantity">
-                  <el-input v-model="form.by_unit_and_range.total_quantity" type="number">
+                  <el-input v-model="form.total_quantity" type="number">
                     <template slot="append">pcs</template>
                   </el-input>
                 </el-form-item>
               </el-col>
               <el-col :md="6">
                 <el-form-item label="Cost Per Piece">
-                  <el-input type="number" v-model="form.by_unit_and_range.cost_per_piece">
+                  <el-input type="number" v-model="form.cost_per_piece">
                     <template slot="prepend">$</template>
                   </el-input>
                 </el-form-item>
@@ -639,14 +745,7 @@ export default {
         uid: '',
         has_lab_results: false,
         harvest_date: '',
-        total_cost: 0,
-        pament_info:{
-          account_id: null,
-          payment_amount: 0,
-        },
-        note: '',
-        by_weight: {
-          jar_g: 0,
+            jar_g: 0,
           one_g: 0,
           eight_oz: 0,
           fourth_oz: 0,
@@ -654,18 +753,18 @@ export default {
           one_oz: 0,
           total_weight: 0,
           cost_per_gram: 0,
-          total_cost: 0
-        },
-        by_weight_range: {
-          total_weight: 0,
-          cost_per_gram: 0,
-          total_cost: 0
-        },
-        by_unit_and_range: {
-          total_quantity: 0,
           cost_per_piece: 0,
-          total_cost: 0
-        }
+          total_quantity: 0,
+         
+        total_cost: 0,
+         note: '',
+        pament_info:{
+          account_id: null,
+          check_in_product_id:0,
+          payment_amount: 0,
+        },
+       
+
       },
       formLab: {
         product_id: 0,
@@ -746,30 +845,30 @@ export default {
     },
        
     one_g_cal: function() {
-      return this.form.by_weight.one_g * 1
+      return this.form.one_g * 1
     },
     eigth_oz_to_g: function() {
-      console.log(this.form.by_weight.eight_oz)
-      return this.form.by_weight.eight_oz * 4
+      console.log(this.form.eight_oz)
+      return this.form.eight_oz * 4
     },
     fourth_oz_to_g: function() {
-      return this.form.by_weight.fourth_oz * 7
+      return this.form.fourth_oz * 7
     },
     half_oz_to_g: function() {
-      return this.form.by_weight.half_oz * 14
+      return this.form.half_oz * 14
     },
     one_oz_to_g: function() {
-      return this.form.by_weight.one_oz * 28
+      return this.form.one_oz * 28
     },
     total_weight: function() {
-      let one_oz = this.form.by_weight.one_oz * 28
-      let half_oz = this.form.by_weight.half_oz * 14
-      let fouth_oz = this.form.by_weight.fourth_oz * 7
-      let eigth_oz = this.form.by_weight.eight_oz * 4
-      let one_g = this.form.by_weight.one_g
-      let jar_g = this.form.by_weight.jar_g
+      let one_oz = this.form.one_oz * 28
+      let half_oz = this.form.half_oz * 14
+      let fouth_oz = this.form.fourth_oz * 7
+      let eigth_oz = this.form.eight_oz * 4
+      let one_g = this.form.one_g
+      let jar_g = this.form.jar_g
 
-      this.form.by_weight.total_weight =
+      this.form.total_weight =
         parseFloat(one_oz) +
         parseFloat(half_oz) +
         parseFloat(fouth_oz) +
@@ -788,30 +887,30 @@ export default {
     },
     total_cost: function() {
       this.form.total_cost =
-        parseFloat(this.form.by_weight.total_weight) *
-        parseFloat(this.form.by_weight.cost_per_gram)
+        parseFloat(this.form.total_weight) *
+        parseFloat(this.form.cost_per_gram)
       return (
-        parseFloat(this.form.by_weight.total_weight) *
-        parseFloat(this.form.by_weight.cost_per_gram)
+        parseFloat(this.form.total_weight) *
+        parseFloat(this.form.cost_per_gram)
       )
     },
 
     total_cost_per_piece: function() {
       this.form.total_cost =
-        parseFloat(this.form.by_unit_and_range.total_quantity) *
-        parseFloat(this.form.by_unit_and_range.cost_per_piece)
+        parseFloat(this.form.total_quantity) *
+        parseFloat(this.form.cost_per_piece)
       return (
-        parseFloat(this.form.by_unit_and_range.total_quantity) *
-        parseFloat(this.form.by_unit_and_range.cost_per_piece)
+        parseFloat(this.form.total_quantity) *
+        parseFloat(this.form.cost_per_piece)
       )
     },
     total_cost_weight_range() {
       this.form.total_cost =
-        parseFloat(this.form.by_weight_range.total_quantity) *
-        parseFloat(this.form.by_weight_range.cost_per_piece)
+        parseFloat(this.form.total_quantity) *
+        parseFloat(this.form.cost_per_piece)
       return (
-        parseFloat(this.form.by_weight_range.total_quantity) *
-        parseFloat(this.form.by_weight_range.cost_per_gram)
+        parseFloat(this.form.total_quantity) *
+        parseFloat(this.form.cost_per_gram)
       )
     }
   },
@@ -819,6 +918,78 @@ export default {
     cancelConfirmation(){
       this.dialogConfirmation = false 
       this.dialogCheckIn=true
+    },
+    confirmCheckIn()
+    {
+      axios.post('/api/catalog/product/checkin/create',this.form)
+          .then(res=>{
+                this.$notify({
+          title: 'Success',
+          message: 'Check In Successfully',
+          position: 'top-left',
+          type:'success'
+        });
+
+        this.price_measurement = ''
+
+     this.form= {
+        product_id: '',
+        vendor_id: '',
+        branch_id: '',
+        batch_id: '',
+        date: null,
+        uid: '',
+        has_lab_results: false,
+        harvest_date: '',
+            jar_g: 0,
+          one_g: 0,
+          eight_oz: 0,
+          fourth_oz: 0,
+          half_oz: 0,
+          one_oz: 0,
+          total_weight: 0,
+          cost_per_gram: 0,
+          cost_per_piece: 0,
+          total_quantity: 0,
+         
+        total_cost: 0,
+         note: '',
+        pament_info:{
+          account_id: null,
+          payment_amount: 0,
+        },
+       
+
+      }
+          this.formLab = {
+            product_id: 0,
+            lab_id: null,
+            test_date: '',
+            cbn: '',
+            cbd: '',
+            thc: '',
+            sativa: '',
+            indica: '',
+            lab_mesurement: '%'
+          }
+
+        this.form.pament_info.check_in_product_id=res.data.id
+          axios.post('/api/catalog/product/checkinpayment/create',this.form.pament_info)
+          .then(res=>{
+            console.log(res)
+            console.log('nka abot dri a')
+          }).catch(err=>{
+            console.log(err)
+            console.log('ne error oh')
+          })
+
+          }).catch(err=>{
+            console.log(err)
+          })
+
+      this.dialogConfirmation = false 
+      
+
     },
     confirm(){
 
@@ -863,44 +1034,35 @@ export default {
 
           this.price_measurement = ''
 
-          this.form = {
-            product_id: '',
-            vendor_id: '',
-            branch_id: '',
-            batch_id: '',
-            uid: '',
-            has_lab_results: false,
-            harvest_date: '',
-            total_cost: 0,
-            payment_amount: 0,
-            note: '',
-            pament_info:{
-              account_id: null,
-              payment_amount: 0,
-            },
+     this.form= {
+        product_id: '',
+        vendor_id: '',
+        branch_id: '',
+        batch_id: '',
+        date: null,
+        uid: '',
+        has_lab_results: false,
+        harvest_date: '',
+            jar_g: 0,
+          one_g: 0,
+          eight_oz: 0,
+          fourth_oz: 0,
+          half_oz: 0,
+          one_oz: 0,
+          total_weight: 0,
+          cost_per_gram: 0,
+          cost_per_piece: 0,
+          total_quantity: 0,
+         
+        total_cost: 0,
+         note: '',
+        pament_info:{
+          account_id: null,
+          payment_amount: 0,
+        },
+       
 
-            by_weight: {
-              jar_g: 0,
-              one_g: 0,
-              eight_oz: 0,
-              fourth_oz: 0,
-              half_oz: 0,
-              one_oz: 0,
-              total_weight: 0,
-              cost_per_gram: 0,
-              total_cost: 0
-            },
-            by_weight_range: {
-              total_weight: 0,
-              cost_per_gram: 0,
-              total_cost: 0
-            },
-            by_unit_and_range: {
-              total_quantity: 0,
-              cost_per_piece: 0,
-              total_cost: 0
-            },  
-          }
+      }
           this.formLab = {
             product_id: 0,
             lab_id: null,
@@ -924,12 +1086,12 @@ export default {
 
     getProductSelected() {
       console.log(this.form.product_id)
-      this.form.by_unit_and_range.total_quantity = 0
-      this.form.by_unit_and_range.cost_per_piece = 0
-      this.form.by_weight.total_weight = 0
-      this.form.by_weight.cost_per_gram = 0
-      this.form.by_weight_range.total_weight = 0
-      this.form.by_weight_range.cost_per_gram = 0
+      this.form.total_quantity = 0
+      this.form.cost_per_piece = 0
+      this.form.total_weight = 0
+      this.form.cost_per_gram = 0
+      this.form.total_weight = 0
+      this.form.cost_per_gram = 0
       this.form.total_cost = 0
       this.form.account_id = null
       this.form.payment_amount = 0

@@ -13,6 +13,8 @@
 	<title>v2</title>
   <link href="{{ mix('/css/app--v2.css') }}" rel="stylesheet">
   <link id="robust" href="{{ mix('/css/robust-admin.css') }}" rel="stylesheet">
+  <link href="{{ mix('/css/robust-admin.css') }}" rel="stylesheet">
+  <link href="{{ mix('/css/jqwidgets/jqx.base.css') }}" rel="stylesheet">
 	<script>
 		window.Laravel = {!! json_encode([
 			'csrfToken' => csrf_token(),
