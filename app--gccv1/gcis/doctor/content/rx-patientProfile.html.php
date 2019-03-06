@@ -1,13 +1,17 @@
 <?php
 $fv = $page['formValues']['patient_information'];
 //print_r( $fv );
+
+//$page['imgPath'] = '../../images/gccv1/';
+if( !$page['imgPath'] )
+	$page['imgPath'] = ROOT_PATH. 'assets/images/';
 ?>
 
 <div class="container">
 	<div class="row">
 		<div class="card-profile-image col-md-auto">
 			<div class="">
-				<img src="<?php echo ROOT_PATH; ?>assets/images/profile-silhouette-male.png" class="rounded-circle img-border box-shadow-1" alt="Card image">
+				<img src="<?php echo $page['imgPath']; ?>profile-silhouette-male.png" class="rounded-circle img-border box-shadow-1" alt="Card image">
 			</div>
 		</div>
 		<div class="col">

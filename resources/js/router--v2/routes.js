@@ -31,6 +31,16 @@ import ViewBooking from '../pages/bookings/ViewBooking'
 import CalendarSetup from '../pages/bookings/CalendarSetup'
 import BookingArchive from '../pages/bookings/BookingArchive'
 
+
+/* Online Store */
+import LayoutStore from '../components/onlineStoreLayout/LayoutStore'
+import StoreHome from '../pages/onlineStore/onlineStore'
+import Shop from '../pages/onlineStore/shop'
+import About from '../pages/onlineStore/about'
+import Checkout from '../pages/onlineStore/checkout'
+import BillingInfo from '../pages/onlineStore/billingInfo'
+
+
 /* Catalog Folder */
 import ManageProducts from '../pages/catalog/ManageProducts'
 import Attributes from '../pages/catalog/Attributes'
@@ -89,6 +99,8 @@ import TransactionEmails from '../pages/system/TransactionEmails'
 // GCCv1
 import GCCv1page from '../pages/GCCv1/index'
 
+import Reporter from '../pages/reports--v2/index'
+
 export default [
 	// parametric route for GCCv1 requests
 	{ 
@@ -100,6 +112,18 @@ export default [
 				path: ':pagename',
 				component: GCCv1page,
 				meta: { requiresAuth: true }
+			}
+		]
+	},
+	{
+		path: '/reports/:role',
+		component: Layout,
+		hidden: true,
+		children: [
+			{
+				path: ':pagename',
+				component: Reporter,
+				meta: { requiresAuth: true, title: 'Balita' }
 			}
 		]
 	},
@@ -116,6 +140,42 @@ export default [
 		hidden: true,
 		meta: {requiresGuest: true, title: 'Login' }
 	},
+	{
+		path: '/onlineStore',
+		name: 'online store',
+		component: LayoutStore,
+		hidden: true,
+		meta: {requiresGuest: true, title: 'Online Store' },
+		children:[
+			{
+				path: '',
+				name: 'Store Home',
+				component: StoreHome,
+				meta: {requiresGuest: true, title: 'Online Store'},
+			},
+			{
+				path: 'shop',
+				name: 'Shop',
+				component: Shop,
+				meta: {requiresGuest: true, title: 'Shop'},
+			},
+			{
+				path: 'about',
+				name: 'About',
+				component: About,
+				meta: {requiresGuest: true, title: 'About'},
+			},
+			{
+				path: 'checkout',
+				name: 'checkout',
+				component: Checkout,
+				meta: {requiresGuest: true, title: 'Checkout'},
+				
+			},
+
+		]
+	}
+	,
 	{
 		path: '/dashboard',
 		component: Layout,
@@ -242,7 +302,7 @@ export default [
 
 	{
 		path: 'doctor-care',
-		meta: { title: 'Continuous Care' },
+		meta: { title: 'Continuous Care', icon: 'fa fa-leaf' },
 		children: [
 			{
 				path: '/gccv1/doctor/feedback',
@@ -501,6 +561,32 @@ export default [
 		]
 	},
 	{
+		path: 'reports',
+		meta: { title: 'Reports', icon: 'fa fa-chart-bar' },
+		children: [
+			{
+				path: '/reports/admin/sales',
+				meta: { title: 'Sales' },
+			},
+			{
+				path: '/reports/admin/products',
+				meta: { title: 'Products' },
+			},
+			{
+				path: '/reports/admin/inventory',
+				meta: { title: 'Inventory' },
+			},
+			{
+				path: '/reports/admin/patients',
+				meta: { title: 'Patients' },
+			},
+			{
+				path: '/reports/admin/state-compliance',
+				meta: { title: 'State Compliance' },
+			}
+		]
+	},
+	/* {
 		path: '/reports',
 		component: Layout,
 		meta: {requiresAuth: true, title: 'Reports', icon: 'fa fa-chart-pie', permission: 'reports sales' },
@@ -548,7 +634,7 @@ export default [
 				meta: {requiresAuth: true, title: 'Search Term', permission: 'reports search term' },
 			}
 		]
-	},
+	}, */
 	{
 		path: '/contact',
 		component: Layout,

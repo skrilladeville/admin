@@ -14,7 +14,9 @@ class CheckInProductController extends Controller
      */
     public function index()
     {
-        //
+        $checkins=CheckInProduct::all();
+
+        return $checkins;
     }
 
     /**
@@ -35,8 +37,15 @@ class CheckInProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       // $id = Auth::user()->id;
+        $checkProd=CheckInProduct::create($request->only(['product_id','vendor_id','branch_id','batch_id',
+        'date','uid','has_lab_results','harvest_date','jar_g','one_g','eight_oz','fourth_oz', 'half_oz',
+          'one_oz','total_weight','cost_per_gram','cost_per_piece','total_quantity','total_cost','note']));
+
+        return $checkProd;
     }
+
+    
 
     /**
      * Display the specified resource.

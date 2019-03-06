@@ -6,6 +6,13 @@ import 'normalize.css/normalize.css';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/en'
 import 'element-ui/lib/theme-chalk/index.css';
+import Vuetify from 'vuetify'
+
+
+import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader 
+
+Vue.use(Vuetify)
+
 //import vue-tables-2
 import {ServerTable, ClientTable, Event} from 'vue-tables-2';
 Vue.use(ClientTable, {}, true, 'bootstrap4');

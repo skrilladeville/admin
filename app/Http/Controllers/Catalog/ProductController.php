@@ -14,9 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=Product::all();
+        $products=Product::with('prices','checkinProducts')->get();
 
-        return $products;
+        return $products->toArray();
     }
 
     /**
@@ -37,12 +37,24 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+            $exploded=explode(',',$request->image);
+            $decoded=base64_decode($exploded[1]);
+
+            if(str_contains($exploded[0],'jpeg')){
+                $extension='jpg';
+            }
+            else{
+                $extension='png';   
+            }
+            $filename=str_random().'.'.$extension;
+            $path=public_path().'/uploadedImages/'.$filename;
+            file_put_contents($path,$decoded);
             
             $product=Product::create($request->only(['name','symbol','sku','product_category_id',
-                                    'strain','is_marijuana','image','product_type_id',
+                                    'strain','is_marijuana','product_type_id',
                                     'is_each','net_weight','is_self_distributed',
                                     'is_lab_results','is_show_on_weedmaps','is_show_on_potify',
-                                    'is_print_label','description','price_measurement']));
+                                    'is_print_label','description','price_measurement'])+['image'=>$filename]);
 
             return $product;
     }

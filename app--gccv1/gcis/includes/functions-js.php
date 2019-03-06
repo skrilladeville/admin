@@ -130,7 +130,7 @@ function esc_js( $text ) {
 
 // AJAX form submission using modal
 function ajaxSave( $pagenameCustom = '',$options = array() ){
-	global $pagename;
+	global $pagename,$page;
 	
 	$opt = $options;
 ?>
@@ -152,7 +152,7 @@ $('.save').click(function(){
 	// CAUTION: .ajax will not run unless data is an object
 	$( "#modal .card-body" ).html( '<p>Submitting data ...</p>' );
 	$.ajax({
-		url : '<?php echo ROOT_PATH; ?>gcis/submit.html.php?pagename=<?= ( $pagenameCustom ? $pagenameCustom : $pagename ) ?>',
+		url : '<?php echo $page['apiPath']; //gcis/submit.html.php?pagename= ?><?= ( $pagenameCustom ? $pagenameCustom : $pagename ) ?>.htm',
 		method : 'POST',
 		data : dataObj,
 		success : function( html ){
@@ -162,7 +162,7 @@ $('.save').click(function(){
 <?php } ?>
 		},
 		error : function(){
-			$( ".helpbox" ).html( '<p><span class="help-block">ERROR: </span>Bad connection</p>' );
+			$( ".helpbox" ).html( '<p><span class="help-block">ERROR: </span>Bad is connection</p>' );
 		}
 	});
 });

@@ -4,11 +4,13 @@ $pagename = isset($_REQUEST['pagename']) ? $_REQUEST['pagename'] : 'dashboard';
 
 list( $page['baseName'],$page['number'] ) = explode( '--p',$pagename );
 
+/* moved to config-loader.php
 $page['configFile'] = $user['role'].'/config/'.$pagename.'.php';
 $page['contentFile'] = $user['role'].'/content/'.$pagename.'.php';
 $page['dataFile'] = $user['role'].'/data/'.$pagename.'.php';
 $page['navFile'] = $user['role'].'/nav.html.php';
 $page['scriptEndFile'] = $user['role'].'/scripts/'.$pagename.'.js.php';
+ */
 
 // customize default page values with config/* files
 if( !file_exists($page['configFile']) )

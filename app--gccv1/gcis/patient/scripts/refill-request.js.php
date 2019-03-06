@@ -1,4 +1,3 @@
-<script language="javascript">
 function ajaxRx( RxID ){
 	$('#modal .card-body').html( 'loading ...' );
 	
@@ -6,7 +5,7 @@ function ajaxRx( RxID ){
 	dataObj[ 'id' ] = RxID;
 	dataObj[ 'tablename' ] = '<?= $tablename ?>';
 	$.ajax({
-		url : '<?php echo ROOT_PATH; ?>gcis/submit.html.php?pagename=rx-refillRequestModal',
+		url : '<?php echo $page['apiPath']; //gcis/submit.html.php?pagename= ?>rx-refillRequestModal.htm',
 		method : 'POST',
 		data : dataObj,
 		success : function( html ){
@@ -28,4 +27,3 @@ $(document).ready(function(){
 		ajaxRx( RxID );
 	});
 } );
-</script>

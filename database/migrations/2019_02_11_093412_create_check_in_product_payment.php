@@ -13,10 +13,12 @@ class CreateCheckInProductPayment extends Migration
      */
     public function up()
     {
-        Schema::create('check_in_product_payment', function (Blueprint $table) {
+        Schema::create('check_in_product_payments', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('check_in_product_id');
             $table->integer('account_id');
             $table->decimal('payment_amount', 12, 2);
-            $table->increments('id');
+         
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateCheckInProductPayment extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('check_in_product_payment');
+        Schema::dropIfExists('check_in_product_payments');
     }
 }

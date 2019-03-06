@@ -214,3 +214,21 @@ if( $contentFile == 'loading' ){ ?>
 </section>
 <?php
 }
+
+/*
+ * Outputs modal html container
+ */
+function modalize( $title ){ ?>
+	<div class="modal animated fadeIn text-left" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<?php 
+				$modal = array( 
+					'widgetType' => 'modbox',
+					'buttonsHide' => 1
+				);
+				widgetize( $title,'modal.html',$modal ); ?>
+			</div>
+		</div>
+	</div>
+<?php }	

@@ -6,9 +6,9 @@
         <meta name="author" content="Team Primie">
         <meta name="description" content="Green Card Information System">
   
-        <title>{{ config('app.name') }} - Green Card Information System <3</title>
+        <title>{{ config('app.name') }} - Green Card Information System 3</title>
 
-        <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+        <link href="{{ mix('/css/app--v2.css') }}" rel="stylesheet">
         <script>
             window.Laravel = {!! json_encode([
                 'csrfToken' => csrf_token(),

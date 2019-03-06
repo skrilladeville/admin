@@ -1,5 +1,6 @@
 <?php
-//echo 'P: ';print_r( $_POST );
+//echo 'P: '.$_POST['id'];//print_r( $_POST );
+//$_POST['id'] = 40;
 
 $newPage = array( 
 	'content' => $pagename,

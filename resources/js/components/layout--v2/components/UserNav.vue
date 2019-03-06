@@ -5,7 +5,7 @@
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper card-profile-image col-md-auto">
         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-        <span class="avatar avatar-sm avatar-online rounded-circle"><img src="/images/profile-silhouette-male.png" class="user-avatar"></span>
+        <span class="avatar avatar-sm avatar-online rounded-circle"><img src="/images/gccv1/profile-silhouette-male.png" class="user-avatar"></span>
         <span class="user-name">{{ userDisplayName }}</span>
         </a>
       </div>

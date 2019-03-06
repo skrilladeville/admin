@@ -1,2 +1,2 @@
 <?php
-include( ROOT_PATH .'gcis/patient/config/rx-refillRequestModal.php' );
+include( __DIR__. '/../../patient/config/rx-refillRequestModal.php' );

@@ -11098,6 +11098,11 @@ a.text-dark:hover, a.text-dark:focus {
   margin-bottom: 0px;
 }
 
+.el-form-item--mini .el-form-item__content,
+.el-form-item--mini .el-form-item__label {
+  line-height: 3px;
+}
+
 #app .el-submenu__title {
   background: none;
 }

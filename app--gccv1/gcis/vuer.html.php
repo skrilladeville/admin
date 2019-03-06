@@ -1,7 +1,5 @@
 <?php
-/*
- * Laravel to GCCv1 content loader
-*/
+// NOTE: has to be here, not upstream
 global $ezSQL,$user;
 
 $user['role'] = $role;
@@ -32,12 +30,14 @@ $page['contentFile'] = $user['role'].'/content/'.$pagename.'.php';
 
 include_once('config-loader.php');
 include( 'content.html.php' );
-//include_once( 'footer.html.php' );
 
+if( $page['scriptSubmit'] || $page['modalOn'] ){
+	modalize( $page['titleContent'] );
+}
 ?>
 
 <script>
 $(document).ready(function(){
-	alert("jQuery is loaded!");
+	//alert("jQuery is loaded!");
 });
 </script>
