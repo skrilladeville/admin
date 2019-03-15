@@ -1,6 +1,7 @@
 # The purpose of gitignore files is to ensure that certain files not tracked by Git remain untracked.
 # To stop tracking a file that is currently tracked, use 
 # git rm --cached
+
 # https://git-scm.com/docs/gitignore
 
 /node_modules
