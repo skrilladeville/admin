@@ -30,9 +30,6 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
         //catalog checkin product
     Route::get('catalog/product/checkinpayment/all', 'Catalog\CheckInProductPaymentController@index');
     Route::post('catalog/product/checkinpayment/create', 'Catalog\CheckInProductPaymentController@store');
-
-
-
      
     Route::post('catalog/tags/create', 'Catalog\TagController@store');
     Route::post('catalog/labResult/create', 'Catalog\LabResultController@store');
@@ -63,6 +60,8 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::post('catalog/product/upload', 'Catalog\ProductController@upload');
     Route::get('catalog/product', 'Catalog\ProductController@index');
     Route::get('catalog/product/view/{id}', 'Catalog\ProductController@show');
+
+    Route::get('reports/{role}/{pagename}','Reports\ReporterController@index');
 
     // GCCv1 pages and files
     Route::get('gccv1/{role}/{pagename}','GCCv1\PageController@gccPage');

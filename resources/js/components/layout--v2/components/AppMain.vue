@@ -15,13 +15,11 @@
       <transition name="fade-transform" mode="out-in">
         <!-- or name="fade" -->
         <!-- <router-view :key="key"></router-view> -->
-        
         <router-view 
           @hook:beforeCreate="childPreload" 
           v-on:gccv1loading="childPreload"
           @childToParent="onChildLoad"
         />
-        
       </transition>
     </section>
 	</div>
@@ -58,12 +56,11 @@ export default {
     moveProgressBar(){
       // move progress bar to navbar bottom
       try{
-  var pace = document.body.getElementsByClassName( "pace" )[0];
+      var pace = document.body.getElementsByClassName( "pace" )[0];
       document.getElementsByTagName( "nav" )[0].appendChild( pace );
       }catch(err){
         console.log(err)
       }
-    
     },
     childPreload() {
       this.moveProgressBar()
@@ -72,6 +69,7 @@ export default {
     // Triggered when `childToParent` event is emitted by the child.
     onChildLoad(value) {
       this.pageTitle = value
+      this.insertScriptTag()
     },
     emptyTitles() {
        this.pageTitle = ''
