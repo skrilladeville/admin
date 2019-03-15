@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users;
 
+use App\Branch;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class BranchController extends Controller
 {
@@ -13,7 +16,9 @@ class BranchController extends Controller
      */
     public function index()
     {
-        //
+        $branches=Branch::all();
+
+        return $branches;
     }
 
     /**
@@ -45,7 +50,8 @@ class BranchController extends Controller
      */
     public function show($id)
     {
-        //
+        $branch=Branch::find($id);
+        return $branch;
     }
 
     /**

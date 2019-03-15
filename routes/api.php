@@ -31,9 +31,19 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::get('catalog/product/checkinpayment/all', 'Catalog\CheckInProductPaymentController@index');
     Route::post('catalog/product/checkinpayment/create', 'Catalog\CheckInProductPaymentController@store');
 
+    //catalog checkin inventory
+    Route::post('catalog/product/inventory/create', 'Catalog\InventoryController@store');
+    Route::post('catalog/product/inventory/update/{pid}/{bid}', 'Catalog\InventoryController@updateBranchAndProduct');
+    Route::get('catalog/product/inventory/get/{pid}/{bid}', 'Catalog\InventoryController@getBranchAndProduct');
+    Route::get('catalog/product/inventory/view/{id}', 'Catalog\InventoryController@show');
+  
+  //branch
+  Route::get('user/branch/all', 'Users\BranchController@index');
+  Route::get('user/branch/view/{id}', 'Users\BranchController@show');
+  
 
 
-     
+
     Route::post('catalog/tags/create', 'Catalog\TagController@store');
     Route::post('catalog/labResult/create', 'Catalog\LabResultController@store');
     Route::post('catalog/weedMapPrice/create', 'Catalog\WeedMapPriceController@store');
@@ -89,6 +99,31 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::get('users/patients/{doctor_id}', 'Users\ProfilePatientController@patients');
     Route::get('users/patientsCount/{doctor_id}', 'Users\ProfilePatientController@patientsCount');
     Route::resource('users', 'Users\ProfilePatientController');
+
+//square endpoints
+    Route::get('/charge', 'ChargeController@charge');
+Route::group(['prefix' => 'merchant'], function () {
+    // Charge with merchant
+    Route::get('/{merchant}/charge', 'ChargeController@chargeWithMerchant');
+    // Charge with merchant and customer
+    Route::get('/{merchant}/customer/{customer}/charge', 'ChargeController@chargeWithMerchantAndCustomer');
+});
+Route::group(['prefix' => 'customer'], function () {
+    // Create customer
+    Route::get('/create', 'ChargeController@createCustomer');
+    // Charge with customer
+    Route::get('/{customer}/charge', 'ChargeController@chargeWithCustomer');
+});
+Route::group(['prefix' => 'order'], function () {
+    // Create an order
+    Route::get('/', 'OrderController@order');
+    // Order with merchant
+    Route::get('/{merchant}/merchant', 'OrderController@orderWithMerchant');
+    // Order with customer
+    Route::get('/{customer}/customer', 'OrderController@orderWithCustomer');
+    // Order with customer and merchant included
+    Route::get('/{merchant}/{customer}', 'OrderController@orderWithCustomerAndMerchant');
+});
 
 //Route::group(['middleware' => 'jwt.auth'], function () {
     /* User */

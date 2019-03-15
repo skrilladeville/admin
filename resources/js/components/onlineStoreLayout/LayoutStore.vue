@@ -1,15 +1,19 @@
 <template>
 
 
-    <div class="container-fluid">
+        
         <v-app>
+
+    <v-container fluid>
       <Navbar/>
      
       <AppMain/>
+
+</v-container>
   
         </v-app>
   
-    </div>
+  
  
 </template>
 <script>
@@ -47,6 +51,6 @@ gcsicss.remove()
 
 <style scoped>
 
-html body.fixed-navbar{padding-top:0rem}
+
 
 </style>

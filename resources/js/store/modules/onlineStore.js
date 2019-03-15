@@ -16,6 +16,10 @@ export default {
         
     
     mutations: {
+
+        SEARCH:function(state,payload){
+          this.state.carts.filter(el=>el.strain==payload)
+        },
         ADD_TO_CART:function(state,payload){
           state.carts.push(payload)
         },

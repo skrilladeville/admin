@@ -1,14 +1,15 @@
 <template>
-  <section>
-    <transition name="fade-transform" mode="out-in">
+  
+  
       <!-- or name="fade" -->
       <!-- <router-view :key="key"></router-view> -->
-      <v-app>
+
+
      <router-view/>
-      </v-app>
- 
-    </transition>
-  </section>
+     
+  
+
+  
 </template>
 
 <script>

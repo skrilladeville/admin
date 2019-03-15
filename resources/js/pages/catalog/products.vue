@@ -23,247 +23,216 @@
       <v-client-table :data="products" :columns="['name','symbol','sku','description','action']">
         <template slot="action" slot-scope="props">
           <div class="d-flex">
-            <el-button size="small" icon="el-icon-edit" type="success"></el-button>
+            <router-link :to="`/catalog/product/details/${props.row.id}`">
+              <el-button size="small" icon="el-icon-view" type="success"></el-button>
+            </router-link>
             <el-button size="small" icon="el-icon-delete" type="danger"></el-button>
           </div>
         </template>
       </v-client-table>
     </el-card>
 
+    <el-dialog title="Confirmation" :visible.sync="dialogConfirmation" width="50%" center>
+      <h5>
+        <b>{{this.product.name}}</b>
+      </h5>
 
-        <el-dialog
-      title="Confirmation"
-      :visible.sync="dialogConfirmation"
-      width="50%"
-      center
-    >
-    <h5><b>{{this.product.name}}</b></h5>
-    
-    <el-row>
-      <el-col :md="8">
-        <p>Check In To</p>
-      </el-col>
-      <el-col :md="16">
-        <p>{{getBranch_name}}</p>
-      </el-col>
-           <el-col :md="8">
-        <p>Vendor</p>
-      </el-col>
-      <el-col :md="16">
-        <p>{{getVendorName.name}}</p>
-      </el-col>
-          <el-col :md="8">
-        <p>Batch Id</p>
-      </el-col>
-      <el-col :md="16">
-        <p v-if="this.form.batch_id != ''">{{this.form.batch_id}}</p>
-        <p v-else>-------------</p>
-      </el-col>
-            <el-col :md="8">
-        <p>Account</p>
-      </el-col>
-      <el-col :md="16">
-        <p>{{getAccount_name}}</p>
-      </el-col>
-    </el-row>
+      <el-row>
+        <el-col :md="8">
+          <p>Check In To</p>
+        </el-col>
+        <el-col :md="16">
+          <p>{{getBranch_name}}</p>
+        </el-col>
+        <el-col :md="8">
+          <p>Vendor</p>
+        </el-col>
+        <el-col :md="16">
+          <p>{{getVendorName.name}}</p>
+        </el-col>
+        <el-col :md="8">
+          <p>Batch Id</p>
+        </el-col>
+        <el-col :md="16">
+          <p v-if="this.form.batch_id != ''">{{this.form.batch_id}}</p>
+          <p v-else>-------------</p>
+        </el-col>
+        <el-col :md="8">
+          <p>Account</p>
+        </el-col>
+        <el-col :md="16">
+          <p>{{getAccount_name}}</p>
+        </el-col>
+      </el-row>
 
       <template v-if="product.price_measurement=='Weight'">
-    <el-card>
+        <el-card>
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>jar, g</th>
+                <th>1 g</th>
+                <th>1/8 oz</th>
+                <th>1/4 oz</th>
+                <th>1/2 oz</th>
+                <th>1 oz</th>
+              </tr>
+            </thead>
 
-      <table class="table table-sm">
-        <thead>
-           <tr>
-          <th>
-            jar, g
-          </th>
-             <th>
-            1 g
-          </th>
-             <th>
-            1/8 oz
-          </th>
-             <th>
-           1/4 oz
-          </th>
-             <th>
-            1/2 oz
-          </th>
-                <th>
-            1 oz
-          </th>
-        </tr>
-        </thead>
-       
-        <tbody>
-          <tr>
-            <td v-if="form.jar_g > 0">
-              {{form.jar_g}} pc
-            </td>
-            <td v-else>-</td>
-             <td v-if="form.one_g > 0">
-              {{form.one_g}} pc
-            </td>
-            <td v-else>-</td>
-             <td v-if="form.eight_oz > 0">
-                 {{form.eight_oz}} pc
-            </td>
-            <td v-else>-</td>
-             <td v-if="form.fourth_oz > 0">
-              {{form.fourth_oz}} pc
-            </td>
-            <td v-else>-</td>
-             <td v-if="form.half_oz > 0">
-              {{form.half_oz}} pc
-            </td>
-            <td v-else>-</td>
-             <td v-if="form.one_oz > 0">
-              {{form.one_oz}} pc
-            </td>
-            <td v-else>-</td>
-          </tr>
+            <tbody>
+              <tr>
+                <td v-if="form.jar_g > 0">{{form.jar_g}} pc</td>
+                <td v-else>-</td>
+                <td v-if="form.one_g > 0">{{form.one_g}} pc</td>
+                <td v-else>-</td>
+                <td v-if="form.eight_oz > 0">{{form.eight_oz}} pc</td>
+                <td v-else>-</td>
+                <td v-if="form.fourth_oz > 0">{{form.fourth_oz}} pc</td>
+                <td v-else>-</td>
+                <td v-if="form.half_oz > 0">{{form.half_oz}} pc</td>
+                <td v-else>-</td>
+                <td v-if="form.one_oz > 0">{{form.one_oz}} pc</td>
+                <td v-else>-</td>
+              </tr>
 
-                    <tr>
-            <td v-if="form.jar_g > 0">
-                     {{form.jar_g}} g
-            </td>
-            <td v-else>-</td>
-             <td v-if="form.one_g > 0">
-               {{one_g_cal}} g
-            </td>
-            <td v-else>-</td>
-             <td v-if="form.eight_oz > 0">
-                {{eigth_oz_to_g}} g
-            </td>
-            <td v-else>-</td>
-             <td v-if="form.fourth_oz > 0">
-                  {{fourth_oz_to_g}} g
-            </td>
-            <td v-else>-</td>
-             <td v-if="form.half_oz > 0">
-              {{half_oz_to_g}} g
-            </td>
-            <td v-else>-</td>
-             <td v-if="form.one_oz > 0">
-           {{one_oz_to_g}} g
-            </td>
-            <td v-else>-</td>
-          </tr>
+              <tr>
+                <td v-if="form.jar_g > 0">{{form.jar_g}} g</td>
+                <td v-else>-</td>
+                <td v-if="form.one_g > 0">{{one_g_cal}} g</td>
+                <td v-else>-</td>
+                <td v-if="form.eight_oz > 0">{{eigth_oz_to_g}} g</td>
+                <td v-else>-</td>
+                <td v-if="form.fourth_oz > 0">{{fourth_oz_to_g}} g</td>
+                <td v-else>-</td>
+                <td v-if="form.half_oz > 0">{{half_oz_to_g}} g</td>
+                <td v-else>-</td>
+                <td v-if="form.one_oz > 0">{{one_oz_to_g}} g</td>
+                <td v-else>-</td>
+              </tr>
+            </tbody>
+          </table>
+        </el-card>
 
-
-
-
-          
-        </tbody>
-      </table>
-          </el-card>
-
-          <el-row :gutter="5">
-            <el-col :md="8">
+        <el-row :gutter="5">
+          <el-col :md="8">
             <el-card>
-            <p>Check In Weight:</p>
-            <h1><b>{{form.total_weight}} g</b></h1>
-            <h5>{{parseFloat(form.total_weight * 0.00220462262)}} lb</h5>
-          </el-card>
-            </el-col>
+              <p>Check In Weight:</p>
+              <h1>
+                <b>{{form.total_weight}} g</b>
+              </h1>
+              <h5>{{parseFloat(form.total_weight * 0.00220462262)}} lb</h5>
+            </el-card>
+          </el-col>
 
-                    <el-col :md="8">
-                  <el-card>
-            <p>Vendor Price:</p>
-            <h1><b>{{form.total_cost}} g</b></h1>
-            <h5 class="warning">per Gram ${{form.cost_per_gram}}</h5>
-          </el-card>
-            </el-col>
-                    <el-col :md="8">
-                  <el-card>
-            <p>Balance:</p>
-            <h1><b>{{parseFloat(form.total_cost - form.pament_info.payment_amount)}}</b></h1>
-            <h5 v-if="parseFloat(form.total_cost - form.pament_info.payment_amount) == 0" class="primary">Paid</h5>
-            <h5 v-else>Partial(${{form.payment_amount}})</h5>
-          </el-card>
-            </el-col>
-
-      
-
-          </el-row>
+          <el-col :md="8">
+            <el-card>
+              <p>Vendor Price:</p>
+              <h1>
+                <b>{{form.total_cost}} g</b>
+              </h1>
+              <h5 class="warning">per Gram ${{form.cost_per_gram}}</h5>
+            </el-card>
+          </el-col>
+          <el-col :md="8">
+            <el-card>
+              <p>Balance:</p>
+              <h1>
+                <b>{{parseFloat(form.total_cost - form.pament_info.payment_amount)}}</b>
+              </h1>
+              <h5
+                v-if="parseFloat(form.total_cost - form.pament_info.payment_amount) == 0"
+                class="primary"
+              >Paid</h5>
+              <h5 v-else>Partial(${{form.payment_amount}})</h5>
+            </el-card>
+          </el-col>
+        </el-row>
       </template>
       <template v-if="product.price_measurement=='Weight Range'">
         <div>
           <el-row :gutter="5">
             <el-col :md="8">
-            <el-card>
-            <p>Check In Weight:</p>
-            <h1><b>{{form.total_weight}} g</b></h1>
-            <h5>{{parseFloat(form.total_weight * 0.00220462262)}} lb</h5>
-          </el-card>
+              <el-card>
+                <p>Check In Weight:</p>
+                <h1>
+                  <b>{{form.total_weight}} g</b>
+                </h1>
+                <h5>{{parseFloat(form.total_weight * 0.00220462262)}} lb</h5>
+              </el-card>
             </el-col>
 
-                    <el-col :md="8">
-                  <el-card>
-            <p>Vendor Price:</p>
-            <h1><b>{{form.total_cost}} g</b></h1>
-            <h5 class="warning">per Gram ${{form.cost_per_gram}}</h5>
-          </el-card>
+            <el-col :md="8">
+              <el-card>
+                <p>Vendor Price:</p>
+                <h1>
+                  <b>{{form.total_cost}} g</b>
+                </h1>
+                <h5 class="warning">per Gram ${{form.cost_per_gram}}</h5>
+              </el-card>
             </el-col>
-                    <el-col :md="8">
-                  <el-card>
-            <p>Balance:</p>
-            <h1><b>{{parseFloat(form.total_cost - form.pament_info.payment_amount)}}</b></h1>
-            <h5 v-if="parseFloat(form.total_cost - form.pament_info.payment_amount) == 0" class="primary">Paid</h5>
-            <h5 v-else>Partial(${{form.payment_amount}})</h5>
-          </el-card>
+            <el-col :md="8">
+              <el-card>
+                <p>Balance:</p>
+                <h1>
+                  <b>{{parseFloat(form.total_cost - form.pament_info.payment_amount)}}</b>
+                </h1>
+                <h5
+                  v-if="parseFloat(form.total_cost - form.pament_info.payment_amount) == 0"
+                  class="primary"
+                >Paid</h5>
+                <h5 v-else>Partial(${{form.payment_amount}})</h5>
+              </el-card>
             </el-col>
-
-      
-
           </el-row>
-          
         </div>
       </template>
 
-
-      <template v-if="product.price_measurement=='Per Unit' || product.price_measurement=='Per Unit Range'">
+      <template
+        v-if="product.price_measurement=='Per Unit' || product.price_measurement=='Per Unit Range'"
+      >
         <div>
           <el-row :gutter="5">
             <el-col :md="8">
-            <el-card>
-            <p>Check In Quantity:</p>
-            <h1><b>{{form.total_quantity}} pcs</b></h1>
-            <h5>&nbsp;</h5>
-          </el-card>
+              <el-card>
+                <p>Check In Quantity:</p>
+                <h1>
+                  <b>{{form.total_quantity}} pcs</b>
+                </h1>
+                <h5>&nbsp;</h5>
+              </el-card>
             </el-col>
 
-                    <el-col :md="8">
-                  <el-card>
-            <p>Vendor Price:</p>
-            <h1><b>{{form.total_cost}} g</b></h1>
-            <h5 class="warning">per Unit ${{form.cost_per_piece}}</h5>
-          </el-card>
+            <el-col :md="8">
+              <el-card>
+                <p>Vendor Price:</p>
+                <h1>
+                  <b>{{form.total_cost}} g</b>
+                </h1>
+                <h5 class="warning">per Unit ${{form.cost_per_piece}}</h5>
+              </el-card>
             </el-col>
-                    <el-col :md="8">
-                  <el-card>
-            <p>Balance:</p>
-            <h1><b>{{parseFloat(form.total_cost - form.pament_info.payment_amount)}}</b></h1>
-            <h5 v-if="parseFloat(form.total_cost - form.pament_info.payment_amount) == 0" class="primary">Paid</h5>
-            <h5 v-else>Partial(${{form.payment_amount}})</h5>
-          </el-card>
+            <el-col :md="8">
+              <el-card>
+                <p>Balance:</p>
+                <h1>
+                  <b>{{parseFloat(form.total_cost - form.pament_info.payment_amount)}}</b>
+                </h1>
+                <h5
+                  v-if="parseFloat(form.total_cost - form.pament_info.payment_amount) == 0"
+                  class="primary"
+                >Paid</h5>
+                <h5 v-else>Partial(${{form.payment_amount}})</h5>
+              </el-card>
             </el-col>
-
-      
-
           </el-row>
-          
         </div>
       </template>
-
-
-
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="cancelConfirmation" type="danger">Edit</el-button>
         <el-button type="primary" @click="confirmCheckIn">Confirm</el-button>
       </span>
     </el-dialog>
-    
 
     <el-dialog
       title="Check In Product"
@@ -309,10 +278,8 @@
                 v-model="form.branch_id"
                 placeholder="please select office"
               >
-                <el-option label="Amsterdam Gardens" value="1"></el-option>
-                <el-option label="Indica Online" value="2"></el-option>
-                <el-option label="Medibook" value="3"></el-option>
-                <el-option label="Billing" value="4"></el-option>
+                <el-option v-for="branch in branches" :label="branch.branch_name" :key="branch.id" :value="branch.id"></el-option>
+         
               </el-select>
             </el-form-item>
           </el-col>
@@ -429,11 +396,7 @@
               </el-col>
               <el-col :md="12">
                 <el-form-item label="Total Cost">
-                  <el-input
-                    type="number"
-                    v-model="form.total_cost"
-                    :value="total_cost"
-                  >
+                  <el-input type="number" v-model="form.total_cost" :value="total_cost">
                     <template slot="prepend">$</template>
                   </el-input>
                 </el-form-item>
@@ -460,7 +423,11 @@
               </el-col>
               <el-col :md="8">
                 <el-form-item label="Payment Amount">
-                  <el-input type="number" v-model="form.pament_info.payment_amount" :value="total_cost">
+                  <el-input
+                    type="number"
+                    v-model="form.pament_info.payment_amount"
+                    :value="total_cost"
+                  >
                     <template slot="prepend">$</template>
                   </el-input>
                 </el-form-item>
@@ -533,7 +500,11 @@
               </el-col>
               <el-col :md="8">
                 <el-form-item label="Payment Amount">
-                  <el-input type="number" v-model="form.pament_info.payment_amount" :value="total_cost">
+                  <el-input
+                    type="number"
+                    v-model="form.pament_info.payment_amount"
+                    :value="total_cost"
+                  >
                     <template slot="prepend">$</template>
                   </el-input>
                 </el-form-item>
@@ -576,11 +547,7 @@
               </el-col>
               <el-col :md="12">
                 <el-form-item label="Total Cost">
-                  <el-input
-                    type="number"
-                    v-model="form.total_cost"
-                    :value="total_cost_per_piece"
-                  >
+                  <el-input type="number" v-model="form.total_cost" :value="total_cost_per_piece">
                     <template slot="prepend">$</template>
                   </el-input>
                 </el-form-item>
@@ -607,7 +574,11 @@
               </el-col>
               <el-col :md="8">
                 <el-form-item label="Payment Amount">
-                  <el-input type="number" v-model="form.pament_info.payment_amount" :value="total_cost">
+                  <el-input
+                    type="number"
+                    v-model="form.pament_info.payment_amount"
+                    :value="total_cost"
+                  >
                     <template slot="prepend">$</template>
                   </el-input>
                 </el-form-item>
@@ -729,11 +700,12 @@ export default {
     return {
       products: [],
       vendors: [],
+      branches:[],
       labs: [],
       product: {},
-      vendor:{},
+      vendor: {},
       dialogCheckIn: false,
-      dialogConfirmation:false,
+      dialogConfirmation: false,
       price_measurement: '',
 
       form: {
@@ -745,26 +717,39 @@ export default {
         uid: '',
         has_lab_results: false,
         harvest_date: '',
-            jar_g: 0,
-          one_g: 0,
-          eight_oz: 0,
-          fourth_oz: 0,
-          half_oz: 0,
-          one_oz: 0,
-          total_weight: 0,
-          cost_per_gram: 0,
-          cost_per_piece: 0,
-          total_quantity: 0,
-         
-        total_cost: 0,
-         note: '',
-        pament_info:{
-          account_id: null,
-          check_in_product_id:0,
-          payment_amount: 0,
-        },
-       
+        jar_g: 0,
+        one_g: 0,
+        eight_oz: 0,
+        fourth_oz: 0,
+        half_oz: 0,
+        one_oz: 0,
+        total_weight: 0,
+        cost_per_gram: 0,
+        cost_per_piece: 0,
+        total_quantity: 0,
 
+        total_cost: 0,
+        note: '',
+        pament_info: {
+          account_id: null,
+          check_in_product_id: 0,
+          payment_amount: 0
+        }
+      },
+      inventory: {
+        product_id: 0,
+        branch_id: 0,
+        jar_g_total: 0,
+        one_g_total: 0,
+        one_eight_oz_total: 0,
+        one_fourth_oz_total: 0,
+        one_half_oz_total: 0,
+        one_oz_total: 0,
+        pre_pack_total: 0,
+        total_weight: 0,
+        total_qty_per_unit:0,
+        total_qty_per_unit_range:0,
+        total_qty: 0
       },
       formLab: {
         product_id: 0,
@@ -784,8 +769,12 @@ export default {
       console.log(res.data)
       this.products = res.data
     })
+    axios.get('/api/user/branch/all').then(res=>{
+      this.branches=res.data
+    })
 
-    axios.get('/api/catalog/lab')
+    axios
+      .get('/api/catalog/lab')
       .then(response => {
         this.labs = response.data
         console.log(response)
@@ -803,47 +792,38 @@ export default {
     console.log(`naka abot ${this.form.date}`)
   },
   computed: {
-    getVendorName:function()
-    {
-      let vendor=this.vendors.filter(el=> el.id==this.form.vendor_id)
-      vendor.forEach(e=>{
-        this.vendor=e
+    getVendorName: function() {
+      let vendor = this.vendors.filter(el => el.id == this.form.vendor_id)
+      vendor.forEach(e => {
+        this.vendor = e
       })
-     return this.vendor
-     
+      return this.vendor
     },
-    getBranch_name:function(){
-      if(this.form.branch_id==1){
-        return "Amsterdam Gardens"
-      }
-      else if(this.form.branch_id==2){
-         return "Indica Online"
-      }
-       else if(this.form.branch_id==3){
-         return "Medibook"
-      }
-       else{
-         return "Billing"
+    getBranch_name: function() {
+      if (this.form.branch_id == 1) {
+        return 'Amsterdam Gardens'
+      } else if (this.form.branch_id == 2) {
+        return 'Indica Online'
+      } else if (this.form.branch_id == 3) {
+        return 'Medibook'
+      } else {
+        return 'Billing'
       }
     },
-        getAccount_name:function(){
-      if(this.form.account_id==1){
-        return "ZTEGRITYBANK ($10,000,000,272,564,224.00)"
-      }
-      else if(this.form.account_id==2){
-         return "Universal Credit Card ($88,599,127,130,112.00)"
-      }
-       else if(this.form.account_id==3){
-         return "Urban Leaf ($85,764,322,885,632.00)"
-      }
-       else if(this.form.account_id==4){
-         return "Stripe ($500,000,094,158,848.00)"
-      }
-       else{
-         return "Quincy And Priscilla Adams ($125,800,011,530,240.00)"
+    getAccount_name: function() {
+      if (this.form.account_id == 1) {
+        return 'ZTEGRITYBANK ($10,000,000,272,564,224.00)'
+      } else if (this.form.account_id == 2) {
+        return 'Universal Credit Card ($88,599,127,130,112.00)'
+      } else if (this.form.account_id == 3) {
+        return 'Urban Leaf ($85,764,322,885,632.00)'
+      } else if (this.form.account_id == 4) {
+        return 'Stripe ($500,000,094,158,848.00)'
+      } else {
+        return 'Quincy And Priscilla Adams ($125,800,011,530,240.00)'
       }
     },
-       
+
     one_g_cal: function() {
       return this.form.one_g * 1
     },
@@ -887,11 +867,9 @@ export default {
     },
     total_cost: function() {
       this.form.total_cost =
-        parseFloat(this.form.total_weight) *
-        parseFloat(this.form.cost_per_gram)
+        parseFloat(this.form.total_weight) * parseFloat(this.form.cost_per_gram)
       return (
-        parseFloat(this.form.total_weight) *
-        parseFloat(this.form.cost_per_gram)
+        parseFloat(this.form.total_weight) * parseFloat(this.form.cost_per_gram)
       )
     },
 
@@ -915,52 +893,142 @@ export default {
     }
   },
   methods: {
-    cancelConfirmation(){
-      this.dialogConfirmation = false 
-      this.dialogCheckIn=true
+    cancelConfirmation() {
+      this.dialogConfirmation = false
+      this.dialogCheckIn = true
     },
-    confirmCheckIn()
-    {
-      axios.post('/api/catalog/product/checkin/create',this.form)
-          .then(res=>{
-                this.$notify({
-          title: 'Success',
-          message: 'Check In Successfully',
-          position: 'top-left',
-          type:'success'
-        });
 
-        this.price_measurement = ''
+    confirmCheckIn() {
+      axios
+        .post('/api/catalog/product/checkin/create', this.form)
+        .then(res => {
 
-     this.form= {
-        product_id: '',
-        vendor_id: '',
-        branch_id: '',
-        batch_id: '',
-        date: null,
-        uid: '',
-        has_lab_results: false,
-        harvest_date: '',
-            jar_g: 0,
-          one_g: 0,
-          eight_oz: 0,
-          fourth_oz: 0,
-          half_oz: 0,
-          one_oz: 0,
+          if(this.price_measurement=='Weight'){
+          this.inventory={
+            product_id: res.data.product_id,
+        branch_id: res.data.branch_id,
+        jar_g_total: res.data.jar_g,
+        one_g_total: res.data.one_g,
+        one_eight_oz_total: res.data.eight_oz,
+        one_fourth_oz_total: res.data.fourth_oz,
+        one_half_oz_total: res.data.half_oz,
+        one_oz_total: res.data.one_oz,
+        pre_pack_total: 0,
+        total_weight: 0,
+               total_qty_per_unit:0,
+        total_qty_per_unit_range:0,
+        total_qty: 0
+          }
+          }
+          else if(this.price_measurement=='Weight Range'){
+            this.inventory={
+            product_id:res.data.product_id,
+        branch_id:res.data.branch_id,
+        jar_g_total:0,
+        one_g_total:0,
+        one_eight_oz_total:0,
+        one_fourth_oz_total: 0,
+        one_half_oz_total:0,
+        one_oz_total: 0,
+        pre_pack_total: 0,
+        total_weight: res.data.total_weight,
+               total_qty_per_unit:0,
+        total_qty_per_unit_range:0,
+        total_qty: 0
+          }
+
+          }
+
+          else if(this.price_measurement=='Per Unit'){
+            this.inventory={
+            product_id:res.data.product_id,
+        branch_id:res.data.branch_id,
+        jar_g_total:0,
+        one_g_total:0,
+        one_eight_oz_total:0,
+        one_fourth_oz_total: 0,
+        one_half_oz_total:0,
+        one_oz_total: 0,
+        pre_pack_total: 0,
           total_weight: 0,
-          cost_per_gram: 0,
-          cost_per_piece: 0,
-          total_quantity: 0,
-         
-        total_cost: 0,
-         note: '',
-        pament_info:{
-          account_id: null,
-          payment_amount: 0,
-        },
-       
+        total_qty_per_unit:res.data.total_quantity,
+        total_qty_per_unit_range:0,
 
-      }
+        total_qty:0
+          } 
+          
+          }
+            else{
+            this.inventory={
+            product_id:res.data.product_id,
+        branch_id:res.data.branch_id,
+        jar_g_total:0,
+        one_g_total:0,
+        one_eight_oz_total:0,
+        one_fourth_oz_total: 0,
+        one_half_oz_total:0,
+        one_oz_total: 0,
+        pre_pack_total: 0,
+        total_weight:0,
+        total_qty_per_unit:-0,
+        total_qty_per_unit_range:res.data.total_quantity,
+
+        total_qty: 0
+          } 
+            }
+
+          axios.get(`/api/catalog/product/inventory/get/${res.data.product_id}/${res.data.branch_id}`).then(res=>{
+            if(res.data.length==0){
+                
+                axios.post('/api/catalog/product/inventory/create',this.inventory).then(res=>{
+                  console.log(res.data)
+                  console.log('ni insert')
+                })
+            }
+            else{
+                  axios.post(`/api/catalog/product/inventory/update/${this.inventory.product_id}/${this.inventory.branch_id}`,this.inventory).then(res=>{
+                  console.log(res.data)
+                console.log('ni update')
+                })
+            }
+          })
+
+          this.$notify({
+            title: 'Success',
+            message: 'Check In Successfully',
+            position: 'top-left',
+            type: 'success'
+          })
+
+          this.price_measurement = ''
+
+          this.form = {
+            product_id: '',
+            vendor_id: '',
+            branch_id: '',
+            batch_id: '',
+            date: new Date().toString(),
+            uid: '',
+            has_lab_results: false,
+            harvest_date: '',
+            jar_g: 0,
+            one_g: 0,
+            eight_oz: 0,
+            fourth_oz: 0,
+            half_oz: 0,
+            one_oz: 0,
+            total_weight: 0,
+            cost_per_gram: 0,
+            cost_per_piece: 0,
+            total_quantity: 0,
+
+            total_cost: 0,
+            note: '',
+            pament_info: {
+              account_id: null,
+              payment_amount: 0
+            }
+          }
           this.formLab = {
             product_id: 0,
             lab_id: null,
@@ -973,59 +1041,54 @@ export default {
             lab_mesurement: '%'
           }
 
-        this.form.pament_info.check_in_product_id=res.data.id
-          axios.post('/api/catalog/product/checkinpayment/create',this.form.pament_info)
-          .then(res=>{
-            console.log(res)
-            console.log('nka abot dri a')
-          }).catch(err=>{
-            console.log(err)
-            console.log('ne error oh')
-          })
+          this.form.pament_info.check_in_product_id = res.data.id
+          axios
+            .post(
+              '/api/catalog/product/checkinpayment/create',
+              this.form.pament_info
+            )
+            .then(res => {
+              console.log(res)
+              console.log('nka abot dri a')
+            })
+            .catch(err => {
+              console.log(err)
+              console.log('ne error oh')
+            })
+        })
+        .catch(err => {
+          console.log(err)
+        })
 
-          }).catch(err=>{
-            console.log(err)
-          })
-
-      this.dialogConfirmation = false 
-      
-
+      this.dialogConfirmation = false
     },
-    confirm(){
-
-      if(this.form.product_id==''){
+    confirm() {
+      if (this.form.product_id == '') {
         this.$notify({
           title: 'Warning',
           message: 'Product is required',
           position: 'top-left',
-          type:'warning'
-        });
-      }
-      else if(this.form.vendor_id==''){
+          type: 'warning'
+        })
+      } else if (this.form.vendor_id == '') {
         this.$notify({
           title: 'Warning',
           message: 'vendor  is required',
           position: 'top-left',
-          type:'warning'
-        });
-      }
-
-      else if(this.form.branch_id==''){
-         this.$notify({
+          type: 'warning'
+        })
+      } else if (this.form.branch_id == '') {
+        this.$notify({
           title: 'Warning',
           message: 'check in to  is required',
           position: 'top-left',
-          type:'warning'
-        });
-      
+          type: 'warning'
+        })
+      } else {
+        console.log('nka abot')
+        this.dialogCheckIn = false
+        this.dialogConfirmation = true
       }
-
-      else{
-      console.log('nka abot')
-      this.dialogCheckIn=false
-      this.dialogConfirmation=true
-      }
-
     },
     clearData(done) {
       this.$confirm('Are you sure to close this dialog?')
@@ -1034,35 +1097,33 @@ export default {
 
           this.price_measurement = ''
 
-     this.form= {
-        product_id: '',
-        vendor_id: '',
-        branch_id: '',
-        batch_id: '',
-        date: null,
-        uid: '',
-        has_lab_results: false,
-        harvest_date: '',
+          this.form = {
+            product_id: '',
+            vendor_id: '',
+            branch_id: '',
+            batch_id: '',
+            date: new Date().toString(),
+            uid: '',
+            has_lab_results: false,
+            harvest_date: '',
             jar_g: 0,
-          one_g: 0,
-          eight_oz: 0,
-          fourth_oz: 0,
-          half_oz: 0,
-          one_oz: 0,
-          total_weight: 0,
-          cost_per_gram: 0,
-          cost_per_piece: 0,
-          total_quantity: 0,
-         
-        total_cost: 0,
-         note: '',
-        pament_info:{
-          account_id: null,
-          payment_amount: 0,
-        },
-       
+            one_g: 0,
+            eight_oz: 0,
+            fourth_oz: 0,
+            half_oz: 0,
+            one_oz: 0,
+            total_weight: 0,
+            cost_per_gram: 0,
+            cost_per_piece: 0,
+            total_quantity: 0,
 
-      }
+            total_cost: 0,
+            note: '',
+            pament_info: {
+              account_id: null,
+              payment_amount: 0
+            }
+          }
           this.formLab = {
             product_id: 0,
             lab_id: null,
@@ -1116,7 +1177,8 @@ export default {
         }
       })
 
-      axios.get(`/api/catalog/product/view/${this.form.product_id}`)
+      axios
+        .get(`/api/catalog/product/view/${this.form.product_id}`)
         .then(res => {
           this.product = res.data
           if (res.data.is_lab_results == 1) {

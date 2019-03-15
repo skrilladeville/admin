@@ -1,12 +1,12 @@
 <template>
     <div>
-      <v-container fluid>
+   
 
  
 <v-toolbar
- color="primary"
+
+      color="#006064"
       dark
-      flat
       fixed 
       app
 >
@@ -20,10 +20,25 @@
           :key="item.icon"
           :to="item.link"
           flat
-        >  <v-icon right dark>{{item.icon}}</v-icon>&nbsp;{{ item.title }}</v-btn>
+        >  <v-icon right>{{item.icon}}</v-icon>&nbsp;{{ item.title }}</v-btn>
       </v-toolbar-items>
     <v-spacer></v-spacer>
         <v-toolbar-items>
+       
+              <div>  
+   <v-text-field
+   @change="search"
+   v-model="plant_type"
+            placeholder="Search by plant type"
+            append-icon="search"
+          ></v-text-field>
+     
+     
+      </div>
+   
+    
+      
+ 
           <v-btn flat :disabled="getCartCount < 1" @click="viewCart">
       <v-badge color="purple">
       <span slot="badge" style="color:white;">{{getCartCount}}</span>
@@ -169,7 +184,7 @@
 </el-dialog>
 
 
-     </v-container>
+
     </div>
 </template>
 
@@ -212,9 +227,10 @@ export default {
         productCount:'',
         dialogCart:false,
         drawer:null,
+        plant_type:'',
 menu: [
         { icon: 'home', title: 'Home',link:'/onlineStore' },
-        { icon: 'shopping_cart', title: 'Shop',link:'/onlineStore/shop' },
+        { icon: 'shopping_cart', title: 'Canabis',link:'/onlineStore/shop' },
         { icon: 'info', title: 'About',link:'/onlineStore/about' }
       ],
       mini: false,
@@ -254,8 +270,15 @@ menu: [
   methods: {
               ...mapMutations([
           'REMOVE_CART',
-          'REMOVE_CART_COUNT'
+          'REMOVE_CART_COUNT',
+          'SEARCH'
       ]),
+
+
+      search(){
+       // this.SEARCH(this.plant_type)
+        console.log('xvxvx')
+      },
 
  
  
