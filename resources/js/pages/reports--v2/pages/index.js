@@ -1,2 +1,6 @@
 export { default as Sales } from './Sales'
 export { default as Products } from './Products'
+export { default as Patients } from './Patients'
+export { default as PatientActions } from './PatientActions'
+export { default as Inventory } from './Inventory'
+export { default as StateCompliance } from './StateCompliance'

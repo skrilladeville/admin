@@ -1,8 +1,7 @@
 <template>
-	<widgetize title="Products">
-		<JqxGrid v-if="this.$route.params.pagename == 'products'" ref="myGrid" :theme="'material'" :width="width" :source="source" 
-			:autoheight="true" :columns="columns" :filterable="true" 
-			:autoshowfiltericon="true" :ready="ready" :updatefilterconditions="updatefilterconditions">
+	<widgetize title="Product Sales">
+		<JqxGrid @sort="onSort($event)" ref="myGrid" :theme="'material'" :width="width" :source="dataAdapter" :columns="columns" :filterable="true" 
+			:autoshowfiltericon="false" :sorting="true" :groupable="true">
 		</JqxGrid>
 		<ExportButtons @exportBtnOnClick="exportBtnOnClick"/>
 	</widgetize>		
@@ -21,77 +20,62 @@ export default {
 		ExportButtons
 	},
 	data: function () {
-			return {
-					width: '99%',
-					source: new jqx.dataAdapter(this.source),
-					columns: [
-							{ text: 'First Name', datafield: 'firstname', width: 160 },
-							{ text: 'Last Name', datafield: 'lastname', width: 160 },
-							{ text: 'Product', datafield: 'productname', width: 170 },
-							{ text: 'Order Date', datafield: 'date', filtertype: 'date', width: 160, cellsformat: 'dd-MMMM-yyyy' },
-							{ text: 'Quantity', datafield: 'quantity', width: 80, cellsalign: 'right' },
-							{ text: 'Unit Price', datafield: 'price', cellsalign: 'right', cellsformat: 'c2' }
-					]
-			}
+		return {
+			width: '99%',
+			dataAdapter: new jqx.dataAdapter(this.source),
+			columns: [
+				{ text: 'Date Sold', datafield: 'date_sold', width: 140 },
+				{ text: 'Product Name', datafield: 'product_id', width: 200 },
+				{ text: 'Register Name', datafield: 'register_id', width: 150 },
+				{ text: 'Shelf', datafield: 'shelf_id', width: 140 },
+				{ text: 'Order Type', datafield: 'order_type_id', width: 120 },
+				{ text: 'Source', datafield: 'source_id', width: 140 },
+				{ text: 'Qty Sold', datafield: 'sold_qty', cellsalign: 'right', cellsformat: 'f', width: 120 },
+				{ text: 'Unit Price', datafield: 'price_unit', cellsalign: 'right', cellsformat: 'c2', width: 120 },
+				{ text: 'Transactions', datafield: 'transaction_qty', cellsalign: 'right', cellsformat: 'c2', width: 120 },
+				{ text: 'Gross Sales', datafield: 'sales_gross', cellsalign: 'right', cellsformat: 'c2', width: 120 },
+				{ text: 'COGS', datafield: 'COGS', cellsalign: 'right', cellsformat: 'c2', width: 120 },
+				{ text: 'Gross Profit', datafield: 'profit_gross', cellsalign: 'right', cellsformat: 'c2', width: 120 },
+				{ text: 'Gross Profit %', datafield: 'profit_gross_percent', cellsalign: 'right', cellsformat: 'f', width: 120 }
+			]
+		}
 	},
 	beforeCreate: function () {
-			this.source = {
-					localdata: [
-							{ firstname: "Andrew", lastname: "Burke", productname: "White Chocolate Mocha", quantity: 5, price: 3.8 },
-							{ firstname: "Andrew", lastname: "Wilson", productname: "Espresso con Panna", quantity: 1, price: 5 },
-							{ firstname: "Nancy", lastname: "Fuller", productname: "Caffe Latte", quantity: 1, price: 3.5 },
-							{ firstname: "Regina", lastname: "Wilson", productname: "Doubleshot Espresso", quantity: 7, price: 4.2 },
-							{ firstname: "Mayumi", lastname: "Davolio", productname: "Caffe Espresso", quantity: 1, price: 3.6 },
-							{ firstname: "Beate", lastname: "Saavedra", productname: "Caffe Latte", quantity: 2, price: 3.5 },
-							{ firstname: "Beate", lastname: "Nodier", productname: "White Chocolate Mocha", quantity: 6, price: 3.8 },
-							{ firstname: "Petra", lastname: "Winkler", productname: "Doubleshot Espresso", quantity: 5, price: 4.6 },
-							{ firstname: "Andrew", lastname: "Rossi", productname: "Caffe Latte", quantity: 2, price: 3.5 },
-							{ firstname: "Nancy", lastname: "Saavedra", productname: "Cappuccino", quantity: 1, price: 3.8 },
-							{ firstname: "Regina", lastname: "Wilson", productname: "Doubleshot Espresso", quantity: 7, price: 4.6 },
-							{ firstname: "Mayumi", lastname: "Bjorn", productname: "Black Tea", quantity: 1, price: 3.8 },
-							{ firstname: "Beate", lastname: "Petersen", productname: "Caffe Latte", quantity: 2, price: 3.5 },
-							{ firstname: "Saavedra", lastname: "Fuller", productname: "Black Tea", quantity: 6, price: 3.8 }
-					],
-					datatype: 'array'
-			};
+		this.source = {
+			datatype: 'json',
+			datafields: [
+				{ name: 'date_sold', type: 'string' },
+				{ name: 'product_id', type: 'string' },
+				{ name: 'register_id', type: 'int' },
+				{ name: 'shelf_id', type: 'int' },
+				{ name: 'order_type_id', type: 'int' },
+				{ name: 'source_id', type: 'int' },
+				{ name: 'sold_qty', type: 'int' },
+				{ name: 'price_unit', type: 'float' },
+				{ name: 'transaction_qty', type: 'int' },
+				{ name: 'sales_gross', type: 'float' },
+				{ name: 'COGS', type: 'float' },
+				{ name: 'profit_gross', type: 'float' },
+				{ name: 'profit_gross_percent', type: 'int' }
+			],
+			id: 'id',
+			url: '/api/reports/admin/products',
+			sortcolumn: 'date_sold',
+			sortdirection: 'asc'
+		};
 	},
 	methods: {
 		exportBtnOnClick: function (format) {
 			this.$refs.myGrid.exportdata(format, 'jqxGrid');
 		},
-		addfilter: function () {
-				// create a filter group for the FirstName column.
-				let fNameFiltergroup = new jqx.filter();
-				// operator between the filters in the filter group. 1 is for OR. 0 is for AND.
-				let filter_or_operator = 1;
-				// create a string filter with `contains` condition.
-				let filtervalue = 'Beate';
-				let filtercondition = 'contains';
-				let fNameFilter1 = fNameFiltergroup.createfilter('stringfilter', filtervalue, filtercondition);
-				// create second filter.
-				filtervalue = 'Andrew';
-				filtercondition = 'starts_with';
-				let fNameFilter2 = fNameFiltergroup.createfilter('stringfilter', filtervalue, filtercondition);
-				// add the filters to the filter group.
-				fNameFiltergroup.addfilter(filter_or_operator, fNameFilter1);
-				fNameFiltergroup.addfilter(filter_or_operator, fNameFilter2);
-				// add the filter group to the `firstname` column in the Grid.
-				this.$refs.myGrid.addfilter('firstname', fNameFiltergroup);
-				// create a filter group for the Quantity column.
-				let quantityFilterGroup = new jqx.filter();
-				// create a filter.
-				filter_or_operator = 1;
-				filtervalue = 3;
-				filtercondition = 'less_than';
-				let quantityFilter1 = quantityFilterGroup.createfilter('numericfilter', filtervalue, filtercondition);
-				quantityFilterGroup.addfilter(filter_or_operator, quantityFilter1);
-				// add the filter group to the `quantity` column in the Grid.
-				this.$refs.myGrid.addfilter('quantity', quantityFilterGroup);
-				// apply the filters.
-				this.$refs.myGrid.applyfilters();
-		},
 		ready: function () {
 				this.addfilter();
+		},
+		onSort: function (event) {
+			let sortinformation = event.args.sortinformation;
+			let sortdirection = sortinformation.sortdirection;
+			let sortcolumn = sortinformation.sortcolumn;
+			console.log("Sorted by: " + sortcolumn);
 		}
 	}
 }
