@@ -62,7 +62,7 @@ body.vertical-layout.vertical-menu.menu-expanded .content, body.vertical-layout.
 /* login */
 .blank-page .content-wrapper .flexbox-container{height:100%/* 138vh*/;padding:4%}
 .card-footer,.card-header{background:none;}
-.card,.box-shadow-2,table.dataTable{border-radius:0.77rem}
+.card,.box-shadow-2,table.dataTable{border-radius:0.77rem;border-collapse:collapse}
 .door #logoArea{width:172px/*50%*/;padding:1em;margin:auto}
 #logoArea img{display:block;margin:0.5em}
 .door #logoArea img:nth-child(2),.hide{display:none}

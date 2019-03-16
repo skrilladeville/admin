@@ -3,7 +3,7 @@
     <el-card class="box-card" shadow="always">
       <div slot="header" class="clearfix">
       <span>Order Details</span>
-      <el-button style="float: right; padding: 3px 0" type="text"><router-link :to="{name:'orders'}">Back To List</router-link></el-button>
+      <el-button style="float: right; padding: 3px 0" type="text"><router-link :to="{name:'sales.orders'}">Back To List</router-link></el-button>
       </div>
        <div class="card-content" >
          <h2>Order #</h2>
@@ -69,7 +69,7 @@
            </el-col>
          </el-row>
          <el-row :gutter="20">
-            <el-col :span="24">
+            <el-col :span="12">
               <el-card>
                 <el-row>
                   <el-col :span="24">
@@ -88,7 +88,6 @@
                           <th scope="row">1</th>
                           <td>
                             <p>Create PSD for mobile APP</p>
-                            <p class="text-muted">Simply dummy text of the printing and typesetting industry.</p>
                           </td>
                           <td class="text-xs-right">$ 20.00/hr</td>
                           <td class="text-xs-right">120</td>
@@ -98,7 +97,6 @@
                           <th scope="row">2</th>
                           <td>
                             <p>iOS Application Development</p>
-                            <p class="text-muted">Pellentesque maximus feugiat lorem at cursus.</p>
                           </td>
                           <td class="text-xs-right">$ 25.00/hr</td>
                           <td class="text-xs-right">260</td>
@@ -108,7 +106,6 @@
                           <th scope="row">3</th>
                           <td>
                             <p>WordPress Template Development</p>
-                            <p class="text-muted">Vestibulum euismod est eu elit convallis.</p>
                           </td>
                           <td class="text-xs-right">$ 20.00/hr</td>
                           <td class="text-xs-right">300</td>
@@ -117,33 +114,7 @@
                       </tbody>
                     </table>
                     <el-row>
-                      <el-col :span="12">
-                          <p class="lead">Order Log:</p>
-                          <div class="">
-                          <table class="table table-borderless table-sm">
-                            <tbody>
-                              <tr>
-                                <td>Created by John Smith</td>
-                                <td class="text-xs-right">September 5, 2018 02:08 pm</td>
-                              </tr>
-                              <tr>
-                                <td>Accepted by John Smith</td>
-                                <td class="text-xs-right">September 5, 2018 02:08 pm</td>
-                              </tr>
-                              <tr>
-                                <td>Started fulfilling by Staff Acct</td>
-                                <td class="text-xs-right">December 27, 2018 02:30 pm</td>
-                              </tr>
-                              <tr>
-                                <td>Invoice No.</td>
-                                <td class="text-xs-right"><a href="">BTNPP34</a></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          </div>
-                        
-                      </el-col>
-                      <el-col :span="12">
+                      <el-col :span="24">
                         <p class="lead">Total due</p>
                         <div class="table-responsive">
                           <table class="table">
@@ -175,9 +146,36 @@
                       </el-col>
                     </el-row>
                   </el-col>
+                  
                 </el-row>
               </el-card>
            </el-col>
+           <el-col :span="12">
+                  <p class="lead">Order Log:</p>
+                  <div class="">
+                  <table class="table table-borderless table-sm">
+                    <tbody>
+                      <tr>
+                        <td>Created by John Smith</td>
+                        <td class="text-xs-right">September 5, 2018 02:08 pm</td>
+                      </tr>
+                      <tr>
+                        <td>Accepted by John Smith</td>
+                        <td class="text-xs-right">September 5, 2018 02:08 pm</td>
+                      </tr>
+                      <tr>
+                        <td>Started fulfilling by Staff Acct</td>
+                        <td class="text-xs-right">December 27, 2018 02:30 pm</td>
+                      </tr>
+                      <tr>
+                        <td>Invoice No.</td>
+                        <td class="text-xs-right"><a href="">BTNPP34</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>
+                
+              </el-col>
          </el-row>
         </div>
     </el-card>

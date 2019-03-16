@@ -15,8 +15,10 @@ Vue.use(Vuetify)
 
 //import vue-tables-2
 import {ServerTable, ClientTable, Event} from 'vue-tables-2';
-Vue.use(ClientTable, {}, false, 'bootstrap4');
+Vue.use(ClientTable, {}, true, 'bootstrap4');
 Vue.use(ServerTable, {}, false, 'bootstrap4');
+Vue.use(Event)
+
 import VueGoodTablePlugin from 'vue-good-table';
 import VueCharts from 'vue-chartjs'
 import { Bar, Line } from 'vue-chartjs'
@@ -30,17 +32,18 @@ import { faCoffee, faCalendarCheck, faUser,
 	faStore, faClock, faFileInvoice, faThumbsUp, faTimes,
 	faShoppingCart, faMoneyBillWave, faTags, faFileInvoiceDollar, 
 	faLandmark, faPercent, faEye, faEllipsisH, faTimesCircle,
-	faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+	faCheckCircle, faBan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faCoffee, faCalendarCheck, faUser, faStore, faClock, faFileInvoice, faThumbsUp, faTimes,
 	faShoppingCart, faMoneyBillWave,faTags, faFileInvoiceDollar, faLandmark, faPercent,faEye, faEllipsisH,
-	faTimesCircle, faCheckCircle)
+	faTimesCircle, faCheckCircle, faBan)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(VueGoodTablePlugin);
 
 window.$ = window.jQuery = $;
 window.axios = axios;
+window.moment = require('moment');
 require('bootstrap');
 
 Vue.use( VueNoty, {

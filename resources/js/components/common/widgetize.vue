@@ -10,10 +10,10 @@
           <li><a data-action="close"><i class="ft-x"></i></a></li>
         </ul>
       </div>
-      <div class="card-content">
-		    <div class="card-body" id="">
-          <slot></slot>
-        </div>
+    </div>
+    <div class="card-content">
+      <div class="card-body" id="">
+        <slot></slot>
       </div>
     </div>
   </section>

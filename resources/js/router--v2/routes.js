@@ -73,9 +73,16 @@ import RecurringProfiles from '../pages/sales/RecurringProfiles'
 import SalesInvoices from '../pages/sales/SalesInvoices'
 import SalesTransactions from '../pages/sales/SalesTransaction'
 import Shipments from '../pages/sales/Shipments'
-import TermsOfCondition from '../pages/sales/TermsOfCondition'
-import SalesOrders from '../pages/sales/SalesOrder'
+import ShipmentMethods from '../pages/sales/ShipmentMethods'
+import TermsAndCondition from '../pages/sales/TermsAndCondition'
+import OrderList from '../pages/sales/OrderList'
 import SalesTax from '../pages/sales/SalesTax'
+import Sales from '../pages/sales/Sales'
+import ViewOrder from '../pages/sales/ViewOrder'
+import EditShipmentMethod from '../pages/sales/EditShipmentMethod'
+import AddShipmentMethod from '../pages/sales/AddShipmentMethod'
+import EditTaxTier from '../pages/sales/EditTaxTier'
+import NewTaxTier from '../pages/sales/NewTaxTier'
 
 /* Reports Folder */
 import CustomerReport from '../pages/reports/CustomerReport'
@@ -455,22 +462,49 @@ export default [
 		meta: {requiresAuth: true, title: 'Sales', icon: 'fa fa-dollar-sign', permission: 'sales orders' },
 		children: [
 			{
+				path: 'sales',
+				name: 'sales.sales',
+				component: Sales,
+				meta: {requiresAuth: true, title: 'Sales', permission: 'sales orders' },
+			},
+			{
 				path: 'orders',
 				name: 'sales.orders',
-				component: SalesOrders,
+				component: OrderList,
 				meta: {requiresAuth: true, title: 'Orders', permission: 'sales orders' },
 			},
 			{
-				path: 'invoices',
-				name: 'sales.invoices',
-				component: SalesInvoices,
-				meta: {requiresAuth: true, title: 'Invoices', permission: 'sales invoices' },
+				path: 'order/:id',
+				name: 'sales.order',
+				component: ViewOrder,
+				hidden: true,
+				meta: {requiresAuth: true, title: 'Order', permission: 'sales orders' },
 			},
 			{
 				path: 'shipments',
 				name: 'sales.shipments',
 				component: Shipments,
 				meta: {requiresAuth: true, title: 'Shipments', permission: 'sales shipments' },
+			},
+			{
+				path: 'shipment-methods',
+				name: 'sales.shipment-methods',
+				component: ShipmentMethods,
+				meta: {requiresAuth: true, title: 'Shipment Methods', permission: 'sales shipments' },
+			},
+			{
+				path: 'edit-shipment-method/:id',
+				name: 'sales.edit-shipment-method',
+				hidden: true,
+				component: EditShipmentMethod,
+				meta: {requiresAuth: true, title: 'Edit Shipment Method', permission: 'sales shipments' },
+			},
+			{
+				path: 'add-shipment-method',
+				name: 'sales.add-shipment-method',
+				hidden: true,
+				component: AddShipmentMethod,
+				meta: {requiresAuth: true, title: 'Add Shipment Method', permission: 'sales shipments' },
 			},
 			{
 				path: 'transactions',
@@ -491,10 +525,10 @@ export default [
 				meta: {requiresAuth: true, title: 'Billing Agreements', permission: 'sales billing agreements' },
 			},
 			{
-				path: 'terms-of-conditions',
+				path: 'terms-and-conditions',
 				name: 'sales.termsCondition',
-				component: TermsOfCondition,
-				meta: {requiresAuth: true, title: 'Terms of Conditions', permission: 'sales terms of condition' },
+				component: TermsAndCondition,
+				meta: {requiresAuth: true, title: 'Terms and Conditions', permission: 'sales terms of condition' },
 			},
 			{
 				path: 'recurring-profiles',
@@ -507,6 +541,20 @@ export default [
 				name: 'sales.tax',
 				component: SalesTax,
 				meta: {requiresAuth: true, title: 'Tax', permission: 'sales tax' },
+			},
+			{
+				path: 'edit-tax-tier',
+				name: 'sales.edit-tax-tier',
+				component: EditTaxTier,
+				hidden: true,
+				meta: {requiresAuth: true, title: 'Edit Tax Tier', permission: 'sales tax' },
+			},
+			{
+				path: 'new-tax-tier',
+				name: 'sales.new-tax-tier',
+				component: NewTaxTier,
+				hidden: true,
+				meta: {requiresAuth: true, title: 'Edit Tax Tier', permission: 'sales tax' },
 			}
 		]
 	},

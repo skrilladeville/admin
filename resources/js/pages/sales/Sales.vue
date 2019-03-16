@@ -6,7 +6,7 @@
             <div slot="header" class="clearfix">
                 <span class="card-title" >Sales</span>
             </div>
-            <div class="card-content" ><!-- widgetType-content here -->
+            <div class="card-content" >
                 <div class="card-body" >
                    <el-row>
                       <el-button-group>
@@ -171,13 +171,13 @@ export default {
   },
   methods: {
       changeCategory(num){
-          this.sales_category = num;
+          this.sales_category = num; 
       }
   }
 }
 </script>
 
-<style scoped>
+<style>
     .active{
         background-color: white!important;
         border:1px solid #067144 !important;

@@ -33,7 +33,8 @@ h3,
 a,
 .text-danger,
 .help-block,
-.el-submenu__title {
+.el-submenu__title,
+.jqx-widget-header {
   font-weight: bold;
 }
 
@@ -68,11 +69,15 @@ label {
 
 /* LAYOUT */
 
+/* h5{margin-bottom: 2rem;} */
+
 input[type="radio"],
 input[type="checkbox"] {
   margin: -4px 1em 0 0;
   vertical-align: middle;
 }
+
+/* h4{margin:3.2rem 0 1rem} */
 
 label {
   margin: 1.2rem 0 0.2rem;
@@ -130,11 +135,7 @@ html body.fixed-navbar {
   padding-top: 7.57rem;
 }
 
-.header-navbar {
-  min-height: 7.57rem;
-}
-
-/*.header-navbar .navbar-header{height:7.57rem}*/
+/*.header-navbar{min-height:7.57rem}*/
 
 body.vertical-layout.vertical-menu.menu-collapsed .navbar .navbar-brand {
   /*height:4.57em*/
@@ -152,6 +153,25 @@ body.vertical-layout.vertical-menu.menu-collapsed .navbar .navbar-brand {
 }
 
 /* .app-content.content{position:absolute} */
+
+div[role="columnheader"],
+div[role="gridcell"] {
+  line-height: initial;
+}
+
+/* .jqx-grid-column-header,.jqx-grid-column-header div div,.jqx-grid-cell{} */
+
+.jqx-grid-cell {
+  height: 100%;
+}
+
+.jqx-grid-cell.jqx-grid-cell-hover {
+  height: inherit;
+}
+
+.jqx-grid-cell-left-align {
+  margin: 0.7rem;
+}
 
 .main-menu.menu-fixed {
   top: 7.57rem;
@@ -331,11 +351,19 @@ h6.font-small-3 {
   text-align: center;
 }
 
+table {
+  border-width: 2px;
+}
+
 .pagination .page-link,
 .pagination .page-item.active .page-link,
 .table-bordered,
 .table-bordered td,
-.table-bordered th {
+.table-bordered th,
+.jqx-widget-content,
+.jqx-widget-header,
+.jqx-widget .jqx-grid-column-header,
+.jqx-widget .jqx-grid-cell {
   border: 1px solid #097244;
   margin: 0;
 }
@@ -348,7 +376,7 @@ h6.font-small-3 {
 
 table.dataTable tbody td {
   vertical-align: middle;
-  padding: 1rem;
+  /* padding:1rem */
 }
 
 .table a.btn.edit {
@@ -371,7 +399,7 @@ div.DTED_Lightbox_Wrapper {
 /* COLOR */
 
 html body {
-  background: #f7f8f6;
+  background: #E3EBD8;
 }
 
 a:link,
@@ -418,7 +446,8 @@ body.vertical-layout.vertical-menu.menu-expanded .main-menu,
 .dropdown-menu.show,
 .card .card,
 .table-hover tbody tr:hover,
-.table-striped tbody tr:nth-of-type(odd) {
+.table-striped tbody tr:nth-of-type(odd),
+.jqx-grid-content div[role="row"]:nth-of-type(odd) .jqx-grid-cell {
   background: #CDE2D9;
 }
 
@@ -449,7 +478,8 @@ thead,
 a.btn,
 .board,
 .headboard.first,
-.el-menu-item.is-active {
+.el-menu-item.is-active,
+.jqx-widget-header {
   background: #067144;
   color: #D3FFC9 !important;
 }
@@ -632,6 +662,15 @@ textarea {
   height: inherit;
 }
 
+table.dataTable {
+  border-collapse: collapse;
+}
+
+.jqx-widget-header {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
 .el-menu-item,
 .el-submenu__title {
   color: inherit;
@@ -654,11 +693,11 @@ textarea {
 
 .el-form-item--mini .el-form-item__content,
 .el-form-item--mini .el-form-item__label {
-  line-height: 3px;
+  line-height: 2px;
 }
 
 .el-form-item--small .el-form-item__content,
 .el-form-item--small .el-form-item__label {
-  line-height: 3px;
+  line-height: 2px;
 }
 

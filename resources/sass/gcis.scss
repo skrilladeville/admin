@@ -5,7 +5,7 @@
 /*body{font-size:1.2rem}*/
 *,.h1, .h2, .h3, .h4, .h5, .h6, code, h1, h2, h3, h4, h5, h6, kbd, pre, samp{font-family: 'Poppins', sans-serif;letter-spacing:inherit}
 h3, .h3{font-size:2.51rem}
-a,.text-danger,.help-block,.el-submenu__title{font-weight:bold}
+a,.text-danger,.help-block,.el-submenu__title,.jqx-widget-header{font-weight:bold}
 .help-block em{font-weight:normal;font-style:normal}
 
 /* .navigation,.el-submenu__title */li.el-menu-item.nav-item,li .el-submenu__title{font-size:1.4rem}
@@ -15,9 +15,9 @@ a,.text-danger,.help-block,.el-submenu__title{font-weight:bold}
 label{text-transform:uppercase}
 
 /* LAYOUT */
-
+/* h5{margin-bottom: 2rem;} */
 input[type="radio"],input[type="checkbox"]{margin:-4px 1em 0 0;vertical-align: middle;}
-
+/* h4{margin:3.2rem 0 1rem} */
 label{margin:1.2rem 0 0.2rem}
 
 [class*=" ft-"], [class^=ft-],.ft-align-center:before{margin:0 0.5em}
@@ -33,14 +33,18 @@ label{margin:1.2rem 0 0.2rem}
 .door label{display:none}label#rememberMe{display:inline;}.door fieldset p{width:70%;margin:auto}
 
 html body.fixed-navbar{padding-top:7.57rem}
-
-
-.header-navbar{min-height:7.57rem}
-/*.header-navbar .navbar-header{height:7.57rem}*/
+/*.header-navbar{min-height:7.57rem}*/
 body.vertical-layout.vertical-menu.menu-collapsed .navbar .navbar-brand{/*height:4.57em*/padding:0}
 .navbar-nav .d-md-none{margin:1.5rem}
 .pace .pace-progress{position:relative;margin-top:-0.4rem;height:0.4rem}
 /* .app-content.content{position:absolute} */
+
+div[role="columnheader"],div[role="gridcell"]{line-height:initial}
+/* .jqx-grid-column-header,.jqx-grid-column-header div div,.jqx-grid-cell{} */
+
+.jqx-grid-cell{height:100%;}
+.jqx-grid-cell.jqx-grid-cell-hover{height:inherit;}
+.jqx-grid-cell-left-align{margin:0.7rem}
 
 .main-menu.menu-fixed{top:7.57rem}
 body.vertical-layout.vertical-menu.menu-expanded .main-menu{width:20rem}
@@ -87,9 +91,10 @@ h6.font-small-3{font-size:0.9rem !important;}
 .dataTables_filter label{width:100%}
 .dataTables_paginate ul.pagination{float:right}
 .pagination li{min-width:2.5em;text-align:center}
-.pagination .page-link,.pagination .page-item.active .page-link,.table-bordered, .table-bordered td, .table-bordered th{border:1px solid #097244;margin:0}
+table{border-width:2px}
+.pagination .page-link,.pagination .page-item.active .page-link,.table-bordered, .table-bordered td, .table-bordered th,.jqx-widget-content,.jqx-widget-header,.jqx-widget .jqx-grid-column-header,.jqx-widget .jqx-grid-cell{border:1px solid #097244;margin:0}
 .page-item.next .page-link,.page-item.previous .page-link,.page-item.disabled .page-link{border:none}
-table.dataTable tbody td{vertical-align:middle;padding:1rem}
+table.dataTable tbody td{vertical-align:middle;/* padding:1rem */}
 .table a.btn.edit{float:right;padding:0.2rem 0.6rem}
 
 div.DTED_Lightbox_Background,div.DTED_Lightbox_Wrapper{z-index:1000}
@@ -97,15 +102,15 @@ div.DTED_Lightbox_Background,div.DTED_Lightbox_Wrapper{z-index:1000}
 .header-navbar .navbar-header,.navbar-wrapper{content:"";clear:both;display:table}
 
 /* COLOR */
-html body{background:rgb(247, 248, 246)}
+html body{background:#E3EBD8}
 a:link,a:visited,.main-menu li{color:#097244 !important}.h1, .h2, .h3, .h4, .h5, .h6, code, h1, h2, h3, h4, h5, h6, kbd, pre, samp,form label{color:#053922}
 a .fa,i.fa{color:#519c4e}
 .main-menu.menu-dark .navigation{background:none}
 body .content-detached.content-right{background:#E2EAD8}
-body.vertical-layout.vertical-menu.menu-expanded .main-menu,.navbar-nav .dropdown-menu,.dropdown-menu.show,.card .card,.table-hover tbody tr:hover,.table-striped tbody tr:nth-of-type(odd){background:#CDE2D9}
+body.vertical-layout.vertical-menu.menu-expanded .main-menu,.navbar-nav .dropdown-menu,.dropdown-menu.show,.card .card,.table-hover tbody tr:hover,.table-striped tbody tr:nth-of-type(odd),.jqx-grid-content div[role="row"]:nth-of-type(odd) .jqx-grid-cell{background:#CDE2D9}
 input:required::placeholder,.help-block{color:red}input:required{border-color:red !important}
 
-.navbar,.main-menu.menu-dark .navigation > li.active > a,.main-menu.menu-dark .navigation > li .active > a,button.btn,thead,a.btn,.board,.headboard.first,.el-menu-item.is-active{background:#067144;color:#D3FFC9 !important}
+.navbar,.main-menu.menu-dark .navigation > li.active > a,.main-menu.menu-dark .navigation > li .active > a,button.btn,thead,a.btn,.board,.headboard.first,.el-menu-item.is-active,.jqx-widget-header{background:#067144;color:#D3FFC9 !important}
 .board h2,.headboard.first h2,.headboard.first h5{color:white}
 .main-menu.menu-dark .navigation > li.open > a,li.is-opened{background:#9CD192}
 .main-menu.menu-dark .navigation > li.active > a span,.main-menu.menu-dark .navigation > li .active > a{color:#D3FFC9 !important}
@@ -154,6 +159,10 @@ body.vertical-layout.vertical-menu .main-menu {width:16rem;}
 button,input,optgroup,select,textarea{font-family:inherit;}
 .form-control{height:inherit}
 
+// override jQuery.dataTables
+table.dataTable{border-collapse:collapse}
+.jqx-widget-header{box-sizing:inherit}
+
 // override elementUI inline styles
 .el-menu-item,.el-submenu__title{color:inherit;font-size:inherit}
 .el-menu-item:hover{background:inherit}
@@ -161,9 +170,5 @@ button,input,optgroup,select,textarea{font-family:inherit;}
 .el-menu--horizontal{border:inherit}
 .tab-container[data-v-fa309b34]{margin:inherit}
 
-.el-form-item--mini .el-form-item__content, .el-form-item--mini .el-form-item__label {
-	line-height: 3px;
-}
-.el-form-item--small .el-form-item__content, .el-form-item--small .el-form-item__label {
-	line-height: 3px;
-}
+.el-form-item--mini .el-form-item__content, .el-form-item--mini .el-form-item__label {line-height:2px;}
+.el-form-item--small .el-form-item__content, .el-form-item--small .el-form-item__label {line-height: 2px;}

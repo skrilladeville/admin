@@ -6,17 +6,15 @@
             <div slot="header" class="clearfix">
                 <span class="card-title" >Sales</span>
             </div>
-            <div class="card-content" ><!-- widgetType-content here -->
+            <div class="card-content" >
                 <div class="card-body" >
 
-                    <v-client-table name='orderTable' ref="table" :columns="columns" :data="data">
-                      <router-link slot="uri" slot-scope="props" :to="{name:'order'}">
+                    <v-client-table name='orderTable' ref="table" :columns="columns" :data="data" :options="options">
+                      <router-link slot="uri" slot-scope="props" :to="{name:'sales.order', params:{id:props.row.order_number}}">
                       <!-- <a slot="uri" slot-scope="props" target="_blank" :href="props.row.uri"> -->
-                        <font-awesome-icon :icon="'eye'" size="sm"/>
+                        <el-button type="warning" size="small"><font-awesome-icon :icon="'eye'" size="sm"/></el-button>
                       </router-link>
-                      <div slot="child_row" slot-scope="props">
-                        The link to {{props.row.name}} is <a :href="props.row.uri">{{props.row.uri}}</a>
-                      </div>
+                      <div slot="created_at" slot-scope="props" class="created-at-row">{{props.row.created_at}}</div>
                       <el-row :class="'filters-row'" slot="afterFilter">
                         <el-tag
                           :key="index"
@@ -63,25 +61,12 @@
 
 <script>
 import axios from 'axios'
-import Event from 'vue-tables-2'
-// import path from 'path'
-// import VueRouter from 'vue-router'
-// import Vue from 'vue';
-import ViewOrder from './ViewOrder'
-// const User = {
-//   template: '<div>Order here</div>'
-// }
-// Vue.use(VueRouter)
-// const router = new VueRouter({
-//   routes: [
-//     { name: 'orders', path: '/', component: SalesOrder },
-//     { name: 'order', path: '/order/', component: ViewOrder }
-//   ]
-// })
+// import Event from 'vue-tables-2'
+
+
 export default {
-//   router,
   name: 'OrderList',
-  components: { ViewOrder },
+  components: {  },
   data() {
     return {
       tag_new:{
@@ -130,7 +115,8 @@ export default {
           callback: function(row, query) {
             return row.status == 'Pickup'
           }
-        }]
+        }],
+      dateColumns:['date']
     },
         dynamicTags: [],
         popover_visible: false,
@@ -151,18 +137,11 @@ export default {
           this.tag_new.value = '';
           this.popover_visible = false;
           // console.log(this.$refs.table)
-          // this.$store.commit('orderTable/SET_CUSTOM_FILTER', {filter:'all_fields', value:this.filter_list})
+          this.$store.commit('orderTable/SET_CUSTOM_FILTER', {filter:'all_fields', value:this.filter_list})
           // this.$store.commit('orderTable/FILTER', {filter:'all_fields', value:this.filter_list})
-          // Event.$emit('vue-tables.orderTable.filter::all_fields', this.filter_list);
+          // Event.$emit('vue-tables.filter::all_fields', this.filter_list);
         }
-      },
-
-      resolvePath(routePath) {
-      if (/^(https?:|mailto:|tel:)/.test(routePath)) {
-        return routePath
       }
-      return path.resolve('/sales/orders', routePath)
-    },
     },
   computed: {
     items(){
@@ -190,7 +169,8 @@ function getData() {
                         status: status[Math.floor(Math.random()*status.length)],
                         order_number: Math.floor(Math.random() * (Math.floor(6245) -  Math.ceil(4567) + 1)) +  Math.ceil(4567),
                         qty: Math.floor(Math.random() * (Math.floor(100) -  Math.ceil(50) + 1)) +  Math.ceil(50),
-                        created_at: new Date(new Date(2019, 0, 1).getTime() + Math.random() * (new Date().getTime() - new Date(2019, 0, 1).getTime())),
+                        created_at: moment(new Date(new Date(2019, 0, 1).getTime() + Math.random() * (new Date().getTime() - new Date(2019, 0, 1).getTime()))).
+                        format('MMM DD, YYYY h:MM:ss a'),
                         total_amount: Math.floor(Math.random() * (Math.floor(100) -  Math.ceil(50) + 1)) +  Math.ceil(50),
                         fulfillment: fulfillment[Math.floor(Math.random()*fulfillment.length)]
                     });
@@ -258,5 +238,20 @@ function getData() {
     color: #fff!important;
 }
 
+.created-at-row{
+  width: 150px;
+}
+
+.el-button--warning {
+  color: #fff!important;
+  background-color: #e6a23c!important;
+  border-color: #e6a23c!important;
+}
+
+.el-button--warning:hover {
+  background-color: rgba(230,162,60,.7)!important;
+  border-color: rgba(230,162,60,.2)!important;
+  color: #fff!important;
+}
 </style>
 
