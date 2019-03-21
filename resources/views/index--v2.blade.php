@@ -15,7 +15,7 @@
   <link id="robust" href="{{ mix('/css/robust-admin.css') }}" rel="stylesheet">
   <link href="{{ mix('/css/robust-admin.css') }}" rel="stylesheet">
 	<link href="{{ mix('/css/jqwidgets/jqx.base.css') }}" rel="stylesheet">
-	<script async type="text/javascript" src="https://js.squareup.com/v2/paymentform"></script>
+	
 	
 	<script>
 		window.Laravel = {!! json_encode([

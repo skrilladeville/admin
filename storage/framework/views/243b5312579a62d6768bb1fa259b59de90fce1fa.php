@@ -15,7 +15,7 @@
   <link id="robust" href="<?php echo e(mix('/css/robust-admin.css')); ?>" rel="stylesheet">
   <link href="<?php echo e(mix('/css/robust-admin.css')); ?>" rel="stylesheet">
 	<link href="<?php echo e(mix('/css/jqwidgets/jqx.base.css')); ?>" rel="stylesheet">
-	<script async type="text/javascript" src="https://js.squareup.com/v2/paymentform"></script>
+	
 	
 	<script>
 		window.Laravel = <?php echo json_encode([
