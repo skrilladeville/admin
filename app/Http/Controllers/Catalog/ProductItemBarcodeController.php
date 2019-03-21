@@ -15,7 +15,7 @@ class ProductItemBarcodeController extends Controller
      */
     public function index()
     {
-        $barcodes=ProductItemBarcode::all();
+        $barcodes=ProductItemBarcode::with('product')->get();
         return $barcodes;
     }
 
@@ -37,8 +37,8 @@ class ProductItemBarcodeController extends Controller
      */
     public function store(Request $request)
     {
-        $code=mt_rand(1000000000, 9999999999);
-        $barcode=ProductItemBarcode::create($request->only('product_id','measurement'),$code);
+        
+        $barcode=ProductItemBarcode::create($request->only(['product_id','size','code']));
         return $barcode;
     }
 

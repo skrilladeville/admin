@@ -13,6 +13,10 @@ class Product extends Model
         return $this->hasMany('App\Inventory'); 
     }
 
+    public function barcodes(){
+        return $this->hasMany('App\ProductItemBarcode');  
+    }
+
     public function productCategory(){
         return $this->belongsTo('App\ProductCategory');
     }

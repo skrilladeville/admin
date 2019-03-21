@@ -20,7 +20,9 @@
         </router-link>
       </div>
 
-      <v-client-table :data="products" :columns="['name','symbol','sku','description','action']">
+
+
+      <v-client-table name="productTable" :options="options"  :data="getProducts" :columns="columns">
         <template slot="action" slot-scope="props">
           <div class="d-flex">
             <router-link :to="`/catalog/product/details/${props.row.id}`">
@@ -695,10 +697,16 @@
 </style>
 
 <script>
+import {mapGetters,mapMutations,mapState} from 'vuex'
+
 export default {
   data() {
     return {
+
+      
       products: [],
+      columns:['name','symbol','sku','description','action'],
+      options:{},
       vendors: [],
       branches:[],
       labs: [],
@@ -765,9 +773,19 @@ export default {
     }
   },
   created() {
+   
     axios.get('/api/catalog/product').then(res => {
-      console.log(res.data)
-      this.products = res.data
+     // console.log(res.data)
+     //this.products = res.data
+     //Object.assign(this.products, res.data);
+     res.data.forEach(el=>{
+      this.$store.commit('SET_PRODUCTS',el)
+     })
+
+     //console.log(this.products)
+
+     
+      
     })
     axios.get('/api/user/branch/all').then(res=>{
       this.branches=res.data
@@ -792,6 +810,10 @@ export default {
     console.log(`naka abot ${this.form.date}`)
   },
   computed: {
+    getProducts(){
+      console.log(this.$store.getters.getProducts)
+      return this.$store.getters.getProducts
+    },
     getVendorName: function() {
       let vendor = this.vendors.filter(el => el.id == this.form.vendor_id)
       vendor.forEach(e => {

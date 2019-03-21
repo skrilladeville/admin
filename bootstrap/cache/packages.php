@@ -41,29 +41,6 @@
       0 => 'Carbon\\Laravel\\ServiceProvider',
     ),
   ),
-  'nikolag/core' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Nikolag\\Core\\Providers\\MigrationServiceProvider',
-      1 => 'Nikolag\\Core\\Providers\\CoreServiceProvider',
-    ),
-    'facades' => 
-    array (
-      0 => 'Nikolag\\Core\\Facades\\CoreService',
-    ),
-  ),
-  'nikolag/laravel-square' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Nikolag\\Square\\Providers\\SquareServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Square' => 'Nikolag\\Square\\Facades\\Square',
-    ),
-  ),
   'nunomaduro/collision' => 
   array (
     'providers' => 

@@ -17,7 +17,7 @@ class CreateProductItemBarcode extends Migration
             $table->increments('id');
             $table->integer('product_id');
             $table->string('code');
-            $table->string('measurement');
+            $table->string('size');
             $table->timestamps();
         });
     }

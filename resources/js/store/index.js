@@ -4,6 +4,10 @@ import auth from "./modules/auth";
 import app from './modules/app';
 import shipmentMethodsTable from './modules/shipments'
 import onlineStore from './modules/onlineStore';
+import products from './modules/products'
+import vendors from './modules/vendors'
+import categories from './modules/categories'
+import labs from './modules/labs'
 import getters from './getters';
 
 
@@ -14,7 +18,11 @@ export default new Vuex.Store({
 		auth,
 		app,
 		shipmentMethodsTable,
-		onlineStore
+		onlineStore,
+		products,
+		vendors,
+		labs,
+		categories
 	},
 	getters,
 	strict: true

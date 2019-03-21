@@ -10,7 +10,7 @@
         </router-link>
       </div>
 
-       <v-client-table :data="labs" :columns="['name','email','phone','description','action']">
+       <v-client-table name="labTable" :data="getLabs" :columns="['name','email','phone','description','action']">
      <template slot="action" slot-scope="props">
        <div class="d-flex">
        <router-link :to="`/catalog/lab/edit/${props.row.id}`"><el-button  size="small"  icon="el-icon-edit"  type="success"></el-button></router-link>
@@ -45,7 +45,9 @@ export default {
     axios
       .get('/api/catalog/lab')
       .then(response => {
-        this.labs = response.data
+       response.data.forEach(element => {
+          this.$store.commit('SET_LAB',element)
+        });
         console.log(response)
       })
       .catch(error => {
@@ -58,6 +60,11 @@ export default {
       id: '',
       index: '',
       labs: []
+    }
+  },
+  computed:{
+    getLabs(){
+      return this.$store.getters.getLabs
     }
   },
   methods: {
@@ -73,7 +80,7 @@ export default {
       let uri = `/api/catalog/lab/delete/${this.id}`
       axios.post(uri).then(res => {
         console.log(res.data)
-        this.labs.splice(this.index, 1)
+        this.$store.commit('DELETE_LAB',this.index)
       })
     }
   }

@@ -16,11 +16,11 @@
 
  
 
-    <v-client-table :data="vendors" :columns="titles">
+    <v-client-table name="vendorTable" :data="getVendors" :columns="titles">
      <template slot="action" slot-scope="props">
        <div class="d-flex">
        <router-link :to="`/catalog/vendors/edit/${props.row.id}`"><el-button  size="small"  icon="el-icon-edit"  type="success"></el-button></router-link>
-     <el-button  size="small"  icon="el-icon-delete" @click="openDialog(props.$index,props.row)"  type="danger"></el-button>
+     <el-button  size="small"  icon="el-icon-delete" @click="openDialog(props.index,props.row)"  type="danger"></el-button>
        </div>
      </template>
      
@@ -51,7 +51,9 @@ export default {
     axios
       .get('/api/catalog/vendor')
       .then(response => {
-        this.vendors = response.data
+        response.data.forEach(element => {
+              this.$store.commit('SET_VENDOR',element)
+        })
         console.log(response)
       })
       .catch(error => {
@@ -63,29 +65,34 @@ export default {
       centerDialogVisible: false,
       id: '',
       index: '',
-      vendors: [],
+     // vendors: [],
       titles: [
         'name','phone','email','description','action'
       ],
       
     }
   },
+      computed: {
+      getVendors(){
+        console.log(this.$store.getters.getVendors)
+        return this.$store.getters.getVendors
+      }
+    },
   methods: {
     openDialog(index, row) {
       this.centerDialogVisible = true
       this.id = row.id
       this.index = index
+      console.log(this.index)
     },
-
-    
-
     Delete() {
       // console.log(row.id)
       this.centerDialogVisible = false
       let uri = `/api/catalog/vendor/delete/${this.id}`
       axios.post(uri).then(res => {
         console.log(res.data)
-        this.vendors.splice(this.index, 1)
+       this.$store.commit('DELETE_VENDOR',this.index)
+     
       })
     },
     handleSelectionChange(val) {
