@@ -169,7 +169,7 @@ class UsersTableSeeder extends Seeder
         User::where('name', 'Patient8')->first()->assignRole('Patient');
         User::where('name', 'Patient9')->first()->assignRole('Patient');
         User::where('name', 'Patient10')->first()->assignRole('Patient');
-        User::where('name', 'Patient111')->first()->assignRole('Patient');
+        User::where('name', 'Patient11')->first()->assignRole('Patient');
         User::where('name', 'Patient12')->first()->assignRole('Patient');
         User::where('name', 'Patient13')->first()->assignRole('Patient');
         User::where('name', 'Patient14')->first()->assignRole('Patient');
