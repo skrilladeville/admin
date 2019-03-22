@@ -60,11 +60,11 @@
                       </el-card>
                        </el-row>
                        <div slot="date" slot-scope="props" class="date-row">{{props.row.date}}</div>
-                       <div slot="amount" slot-scope="props">$ {{props.row.amount}}</div>
-                       <div slot="discount" slot-scope="props" class="discount-row">$ {{props.row.discount}}</div>
-                       <div slot="tax" slot-scope="props" class="tax-row">$ {{props.row.tax}}</div>
+                       <div slot="amount" slot-scope="props">{{props.row.amount}}</div>
+                       <div slot="discount" slot-scope="props" class="discount-row">{{props.row.discount}}</div>
+                       <div slot="tax" slot-scope="props" class="tax-row">{{props.row.tax}}</div>
                        <div slot="total" slot-scope="props">$ {{props.row.total}}</div>
-                       <div slot="total_paid" slot-scope="props">$ {{props.row.total_paid}}</div>
+                       <div slot="total_paid" slot-scope="props">{{props.row.total_paid}}</div>
                       <el-button type="warning" size="small" slot="view" slot-scope="props" @click="viewTransaction(props.row)">
                         <font-awesome-icon :icon="'eye'" size="sm"/>
                       </el-button>
@@ -169,7 +169,7 @@ export default {
     checkedRows:[],
     columns: ['date', 'register_name', 'register_type', 'type', 
       'amount', 'discount', 'tax', 'total', 'total_paid', 'view'],
-    data: getData(),
+    data: [],
     options: {
       headings: {
         date: 'Date',
@@ -190,7 +190,8 @@ export default {
       date:[],
       register_name: '',
       type: 'Type',
-    }
+    },
+    register_types: ['Register', 'Courier']
     }
   },
    methods: {
@@ -199,37 +200,33 @@ export default {
        this.dialogVisible = true;
      }
     },
-  computed: {
+  mounted() {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+        axios.get('/api/sales/transactions/')
+        .then(res=>{
+          res.data.forEach(obj => {
+            var transaction = {
+              register_name: obj.name,
+              register_type: this.register_types[obj.register_type],
+              type: obj.type,
+              amount: formatter.format(obj.amount),
+              discount: formatter.format(obj.discount),
+              tax: formatter.format(obj.sales_tax),
+              total_paid: formatter.format(obj.total-0.00),
+              date: moment(new Date(obj.created_at)).format('MMM DD, YYYY h:MM:ss a'),
+              total:formatter.format(obj.total),
+            }
+
+            this.$store.dispatch('SET_TRANSACTIONS', transaction)
+          });;
+        }
+        ).catch(err=>console.log(err))
+      }
   }
-  }
 
-
-
-function getData() {
-  var type = ['Open Shift','Safe Drop','Sale', 'Close Shift', 'Return Cash'];
-  var register_type = ['Register', 'Courier'];
-  var register_name = ['Register #1', 'Register #1', 'Register #1'];
-  var shift_headings = ['Opening Amount', 'Cash Sales', 'Drops', 'Expected Drawer', 'Actual Drawer', 'Short'];
-  var sale_headings = ['Product', 'Category', 'Price', 'Qty', 'Discount', 'Free Discount', 'Tax', 'Total'];
-  var list =[];              
-                for (var i=0; i<10; i++){
-                    list.push({
-                        type: type[Math.floor(Math.random()*type.length)],
-                        register_type: register_type[Math.floor(Math.random()*register_type.length)],
-                        register_name: register_name[Math.floor(Math.random()*register_name.length)],
-                        date: moment(new Date(new Date(2019, 0, 1).getTime() + Math.random() * (new Date().getTime() - new Date(2019, 0, 1).getTime()))).
-                        format('MMM DD, YYYY h:MM:ss a'),
-                        tax: Math.floor(Math.random() * (Math.floor(20) -  Math.ceil(0) + 1)) +  Math.ceil(50),
-                        discount: Math.floor(Math.random() * (Math.floor(20) -  Math.ceil(0) + 1)) +  Math.ceil(50),
-                        amount: Math.floor(Math.random() * (Math.floor(100) -  Math.ceil(50) + 1)) +  Math.ceil(50),
-                        total: Math.floor(Math.random() * (Math.floor(100) -  Math.ceil(50) + 1)) +  Math.ceil(50),
-                        total_paid: Math.floor(Math.random() * (Math.floor(100) -  Math.ceil(50) + 1)) +  Math.ceil(50)
-                    });
-                  list[i].headings = list[i].type=='Return Cash' || list[i].type=='Sale' ?
-                                      sale_headings : shift_headings;
-                }
-  return list;
-}
 </script>
 
 <style>

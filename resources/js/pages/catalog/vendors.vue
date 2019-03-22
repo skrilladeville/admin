@@ -16,7 +16,7 @@
 
  
 
-    <v-client-table :data="vendors" :columns="titles">
+    <v-client-table name="vendors" :data="vendors" :columns="titles">
      <template slot="action" slot-scope="props">
        <div class="d-flex">
        <router-link :to="`/catalog/vendors/edit/${props.row.id}`"><el-button  size="small"  icon="el-icon-edit"  type="success"></el-button></router-link>
