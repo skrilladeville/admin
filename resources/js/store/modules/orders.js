@@ -3,12 +3,12 @@ export default {
         data:[]
     },
     actions:{
-        ['SET_SHIPMENTS']({commit}, payload){
-            commit('SET_SHIPMENTS', payload)
+        ['SET_ORDERS']({commit}, payload){
+            commit('SET_ORDERS', payload)
         }
     },
     mutations:{
-        ['SET_SHIPMENTS'](state, payload){
+        ['SET_ORDERS'](state, payload){
             state.data.push(payload);
         }
     }

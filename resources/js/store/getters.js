@@ -10,8 +10,8 @@ const getters = {
   //online Store getter
   getCarts:state=>state.onlineStore.carts,
   getCartCount:state=>state.onlineStore.cart_count,
-  getIslegalAge:state=>state.onlineStore.isLegalAge
-
+  getIslegalAge:state=>state.onlineStore.isLegalAge,
+  getOrders: state => state.orderTable.orders
 
       
 
