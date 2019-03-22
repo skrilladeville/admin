@@ -132,4 +132,13 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     /*Contact*/
     Route::post('contact/create', 'Contact\ContactController@store');
 
+    /*Sales*/
+    Route::post('sales/sales', 'Sales\SalesController@index');
+    Route::post('sales/orders', 'Sales\OrderController@filter');
+    Route::get('sales/orders', 'Sales\OrderController@index');
+    Route::get('sales/transactions', 'Sales\TransactionController@index');
+    Route::get('sales/transactions/{filter}', 'Sales\TransactionController@show');
+    Route::get('sales/shipments', 'Sales\ShipmentController@index');
+    Route::get('sales/shipmentMethods', 'Sales\ShipmentController@shipmentMethods');
+    Route::get('sales/tax', 'Sales\TaxController@index');
 //});
