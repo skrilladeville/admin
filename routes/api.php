@@ -31,9 +31,19 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::get('catalog/product/checkinpayment/all', 'Catalog\CheckInProductPaymentController@index');
     Route::post('catalog/product/checkinpayment/create', 'Catalog\CheckInProductPaymentController@store');
 
+    //catalog checkin inventory
+    Route::post('catalog/product/inventory/create', 'Catalog\InventoryController@store');
+    Route::post('catalog/product/inventory/update/{pid}/{bid}', 'Catalog\InventoryController@updateBranchAndProduct');
+    Route::get('catalog/product/inventory/get/{pid}/{bid}', 'Catalog\InventoryController@getBranchAndProduct');
+    Route::get('catalog/product/inventory/view/{id}', 'Catalog\InventoryController@show');
+  
+  //branch
+  Route::get('user/branch/all', 'Users\BranchController@index');
+  Route::get('user/branch/view/{id}', 'Users\BranchController@show');
+  
 
 
-     
+
     Route::post('catalog/tags/create', 'Catalog\TagController@store');
     Route::post('catalog/labResult/create', 'Catalog\LabResultController@store');
     Route::post('catalog/weedMapPrice/create', 'Catalog\WeedMapPriceController@store');
@@ -59,10 +69,14 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
 
 
     //product catalog
+    Route::post('catalog/product/barcode/create', 'Catalog\ProductItemBarcodeController@store');
+    Route::get('catalog/product/barcode/all', 'Catalog\ProductItemBarcodeController@index');
     Route::post('catalog/product/create', 'Catalog\ProductController@store');
     Route::post('catalog/product/upload', 'Catalog\ProductController@upload');
     Route::get('catalog/product', 'Catalog\ProductController@index');
     Route::get('catalog/product/view/{id}', 'Catalog\ProductController@show');
+    Route::get('reports/{role}/{pagename}','Reports\ReporterController@index');
+    
 
     // GCCv1 pages and files
     Route::get('gccv1/{role}/{pagename}','GCCv1\PageController@gccPage');
@@ -89,6 +103,7 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::get('users/patients/{doctor_id}', 'Users\ProfilePatientController@patients');
     Route::get('users/patientsCount/{doctor_id}', 'Users\ProfilePatientController@patientsCount');
     Route::resource('users', 'Users\ProfilePatientController');
+
 
 //Route::group(['middleware' => 'jwt.auth'], function () {
     /* User */

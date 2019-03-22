@@ -9,6 +9,14 @@ class Product extends Model
     protected $guarded = [];
 
 
+    public function inventories(){
+        return $this->hasMany('App\Inventory'); 
+    }
+
+    public function barcodes(){
+        return $this->hasMany('App\ProductItemBarcode');  
+    }
+
     public function productCategory(){
         return $this->belongsTo('App\ProductCategory');
     }

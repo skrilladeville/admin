@@ -100,6 +100,7 @@ axios.interceptors.response.use(response => {
 	if (errorResponseData.error && errors.includes(errorResponseData.error)) {
 		store.dispatch('unsetAuthUser')
 			.then(() => {
+		
 				jwtToken.removeToken();
 				router.push({name: 'login'});
 			});
@@ -114,5 +115,6 @@ new Vue({
   el: '#app',
   router,
   store,
+  
   render: h => h(App)
 })

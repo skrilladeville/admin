@@ -6,11 +6,11 @@
     <el-button @click="dialogAdd = true" style="float: right;" icon="el-icon-plus" type="success" size="small">Add Category</el-button>
   </div>
 
-   <v-client-table :data="categories" :columns="['name','products','marijuana','nonmarijuana','description','action']">
+   <v-client-table name="categoryTable" :data="getCategories" :columns="['name','products','marijuana','nonmarijuana','description','action']">
      <template slot="action" slot-scope="props">
        <div class="d-flex">
-      <el-button  size="small"  icon="el-icon-edit" @click="openDialogEdit(props.row)" type="success"></el-button>
-     <el-button  size="small"  icon="el-icon-delete" @click="openDialog(props.$index, props.row)" type="danger"></el-button>
+      <el-button  size="small"  icon="el-icon-edit" @click="openDialogEdit(props.index, props.row)" type="success"></el-button>
+     <el-button  size="small"  icon="el-icon-delete" @click="openDialog(props.index, props.row)" type="danger"></el-button>
        </div>
      </template>
      
@@ -181,7 +181,9 @@ export default {
     },
 
     computed:{
-       
+    getCategories(){
+      return this.$store.getters.getCategories
+    }   
 
     },
     created(){
@@ -196,25 +198,8 @@ export default {
            axios.get('/api/catalog/category/all')
             .then(res=>{
               console.log(res.data)
-                      res.data.forEach(element => {
-                  if(element.product_cat_id==0){
-                      this.categories.push(element)
-                      let subCats=res.data.filter(e=>e.product_cat_id == element.id)
-                      subCats.forEach(sub=>{
-                           this.categories.push(sub)
-                      })
-                  }
-              });
-
-
-              this.categories.forEach(e=>{
-                e.products=e.products.length
-                e.marijuana=`${e.marijuana_products.length} marijuana` 
-                e.nonmarijuana=`${e.nonmarijuana_products.length} non marijuana`
-              })
-
     
-
+              this.$store.commit('SET_CATEGORY',res.data)
               console.log("total"+this.categories)
             })
 
@@ -226,15 +211,18 @@ export default {
           this.centerDialogVisible=true
           this.id=row.id
           this.index=index
+          console.log(index)
+
 
             
         
         },
 
-        openDialogEdit(row){
+        openDialogEdit(index,row){
+          this.index=index
+          console.log(index)
           this.dialogEdit=true
           this.edit_id=row.id
-
           this.form.name=row.name
           this.form.description=row.description
           this.form.product_cat_id=row.product_cat_id
@@ -247,8 +235,10 @@ export default {
             let uri=`/api/catalog/category/delete/${this.id}`
             axios.post(uri)
                 .then(res=>{
-                    console.log(res.data)
-                    this.categories.splice(this.index,1)
+                    
+                   // this.categories.splice(this.index,1)
+
+                    this.$store.commit('DELETE_CATEGORY',this.index)
 
                 })
         },
@@ -265,14 +255,18 @@ export default {
 
                 //add to parent
 
-                this.categories.push(res.data)
-                this.categories[this.index]={
+               // this.categories.push(res.data)
+            
+                
+
+                this.$store.commit('UPDATE_CAT',{
+                  index:this.index,
                   id:this.edit_id,
                   name:this.form.name,
                   product_cat_id:this.form.product_cat_id,
                   description:this.form.description
                
-                }
+                })
 
                 
                 if(res.data.product_cat_id==0){
@@ -305,7 +299,9 @@ export default {
                 //add to parent
                 
 
-                this.categories.push(res.data)
+                //this.categories.push(res.data)
+
+                this.$store.commit('ADD_CAT',res.data)
 
                 this.categories.forEach(el=>{
                   if(el.id == res.data.id){

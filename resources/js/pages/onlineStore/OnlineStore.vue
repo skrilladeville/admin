@@ -1,6 +1,6 @@
 <template>
-<div style="margin-top:10px;">
-  <v-container fluid v-if="getIslegalAge">
+<div v-if="getIslegalAge" style="margin-top:10px;">
+ 
  <v-carousel>
     <v-carousel-item
       v-for="(item,i) in items"
@@ -16,7 +16,7 @@
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, repellendus fugiat incidunt commodi magni alias accusantium, natus cum eos quis ipsam, numquam sint ratione quod vitae! Amet aliquid tenetur modi!</p>
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus quas illo aliquid, dolorem incidunt id eveniet facilis aperiam molestiae asperiores dolore veniam veritatis mollitia. Quas quae voluptatibus nisi possimus id!</p>
   </el-card>
-  </v-container>
+
 
     <v-layout v-if="getIslegalAge==false" row justify-center>
     <v-dialog v-model="dialogAgree"

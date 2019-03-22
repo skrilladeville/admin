@@ -3,6 +3,10 @@ import Vuex from 'vuex';
 import auth from "./modules/auth";
 import app from './modules/app';
 import onlineStore from './modules/onlineStore';
+import products from './modules/products'
+import vendors from './modules/vendors'
+import categories from './modules/categories'
+import labs from './modules/labs'
 import getters from './getters';
 import orderTable from './modules/orders';
 import transactionsTable from './modules/transactions';
@@ -19,7 +23,11 @@ export default new Vuex.Store({
 		shipmentMethodsTable,
 		onlineStore,
 		orderTable,
-		transactionsTable
+		transactionsTable,
+		products,
+		vendors,
+		labs,
+		categories
 	},
 	getters,
 	strict: true

@@ -1,6 +1,8 @@
 <template>
   <widgetize title="Sales">
-  	<JqxGrid ref="myGrid" :width="'98%'" :source="dataAdapter" :columns="columns" />
+		<JqxGrid @sort="onSort($event)" ref="myGrid" :theme="'material'" :width="width" :source="dataAdapter" :columns="columns" :filterable="true" 
+			:autoshowfiltericon="false" :sorting="true" :groupable="true">
+		</JqxGrid>
 		<ExportButtons @exportBtnOnClick="exportBtnOnClick"/>
   </widgetize>
 </template>
@@ -20,38 +22,39 @@ export default {
   data: 
     function () {
       return {
+				width: '99%',
         dataAdapter: new jqx.dataAdapter(this.source),
         columns: [
-            { text: 'Contact Name', datafield: 'ContactName', width: 240 },
-            { text: 'Contact Title', datafield: 'Title', width: 240 },
-            { text: 'City', datafield: 'City', width: 150 },
-            { text: 'Country', datafield: 'Country' }
+					{ text: 'Date', datafield: 'order_date', cellsformat: 'd', width: 140 },
+					{ text: 'Time', datafield: 'order_time', width: 120 },
+					{ text: 'Customer Name', datafield: 'customer_id', width: 200 },
+					{ text: 'Shelf', datafield: 'shelf_id', width: 140 },
+					{ text: 'Register Name', datafield: 'register_id', width: 150 },
+					{ text: 'Payment Method', datafield: 'payment_method_id', width: 140 },
+					{ text: 'Order Type', datafield: 'order_type_id', width: 120 },
+					{ text: 'Order Amount', datafield: 'order_amt', cellsalign: 'right', cellsformat: 'c2', width: 120 },
+					{ text: 'Items Qty', datafield: 'items_qty', cellsalign: 'right', cellsformat: 'f', width: 120 }
         ]
       }
   },
 	beforeCreate: function () {
 		this.source = {
-			localdata: [
-				['Maria Anders', 'Sales Representative', 'Berlin', 'Germany'],
-				['Ana Trujillo', 'Owner', 'Mxico D.F.', 'Mexico'],
-				['Antonio Moreno', 'Owner', 'Mxico D.F.', 'Mexico'],
-				['Thomas Hardy', 'Sales Representative', 'London', 'UK'],
-				['Christina Berglund', 'Order Administrator', 'Lule', 'Sweden'],
-				['Hanna Moos', 'Sales Representative', 'Mannheim', 'Germany'],
-				['Frdrique Citeaux', 'Marketing Manager', 'Strasbourg', 'France'],
-				['Martn Sommer', 'Owner', 'Madrid', 'Spain'],
-				['Laurence Lebihan', 'Owner', 'Marseille', 'France'],
-				['Elizabeth Lincoln', 'Accounting Manager', 'Tsawassen', 'Canada'],
-				['Victoria Ashworth', 'Sales Representative', 'London', 'UK'],
-				['Patricio Simpson', 'Sales Agent', 'Buenos Aires', 'Argentina']
-			],
+			datatype: 'json',
 			datafields: [
-					{ name: 'ContactName', type: 'string', map: '0' },
-					{ name: 'Title', type: 'string', map: '1' },
-					{ name: 'City', type: 'string', map: '2' },
-					{ name: 'Country', type: 'string', map: '3' }
+				{ name: 'customer_id', type: 'int' },
+				{ name: 'shelf_id', type: 'int' },
+				{ name: 'register_id', type: 'int' },
+				{ name: 'payment_method_id', type: 'int' },
+				{ name: 'order_type_id', type: 'int' },
+				{ name: 'order_date', type: 'string' },
+				{ name: 'order_time', type: 'string' },
+				{ name: 'order_amt', type: 'float' },
+				{ name: 'items_qty', type: 'int' }
 			],
-			datatype: 'array'
+			id: 'id',
+			url: '/api/reports/admin/sales',
+			sortcolumn: 'order_date',
+			sortdirection: 'desc'
 		}
 	},
 	methods: {

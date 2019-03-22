@@ -13,7 +13,7 @@
         </router-link>
       </div>
   
-       <v-client-table :data="price_presets" :columns="['name','price_type','is_custom_prices','is_dynamic_preset','action']">
+       <v-client-table name="pricePresetTable" :data="price_presets" :columns="['name','price_type','is_custom_prices','is_dynamic_preset','action']">
      <template slot="action" slot-scope="props">
        <div class="d-flex">
        <router-link :to="`/catalog/pricePresets/edit/${props.row.id}`"><el-button  size="small"  icon="el-icon-edit"  type="success"></el-button></router-link>
@@ -51,7 +51,10 @@ export default {
     axios
       .get('/api/catalog/pricePreset')
       .then(res => {
-        this.price_presets = res.data
+        res.data.forEach(el=>{
+           this.price_presets.push(el)
+        })
+       // this.price_presets = res.data
         this.price_presets.forEach(price => {
           if (price.is_custom_prices == 0) {
             price.is_custom_prices = 'no'

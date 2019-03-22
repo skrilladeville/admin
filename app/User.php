@@ -9,10 +9,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Role;
 
+
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
     use HasRoles;
+
 
     protected $appends = ['role', 'permission'];
 

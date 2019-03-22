@@ -40,6 +40,13 @@ import About from '../pages/onlineStore/about'
 import Checkout from '../pages/onlineStore/checkout'
 import BillingInfo from '../pages/onlineStore/billingInfo'
 
+/* Pos */
+import LayoutPOS from '../components/posLayout/LayoutPos'
+import posHome from '../pages/pos/posHome'
+import posLogin  from '../pages/pos/loginpos'
+
+
+
 
 /* Catalog Folder */
 import ManageProducts from '../pages/catalog/ManageProducts'
@@ -49,15 +56,16 @@ import AddPricePreset from '../pages/catalog/addPricePreset'
 import AddProduct from '../pages/catalog/addProduct'
 import EditProduct from '../pages/catalog/editProduct'
 import Products from '../pages/catalog/products'
+import ProductDetails from '../pages/catalog/productDetails'
 import PricePresets from '../pages/catalog/PricePresets'
 import Vendors from '../pages/catalog/vendors'
 import AddVendor from '../pages/catalog/addVendor'
 import EditVendor from '../pages/catalog/editVendor'
 import AddLab from '../pages/catalog/addLab'
 import EditLab from '../pages/catalog/editLab'
+
 import Labs from '../pages/catalog/labs'
 import EditPricePreset from '../pages/catalog/editPricePreset'
-
 /* Sales Folder */
 import BillingAgreements from '../pages/sales/BillingAgreements'
 import CreditMemos from '../pages/sales/CreditMemos'
@@ -139,6 +147,27 @@ export default [
 		component: Login,
 		hidden: true,
 		meta: {requiresGuest: true, title: 'Login' }
+	},
+	{
+		path: '/pos',
+		name: 'POS',
+		component: LayoutPOS,
+		hidden: true,
+		meta: {requiresGuest: true, title: 'POS' },
+		children:[
+			{
+				path: 'login',
+				name: 'pos login',
+				component: posLogin,
+				meta: {requiresGuestPOS: true, title: 'POS'},
+			},
+			{
+				path: '',
+				name: 'POS Home',
+				component: posHome,
+				meta: {requireAuthPOS: true, title: 'POS'},
+			},
+		]
 	},
 	{
 		path: '/onlineStore',
@@ -334,6 +363,13 @@ export default [
 				name: 'catalog.addProduct',
 				meta: {requiresAuth: true, title: 'Add Product', permission: 'add product' },
 			},
+			{
+				path: 'product/details/:id',
+					component:ProductDetails,
+					hidden:true,
+					name: 'catalog.productDetails',
+					meta: {requiresAuth: true, title: 'Product Details', permission: 'Product Details' },
+				},
 			{
 				path: 'product/edit/:id',
 					component:EditProduct,

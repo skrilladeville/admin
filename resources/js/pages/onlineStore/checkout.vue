@@ -18,41 +18,71 @@
    <el-col :md="24">
 
                  <h4><b>Billing Information</b></h4>
-        <el-form  size="mini">
+        <el-form>
+       <el-row :gutter="5">
+         <el-col :md="12">
+
+                <el-input placeholder="First Name"></el-input>
        
-            <el-form-item  label="First Name">
-                <el-input></el-input>
-            </el-form-item >
-               <el-form-item  label="Last Name">
-                <el-input></el-input>
-            </el-form-item>
-               <el-form-item  label="Email">
-                <el-input type="email"></el-input>
-            </el-form-item>
-               <el-form-item  label="Address">
-                <el-input></el-input>
-            </el-form-item>
-               <el-form-item  label="Address 2">
-                <el-input></el-input>
-            </el-form-item>
-                 <el-form-item  label="City">
-                <el-input></el-input>
-            </el-form-item>
-              <el-form-item  label="State">
-                <el-input></el-input>
-            </el-form-item>
-            <el-form-item  label="Zip/PostCode">
-                <el-input></el-input>
-            </el-form-item>
-            <el-form-item  label="Country">
-                <el-input></el-input>
-            </el-form-item>
-            <el-form-item  label="Telephone">
-                <el-input></el-input>
-            </el-form-item>
+         </el-col>
+         <el-col :md="12">
+          
+                <el-input placeholder="Last Name"></el-input>
+  
+         </el-col>
+         
+       </el-row>
+             <el-row :gutter="5">
+         <el-col :md="12" style="margin-top:10px;">
+
+                <el-input placeholder="Email"></el-input>
+       
+         </el-col>
+         <el-col :md="12" style="margin-top:10px;">
+          
+                <el-input placeholder="Address"></el-input>
+  
+         </el-col>
+         
+       </el-row>
+
+              <el-row :gutter="5">
+         <el-col :md="12" style="margin-top:10px;">
+
+                <el-input placeholder="City"></el-input>
+       
+         </el-col>
+         <el-col :md="12" style="margin-top:10px;">
+          
+                <el-input placeholder="State"></el-input>
+  
+         </el-col>
+         
+       </el-row>
+
+              <el-row :gutter="5">
+         <el-col :md="12" style="margin-top:10px;">
+
+                <el-input placeholder="ZIP"></el-input>
+       
+         </el-col>
+         <el-col :md="12" style="margin-top:10px;">
+          
+                <el-input placeholder="Country"></el-input>
+  
+         </el-col>
+         
+       </el-row>
+
+         
+
+               
+          
+                <el-input  style="margin-top:10px;" placeholder="phone Number"></el-input>
+            
             <el-form-item>
               <hr>
-          <el-button style="float:right; margin-top:10px;" type="warning">Continue</el-button>
+          <el-button @click="checkout=true" style="float:right; margin-top:10px;" type="warning">Continue</el-button>
             </el-form-item>
 
   
@@ -103,8 +133,21 @@
 
 
 
-
 </v-container>
+
+<v-layout row justify-center>
+    <v-dialog v-model="checkout"  max-width="800px">
+
+      <v-card>
+        <v-card-title>
+          <span class="headline">User Profile</span>
+        </v-card-title>
+ <paymentForm v-show="checkout"  v-bind:showPaymentForm=checkout />
+     
+      </v-card>
+    </v-dialog>
+  </v-layout>
+
 </div>    
 </template>
 
@@ -116,7 +159,18 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import paymentForm from './paymentForm.vue'
+
 export default {
+
+  data(){
+    return{
+checkout:false,
+    }
+  },
+  components:{
+    paymentForm
+  },
     computed:{
     ...mapGetters([
       'getCarts'

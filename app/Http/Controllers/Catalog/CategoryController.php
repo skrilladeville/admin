@@ -41,8 +41,9 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
        $category= ProductCategory::create($request->only(["product_cat_id","name","description"]));
-   
-       return $category;
+      
+       $categoryF= ProductCategory::with('products','marijuanaProducts','nonmarijuanaProducts')->findOrFail($category->id);
+       return $categoryF;
     }
 
     /**

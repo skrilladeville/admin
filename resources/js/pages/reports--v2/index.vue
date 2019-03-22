@@ -1,18 +1,26 @@
 <template>
   <div id="app">
 		<sales v-if="$route.params.pagename=='sales'"/>
+		<Patients v-if="$route.params.pagename=='patients'"/>
+		<PatientActions v-if="$route.params.pagename=='patients'"/>
 		<products v-if="$route.params.pagename=='products'"/>
+		<inventory v-if="$route.params.pagename=='inventory'"/>
+		<StateCompliance v-if="$route.params.pagename=='state-compliance'"/>
   </div>
 </template>
 
 <script>
-import { Sales, Products } from './pages'
+import { Sales, Patients, PatientActions, Products, Inventory, StateCompliance } from './pages'
 
 export default {
 	name: 'Reporter',
 	components: {
 		Sales,
-		Products
+		Patients,
+		PatientActions,
+		Products,
+		Inventory,
+		StateCompliance
 	},
 	methods: {
 		emitt(){

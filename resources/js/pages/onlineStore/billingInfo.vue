@@ -1,6 +1,6 @@
 <template>
     <div style="margin-top:20px;">
-        <v-container fluid>   
+       
             
              <el-col :md="24">
 
@@ -46,7 +46,7 @@
         </el-form>
                 
             </el-col>
-       </v-container>  
+    
     </div>
 </template>
 

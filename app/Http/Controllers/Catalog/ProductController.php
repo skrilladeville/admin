@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=Product::with('prices','checkinProducts')->get();
+        $products=Product::with('prices','checkinProducts','productCategory','inventories')->get();
 
         return $products->toArray();
     }
@@ -109,7 +109,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product=Product::with('tags','labResults','prices','weedMapPrices')->find($id);
+        $product=Product::with('tags','labResults','prices','weedMapPrices','productCategory','inventories')->find($id);
 
         return $product->toArray();
     }

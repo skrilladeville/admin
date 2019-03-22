@@ -836,13 +836,49 @@ export default {
             .then(res=>{
                 console.log(res.data)
 
+            //save barcode
+     
+              
+            axios.post('/api/catalog/product/barcode/create',{code:'7'+Math.floor(100000 + Math.random() * 999999)+''+Math.floor(10000 + Math.random() * 99999),product_id:res.data.id,size:'in jar,g'}).then(res=>{
+              console.log(`ni save ${res.data}`)
+            }).catch(err=>console.log(err))
+            axios.post('/api/catalog/product/barcode/create',{code:'7'+Math.floor(100000 + Math.random() * 999999)+''+Math.floor(10000 + Math.random() * 99999),product_id:res.data.id,size:'1g'}).then(res=>{
+              console.log(`ni save ${res.data}`)
+            }).catch(err=>console.log(err))
+            axios.post('/api/catalog/product/barcode/create',{code:'7'+Math.floor(100000 + Math.random() * 999999)+''+Math.floor(10000 + Math.random() * 99999),product_id:res.data.id,size:'1/8oz'}).then(res=>{
+              console.log(`ni save ${res.data}`)
+            }).catch(err=>console.log(err))
+            axios.post('/api/catalog/product/barcode/create',{code:'7'+Math.floor(100000 + Math.random() * 999999)+''+Math.floor(10000 + Math.random() * 99999),product_id:res.data.id,size:'1/4oz'}).then(res=>{
+              console.log(`ni save ${res.data}`)
+            }).catch(err=>console.log(err))
+            axios.post('/api/catalog/product/barcode/create',{code:'7'+Math.floor(100000 + Math.random() * 999999)+''+Math.floor(10000 + Math.random() * 99999),product_id:res.data.id,size:'1/2oz'}).then(res=>{
+              console.log(`ni save ${res.data}`)
+            }).catch(err=>console.log(err))
+            axios.post('/api/catalog/product/barcode/create',{code:'7'+Math.floor(100000 + Math.random() * 999999)+''+Math.floor(10000 + Math.random() * 99999),product_id:res.data.id,size:'1oz'}).then(res=>{
+              console.log(`ni save ${res.data}`)
+            }).catch(err=>console.log(err))
+            axios.post('/api/catalog/product/barcode/create',{code:'7'+Math.floor(100000 + Math.random() * 999999)+''+Math.floor(10000 + Math.random() * 99999),product_id:res.data.id,size:'pre-roll'}).then(res=>{
+              console.log(`ni save ${res.data}`)
+            }).catch(err=>console.log(err))
+            axios.post('/api/catalog/product/barcode/create',{code:'7'+Math.floor(100000 + Math.random() * 999999)+''+Math.floor(10000 + Math.random() * 99999),product_id:res.data.id,size:'unit'}).then(res=>{
+              console.log(`ni save ${res.data}`)
+            }).catch(err=>console.log(err))
+            axios.post('/api/catalog/product/barcode/create',{code:'7'+Math.floor(100000 + Math.random() * 999999)+''+Math.floor(10000 + Math.random() * 99999),product_id:res.data.id,size:'unit range'}).then(res=>{
+              console.log(`ni save ${res.data}`)
+            }).catch(err=>console.log(err))
+
+
+            axios.post('/api/catalog/product/barcode/create',{product_id:res.data.id,size:'weight range'}).then(res=>{
+              console.log(`ni save ${res.data}`)
+            }).catch(err=>console.log(err))
+
             //save prices
             this.form.prices.forEach(price=>{
                         price.product_id=res.data.id
                     })
-                      axios.post('/api/catalog/prices/create',{prices:this.form.prices}).then(response=>{
+            axios.post('/api/catalog/prices/create',{prices:this.form.prices}).then(response=>{
                       console.log(response)                   
-                  }).catch(err=>console.log(err))
+           }).catch(err=>console.log(err))
 
 
             //save tags
