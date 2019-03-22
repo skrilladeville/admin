@@ -32,7 +32,23 @@ router.beforeEach(async (to, from, next) => {
 		else
 			return next({name: 'login'});
 	}
+	if(to.meta.requireAuthPOS){
+		if (store.getters.isLoggedIn || jwtToken.getToken())
+			return next();
+		else
+			return next({name: 'pos login'});
+
+	}
 	if (to.meta.requiresGuest) {
+		if (store.getters.isLoggedIn || jwtToken.getToken())
+		{
+			return next();
+		}
+		else
+			console.log('ni abot dri1')
+			return next();
+	}
+	if (to.meta.requiresGuestPOS) {
 		if (store.getters.isLoggedIn || jwtToken.getToken())
 		{
 			return next();

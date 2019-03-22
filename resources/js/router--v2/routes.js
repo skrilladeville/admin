@@ -43,6 +43,7 @@ import BillingInfo from '../pages/onlineStore/billingInfo'
 /* Pos */
 import LayoutPOS from '../components/posLayout/LayoutPos'
 import posHome from '../pages/pos/posHome'
+import posLogin  from '../pages/pos/loginpos'
 
 
 
@@ -65,7 +66,6 @@ import EditLab from '../pages/catalog/editLab'
 
 import Labs from '../pages/catalog/labs'
 import EditPricePreset from '../pages/catalog/editPricePreset'
-
 /* Sales Folder */
 import BillingAgreements from '../pages/sales/BillingAgreements'
 import CreditMemos from '../pages/sales/CreditMemos'
@@ -156,10 +156,16 @@ export default [
 		meta: {requiresGuest: true, title: 'POS' },
 		children:[
 			{
+				path: 'login',
+				name: 'pos login',
+				component: posLogin,
+				meta: {requiresGuestPOS: true, title: 'POS'},
+			},
+			{
 				path: '',
 				name: 'POS Home',
 				component: posHome,
-				meta: {requiresGuest: true, title: 'POS'},
+				meta: {requireAuthPOS: true, title: 'POS'},
 			},
 		]
 	},
