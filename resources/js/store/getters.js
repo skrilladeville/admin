@@ -11,7 +11,6 @@ const getters = {
   getCarts:state=>state.onlineStore.carts,
   getCartCount:state=>state.onlineStore.cart_count,
   getIslegalAge:state=>state.onlineStore.isLegalAge,
-  getOrders: state => state.orderTable.orders,
   //products
   getProducts:state=>state.products.products,
   //vendors
@@ -20,6 +19,11 @@ const getters = {
   getLabs:state=>state.labs.labs,
   //categories
   getCategories:state=>state.categories.categories,
+  //sales
+  getOrders: state => state.orders.orders,
+  getTransactions: state => state.transactions.transactions,
+  getShipments: state => state.shipments.shipments,
+  getShipmentMethods: state => state.shipmentMethods.shipmentMethods
 
 
 

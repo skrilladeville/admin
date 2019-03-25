@@ -1,6 +1,6 @@
 export default {
     state:{
-        data:[]
+        orders:[]
     },
     actions:{
         ['SET_ORDERS']({commit}, payload){
@@ -9,7 +9,7 @@ export default {
     },
     mutations:{
         ['SET_ORDERS'](state, payload){
-            state.data.push(payload);
+            state.orders.push(payload);
         }
     }
 }

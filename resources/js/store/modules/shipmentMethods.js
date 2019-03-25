@@ -1,6 +1,6 @@
 export default {
     state:{
-        data:[]
+        shipmentMethods:[]
     },
     actions:{
         ['SET_SHIPMENT_METHODS']({commit}, payload){
@@ -12,10 +12,10 @@ export default {
     },
     mutations:{
         ['SET_SHIPMENT_METHODS'](state, payload){
-            state.data.push(payload);
+            state.shipmentMethods.push(payload);
         },
         ['SET_ACTIVE'](state, payload){
-            state.data[payload-1].is_active = !state.data[payload-1].is_active;
+            state.shipmentMethods[payload-1].is_active = !state.shipmentMethods[payload-1].is_active;
         }
     }
 }

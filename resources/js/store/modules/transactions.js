@@ -1,6 +1,6 @@
 export default {
     state:{
-        data:[]
+        transactions:[]
     },
     actions:{
         ['SET_TRANSACTIONS']({commit}, payload){
@@ -9,7 +9,7 @@ export default {
     },
     mutations:{
         ['SET_TRANSACTIONS'](state, payload){
-            state.data.push(payload);
+            state.transactions.push(payload);
         }
     }
 }
