@@ -9,14 +9,14 @@
             <div class="card-content" >
                 <div class="card-body" >
 
-                    <v-client-table name='shipmentsTable' ref="table" :columns="columns" :data="data" :options="options">
+                    <v-client-table name='shipmentsTable' ref="table" :columns="columns" :data="getShipments" :options="options">
                        <el-row class="actions-col" slot="actions" slot-scope="props">
                           <router-link :to="{name:'sales.order', params:{id:props.row.order_number}}">
                             <el-button type="warning" size="small">
                               <font-awesome-icon :icon="'eye'" size="sm"/>
                             </el-button>
                           </router-link>
-                        <el-button type="danger" size="small" @click="onCancel">
+                        <el-button v-if="props.row.status=='In Transit'" type="danger" size="small" @click="onCancel(props.row.id, props.index)">
                           <font-awesome-icon :icon="'ban'" size="sm"/>
                         </el-button>
                       </el-row>
@@ -42,7 +42,6 @@ export default {
     checkedRows:[],
     columns: ['order_number', 'name', 'address', 'courier', 
       'total_amount', 'status', 'actions'],
-    data:[],
     options: {
       headings: {
         order_number: 'Order Number',
@@ -61,17 +60,24 @@ export default {
     }
   },
    methods: {
-      onCancel(){
+      onCancel(id, index){
          this.$confirm('Are you sure you want to cancel this shipment?', 'Warning', {
-          confirmButtonText: 'OK',
-          cancelButtonText: 'Cancel',
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'No',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: 'Shipment cancelled'
-          });
-        }).catch(() => {         
+          axios.put('/api/sales/shipment/cancel/'+id)
+            .then(res=>{
+              this.$store.dispatch('SET_SHIPMENT_STATUS', index);
+              this.$message({
+                type: 'success',
+                message: 'Shipment cancelled'
+              });
+          }
+        ).catch(err=>console.log(err))
+          
+        }).catch(() => {  
+                 
         });
       }
     },
@@ -84,6 +90,7 @@ export default {
         .then(res=>{
           res.data.forEach(obj => {
             var shipment = {
+              id: obj.id,
               order_number: obj.order_id,
               name: obj.first_name+' '+obj.last_name,
               address: obj.delivery_address,
@@ -96,6 +103,11 @@ export default {
         }
         ).catch(err=>console.log(err))
       
+    },
+    computed:{
+      getShipments(){
+        return this.$store.getters.getShipments;
+      }
     }
   }
 

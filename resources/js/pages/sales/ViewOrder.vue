@@ -6,7 +6,7 @@
       <el-button style="float: right; padding: 3px 0" type="text"><router-link :to="{name:'sales.orders'}">Back To List</router-link></el-button>
       </div>
        <div class="card-content" >
-         <h2>Order #</h2>
+         <h2>Order # {{this.details.order.id}}</h2>
          <el-row :gutter="20">
            <el-col :span="24">
               <el-card>
@@ -16,19 +16,19 @@
                       <td class="text-muted">
                         Patient Name
                       </td>
-                      <td class="text-xs-right name">John Doe</td> 
+                      <td class="text-xs-right name">{{this.details.order.first_name+ ' ' +this.details.order.last_name}}</td> 
                     </tr>
                      <tr>
                       <td class="text-muted">
                         Customer Type
                       </td>
-                      <td class="text-xs-right">Medical w/ State Card</td> 
+                      <td class="text-xs-right">{{this.details.order.customer_type}}</td> 
                     </tr>
                     <tr>
                       <td class="text-muted">
                         Delivery Address
                       </td>
-                      <td class="text-xs-right">032 Londonderry Park</td> 
+                      <td class="text-xs-right">{{this.details.order.delivery_address}}</td> 
                     </tr>
                     <tr>
                       <td class="text-muted">
@@ -40,16 +40,16 @@
                       <td class="text-muted">
                         Register
                       </td>
-                      <td class="text-xs-right">Register #1</td> 
+                      <td class="text-xs-right">{{this.details.order.register}}</td> 
                     </tr>
                     <tr>
                       <td class="text-muted">
                         Order Status
                       </td>
                       <td class="text-xs-right">
-                        <el-tag type="success">Picked up</el-tag>
-                      <el-tag type="danger">Cancelled</el-tag>
-                      <el-tag type="warning">Pending</el-tag>
+                        <el-tag :type="tag_type">{{this.status[this.details.order.status]}}</el-tag>
+                      <!-- <el-tag type="danger">{{}}</el-tag> -->
+                      <!-- <el-tag type="warning">Pending</el-tag> -->
                       </td> 
                     </tr>
                      <tr>
@@ -57,10 +57,8 @@
                         Fulfillment Status
                       </td>
                       <td class="text-xs-right">
-                        <font-awesome-icon :icon="'check-circle'" size="md" class=" fulfilled"/>
-                          <span> Fulfilled </span>
-                        <font-awesome-icon :icon="'times-circle'" size="md"/>
-                          <span> Unfulfilled </span>
+                        <font-awesome-icon :icon="this.fulfillment_types[this.fulfillment[this.details.order.fulfillment]]" size="md" class=" fulfilled"/>
+                          <span> {{this.fulfillment[this.details.order.fulfillment]}} </span>
                         </td> 
                     </tr>
                   </tbody>
@@ -84,32 +82,14 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
+                        <tr v-for="(item, index) in this.details.items" :key="index">
+                          <th scope="row">{{index + 1}}</th>
                           <td>
-                            <p>Create PSD for mobile APP</p>
+                            <p>{{item.name}}</p>
                           </td>
-                          <td class="text-xs-right">$ 20.00/hr</td>
-                          <td class="text-xs-right">120</td>
-                          <td class="text-xs-right">$ 2400.00</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>
-                            <p>iOS Application Development</p>
-                          </td>
-                          <td class="text-xs-right">$ 25.00/hr</td>
-                          <td class="text-xs-right">260</td>
-                          <td class="text-xs-right">$ 6500.00</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>
-                            <p>WordPress Template Development</p>
-                          </td>
-                          <td class="text-xs-right">$ 20.00/hr</td>
-                          <td class="text-xs-right">300</td>
-                          <td class="text-xs-right">$ 6000.00</td>
+                          <td class="text-xs-right">{{item.qty}}</td>
+                          <td class="text-xs-right">{{0.00}}</td>
+                          <td class="text-xs-right">{{item.qty * 0.00}}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -121,23 +101,28 @@
                             <tbody>
                               <tr>
                                 <td>Sub Total</td>
-                                <td class="text-xs-right">$ 14,900.00</td>
+                                <td class="text-xs-right">$ {{sub_total}}</td>
+                              </tr>
+                               <tr>
+                                <td>Discount</td>
+                                <td class="text-xs-right">- $ {{this.details.order.discount}}</td>
                               </tr>
                               <tr>
                                 <td>TAX (12%)</td>
-                                <td class="text-xs-right">$ 1,788.00</td>
+                                <td class="text-xs-right">$ {{this.details.order.sales_tax}}</td>
                               </tr>
                               <tr>
                                 <td class="text-bold-800">Total</td>
-                                <td class="text-bold-800 text-xs-right"> $ 16,688.00</td>
+                                <td class="text-bold-800 text-xs-right"> $ {{this.details.order.total}}</td>
                               </tr>
                               <tr>
                                 <td>Shipping</td>
-                                <td class="text-xs-right">$ 4,688.00</td>
+                                <td class="text-xs-right">$ {{this.details.order.shipping}}</td>
                               </tr>
+            
                               <tr class="bg-grey bg-lighten-4">
                                 <td class="text-bold-800">Balance Due</td>
-                                <td class="text-bold-800 text-xs-right">$ 12,000.00</td>
+                                <td class="text-bold-800 text-xs-right">$ {{this.details.order.balance}}</td>
                               </tr>
                             </tbody>
                           </table>
@@ -190,11 +175,68 @@ export default {
   components: { },
   data() {
     return {
+      details: {
+        order: {
+        register: '',
+        first_name: '',
+        last_name: '',
+        customer_type: '',
+        delivery_address: '',
+        balance: 0.00,
+        total: 0.00,
+        discount: 0.00,
+        status: 0.00,
+        created_at: ''
+    },
+    items: []
+      },
+    fulfillment: ['Unfulfilled', 'Processing', 'Fulfilled'],
+    status: ['Pending', 'Pending Pickup', 'Picked Up', 'Declined',
+    'Processing', 'In Transit', 'Rejected', 'Not Home', 'Cancelled', 'Delivered', 
+    'Returned', 'Completed', 'Partial', 'Unpaid'],
+    fulfillment_types: {
+      'Unfulfilled': 'times-circle',
+      'Processing': 'times-circle',
+    'Fulfilled': 'check-circle'},
+    status_types: {
+      'Pending': 'success', 
+      'Pending Pickup': 'success', 
+      'Picked Up': 'success', 
+      'Declined': 'warning',
+      'Processing': 'danger', 
+      'In Transit': 'warning', 
+      'Rejected': 'danger', 
+      'Not Home': 'warning', 
+      'Cancelled': 'danger', 
+      'Delivered': 'success', 
+      'Returned': 'warning', 
+      'Completed': 'success', 
+      'Partial': 'warning', 
+      'Unpaid': 'danger'
+      }
     }
   },
   created() {
+     axios.get('/api/sales/order/'+this.$route.params.id)
+        .then(res=>{
+          this.details = res.data;
+        }
+        ).catch(err=>console.log(err))
   },
   methods: {
+  },
+  computed:{
+    sub_total(){
+      var sub_total=0;
+      this.details.items.forEach(function(item){
+        console.log(item.qty * 0.00)
+        sub_total += item.qty * 0.00
+      })
+      return sub_total;
+    },
+    tag_type(){
+      return this.status_types[this.status[this.details.order.status]]
+    }
   }
 }
 </script>

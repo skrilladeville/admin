@@ -8,7 +8,7 @@
             </div>
             <div class="card-content" >
                 <div class="card-body" >
-                    <v-client-table name='transactionsTable' ref="table" :columns="columns" :data="data" :options="options">
+                    <v-client-table name='transactionsTable' :columns="columns" :data="getTransactions" :options="options">
                        <el-row slot="afterFilter" class="filter-row">
                        <el-card class="filters-card box-card" shadow="never">
                           <el-row :gutter="20">
@@ -166,10 +166,10 @@ export default {
     return {
     dialogVisible: false,
     transaction:{},
+    transactions:[],
     checkedRows:[],
     columns: ['date', 'register_name', 'register_type', 'type', 
       'amount', 'discount', 'tax', 'total', 'total_paid', 'view'],
-    data: [],
     options: {
       headings: {
         date: 'Date',
@@ -224,6 +224,11 @@ export default {
           });;
         }
         ).catch(err=>console.log(err))
+      },
+      computed:{
+        getTransactions(){
+          return this.$store.getters.getTransactions;
+        }
       }
   }
 

@@ -9,7 +9,7 @@
             <div class="card-content" >
                 <div class="card-body" >
 
-                    <v-client-table name='shipmentMethodsTable' ref="table" :columns="columns" :data="data" :options="options">
+                    <v-client-table name='shipmentMethodsTable' ref="table" :columns="columns" :data="getShipmentMethods" :options="options">
                       <el-switch
                         slot="is_active"
                         slot-scope="props"
@@ -49,7 +49,6 @@ export default {
     checkedRows:[],
     columns: ['type', 'shipping_method', 'delivery_charge', 'min_order_amount', 
       'free_delivery_after', 'time', 'is_active', 'actions'],
-    data: [],
     options: {
       headings: {
         type: 'Type',
@@ -94,6 +93,7 @@ export default {
       style: 'currency',
       currency: 'USD',
     });
+    
         axios.get('/api/sales/shipmentMethods/')
         .then(res=>{
           res.data.forEach(obj => {
@@ -111,7 +111,12 @@ export default {
           });;
         }
         ).catch(err=>console.log(err))
+      },
+    computed:{
+      getShipmentMethods(){
+        return this.$store.getters.getShipmentMethods;
       }
+    }
   }
 
 </script>

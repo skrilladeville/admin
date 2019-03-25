@@ -9,7 +9,7 @@
             <div class="card-content" >
                 <div class="card-body" >
 
-                    <v-client-table name='orderTable' ref="table" :columns="columns" :data="data" :options="options">
+                    <v-client-table name='orderTable' :columns="columns" :data="getOrders" :options="options">
                       <router-link slot="uri" slot-scope="props" :to="{name:'sales.order', params:{id:props.row.order_number}}">
                       <!-- <a slot="uri" slot-scope="props" target="_blank" :href="props.row.uri"> -->
                         <el-button type="warning" size="small"><font-awesome-icon :icon="'eye'" size="sm"/></el-button>
@@ -73,6 +73,7 @@ export default {
         key: '',
         value: ''
       },
+      orders:[],
       filters:[{
         label: 'Status',
         value: 'status',
@@ -101,7 +102,6 @@ export default {
       }],
       columns: ['order_type', 'order_number', 'patient_name', 'qty', 
       'created_at', 'total_amount', 'status', 'fulfillment', 'uri'],
-    data: [],
     options: {
       headings: {
         order_type: 'Type',
@@ -158,6 +158,9 @@ export default {
         var result = this.filters.filter(obj=>obj.value==this.tag_new.key);
         return result[0].items;
       }
+    },
+    getOrders(){
+      return this.$store.getters.getOrders
     }
   },
   created() {
