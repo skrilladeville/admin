@@ -26,6 +26,7 @@ const initialState = {
 */
 const mutations = {
 	[SET_USER](state, payload) {
+		console.log(payload.user.email)
 		state.name = payload.user.name;
 		state.email = payload.user.email;
 		state.id=payload.user.id;

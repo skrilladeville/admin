@@ -16,6 +16,13 @@
 
 
     <v-toolbar-title class="white--text">POS</v-toolbar-title>
+
+    <v-spacer></v-spacer>
+
+    <v-toolbar-items>
+      <v-btn flat>{{user.email}}</v-btn>
+  
+    </v-toolbar-items>
  
     
       
@@ -62,11 +69,12 @@ html body.fixed-navbar {
 </style>
 
 <script>
-import {mapGetters,mapMutations,mapState} from 'vuex'
 
 
+//import jwtToken from '~/helpers/jwt-token';
 
 export default {
+  
 name:'Navbar',
   data(){
     return{
@@ -74,6 +82,7 @@ name:'Navbar',
         dialogCart:false,
         drawer:null,
         plant_type:'',
+        user:{},
 menu: [
         { icon: 'home', title: 'Home',link:'' },
         { icon: 'shopping_cart', title: 'Canabis',link:'' },
@@ -86,6 +95,13 @@ menu: [
         
     }
   },
+
+  computed:{
+
+  },
+  created(){
+
+  }
   
   
 }

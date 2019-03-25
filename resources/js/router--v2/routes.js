@@ -43,6 +43,11 @@ import BillingInfo from '../pages/onlineStore/billingInfo'
 /* Pos */
 import LayoutPOS from '../components/posLayout/LayoutPos'
 import posHome from '../pages/pos/posHome'
+
+import posStart from '../pages/pos/posStart'
+import posTrans from '../pages/pos/posTrans'
+import posHomeTrans from '../pages/pos/posHomeTrans'
+
 import posLogin  from '../pages/pos/loginpos'
 
 
@@ -162,10 +167,32 @@ export default [
 				meta: {requiresGuestPOS: true, title: 'POS'},
 			},
 			{
-				path: '',
-				name: 'POS Home',
+				path: 'branch/:id',
+				name: 'pos branch',
 				component: posHome,
+				meta: {requiresGuestPOS: true, title: 'POS'},
+				children:[
+
+						{
+						path: '',
+						name: 'POS home trans',
+						component: posHomeTrans,
+						meta: {requireAuthPOS: true, title: 'POS'},
+						},
+						{
+							path: 'trans/:id',
+							name: 'POS home trans',
+							component: posTrans,
+							meta: {requireAuthPOS: true, title: 'POS'},
+							}
+				]
+			},
+			{
+				path: 'home',
+				name: 'POS start',
+				component: posStart,
 				meta: {requireAuthPOS: true, title: 'POS'},
+				
 			},
 		]
 	},

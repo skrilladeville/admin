@@ -1,7 +1,9 @@
 <template>
-	<div class="container">
-<div class="card" style="margin-top:100px;">
-			<p class="lead">Please Login With your credentials</p>
+	<div>
+        <div class="row">
+            <div class="col-md-5 offset-4">
+                <div class="card" style="margin-top:100px;">
+			<p class="lead"><b>Please Login With your Credentials</b></p>
 			<div class="card-body" style="padding:30px;">
 <form @submit.prevent="login">
 			<div class="form-group">
@@ -48,6 +50,9 @@
 		</form>
 		</div>
 		</div>
+            </div>
+        </div>
+
 	</div>
 	
 </template>
@@ -76,11 +81,7 @@ loading: false,
 			...mapActions([
 				'setAuthUser'
 			]),
-			loginSuccess(data) {
-				jwtToken.setToken(data.token);
-				this.setAuthUser(data.user);
-				this.$router.push({name: 'Dashboard'});
-            },
+
             
             clear(){
 
@@ -93,9 +94,13 @@ loading: false,
 				this.loading = true;
 				axios.post(api.login, this.form)
 					.then(res => {
+                        console.log(res.data)
 						this.loading = false;
 						this.$noty.success('Welcome back!');
-						this.$emit('loginSuccess', res.data);
+                    jwtToken.setToken(res.data.token);
+                    jwtToken.setUser(res.data.user)
+				this.setAuthUser(res.data.user);
+				this.$router.push({name: 'POS start'});
 					})
 					.catch(err => {
 						(err.response.data.error) && this.$noty.error(err.response.data.error);
@@ -119,15 +124,8 @@ loading: false,
 	}
 </script>
 
-<style rel="stylesheet/scss" lang="scss">
-.container {
-	position: relative;
-    width: 520px;
-    max-width: 100%;
-    padding: 0px 35px 0;
-    margin: 0 auto;
-    overflow: hidden;
-}
+<style scope>
+
 img{
 	margin-top: 30px;
 width: 100px;

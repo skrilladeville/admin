@@ -40,7 +40,10 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
   //branch
   Route::get('user/branch/all', 'Users\BranchController@index');
   Route::get('user/branch/view/{id}', 'Users\BranchController@show');
-  
+
+  //pos sales
+  Route::post('sales/order/create', 'sales\OrderController@store');
+   
 
 
 

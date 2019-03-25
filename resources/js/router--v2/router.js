@@ -51,7 +51,7 @@ router.beforeEach(async (to, from, next) => {
 	if (to.meta.requiresGuestPOS) {
 		if (store.getters.isLoggedIn || jwtToken.getToken())
 		{
-			return next();
+			return next({name: 'POS start'});
 		}
 		else
 			console.log('ni abot dri')
