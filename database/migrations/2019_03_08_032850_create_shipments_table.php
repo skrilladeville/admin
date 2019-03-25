@@ -15,7 +15,7 @@ class CreateShipmentsTable extends Migration
     {
         Schema::create('shipments', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('order_id');
+            $table->unsignedInteger('order_id')->unique();
             $table->unsignedInteger('shipment_method');
             $table->string('status');
             $table->timestamps();

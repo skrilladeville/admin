@@ -17,9 +17,9 @@ class CreateShipmentMethodsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('type');
             $table->string('method');
-            $table->double('charge')->default('0.00');
-            $table->double('min_amount')->default('0.00');
-            $table->double('free_after')->default('0.00');    
+            $table->float('charge')->default('0.00');
+            $table->float('min_amount')->default('0.00');
+            $table->float('free_after')->default('0.00');    
             $table->time('start_time')->default('0:00');
             $table->time('end_time')->default('0:00');
             $table->tinyInteger('is_active')->default('0');

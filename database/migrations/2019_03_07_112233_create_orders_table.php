@@ -22,11 +22,11 @@ class CreateOrdersTable extends Migration
             $table->integer('status');
             $table->integer('fulfillment');
             $table->text('note');
-            $table->double('shipping');
-            $table->double('sales_tax');
-            $table->double('total');
-            $table->double('balance');
-            $table->double('discount');
+            $table->float('shipping');
+            $table->float('sales_tax');
+            $table->float('total');
+            $table->float('balance');
+            $table->float('discount');
             $table->timestamps();
         });
     }

@@ -11,7 +11,7 @@ class OrdersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Order::class, 5)->create()->each(function($order){
+        factory(App\Order::class, 10)->create()->each(function($order){
             $order->items()->saveMany(factory(App\OrderItem::class, 3)->create());
         });
     }

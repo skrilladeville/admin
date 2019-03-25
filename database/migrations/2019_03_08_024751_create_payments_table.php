@@ -18,7 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->unsignedInteger('register_id');
             $table->tinyInteger('status');
             $table->unsignedInteger('payment_method');
-            $table->double('amount_paid');
+            $table->float('amount_paid');
             $table->timestamps();
         });
     }

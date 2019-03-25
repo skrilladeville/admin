@@ -17,8 +17,8 @@ class CreateOrderItemsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('order_id')->nullable();
             $table->integer('product_id');
-            $table->double('qty');
-            $table->integer('tax');
+            $table->integer('qty');
+            $table->float('tax');
             $table->timestamps();
         });
     }
