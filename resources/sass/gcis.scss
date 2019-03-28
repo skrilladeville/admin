@@ -11,6 +11,7 @@ a,.text-danger,.help-block,.el-submenu__title,.jqx-widget-header{font-weight:bol
 /* .navigation,.el-submenu__title */li.el-menu-item.nav-item,li .el-submenu__title{font-size:1.4rem}
 .main-menu.menu-dark .navigation > li ul{font-size:1.2rem}
 .card .card-title{font-size:1.82rem;margin:0}
+.card .el-tabs__nav{float: right;}.card .el-tabs__item{line-height:50px}.card .fa{line-height:normal}
 .ft-align-center:before{content:""}
 label{text-transform:uppercase}
 
@@ -104,10 +105,10 @@ div.DTED_Lightbox_Background,div.DTED_Lightbox_Wrapper{z-index:1000}
 /* COLOR */
 html body{background:#E3EBD8}
 a:link,a:visited,.main-menu li{color:#097244 !important}.h1, .h2, .h3, .h4, .h5, .h6, code, h1, h2, h3, h4, h5, h6, kbd, pre, samp,form label{color:#053922}
-a .fa,i.fa{color:#519c4e}
+a .fa,i.fa{color:#519c4e}.card i.fa{color:#54987A}
 .main-menu.menu-dark .navigation{background:none}
 body .content-detached.content-right{background:#E2EAD8}
-body.vertical-layout.vertical-menu.menu-expanded .main-menu,.navbar-nav .dropdown-menu,.dropdown-menu.show,.card .card,.table-hover tbody tr:hover,.table-striped tbody tr:nth-of-type(odd),.jqx-grid-content div[role="row"]:nth-of-type(odd) .jqx-grid-cell{background:#CDE2D9}
+body.vertical-layout.vertical-menu.menu-expanded .main-menu,.navbar-nav .dropdown-menu,.dropdown-menu.show,.card .card,.table-hover tbody tr:hover,.table-striped tbody tr:nth-of-type(odd),.jqx-grid-content div[role="row"]:nth-of-type(odd) .jqx-grid-cell,.card .el-tabs__nav{background:#CDE2D9}
 input:required::placeholder,.help-block{color:red}input:required{border-color:red !important}
 
 .navbar,.main-menu.menu-dark .navigation > li.active > a,.main-menu.menu-dark .navigation > li .active > a,button.btn,thead,a.btn,.board,.headboard.first,.el-menu-item.is-active,.jqx-widget-header{background:#067144;color:#D3FFC9 !important}
@@ -133,7 +134,7 @@ body.vertical-layout.vertical-menu.menu-expanded .main-menu .navigation > li > a
 .card-profile-image img{width:111px;border:5px solid #D2FEC9;}
 
 /* login */
-.card{background:#FFF;}.help{background:#F9FEBD}
+.card,.el-tabs--card>.el-tabs__header .el-tabs__item.is-active{background:#FFF;}.help{background:#F9FEBD}
 .form-control,.checkbox .skin{border:1px solid #39B54A !important;background:#E3EBD8 !important}
 .checkbox .skin:hover,.checkbox input:checked ~ .skin{background:#39B54A !important}
 .border-grey.border-lighten-3,.card{border:1px solid #097244 !important}

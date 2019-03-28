@@ -1,6 +1,8 @@
 # The purpose of gitignore files is to ensure that certain files not tracked by Git remain untracked.
 # To stop tracking a file that is currently tracked, use 
-# git rm --cached .gitignore
+# git rm --cached [gitignore item]
+
+# Example: git rm --cached public/js/app.js
 
 # https://git-scm.com/docs/gitignore
 
@@ -29,6 +31,7 @@ bootstrap/cache/config.php
 !/storage/framework/sessions/README.md
 public/js/app.js
 public/js/robust-admin.js
+public/js/robust-admin-init.js
 public/css/app--v2.css
 public/css/gcis.css
 public/css/jqwidgets
