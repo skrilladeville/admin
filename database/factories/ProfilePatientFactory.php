@@ -24,7 +24,7 @@ $factory->define(App\ProfilePatient::class, function (Faker $faker) {
         'emg_contact' => $faker->text($maxNbChars = 200),
         'emg_contact_phone' => $faker->phoneNumber,
         'address_1' => $faker->address,
-        'user_id' => $faker->numberBetween($min = 5, $max = 20),
+        'user_id' => $faker->unique()->numberBetween(5, 21),
         'profile_doctors_id' => $faker->randomElement($array = array('3', '4'), $count = 1),
         'branches_id' => 1,
         'status' => 1,

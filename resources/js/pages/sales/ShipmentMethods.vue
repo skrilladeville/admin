@@ -9,17 +9,17 @@
             <div class="card-content" >
                 <div class="card-body" >
 
-                    <v-client-table name='shipmentMethodsTable' ref="table" :columns="columns" :data="data" :options="options">
+                    <v-client-table name='shipmentMethodsTable' ref="table" :columns="columns" :data="getShipmentMethods" :options="options">
                       <el-switch
                         slot="is_active"
                         slot-scope="props"
                         :value="props.row.is_active"
                         active-color="#13ce66"
                         inactive-color="#ff4949"
-                        @change="switchActive(props.row)">
+                        @change="switchActive(props.index)">
                       </el-switch>
                        <el-row class="actions-col" slot="actions" slot-scope="props">
-                          <router-link :to="{name:'sales.edit-shipment-method', params:{id:123}}">
+                          <router-link :to="{name:'sales.edit-shipment-method', params:{id:props.row.id}}">
                             <el-button type="warning" icon="el-icon-edit" size="small">
                             </el-button>
                           </router-link>
@@ -49,7 +49,6 @@ export default {
     checkedRows:[],
     columns: ['type', 'shipping_method', 'delivery_charge', 'min_order_amount', 
       'free_delivery_after', 'time', 'is_active', 'actions'],
-    data: getData(),
     options: {
       headings: {
         type: 'Type',
@@ -68,9 +67,8 @@ export default {
     }
   },
    methods: {
-      switchActive(row){
-        
-        this.$store.dispatch('switchActive', row)
+      switchActive(id){
+        this.$store.dispatch('SET_ACTIVE', id)
       },
       onDelete(){
          this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
@@ -90,46 +88,37 @@ export default {
         });
       }
     },
-  computed: {
+  mounted() {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+    
+        axios.get('/api/sales/shipmentMethods/')
+        .then(res=>{
+          res.data.forEach(obj => {
+            var method = {
+              id: obj.id,
+              type: obj.type,
+              shipping_method: obj.method,
+              delivery_charge: formatter.format(obj.charge),
+              min_order_amount: formatter.format(obj.min_amount),
+              free_delivery_after: formatter.format(obj.free_after),
+              time: obj.start_time +' '+obj.end_time,
+              is_active: obj.is_active
+            }
+            this.$store.dispatch('SET_SHIPMENT_METHODS', method)
+          });;
+        }
+        ).catch(err=>console.log(err))
+      },
+    computed:{
+      getShipmentMethods(){
+        return this.$store.getters.getShipmentMethods;
+      }
+    }
   }
-  }
 
-
-
-function getData() {
-  var list = [{
-    id: 0,
-    type: 'Delivery',
-    shipping_method: 'Courier #1',
-    delivery_charge: '$0.00',
-    min_order_amount: '-',
-    free_delivery_after: '$50.00',
-    time: '',
-    is_active: false
-  },
-  {
-    id: 1,
-    type: 'Delivery',
-    shipping_method: 'Courier #2',
-    delivery_charge: '$0.00',
-    min_order_amount: '-',
-    free_delivery_after: '$50.00',
-    time: '',
-    is_active: false
-  },
-  {
-    id: 2,
-    type: 'Pickup',
-    shipping_method: 'Pickup',
-    delivery_charge: '$0.00',
-    min_order_amount: '-',
-    free_delivery_after: '$50.00',
-    time: '',
-    is_active: true
-  }];
-
-  return list;
-}
 </script>
 
 <style>

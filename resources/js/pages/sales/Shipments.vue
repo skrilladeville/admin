@@ -4,19 +4,19 @@
       <el-col :span="24">
         <el-card class="box-card" shadow="always">
             <div slot="header" class="clearfix">
-                <span class="card-title" >Shipment Methods</span>
+                <span class="card-title" >Shipments</span>
             </div>
             <div class="card-content" >
                 <div class="card-body" >
 
-                    <v-client-table name='shipmentsTable' ref="table" :columns="columns" :data="data" :options="options">
+                    <v-client-table name='shipmentsTable' ref="table" :columns="columns" :data="getShipments" :options="options">
                        <el-row class="actions-col" slot="actions" slot-scope="props">
                           <router-link :to="{name:'sales.order', params:{id:props.row.order_number}}">
                             <el-button type="warning" size="small">
                               <font-awesome-icon :icon="'eye'" size="sm"/>
                             </el-button>
                           </router-link>
-                        <el-button type="danger" size="small" @click="onCancel">
+                        <el-button v-if="props.row.status=='In Transit'" type="danger" size="small" @click="onCancel(props.row.id, props.index)">
                           <font-awesome-icon :icon="'ban'" size="sm"/>
                         </el-button>
                       </el-row>
@@ -42,7 +42,6 @@ export default {
     checkedRows:[],
     columns: ['order_number', 'name', 'address', 'courier', 
       'total_amount', 'status', 'actions'],
-    data: getData(),
     options: {
       headings: {
         order_number: 'Order Number',
@@ -57,49 +56,61 @@ export default {
 
     },
         dynamicTags: [],
+        status: ['Completed', 'In Transit', 'Cancelled', 'Delivered']
     }
   },
    methods: {
-      onCancel(){
+      onCancel(id, index){
          this.$confirm('Are you sure you want to cancel this shipment?', 'Warning', {
-          confirmButtonText: 'OK',
-          cancelButtonText: 'Cancel',
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'No',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: 'Shipment cancelled'
-          });
-        }).catch(() => {         
+          axios.put('/api/sales/shipment/cancel/'+id)
+            .then(res=>{
+              this.$store.dispatch('SET_SHIPMENT_STATUS', index);
+              this.$message({
+                type: 'success',
+                message: 'Shipment cancelled'
+              });
+          }
+        ).catch(err=>console.log(err))
+          
+        }).catch(() => {  
+                 
         });
       }
     },
-  computed: {
+  mounted(){
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+        axios.get('/api/sales/shipments/')
+        .then(res=>{
+          res.data.forEach(obj => {
+            var shipment = {
+              id: obj.id,
+              order_number: obj.order_id,
+              name: obj.first_name+' '+obj.last_name,
+              address: obj.delivery_address,
+              // courier: ,
+              total_amount: formatter.format(obj.total),
+              status: this.status[obj.status]
+            }
+            this.$store.dispatch('SET_SHIPMENTS', shipment)
+          });;
+        }
+        ).catch(err=>console.log(err))
+      
+    },
+    computed:{
+      getShipments(){
+        return this.$store.getters.getShipments;
+      }
+    }
   }
-  }
 
-
-
-function getData() {
-  var name = ['TOMMY JOHN', 'MATTHEW T GRAY', 'PRISCILLA V. GEORGE'];
-  var address = ['55534 Ryan Harbors Suite 898', '123 High street BATH ME 04530']
-  var status = ['Completed', 'In Transit', 'Cancelled', 'Delivered'];
-  var courier = ['Courier #1', 'Courier #2'];
-  var list =[];              
-                for (var i=0; i<10; i++){
-                    list.push({
-                        name: name[Math.floor(Math.random()*name.length)],
-                        address: address[Math.floor(Math.random()*address.length)],
-                        courier: courier[Math.floor(Math.random()*courier.length)],
-                        status: status[Math.floor(Math.random()*status.length)],
-                        order_number: Math.floor(Math.random() * (Math.floor(6245) -  Math.ceil(4567) + 1)) +  Math.ceil(4567),
-                        total_amount: Math.floor(Math.random() * (Math.floor(100) -  Math.ceil(50) + 1)) +  Math.ceil(50),
-                    });
-                    
-                }
-
-  return list;
-}
 </script>
 
 <style scoped>

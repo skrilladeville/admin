@@ -28,11 +28,20 @@ class DatabaseSeeder extends Seeder
         $this->call(ProfileDoctorSeeder::class);
         $this->call(ProfilePatientSeeder::class);
         $this->call(VendorsTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(OrdersTableSeeder::class);
+        $this->call(RegistersSeeder::class);
+        $this->call(ShipmentTypesSeeder::class);
+        $this->call(ShipmentMethodsSeeder::class);
+        $this->call(TransactionTypesSeeder::class);
+        $this->call(PaymentMethodsSeeder::class);
+        $this->call(ShipmentsSeeder::class);
+        $this->call(TransactionsSeeder::class);
         //$this->call(PrescriptionSeeder::class);
         //$this->call(DiagnosisSeeder::class);
 
         $this->call([
-            UsersTableSeeder::class,
+            // UsersTableSeeder::class,
             ReportsTableSeeder::class,
         ]);
     }

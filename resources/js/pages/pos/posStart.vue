@@ -29,7 +29,8 @@ export default {
 data(){
     return{
         branches:[],
-        branch:''
+        branch:'',
+        mac:''
     }
 },
 created(){
@@ -37,7 +38,9 @@ created(){
         this.branches=res.data
     })
 },
+
 methods:{
+    
     start(){
         if(this.branch != "")
         {

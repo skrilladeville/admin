@@ -20,6 +20,11 @@ const getters = {
   getLabs:state=>state.labs.labs,
   //categories
   getCategories:state=>state.categories.categories,
+  //sales
+  getOrders: state => state.orders.orders,
+  getTransactions: state => state.transactions.transactions,
+  getShipments: state => state.shipments.shipments,
+  getShipmentMethods: state => state.shipmentMethods.shipmentMethods
 
 
 

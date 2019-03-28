@@ -25,7 +25,7 @@ class CreateProfilePatientsTable extends Migration
             $table->string('emg_contact_phone');
             $table->integer('profile_doctors_id');
             $table->integer('branches_id');
-            $table->integer('user_id');
+            $table->integer('user_id')->unique();
             $table->integer('status');
             $table->char('mi', 1)->nullable();
             $table->double('weight')->default(0.0);

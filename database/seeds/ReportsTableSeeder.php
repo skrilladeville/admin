@@ -23,7 +23,6 @@ class ReportsTableSeeder extends Seeder
             'product_excise_stats',
             'product_inventory_incoming',
             'product_sales_stats',
-            'products',
             'sales_log'
         );
 

@@ -23,17 +23,13 @@ class BranchSeeder extends Seeder
             'status' => 1,
         ]);
         Branch::create([
-            'branch_name'      =>  'Amsterdam',
+            'branch_name'      =>  'Amsterdam Gardens',
             'branch_description'     =>  'Green, green grass of Home',
             'status' => 1,
         ]);
+  
         Branch::create([
-            'branch_name'      =>  'Indica Online',
-            'branch_description'     =>  'Green, green grass of Home',
-            'status' => 1,
-        ]);
-        Branch::create([
-            'branch_name'      =>  'Indica Online',
+            'branch_name'      =>  'Medibook',
             'branch_description'     =>  'Green, green grass of Home',
             'status' => 1,
         ]);

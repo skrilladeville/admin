@@ -16,7 +16,7 @@
 
  
 
-    <v-client-table name="vendorTable" :data="getVendors" :columns="titles">
+    <v-client-table name="vendors" :data="getVendors" :columns="titles">
      <template slot="action" slot-scope="props">
        <div class="d-flex">
        <router-link :to="`/catalog/vendors/edit/${props.row.id}`"><el-button  size="small"  icon="el-icon-edit"  type="success"></el-button></router-link>
@@ -46,15 +46,16 @@
 import axios from 'axios'
 
 export default {
-  created() {
+  mounted() {
     console.log('creeate')
     axios
       .get('/api/catalog/vendor')
       .then(response => {
+        
         response.data.forEach(element => {
               this.$store.commit('SET_VENDOR',element)
         })
-        console.log(response)
+        console.log(response.data)
       })
       .catch(error => {
         console.log(error)
@@ -74,7 +75,7 @@ export default {
   },
       computed: {
       getVendors(){
-        console.log(this.$store.getters.getVendors)
+        // console.log("naa ra"+this.$store.getters.getVendors)
         return this.$store.getters.getVendors
       }
     },

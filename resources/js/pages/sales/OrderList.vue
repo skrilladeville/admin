@@ -9,7 +9,7 @@
             <div class="card-content" >
                 <div class="card-body" >
 
-                    <v-client-table name='orderTable' ref="table" :columns="columns" :data="data" :options="options">
+                    <v-client-table name='orderTable' :columns="columns" :data="getOrders" :options="options">
                       <router-link slot="uri" slot-scope="props" :to="{name:'sales.order', params:{id:props.row.order_number}}">
                       <!-- <a slot="uri" slot-scope="props" target="_blank" :href="props.row.uri"> -->
                         <el-button type="warning" size="small"><font-awesome-icon :icon="'eye'" size="sm"/></el-button>
@@ -73,6 +73,7 @@ export default {
         key: '',
         value: ''
       },
+      orders:[],
       filters:[{
         label: 'Status',
         value: 'status',
@@ -94,13 +95,16 @@ export default {
         label: 'Fulfillment',
         value: 'fulfillment',
         items: ['Unfulfilled', 'Processing', 'Fulfilled']
+      },{
+        label: 'Order Type',
+        value: 'order_type',
+        items: ['Walk-In', 'Delivery', 'Pick-up']
       }],
-      columns: ['type', 'order_number', 'patient_name', 'qty', 
+      columns: ['order_type', 'order_number', 'patient_name', 'qty', 
       'created_at', 'total_amount', 'status', 'fulfillment', 'uri'],
-    data: getData(),
     options: {
       headings: {
-        type: 'Type',
+        order_type: 'Type',
         order_number: 'Order Number',
         patient_name: 'Patient Name',
         qty: 'Qty',
@@ -118,11 +122,16 @@ export default {
         }],
       dateColumns:['date']
     },
-        dynamicTags: [],
-        popover_visible: false,
-        filter_list: { 
-          status:['Pickup']
-        }
+    dynamicTags: [],
+    popover_visible: false,
+    filter_list: { 
+      status:['Pickup']
+    },
+    order_types: ['Walk-in', 'Delivery', 'Pick-up'],
+    fulfillment_types: ['Unfulfilled', 'Processing', ,'Fulfilled'],
+    status_types: ['Pending', 'Pending Pickup', 'Picked Up', 'Declined',
+    'Processing', 'In Transit', 'Rejected', 'Not Home', 'Cancelled', 'Delivered', 
+    'Returned', 'Completed', 'Partial', 'Unpaid']
     }
   },
    methods: {
@@ -149,35 +158,35 @@ export default {
         var result = this.filters.filter(obj=>obj.value==this.tag_new.key);
         return result[0].items;
       }
+    },
+    getOrders(){
+      return this.$store.getters.getOrders
     }
+  },
+  created() {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+        axios.get('/api/sales/orders/')
+        .then(res=>{
+          res.data.forEach(obj => {
+            var order = {
+              order_number: obj.id,
+              order_type: this.order_types[obj.order_type],
+              patient_name: obj.first_name+' '+obj.last_name,
+              fulfillment: this.fulfillment_types[obj.fulfillment],
+              created_at: moment(new Date(obj.created_at)).format('MMM DD, YYYY h:MM:ss a'),
+              total_amount:formatter.format(obj.total),
+              status: this.status_types[obj.status]
+            }
+            this.$store.dispatch('SET_ORDERS', order)
+          });;
+        }
+        ).catch(err=>console.log(err))
+      }
   }
-  }
 
-
-
-function getData() {
-  // return [];
-  var type = ['Order','Walkin','Pickup'];
-  var patient_name = ['TOMMY JOHN', 'MATTHEW T GRAY', 'PRISCILLA V. GEORGE'];
-  var status = ['Completed', 'Pending', 'Pickup', 'In Transit', 'Cancelled', 'Delivered'];
-  var fulfillment = ['Fulfilled', 'Unfulfilled', 'Processing'];
-  var list =[];              
-                for (var i=0; i<10; i++){
-                    list.push({
-                        type: type[Math.floor(Math.random()*type.length)],
-                        patient_name: patient_name[Math.floor(Math.random()*patient_name.length)],
-                        status: status[Math.floor(Math.random()*status.length)],
-                        order_number: Math.floor(Math.random() * (Math.floor(6245) -  Math.ceil(4567) + 1)) +  Math.ceil(4567),
-                        qty: Math.floor(Math.random() * (Math.floor(100) -  Math.ceil(50) + 1)) +  Math.ceil(50),
-                        created_at: moment(new Date(new Date(2019, 0, 1).getTime() + Math.random() * (new Date().getTime() - new Date(2019, 0, 1).getTime()))).
-                        format('MMM DD, YYYY h:MM:ss a'),
-                        total_amount: Math.floor(Math.random() * (Math.floor(100) -  Math.ceil(50) + 1)) +  Math.ceil(50),
-                        fulfillment: fulfillment[Math.floor(Math.random()*fulfillment.length)]
-                    });
-                    
-                }
-    return list;
-}
 </script>
 
 <style>
