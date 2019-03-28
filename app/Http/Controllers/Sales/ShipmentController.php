@@ -23,7 +23,8 @@ class ShipmentController extends Controller
 
     public function shipmentMethods(){
         $shipment_methods = DB::table('shipment_methods')
-        ->select()
+        ->select('shipment_methods.id', 'shipment_types.type', 'method', 'min_amount',
+        'charge', 'free_after', 'start_time', 'end_time', 'is_active')
         ->join('shipment_types', 'shipment_types.id', '=', 'shipment_methods.type')
         ->get();
 
@@ -42,7 +43,9 @@ class ShipmentController extends Controller
         $shipment_method = ShipmentMethod::create($request->all());
         
         if($shipment_method){
-            $shipment_method->save();
+            if($shipment_method->save()){
+                return $shipment_method;
+            }
         }
 
     }
@@ -54,15 +57,28 @@ class ShipmentController extends Controller
     }
 
     public function updateShipmentMethod(Request $request, $id){
-        $shipment_method = ShipmentMethod::where('id', $id)->firstOrFail();
+        $shipment_method = ShipmentMethod::findOrFail($id);
        
-        $data = $request->except('_token');
-        foreach($data as $key => $value){
-            if(array_key_exists($key, $shipment_method)){
-                $shipment_method[$key] = $value;
-            }
-        }
-        $shipment_method->save();
+        // $data = $request->except('_token');
+        // foreach($data as $key => $value){
+        //     if(array_key_exists($key, $shipment_method)){
+        //         $shipment_method[$key] = $value;
+        //     }
+        // }
+        $shipment_method->update($request->all());
         // return $data;
+    }
+
+    public function deleteShipmentMethod($id){
+        $shipment_method = ShipmentMethod::findOrFail($id);
+        $shipment_method->delete();
+    }
+
+    public function updateIsActive(Request $request, $id){
+        $shipment_method = ShipmentMethod::findOrFail($id);
+        if($shipment_method){
+            $shipment_method->is_active = $request->is_active;
+            $shipment_method->save();
+        }
     }
 }

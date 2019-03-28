@@ -12,8 +12,20 @@
                     <v-client-table name='orderTable' :columns="columns" :data="getOrders" :options="options">
                       <router-link slot="uri" slot-scope="props" :to="{name:'sales.order', params:{id:props.row.order_number}}">
                       <!-- <a slot="uri" slot-scope="props" target="_blank" :href="props.row.uri"> -->
-                        <el-button type="warning" size="small"><font-awesome-icon :icon="'eye'" size="sm"/></el-button>
+                        <el-button type="warning" size="small"><font-awesome-icon :icon="'eye'" /></el-button>
                       </router-link>
+                      <div slot="fulfillment" slot-scope="props">
+                         <font-awesome-icon :icon="fulfillment_icons[props.row.fulfillment]"  :class="props.row.fulfillment"/>
+                          <span> {{props.row.fulfillment}} </span>
+                          <el-button-group v-if="props.row.fulfillment=='Processing'">
+                            <el-button type="primary" size="small" @click="setFulfillment(props.index, props.row.order_number, 0)">                         
+                              <font-awesome-icon :icon="fulfillment_icons['Unfulfilled']" :class="props.row.fulfillment"/>
+                            </el-button>
+                            <el-button type="primary" size="small" @click="setFulfillment(props.index, props.row.order_number, 2)">
+                              <font-awesome-icon :icon="fulfillment_icons['Fulfilled']"  :class="props.row.fulfillment"/>
+                            </el-button>
+                          </el-button-group>
+                      </div>
                       <div slot="created_at" slot-scope="props" class="created-at-row">{{props.row.created_at}}</div>
                       <el-row :class="'filters-row'" slot="afterFilter">
                         <el-tag
@@ -128,7 +140,11 @@ export default {
       status:['Pickup']
     },
     order_types: ['Walk-in', 'Delivery', 'Pick-up'],
-    fulfillment_types: ['Unfulfilled', 'Processing', ,'Fulfilled'],
+    fulfillment_types: ['Unfulfilled', 'Processing','Fulfilled'],
+    fulfillment_icons: {
+      'Unfulfilled': 'times-circle',
+      'Processing': 'spinner',
+    'Fulfilled': 'check-circle'},
     status_types: ['Pending', 'Pending Pickup', 'Picked Up', 'Declined',
     'Processing', 'In Transit', 'Rejected', 'Not Home', 'Cancelled', 'Delivered', 
     'Returned', 'Completed', 'Partial', 'Unpaid']
@@ -150,6 +166,10 @@ export default {
           // this.$store.commit('orderTable/FILTER', {filter:'all_fields', value:this.filter_list})
           // Event.$emit('vue-tables.filter::all_fields', this.filter_list);
         }
+      },
+      setFulfillment(index, id, value){
+        this.$store.dispatch('SET_FULFILLMENT', 
+        {value: this.fulfillment_types[value], index: index})
       }
     },
   computed: {

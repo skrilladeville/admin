@@ -121,6 +121,7 @@ export default {
       axios.get('/api/sales/shipmentMethod/'+this.$route.params.id)
       .then(res=>{
           this.form = res.data;
+          this.form.is_active = res.data.is_active? true : false;
       });
   },
   methods: {

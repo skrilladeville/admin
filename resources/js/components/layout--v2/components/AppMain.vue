@@ -31,6 +31,7 @@ export default {
   data () {
     return {
       pageTitle: '',
+      pageSubtitle: ''
     }
   },
   name: 'AppMain',
@@ -43,12 +44,10 @@ export default {
   methods: {
     insertScriptTag(){
       try{
-      let scriptTag = document.createElement('script');    
-      scriptTag.setAttribute('src',"/js/robust-admin-init.js");
+        let scriptTag = document.createElement('script');    
+        scriptTag.setAttribute('src',"/js/robust-admin-init.js");
 
-      //var appMain=document.getElementById("appMain");
-      document.body.appendChild(scriptTag);
-      //appMain.appendChild(scriptTag);
+        document.body.appendChild(scriptTag);
       }catch(err){
         console.log(err)
       }
@@ -56,8 +55,8 @@ export default {
     moveProgressBar(){
       // move progress bar to navbar bottom
       try{
-      var pace = document.body.getElementsByClassName( "pace" )[0];
-      document.getElementsByTagName( "nav" )[0].appendChild( pace );
+        var pace = document.body.getElementsByClassName( "pace" )[0];
+        document.getElementsByTagName( "nav" )[0].appendChild( pace );
       }catch(err){
         console.log(err)
       }

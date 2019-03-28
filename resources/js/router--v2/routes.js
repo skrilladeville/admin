@@ -51,8 +51,6 @@ import posHomeTrans from '../pages/pos/posHomeTrans'
 import posLogin  from '../pages/pos/loginpos'
 
 
-
-
 /* Catalog Folder */
 import ManageProducts from '../pages/catalog/ManageProducts'
 import Attributes from '../pages/catalog/Attributes'
@@ -68,9 +66,9 @@ import AddVendor from '../pages/catalog/addVendor'
 import EditVendor from '../pages/catalog/editVendor'
 import AddLab from '../pages/catalog/addLab'
 import EditLab from '../pages/catalog/editLab'
-
 import Labs from '../pages/catalog/labs'
 import EditPricePreset from '../pages/catalog/editPricePreset'
+
 /* Sales Folder */
 import BillingAgreements from '../pages/sales/BillingAgreements'
 import CreditMemos from '../pages/sales/CreditMemos'
@@ -646,6 +644,22 @@ export default [
 			{
 				path: '/reports/admin/state-compliance',
 				meta: { title: 'State Compliance' },
+			},
+			{
+				path: '/reports/admin/shopping-carts',
+				meta: { title: 'Shopping Carts' },
+			},
+			{
+				path: '/reports/admin/expenses',
+				meta: { title: 'Expenses' },
+			},
+			{
+				path: '/reports/admin/registers',
+				meta: { title: 'Registers' },
+			},
+			{
+				path: '/reports/admin/marketing-statistics',
+				meta: { title: 'Marketing Statistics' },
 			}
 		]
 	},

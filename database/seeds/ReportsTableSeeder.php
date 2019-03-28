@@ -17,13 +17,17 @@ class ReportsTableSeeder extends Seeder
             set DATE type to TEXT type
          */
         $reportsDump = array(
+            'expenses_log',
+            'marketing_stats',
             'patient_action_stats',
             'patient_profiles',
             'patient_store_stats',
             'product_excise_stats',
             'product_inventory_incoming',
             'product_sales_stats',
-            'sales_log'
+            'registers_log',
+            'sales_log',
+            'shopping_carts'
         );
 
         foreach ($reportsDump as $dump) {
