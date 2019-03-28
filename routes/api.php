@@ -160,5 +160,7 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::get('sales/shipmentMethod/{id}', 'Sales\ShipmentController@show');
     Route::post('sales/shipmentMethod/new', 'Sales\ShipmentController@store');
     Route::put('sales/shipmentMethod/edit/{id}', 'Sales\ShipmentController@updateShipmentMethod');
+    Route::delete('sales/shipmentMethod/delete/{id}', 'Sales\ShipmentController@deleteShipmentMethod');
+    Route::put('sales/shipmentMethod/is_active/{id}', 'Sales\ShipmentController@updateIsActive');
     Route::get('sales/tax', 'Sales\TaxController@index');
 //});
