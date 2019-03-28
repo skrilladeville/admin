@@ -196,7 +196,7 @@ export default {
     'Returned', 'Completed', 'Partial', 'Unpaid'],
     fulfillment_types: {
       'Unfulfilled': 'times-circle',
-      'Processing': 'times-circle',
+      'Processing': 'spinner',
     'Fulfilled': 'check-circle'},
     status_types: {
       'Pending': 'success', 

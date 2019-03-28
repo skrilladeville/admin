@@ -16,14 +16,14 @@
                         :value="props.row.is_active"
                         active-color="#13ce66"
                         inactive-color="#ff4949"
-                        @change="switchActive(props.index)">
+                        @change="switchActive(props.row.id, props.index, props.row.is_active)">
                       </el-switch>
                        <el-row class="actions-col" slot="actions" slot-scope="props">
                           <router-link :to="{name:'sales.edit-shipment-method', params:{id:props.row.id}}">
                             <el-button type="warning" icon="el-icon-edit" size="small">
                             </el-button>
                           </router-link>
-                        <el-button type="danger" icon="el-icon-delete" size="small" @click="onDelete"></el-button>
+                        <el-button type="danger" icon="el-icon-delete" size="small" @click="onDelete(props.index, props.row.id)"></el-button>
                       </el-row>
                     </v-client-table>
                       <div class="button-div">
@@ -67,25 +67,29 @@ export default {
     }
   },
    methods: {
-      switchActive(id){
-        this.$store.dispatch('SET_ACTIVE', id)
+      switchActive(id, index, is_active){
+        var change = is_active? 0 : 1;
+        axios.put('/api/sales/shipmentMethod/is_active/'+id, {is_active: change})
+          .then(res=>{
+            this.$store.dispatch('SET_ACTIVE', index)
+          });
       },
-      onDelete(){
+      onDelete(index, id){
+      
          this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
           type: 'warning'
-        }).then(() => {
-          this.$message({
-            type: 'success',
-            message: 'Delete completed'
-          });
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: 'Delete canceled'
-          });          
-        });
+          }).then(() => {
+            axios.delete('/api/sales/shipmentMethod/delete/'+id).then(res=>{
+              this.$store.dispatch('DELETE_SHIPMENT_METHOD', index)
+              this.$message({
+                type: 'success',
+                message: 'Delete completed'
+              });
+            }).catch(err=>console.log(err));
+          }).catch(() => {});
+      
       }
     },
   mounted() {
@@ -93,7 +97,7 @@ export default {
       style: 'currency',
       currency: 'USD',
     });
-    
+      if(this.$store.getters.getShipmentMethods.length==0){    
         axios.get('/api/sales/shipmentMethods/')
         .then(res=>{
           res.data.forEach(obj => {
@@ -105,12 +109,13 @@ export default {
               min_order_amount: formatter.format(obj.min_amount),
               free_delivery_after: formatter.format(obj.free_after),
               time: obj.start_time +' '+obj.end_time,
-              is_active: obj.is_active
+              is_active: (obj.is_active)? true : false,
             }
             this.$store.dispatch('SET_SHIPMENT_METHODS', method)
           });;
         }
         ).catch(err=>console.log(err))
+      }
       },
     computed:{
       getShipmentMethods(){

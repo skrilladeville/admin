@@ -121,20 +121,37 @@ export default {
   },
   methods: {
     onSubmit(formName){
-        if(this.form.start_time==''){
-            this.form.start_time = '00:00';
-            this.form.end_time = '00:00';
+        var post_form = this.form;
+        if(post_form.start_time==''){
+            post_form.start_time = '00:00';
+            post_form.end_time = '00:00';
         }
+         var formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        });
         this.$refs[formName].validate((valid) => {
 			if (valid) {
-                axios.post('/api/sales/shipmentMethod/new', this.form)
+                axios.post('/api/sales/shipmentMethod/new', post_form)
                 .then(res=>{
-                    // alert('Successfully saved! ')
-                        this.$message({
+                    this.$message({
                     message: 'Successfully saved!',
                     type: 'success'
                     });
+                    var new_method = {
+                        id: res.data.id,
+                        type: res.data.type==1? 'Pickup': 'Delivery',
+                        shipping_method: res.data.method,
+                        delivery_charge: formatter.format(res.data.charge),
+                        min_order_amount: formatter.format(res.data.min_amount),
+                        free_delivery_after: formatter.format(res.data.free_after),
+                        time: res.data.start_time +' '+res.data.end_time,
+                        is_active: (res.data.is_active)? true : false,
+                    };
+                    this.$store.dispatch('ADD_NEW_SHIPMENT_METHOD', new_method)
+
                     this.$router.push({name: 'sales.shipment-methods'})
+                    
                 }).catch(err=>this.$message.error('Please check your fields.'))
             }else{
                 this.$message.error('Please check your fields.')
