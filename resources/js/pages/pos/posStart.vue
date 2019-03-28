@@ -4,14 +4,14 @@
             <v-flex md4 offset-sm-4>
             <v-card>
                 <v-card-title>
-                    <h3>Select Branch</h3>
+                    <h3>Select Register</h3>
                 </v-card-title>
                 <v-card-text>
                <el-select style="width:100%;" v-model="branch" placeholder="Select">
     <el-option
-      v-for="item in branches"
+      v-for="item in registers"
       :key="item.id"
-      :label="item.branch_name"
+      :label="item.name"
       :value="item.id">
     </el-option>
   </el-select>
@@ -28,14 +28,14 @@
 export default {
 data(){
     return{
-        branches:[],
+        registers:[],
         branch:'',
         mac:''
     }
 },
 created(){
-    axios.get('/api/user/branch/all').then(res=>{
-        this.branches=res.data
+    axios.get('/api/pos/register/all').then(res=>{
+        this.registers=res.data
     })
 },
 
@@ -45,7 +45,7 @@ methods:{
         if(this.branch != "")
         {
             console.log(this.branch)
-                 this.$router.push(`/pos/branch/${this.branch}`)
+                 this.$router.push(`/pos/terminal/${this.branch}`)
         }
    
     }

@@ -226,8 +226,8 @@
         width="160">
       </el-table-column>
       <el-table-column
-        prop="count"
-        label="count"
+        prop="qty"
+        label="qty"
         width="80">
       </el-table-column>
       <el-table-column
@@ -539,10 +539,24 @@ export default {
       barcode:'',
       dialogVoidLine:false,
        currentRow: null,
-        activeIndex: -1
+        activeIndex: -1,
+        order:{}
         }
   },
   created() {
+
+
+    axios.get('/api/sales/order/show/'+this.$route.params.id).then(res=>{
+     this.order=res.data 
+     console.log(res.data)
+
+    axios.get('/api/sales/orderItem/byOrder/'+this.order.id).then(res=>{
+      console.log("naa ra"+res.data)
+      res.data.forEach(el=>{
+          this.addProducts.push({id:el.id,product_id:el.product_id,product:el.product_name,price:el.price,qty:el.qty,amount:el.price* el.qty})
+      })
+    }).catch(err=>console.log("error"+err))
+    })
     axios.get('/api/catalog/product/barcode/all').then(res=>{
       this.barcodes=res.data
       console.log(res.data)
@@ -587,33 +601,32 @@ export default {
       if(prod.product.price_measurement=='Weight'){
           console.log(prod.size)
           
-        if(prod.size=='1g'){
-          
+        if(prod.size=='1g'){  
           let p=this.products.find(el=>el.id == prod.product.id)
-          this.addProducts.push({product:`${prod.product.name} ${prod.size}`,price:p.prices[0].gram_price,count:1,amount:p.prices[0].gram_price})
+          this.addProducts.push({product_id:p.id,product:`${prod.product.name} ${prod.size}`,price:p.prices[0].gram_price,qty:1,amount:p.prices[0].gram_price})
         }
         if(prod.size=='1/8oz'){
           console.log('naka abot pud')
           let p=this.products.find(el=>el.id == prod.product.id)
-          this.addProducts.push({product:`${prod.product.name} ${prod.size}`,price:p.prices[0].eight_price,count:1,amount:p.prices[0].eight_price})
+          this.addProducts.push({product_id:p.id,product:`${prod.product.name} ${prod.size}`,price:p.prices[0].eight_price,qty:1,amount:p.prices[0].eight_price})
         }
       if(prod.size=='1/4oz'){
           let p=this.products.find(el=>el.id == prod.product.id)
-          this.addProducts.push({product:`${prod.product.name} ${prod.size}`,price:p.prices[0].quarter_price,count:1,amount:p.prices[0].quarter_price})
+          this.addProducts.push({product_id:p.id,product:`${prod.product.name} ${prod.size}`,price:p.prices[0].quarter_price,qty:1,amount:p.prices[0].quarter_price})
         }
               if(prod.size=='1/2oz'){
           let p=this.products.find(el=>el.id == prod.product.id)
-          this.addProducts.push({product:`${prod.product.name} ${prod.size}`,price:p.prices[0].half_price,count:1,amount:p.prices[0].half_price})
+          this.addProducts.push({product_id:p.id,product:`${prod.product.name} ${prod.size}`,price:p.prices[0].half_price,qty:1,amount:p.prices[0].half_price})
         }
 
         if(prod.size=='1oz'){
           let p=this.products.find(el=>el.id == prod.product.id)
-          this.addProducts.push({product:`${prod.product.name} ${prod.size}`,price:p.prices[0].half_price,count:1,amount:p.prices[0].ounce_price})
+          this.addProducts.push({product_id:p.id,product:`${prod.product.name} ${prod.size}`,price:p.prices[0].half_price,qty:1,amount:p.prices[0].ounce_price})
         }
         
         if(prod.size=='pre-roll'){
           let p=this.products.find(el=>el.id == prod.product.id)
-          this.addProducts.push({product:`${prod.product.name} ${prod.size}`,price:p.prices[0].joint_price,count:1,amount:p.prices[0].joint_price})
+          this.addProducts.push({product_id:p.id,product:`${prod.product.name} ${prod.size}`,price:p.prices[0].joint_price,qty:1,amount:p.prices[0].joint_price})
         }
         
 
@@ -632,30 +645,31 @@ export default {
         if(prod.size=='1g'){
           
           let p=this.products.find(el=>el.id == prod.product.id)
-          this.addProducts.push({product:`${prod.product.name} ${prod.size}`,price:p.prices[0].gram_price,count:res[1],amount:p.prices[0].gram_price * res[1]})
+          this.addProducts.push({product_id:p.id,product:`${prod.product.name} ${prod.size}`,price:p.prices[0].gram_price,qty:res[1],amount:p.prices[0].gram_price * res[1]})
         }
         if(prod.size=='1/8oz'){
           console.log('naka abot pud')
           let p=this.products.find(el=>el.id == prod.product.id)
-          this.addProducts.push({product:`${prod.product.name} ${prod.size}`,price:p.prices[0].eight_price,count:res[1],amount:p.prices[0].eight_price * res[1]})
+          this.addProducts.push({product_id:p.id,product:`${prod.product.name} ${prod.size}`,price:p.prices[0].eight_price,qty
+          :res[1],amount:p.prices[0].eight_price * res[1]})
         }
       if(prod.size=='1/4oz'){
           let p=this.products.find(el=>el.id == prod.product.id)
-          this.addProducts.push({product:`${prod.product.name} ${prod.size}`,price:p.prices[0].quarter_price,count:res[1],amount:p.prices[0].quarter_price * res[1]})
+          this.addProducts.push({product_id:p.id,product:`${prod.product.name} ${prod.size}`,price:p.prices[0].quarter_price,qty:res[1],amount:p.prices[0].quarter_price * res[1]})
         }
               if(prod.size=='1/2oz'){
           let p=this.products.find(el=>el.id == prod.product.id)
-          this.addProducts.push({product:`${prod.product.name} ${prod.size}`,price:p.prices[0].half_price,count:res[1],amount:p.prices[0].half_price * res[1]})
+          this.addProducts.push({product_id:p.id,product:`${prod.product.name} ${prod.size}`,price:p.prices[0].half_price,qty:res[1],amount:p.prices[0].half_price * res[1]})
         }
 
         if(prod.size=='1oz'){
           let p=this.products.find(el=>el.id == prod.product.id)
-          this.addProducts.push({product:`${prod.product.name} ${prod.size}`,price:p.prices[0].half_price,count:res[1],amount:p.prices[0].ounce_price * res[1]})
+          this.addProducts.push({product_id:p.id,product:`${prod.product.name} ${prod.size}`,price:p.prices[0].half_price,qty:res[1],amount:p.prices[0].ounce_price * res[1]})
         }
         
         if(prod.size=='pre-roll'){
           let p=this.products.find(el=>el.id == prod.product.id)
-          this.addProducts.push({product:`${prod.product.name} ${prod.size}`,price:p.prices[0].joint_price,count:res[1],amount:p.prices[0].joint_price * res[1]})
+          this.addProducts.push({product_id:p.id,product:`${prod.product.name} ${prod.size}`,price:p.prices[0].joint_price,qty:res[1],amount:p.prices[0].joint_price * res[1]})
         }
         
 
@@ -668,7 +682,8 @@ export default {
     },
       handleCurrentChange(val) {
         this.currentRow = val;
-         this.activeIndex = this.tableData.indexOf(val);
+         this.activeIndex = this.addProducts.indexOf(val);
+         
       },
     setAll(){
       this.category_id=''
@@ -684,30 +699,56 @@ this.category_id=id
       this.value += e;
     },
     voidline(){
-        this.addProducts.splice(this.activeIndex, 1);
+      console.log(this.currentRow.id)
+        axios.post('/api/sales/orderItem/delete/'+this.currentRow.id).then(res=>{
+          console.log(res)
+   this.addProducts.splice(this.activeIndex, 1);
         this.dialogVoidLine = false
+        })
+     
     },
     del(){
 this.value = this.value.slice(0, -1);
-
-       
+   
     },
     addProduct(){
         if(this.product.price_measurement == 'Weight'){
          let prod=`${this.product.name} ${this.weight_selected}`
          let amount=this.count*this.price
-         this.addProducts.push({product:prod,price:this.price,count:this.count,amount:amount})
+         axios.post('/api/sales/orderItem/create',{'order_id':this.$route.params.id,'product_name':prod,'product_id':this.product.id,'qty':this.count,'price':this.price,'tax':0}).then(el=>{
+            console.log(el.data)
+            console.log(this.count)
+                this.addProducts.push({id:el.data.id,product_id:el.data.product_id,product:el.data.product_name,price:el.data.price,qty:el.data.qty,amount:el.data.price* el.data.qty})
+   
+           
+         })
+        //  this.addProducts.push({product_id:this.product.id,product:prod,price:this.price,qty:this.count,amount:amount})
+ 
         }
          if(this.product.price_measurement == 'Weight Range'){
          let prod=`${this.product.name} 1g`
           let amount=this.count*this.price
-         this.addProducts.push({product:prod,price:this.price,count:this.count,amount:amount})
-        }
+          axios.post('/api/sales/orderItem/create',{'order_id':this.$route.params.id,'product_name':prod,'product_id':this.product.id,'qty':this.count,'price':this.price,'tax':0}).then(el=>{
+             console.log(this.price)
+            console.log(this.count)
+              this.addProducts.push({id:el.data.id,product_id:el.data.product_id,product:el.data.product_name,price:el.data.price,qty:el.data.qty,amount:el.data.price* el.data.qty})
+   
+         })
+        //  this.addProducts.push({product_id:this.product.id,product:prod,price:this.price,qty:this.count,amount:amount})
+       
+         }
         if(this.product.price_measurement == 'Per Unit' || this.product.price_measurement == 'Per Unit Range' ){
           let prod=`${this.product.name} ${this.product.net_weight}g`
            let amount=this.count*this.price
-         this.addProducts.push({product:prod,price:this.price,count:this.count,amount:amount})
-        }
+           axios.post('/api/sales/orderItem/create',{'order_id':this.$route.params.id,'product_name':prod,'product_id':this.product.id,'qty':this.count,'price':this.price,'tax':0}).then(el=>{
+           console.log(this.price)
+            console.log(this.count)
+    this.addProducts.push({id:el.data.id,product_id:el.data.product_id,product:el.data.product_name,price:el.data.price,qty:el.data.qty,amount:el.data.price* el.data.qty})
+   
+         }) 
+         // this.addProducts.push({product_id:this.product.id,product:prod,price:this.price,qty:this.count,amount:amount})
+       
+         }
     
       this.weight=''
       this.weight_selected=''

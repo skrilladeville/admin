@@ -8,7 +8,7 @@
                 </v-card-title>
                 <v-card-text>
     
-                    <v-btn color="error" style="color:white;" block @click="createTrans">Start Transaction</v-btn>
+                    <v-btn color="error" style="color:white;" block @click="createTrans">Start Sale Transaction</v-btn>
                 </v-card-text>
             </v-card>
             </v-flex>
@@ -27,18 +27,34 @@ data(){
 methods:{
     createTrans(){
      
-      let trans={
-          customer_id:null,
-          order_status:'',
-          order_date:'',
-          shipped_date:'',
-          required_date:'',
-          branch_id:this.$route.params.id,
-          staff_id:3
-
+      let order={
+         user_id:1,
+        order_type:0,
+        customer_type:0,
+        delivery_address:'',
+        status:0,
+        fulfillment:0,
+        note:'',
+        shipping:'',
+        sales_tax:0,
+        total:0,
+        balance:0,
+      
       }
-        axios.post('/api/sales/order/create',trans).then(res=>{
-            this.$router.push('/pos/branch/1/trans/'+res.data.id)
+        axios.post('/api/sales/order/create',order).then(res=>{  		
+        let trans={
+          register_id:2,
+          transaction_type:2,
+          order_id:res.data.id,
+          amount:0.0,
+          conpleted:'',
+          last_edit:'',
+          last_edit:''
+      }
+        axios.post('/api/sales/transaction/create',trans).then(res=>{
+            this.$router.push('/pos/terminal/1/trans/'+res.data.id)
+        })
+    
         })
     }
 }

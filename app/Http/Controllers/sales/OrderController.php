@@ -52,4 +52,21 @@ class OrderController extends Controller
         ->get();
         return $order;
     }
+
+
+    public function showOrder($id)
+    {
+        $order=Order::find($id);
+        return $order;
+    }
+	
+    
+
+    public function store(Request $request)
+    {
+        $order=Order::create($request->only(['user_id','order_type','customer_type',
+        'delivery_address','status','fulfillment','note','shipping','sales_tax','total','balance']));
+
+        return $order;
+    }
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Product;
-use App\Price;
+
 
 
 class ProductSeeder extends Seeder
@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
             'name'=>'Product 1',
             'symbol'=>'232',
             'sku'=>'325231',
-            'image'=>'image1.png',
+            'image'=>'image1.jpg',
             'product_category_id'=>1,
             'strain'=>'Indica',
             'is_marijuana'=>1,
@@ -100,7 +100,7 @@ class ProductSeeder extends Seeder
             'name'=>'Product 5',
             'symbol'=>'232',
             'sku'=>'325235',
-            'image'=>'image4.png',
+            'image'=>'image4.jpg',
             'product_category_id'=>5,
             'strain'=>'Indica',
             'is_marijuana'=>1,
@@ -142,7 +142,7 @@ class ProductSeeder extends Seeder
             'sku'=>'325237',
             'product_category_id'=>1,
             'strain'=>'Indica',
-            'image'=>'image1.png',
+            'image'=>'image1.jpg',
             'is_marijuana'=>1,
             'product_type_id'=>2,
             'is_each'=>0,

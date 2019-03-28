@@ -167,8 +167,8 @@ export default [
 				meta: {requiresGuestPOS: true, title: 'POS'},
 			},
 			{
-				path: 'branch/:id',
-				name: 'pos branch',
+				path: 'terminal/:id',
+				name: 'pos terminal',
 				component: posHome,
 				meta: {requiresGuestPOS: true, title: 'POS'},
 				children:[
@@ -181,7 +181,7 @@ export default [
 						},
 						{
 							path: 'trans/:id',
-							name: 'POS home trans',
+							name: 'POS  trans',
 							component: posTrans,
 							meta: {requireAuthPOS: true, title: 'POS'},
 							}

@@ -37,8 +37,12 @@ class OrderItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        	
+
+$orderItem=OrderItem::create($request->only(['order_id','product_id','product_name','qty','price','tax']));
+   return $orderItem;
+
+}
 
     /**
      * Display the specified resource.
@@ -49,6 +53,12 @@ class OrderItemController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function showbyOrderId($id)
+    {
+        $orderItems=OrderItem::where('order_id','=',$id)->get();
+        return $orderItems;
     }
 
     /**
@@ -82,6 +92,8 @@ class OrderItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $orderItem=OrderItem::find($id);
+        $orderItem->delete();
+        return "success";
     }
 }

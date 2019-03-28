@@ -23,6 +23,7 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
-        $transaction=Transaction::create($request->only(['register_id','transaction_type','order_id','amount']));
+        $transaction=Transaction::create($request->only(['register_id','transaction_type','order_id','amount','completed','last_edit']));
+        return $transaction;
     }
 }

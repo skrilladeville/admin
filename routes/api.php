@@ -41,8 +41,7 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
   Route::get('user/branch/all', 'Users\BranchController@index');
   Route::get('user/branch/view/{id}', 'Users\BranchController@show');
 
-  //pos sales
-  Route::post('sales/order/create', 'sales\OrderController@store');
+
    
 
 
@@ -79,6 +78,11 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::get('catalog/product', 'Catalog\ProductController@index');
     Route::get('catalog/product/view/{id}', 'Catalog\ProductController@show');
     Route::get('reports/{role}/{pagename}','Reports\ReporterController@index');
+
+
+    //pos register
+
+    Route::get('pos/register/all','pos\PosRegisterController@index');
     
 
     // GCCv1 pages and files
@@ -153,10 +157,16 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     /*Sales*/
     Route::post('sales/sales', 'Sales\SalesController@index');
     Route::post('sales/orders', 'Sales\OrderController@filter');
+    Route::post('sales/order/create', 'sales\OrderController@store');
+    Route::post('sales/orderItem/create', 'sales\OrderItemController@store');
+    Route::get('sales/orderItem/byOrder/{id}', 'sales\OrderItemController@showbyOrderId');
+    Route::post('sales/orderItem/delete/{id}', 'sales\OrderItemController@destroy');
+    
     Route::get('sales/orders', 'Sales\OrderController@index');
     Route::get('sales/order/{order_id}', 'Sales\OrderController@show');
+    Route::get('sales/order/show/{id}', 'Sales\OrderController@showOrder');
     Route::get('sales/transactions', 'Sales\TransactionController@index');
-    Route::get('sales/transaction/create', 'Sales\TransactionController@store');
+    Route::post('sales/transaction/create', 'Sales\TransactionController@store');
     Route::get('sales/transactions/{filter}', 'Sales\TransactionController@show');
     Route::get('sales/shipments', 'Sales\ShipmentController@index');
     Route::put('sales/shipment/cancel/{shipment_id}', 'Sales\ShipmentController@update');
