@@ -8,6 +8,10 @@ use App\ProductSalesReport;
 use App\ProductInventory;
 use App\SalesReport;
 use App\StateCompliance;
+use App\MarketingStatistics;
+use App\Registers;
+use App\Expenses;
+use App\ShoppingCarts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -38,6 +42,18 @@ class ReporterController extends Controller
                 break;
 			case 'state-compliance':
                 $user = StateCompliance::all();
+                break;
+            case 'marketing-statistics':
+                $user = MarketingStatistics::all();
+                break;
+            case 'registers':
+                $user = Registers::all();
+                break;
+            case 'expenses':
+                $user = Expenses::all();
+                break;
+            case 'shopping-carts':
+                $user = ShoppingCarts::all();
                 break;
             default:
                 return;
