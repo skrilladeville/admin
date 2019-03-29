@@ -165,7 +165,7 @@ export default [
 				meta: {requiresGuestPOS: true, title: 'POS'},
 			},
 			{
-				path: 'terminal/:id',
+				path: 'terminal/:terminalId',
 				name: 'pos terminal',
 				component: posHome,
 				meta: {requiresGuestPOS: true, title: 'POS'},
@@ -178,7 +178,7 @@ export default [
 						meta: {requireAuthPOS: true, title: 'POS'},
 						},
 						{
-							path: 'trans/:id',
+							path: 'trans/:transid/order/:orderid',
 							name: 'POS  trans',
 							component: posTrans,
 							meta: {requireAuthPOS: true, title: 'POS'},

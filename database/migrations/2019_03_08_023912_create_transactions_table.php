@@ -21,6 +21,7 @@ class CreateTransactionsTable extends Migration
             $table->float('amount');
             $table->dateTime('completed')->nullable();
             $table->dateTime('last_edit')->nullable(); 
+            $table->integer('status');
             $table->timestamps();
         });
     }

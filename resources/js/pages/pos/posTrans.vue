@@ -254,7 +254,7 @@
   <v-btn color="warning" style="color:white !important;" mr-2 block @click="dialogVoidLine=true">F4-Void Line</v-btn>
   </v-flex>
         <v-flex md4>
-  <v-btn color="success" dark  block style="color:white !important;">F5-Void Transaction</v-btn>
+  <v-btn color="success" dark  block style="color:white !important;" @click="dialogCancelTrans=true">F5-Void Transaction</v-btn>
   </v-flex>
       <v-flex md4>
   <v-btn color="error" dark @click="tender=true" block style="color:white !important;">F6-Tender</v-btn>
@@ -369,6 +369,23 @@
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" flat @click="dialogVoidLine = false">Cancel</v-btn>
           <v-btn color="green darken-1" flat @click="voidline">Done</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-layout>
+
+  <v-layout row justify-center>
+    <v-dialog v-model="dialogCancelTrans" persistent max-width="350">
+
+      <v-card>
+        <v-card-title class="headline">Branch Admin User</v-card-title>
+        <v-card-text>  <el-input type="email" placeholder="email here"></el-input>
+        
+        <el-input type="password"  placeholder="password here"></el-input></v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" flat @click="dialogCancelTrans = false">Cancel</v-btn>
+          <v-btn color="green darken-1" flat @click="canceltrans">Done</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -538,15 +555,20 @@ export default {
       barcodes:[],
       barcode:'',
       dialogVoidLine:false,
+      dialogCancelTrans:false,
        currentRow: null,
         activeIndex: -1,
         order:{}
         }
   },
   created() {
+    axios.get('/api/sales/transaction/show/'+this.$route.params.transid).then(res=>{
+        if(res.data.status==2){
+            this.$router.push('/pos/terminal/'+this.$route.params.terminalId) 
+        }
+    })
 
-
-    axios.get('/api/sales/order/show/'+this.$route.params.id).then(res=>{
+    axios.get('/api/sales/order/show/'+this.$route.params.orderid).then(res=>{
      this.order=res.data 
      console.log(res.data)
 
@@ -671,8 +693,6 @@ export default {
           let p=this.products.find(el=>el.id == prod.product.id)
           this.addProducts.push({product_id:p.id,product:`${prod.product.name} ${prod.size}`,price:p.prices[0].joint_price,qty:res[1],amount:p.prices[0].joint_price * res[1]})
         }
-        
-
       }
       }
       }
@@ -698,6 +718,7 @@ this.category_id=id
         this.value = ''; 
       this.value += e;
     },
+
     voidline(){
       console.log(this.currentRow.id)
         axios.post('/api/sales/orderItem/delete/'+this.currentRow.id).then(res=>{
@@ -706,6 +727,12 @@ this.category_id=id
         this.dialogVoidLine = false
         })
      
+    },
+
+    canceltrans(){
+      axios.post('/api/sales/transaction/void/'+this.$route.params.transid).then(res=>{ 
+      this.$router.push('/pos/terminal/'+this.$route.params.terminalId) 
+      })
     },
     del(){
 this.value = this.value.slice(0, -1);
@@ -728,7 +755,7 @@ this.value = this.value.slice(0, -1);
          if(this.product.price_measurement == 'Weight Range'){
          let prod=`${this.product.name} 1g`
           let amount=this.count*this.price
-          axios.post('/api/sales/orderItem/create',{'order_id':this.$route.params.id,'product_name':prod,'product_id':this.product.id,'qty':this.count,'price':this.price,'tax':0}).then(el=>{
+          axios.post('/api/sales/orderItem/create',{'order_id':this.$route.params.orderid,'product_name':prod,'product_id':this.product.id,'qty':this.count,'price':this.price,'tax':0}).then(el=>{
              console.log(this.price)
             console.log(this.count)
               this.addProducts.push({id:el.data.id,product_id:el.data.product_id,product:el.data.product_name,price:el.data.price,qty:el.data.qty,amount:el.data.price* el.data.qty})
@@ -740,10 +767,10 @@ this.value = this.value.slice(0, -1);
         if(this.product.price_measurement == 'Per Unit' || this.product.price_measurement == 'Per Unit Range' ){
           let prod=`${this.product.name} ${this.product.net_weight}g`
            let amount=this.count*this.price
-           axios.post('/api/sales/orderItem/create',{'order_id':this.$route.params.id,'product_name':prod,'product_id':this.product.id,'qty':this.count,'price':this.price,'tax':0}).then(el=>{
+           axios.post('/api/sales/orderItem/create',{'order_id':this.$route.params.orderid,'product_name':prod,'product_id':this.product.id,'qty':this.count,'price':this.price,'tax':0}).then(el=>{
            console.log(this.price)
             console.log(this.count)
-    this.addProducts.push({id:el.data.id,product_id:el.data.product_id,product:el.data.product_name,price:el.data.price,qty:el.data.qty,amount:el.data.price* el.data.qty})
+            this.addProducts.push({id:el.data.id,product_id:el.data.product_id,product:el.data.product_name,price:el.data.price,qty:el.data.qty,amount:el.data.price* el.data.qty})
    
          }) 
          // this.addProducts.push({product_id:this.product.id,product:prod,price:this.price,qty:this.count,amount:amount})

@@ -59,6 +59,14 @@ class OrderController extends Controller
         $order=Order::find($id);
         return $order;
     }
+
+    public function voidOrder($id)
+    {
+        $order=Order::find($id);
+        $order->status=2;
+        $order->save();
+        return $order;
+    }
 	
     
 
