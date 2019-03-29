@@ -40,6 +40,10 @@ class DatabaseSeeder extends Seeder
         //$this->call(PrescriptionSeeder::class);
         //$this->call(DiagnosisSeeder::class);
 
+        $this->call(ProductSeeder::class);
+        $this->call(PriceSeeder::class);
+        $this->call(CategorySeeder::class);
+
         $this->call([
             // UsersTableSeeder::class,
             ReportsTableSeeder::class,

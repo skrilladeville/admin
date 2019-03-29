@@ -16,7 +16,7 @@
 
  
 
-    <v-client-table name="vendors" :data="getVendors" :columns="titles">
+    <v-client-table name="vendorTable" :data="getVendors" :columns="titles">
      <template slot="action" slot-scope="props">
        <div class="d-flex">
        <router-link :to="`/catalog/vendors/edit/${props.row.id}`"><el-button  size="small"  icon="el-icon-edit"  type="success"></el-button></router-link>
@@ -66,7 +66,7 @@ export default {
       centerDialogVisible: false,
       id: '',
       index: '',
-     // vendors: [],
+      vendors: [],
       titles: [
         'name','phone','email','description','action'
       ],

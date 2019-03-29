@@ -182,7 +182,7 @@ export default [
 							name: 'POS  trans',
 							component: posTrans,
 							meta: {requireAuthPOS: true, title: 'POS'},
-							}
+						}
 				]
 			},
 			{

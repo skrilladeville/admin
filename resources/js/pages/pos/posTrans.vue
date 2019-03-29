@@ -3,21 +3,22 @@
       <router-view/>
       
     <v-layout row>
-         <transition name="slide-fade">
-      <template v-if="tender == true">
+        
+            <v-dialog v-model="tender" persistent max-width="700">
+ 
          
             
            
 
-             <v-flex md5 pt-5 mr-3>
+             <v-flex md12>
                 <v-card  class="text--white" height="540" >
         
                 <v-layout  row wrap mr-1 ml-1>
-                  <v-flex  m12 pb-2>
+                  <v-flex  m12 pb-0>
                   
                      <v-container fluid grid-list-sm>
                     <v-layout    class="white--text" pa-0 ma-0 row wrap>
-                        <v-flex md12 style="background:#2f2f31" class="rounded-div">
+                        <v-flex md12  class="rounded-div">
                         <div id="calculator">
 
   <input type="string" class="calculator-input" v-model="value" @keyup.enter="getResult()">
@@ -57,9 +58,20 @@
       <button class="calculator-btn" @click="addExpresion(9)">9</button>
     </div>
   </div>
-  <div class="calculator-row">
+    <div class="calculator-row">
     <div class="calculator-col">
       <button class="calculator-btn" @click="addExpresion(0)">0</button>
+    </div>
+    <div class="calculator-col">
+      <button class="calculator-btn" @click="addExpresion(100)">100</button>
+    </div>
+    <div class="calculator-col">
+      <button class="calculator-btn" @click="addExpresion(200)">200</button>
+    </div>
+  </div>
+  <div class="calculator-row">
+    <div class="calculator-col">
+      <button class="calculator-btn" @click="addExpresion(500)">500</button>
     </div>
     <div class="calculator-col">
       <button class="calculator-btn" @click="addExpresion('.')">.</button>
@@ -68,30 +80,50 @@
       <button class="calculator-btn del" @click="del">del</button>
     </div>
   </div>
-    <div class="calculator-row">
-    <div style="margin-bottom:10px;" class="calculator-col">
-      <v-btn large style="  color: #D4D4D2 !important;" block color="success">Change</v-btn>
-    </div>
-    
-  </div>
+
 </div>
+      <v-layout row wrap>
+              <v-flex md12>
+                <v-card height="120">
+                 
+                          <v-layout row wrap ml-3 pa-2>
+               <v-flex md8><h6>Total Due</h6></v-flex>
+        <v-flex md4><h5><b>{{(total).toFixed(2)}}</b></h5></v-flex> 
+                      <v-flex md8><h6>Amount Tender</h6></v-flex>
+        <v-flex md4><h5><b>{{value}}</b></h5></v-flex> 
+                            <v-flex md8><h6>Change</h6></v-flex>
+        <v-flex md4><h5><b>{{(value-total).toFixed(2)}}</b></h5></v-flex> 
+              
+      </v-layout>
+    
+     
+      <v-btn block style="color:white !important;" @click="pdfgen" color="success">Finish Transaction</v-btn>
+           
+       
+
+                </v-card>
+  
+
+              </v-flex>
+      
+            </v-layout>
 </v-flex>
-                    </v-layout>
-                     </v-container>
-                  </v-flex>
-                </v-layout>
+</v-layout>
+</v-container>
+</v-flex>
+</v-layout>
+        
                 
                 </v-card>
+
+  
 
              </v-flex>
 
       
-      </template>
-      
-    </transition>
-     <transition name="slide-fade">
-      <template v-if="tender == false">
-      <v-flex md7 pt-5 mr-3>
+            </v-dialog>
+    
+      <v-flex md6 pt-5 mr-3>
         <v-card height="400" >
           <v-layout row ml-2 mr-2 pa-2 justify-space-between>
             <v-flex xs2>
@@ -196,19 +228,18 @@
             
         </v-layout>
       </v-flex>
-      </template>
-      </transition>
+
       
 
-      <v-flex md7 pt-5>
+      <v-flex md6 pt-5>
         <v-card height="540">
           <v-card-title>
             <el-input @keyup.enter.native="addProductbyBarcode()" v-model="barcode"    prefix-icon="el-icon-tickets" placeholder="Scan Barcode"></el-input>
           </v-card-title>
-              <p>{{username}}</p>
+     
           <hr>
 
-          <v-layout mr-2 ml-2 row wrap style="height:320px; max-height:320px; overflow-y:scroll;">
+          <v-layout mr-2 ml-2 row wrap style="height:220px; max-height:220px; overflow-y:scroll;">
             <v-flex md12>
  
                 <el-table
@@ -244,21 +275,36 @@
   </v-layout>
   <v-layout ml-2 mr-2 row wrap>
     <v-flex ma-2 md12>
-      <v-card height="70">
-        <h2>Total:{{total.toFixed(2)}}</h2>
+      <v-card height="150">
+      <v-layout row wrap ml-3 pa-2>
+               <v-flex md8><h6>Sub Total</h6></v-flex>
+        <v-flex md4><h6>{{(total-taxtotal).toFixed(2)}}</h6></v-flex> 
+                      <v-flex md8><h6>Discount</h6></v-flex>
+        <v-flex md4><h6>0.00</h6></v-flex> 
+                            <v-flex md8><h6>Tax</h6></v-flex>
+        <v-flex md4><h6>{{taxtotal.toFixed(2)}}</h6></v-flex> 
+                            <v-flex md8><h6>Grand Total</h6></v-flex>
+        <v-flex md4><h6>{{total.toFixed(2)}}</h6></v-flex> 
+      </v-layout>
+
+  
 
       </v-card>
 
     </v-flex>
-    <v-flex md4>
+    <v-flex md3>
   <v-btn color="warning" style="color:white !important;" mr-2 block @click="dialogVoidLine=true">F4-Void Line</v-btn>
   </v-flex>
-        <v-flex md4>
+        <v-flex md3>
   <v-btn color="success" dark  block style="color:white !important;" @click="dialogCancelTrans=true">F5-Void Transaction</v-btn>
   </v-flex>
-      <v-flex md4>
-  <v-btn color="error" dark @click="tender=true" block style="color:white !important;">F6-Tender</v-btn>
+      <v-flex md3>
+  <v-btn color="error" dark @click="tender=true" block style="color:white !important;">F6-Cash</v-btn>
   </v-flex>
+     <v-flex md3>
+  <v-btn color="primary" dark block style="color:white !important;">F7-Credit/Debit Card</v-btn>
+  </v-flex>
+
    </v-layout>       
         </v-card>
         
@@ -414,9 +460,9 @@ body {
   width: 100%;
   margin: 0 auto;
   display: flex;
-  padding: 0;
-  max-width: 320px;
-  min-width: 320px;
+  padding: 5px;
+
+ 
   flex-direction: column;
   background-color: #2f2f31;
 }
@@ -534,6 +580,10 @@ body {
 </style>
 
 <script>
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 export default {
 
   data() {
@@ -558,15 +608,20 @@ export default {
       dialogCancelTrans:false,
        currentRow: null,
         activeIndex: -1,
-        order:{}
+        order:{},
+        payment_type:''
         }
   },
-  created() {
+  mounted(){
     axios.get('/api/sales/transaction/show/'+this.$route.params.transid).then(res=>{
         if(res.data.status==2){
-            this.$router.push('/pos/terminal/'+this.$route.params.terminalId) 
+            this.$router.push('/pos/terminal/'+this.$route.params.terminalId)
+            	this.$noty.error('Void transaction'); 
         }
     })
+
+  },
+  created() {
 
     axios.get('/api/sales/order/show/'+this.$route.params.orderid).then(res=>{
      this.order=res.data 
@@ -575,7 +630,7 @@ export default {
     axios.get('/api/sales/orderItem/byOrder/'+this.order.id).then(res=>{
       console.log("naa ra"+res.data)
       res.data.forEach(el=>{
-          this.addProducts.push({id:el.id,product_id:el.product_id,product:el.product_name,price:el.price,qty:el.qty,amount:el.price* el.qty})
+          this.addProducts.push({id:el.id,product_id:el.product_id,product:el.product_name,price:el.price,qty:el.qty,amount:el.price* el.qty,tax:el.tax})
       })
     }).catch(err=>console.log("error"+err))
     })
@@ -612,6 +667,55 @@ export default {
     
   },
   methods:{
+        pdfgen: function () {
+
+          // playground requires you to assign document definition to a variable called dd
+
+var dd = {
+  pageSize:{
+		width: 100.28,
+		height: 'auto'
+  },
+   pageMargins: [ 0, 0, 0, 0 ],
+	content: [
+{ text: 'Indica Online', fontSize: 8,alignment: 'center' },
+{ text: 'This paragraph will have a bigger font', fontSize: 6 },
+{ text: 'This paragraph will have a bigger font', fontSize: 6 },
+
+{ text: 'This paragraph will have a bigger font', fontSize: 6 },
+{ text: 'This paragraph will have a bigger font', fontSize: 6 },
+{ text: 'This paragraph will have a bigger font', fontSize: 6 },
+{ text: 'This paragraph will have a bigger font', fontSize: 6 },
+{ text: 'This paragraph will have a bigger font', fontSize: 6 },
+{ text: 'This paragraph will have a bigger font', fontSize: 6 },
+{ text: 'This paragraph will have a bigger font', fontSize: 6 },
+
+		// {
+		// 	style: 'tableExample',
+		// 	table: {
+		
+		// 		body: [
+		// 			['width=100', 'star-sized', 'width=200', 'star-sized'],
+		// 			['fixed-width cells have exactly the specified width', {text: 'nothing interesting here', }, {text: 'nothing interesting here', italics: true, color: 'gray'}, {text: 'nothing interesting here', italics: true, color: 'gray'}]
+		// 		]
+		// 	}		
+		// }
+	],
+	styles: {
+
+		style: {
+      fontSize: 8,
+
+		},
+	},
+	
+}
+
+    
+    
+      pdfMake.createPdf(dd).open();
+    },
+
     addProductbyBarcode(){
       console.log('ni abot')
       var res = this.barcode.split("@")
@@ -714,9 +818,11 @@ export default {
 this.category_id=id
     },
         addExpresion(e) {
-      if ( Number.isInteger(this.value) )
-        this.value = ''; 
+         
+      if ( Number.isInteger(this.value))
+        this.value = '';
       this.value += e;
+ 
     },
 
     voidline(){
@@ -732,6 +838,7 @@ this.category_id=id
     canceltrans(){
       axios.post('/api/sales/transaction/void/'+this.$route.params.transid).then(res=>{ 
       this.$router.push('/pos/terminal/'+this.$route.params.terminalId) 
+          	this.$noty.error('Void transaction successfully'); 
       })
     },
     del(){
@@ -742,10 +849,10 @@ this.value = this.value.slice(0, -1);
         if(this.product.price_measurement == 'Weight'){
          let prod=`${this.product.name} ${this.weight_selected}`
          let amount=this.count*this.price
-         axios.post('/api/sales/orderItem/create',{'order_id':this.$route.params.id,'product_name':prod,'product_id':this.product.id,'qty':this.count,'price':this.price,'tax':0}).then(el=>{
+         axios.post('/api/sales/orderItem/create',{'order_id':this.$route.params.id,'product_name':prod,'product_id':this.product.id,'qty':this.count,'price':this.price,'tax':(this.price*0.10)*this.count}).then(el=>{
             console.log(el.data)
             console.log(this.count)
-                this.addProducts.push({id:el.data.id,product_id:el.data.product_id,product:el.data.product_name,price:el.data.price,qty:el.data.qty,amount:el.data.price* el.data.qty})
+                this.addProducts.push({id:el.data.id,product_id:el.data.product_id,product:el.data.product_name,price:el.data.price,qty:el.data.qty,amount:el.data.price* el.data.qty,tax:el.data.tax})
    
            
          })
@@ -755,10 +862,10 @@ this.value = this.value.slice(0, -1);
          if(this.product.price_measurement == 'Weight Range'){
          let prod=`${this.product.name} 1g`
           let amount=this.count*this.price
-          axios.post('/api/sales/orderItem/create',{'order_id':this.$route.params.orderid,'product_name':prod,'product_id':this.product.id,'qty':this.count,'price':this.price,'tax':0}).then(el=>{
+          axios.post('/api/sales/orderItem/create',{'order_id':this.$route.params.orderid,'product_name':prod,'product_id':this.product.id,'qty':this.count,'price':this.price,'tax':(this.price*0.10)*this.count}).then(el=>{
              console.log(this.price)
             console.log(this.count)
-              this.addProducts.push({id:el.data.id,product_id:el.data.product_id,product:el.data.product_name,price:el.data.price,qty:el.data.qty,amount:el.data.price* el.data.qty})
+              this.addProducts.push({id:el.data.id,product_id:el.data.product_id,product:el.data.product_name,price:el.data.price,qty:el.data.qty,amount:el.data.price* el.data.qty,tax:el.data.tax})
    
          })
         //  this.addProducts.push({product_id:this.product.id,product:prod,price:this.price,qty:this.count,amount:amount})
@@ -767,10 +874,10 @@ this.value = this.value.slice(0, -1);
         if(this.product.price_measurement == 'Per Unit' || this.product.price_measurement == 'Per Unit Range' ){
           let prod=`${this.product.name} ${this.product.net_weight}g`
            let amount=this.count*this.price
-           axios.post('/api/sales/orderItem/create',{'order_id':this.$route.params.orderid,'product_name':prod,'product_id':this.product.id,'qty':this.count,'price':this.price,'tax':0}).then(el=>{
+           axios.post('/api/sales/orderItem/create',{'order_id':this.$route.params.orderid,'product_name':prod,'product_id':this.product.id,'qty':this.count,'price':this.price,'tax':(this.price*0.10)*this.count}).then(el=>{
            console.log(this.price)
             console.log(this.count)
-            this.addProducts.push({id:el.data.id,product_id:el.data.product_id,product:el.data.product_name,price:el.data.price,qty:el.data.qty,amount:el.data.price* el.data.qty})
+            this.addProducts.push({id:el.data.id,product_id:el.data.product_id,product:el.data.product_name,price:el.data.price,qty:el.data.qty,amount:el.data.price* el.data.qty,tax:el.data.tax})
    
          }) 
          // this.addProducts.push({product_id:this.product.id,product:prod,price:this.price,qty:this.count,amount:amount})
@@ -854,6 +961,14 @@ addProd(index){
         let total=0
         this.addProducts.forEach(el=>{
           total=total+el.amount
+        })
+
+        return total
+    },
+        taxtotal(){
+        let total=0
+        this.addProducts.forEach(el=>{
+          total=total+el.tax
         })
 
         return total
