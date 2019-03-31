@@ -12,7 +12,8 @@ import orders from './modules/orders';
 import transactions from './modules/transactions';
 import shipmentMethods from './modules/shipmentMethods';
 import shipments from './modules/shipments';
-
+import DoctorlistsIndex from './modules/Doctorlists'
+import DoctorlistsSingle from './modules/Doctorlists/single'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -27,7 +28,9 @@ export default new Vuex.Store({
 		products,
 		vendors,
 		labs,
-		categories
+		categories,
+		DoctorlistsIndex,
+        DoctorlistsSingle,
 	},
 	getters,
 	strict: true

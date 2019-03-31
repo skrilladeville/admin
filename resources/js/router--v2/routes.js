@@ -25,6 +25,13 @@ import PrescriptionList from '../pages/prescription/PrescriptionList'
 import AddPrescription from '../pages/prescription/AddPrescription'
 import PrescriptionArchive from '../pages/prescription/PrescriptionArchive'
 
+/*Doctorlist Folder */
+import DoctorlistsIndex from '../components/cruds/Doctorlists/Index.vue'
+import DoctorlistsCreate from '../components/cruds/Doctorlists/Create.vue'
+import DoctorlistsShow from '../components/cruds/Doctorlists/Show.vue'
+import DoctorlistsEdit from '../components/cruds/Doctorlists/Edit.vue'
+import DoctorVendors from '../pages/doctors/doctors.vue'
+
 /* Bookings Folder*/
 import AddBooking from '../pages/bookings/AddBooking'
 import ViewBooking from '../pages/bookings/ViewBooking'
@@ -320,6 +327,49 @@ export default [
 				name: 'xprescription-archive',
 				meta: {requiresAuth: true, title: 'Prescription Archive', permission: 'prescription archive' },
 			}
+		]
+	},
+	{
+		path: '/doctors',
+		component: Layout,
+		meta: {requiresAuth: true, title: 'Doctors', icon: 'fa fa-prescription', permission: 'doctor list' },
+		children: [
+/* 			{
+				path: '/doctorlists',
+				name: 'doctorlists.index',
+				component: DoctorlistsIndex,
+				meta: {requiresAuth: true, title: 'Doctors List', permission: 'doctors list' },
+
+			}, */
+			{
+				path: '/doctorlists/create',
+				name: 'doctorlists.create',
+				component:DoctorlistsCreate,
+				//hidden: true,
+				meta: {requiresAuth: true, title: 'Add Doctor', permission: 'doctor create' },
+			},
+			{
+				path: '/doctorlists/:id',
+				name: '/doctorlists.show',
+				component: DoctorlistsShow,
+				meta: {requiresAuth: true, title: 'View Doctor List', permission: 'doctors view' },
+			},
+			{
+				path: 'doc-vendor',
+				component:DoctorVendors,
+				name: 'doctorlists.index',
+
+				meta: {requiresAuth: true, title: 'Doctor List', permission: 'doctor list' },
+			},
+			{
+				path: 'doctorlists/:id/edit',
+				name: 'doctorlists.edit',
+				component: DoctorlistsEdit,
+				//hidden: true,
+				meta: {requiresAuth: true, title: 'Edit Doctor', permission: 'doctor edit' },
+			},
+			
+			
 		]
 	},
 	{

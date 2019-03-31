@@ -180,4 +180,15 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::delete('sales/shipmentMethod/delete/{id}', 'Sales\ShipmentController@deleteShipmentMethod');
     Route::put('sales/shipmentMethod/is_active/{id}', 'Sales\ShipmentController@updateIsActive');
     Route::get('sales/tax', 'Sales\TaxController@index');
+    
+    /* Doctors*/
+    //Route::apiResource('doctorlists', 'DoctorlistsController');
 //});
+Route::group(['prefix' => '/v1', 'middleware' => ['auth:api'], 'namespace' => 'Api\V1', 'as' => 'api.'], function () {
+    //Route::post('change-password', 'ChangePasswordController@changePassword')->name('auth.change_password');
+    //Route::apiResource('rules', 'RulesController', ['only' => ['index']]);
+    //Route::apiResource('permissions', 'PermissionsController');
+    //Route::apiResource('roles', 'RolesController');
+    //Route::apiResource('users', 'UsersController');
+    Route::apiResource('doctorlists', 'DoctorlistsController');
+});
