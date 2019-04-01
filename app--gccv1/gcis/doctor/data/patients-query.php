@@ -1,5 +1,5 @@
 <?php
-$sqlDB['table'] = 'patient_information';
+$sqlDB['table'] = 'patient_profiles';
 
 //global $ezSQL;
 //print_r($ezSQL);exit();

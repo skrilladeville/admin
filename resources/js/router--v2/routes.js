@@ -25,6 +25,13 @@ import PrescriptionList from '../pages/prescription/PrescriptionList'
 import AddPrescription from '../pages/prescription/AddPrescription'
 import PrescriptionArchive from '../pages/prescription/PrescriptionArchive'
 
+/*Doctorlist Folder */
+import DoctorlistsIndex from '../components/cruds/Doctorlists/Index.vue'
+import DoctorlistsCreate from '../components/cruds/Doctorlists/Create.vue'
+import DoctorlistsShow from '../components/cruds/Doctorlists/Show.vue'
+import DoctorlistsEdit from '../components/cruds/Doctorlists/Edit.vue'
+import DoctorVendors from '../pages/doctors/doctors.vue'
+
 /* Bookings Folder*/
 import AddBooking from '../pages/bookings/AddBooking'
 import ViewBooking from '../pages/bookings/ViewBooking'
@@ -43,11 +50,9 @@ import BillingInfo from '../pages/onlineStore/billingInfo'
 /* Pos */
 import LayoutPOS from '../components/posLayout/LayoutPos'
 import posHome from '../pages/pos/posHome'
-
 import posStart from '../pages/pos/posStart'
 import posTrans from '../pages/pos/posTrans'
 import posHomeTrans from '../pages/pos/posHomeTrans'
-
 import posLogin  from '../pages/pos/loginpos'
 
 
@@ -170,19 +175,18 @@ export default [
 				component: posHome,
 				meta: {requiresGuestPOS: true, title: 'POS'},
 				children:[
-
-						{
+					{
 						path: '',
 						name: 'POS home trans',
 						component: posHomeTrans,
 						meta: {requireAuthPOS: true, title: 'POS'},
-						},
-						{
-							path: 'trans/:transid/order/:orderid',
-							name: 'POS  trans',
-							component: posTrans,
-							meta: {requireAuthPOS: true, title: 'POS'},
-						}
+					},
+					{
+						path: 'trans/:transid/order/:orderid',
+						name: 'POS  trans',
+						component: posTrans,
+						meta: {requireAuthPOS: true, title: 'POS'},
+					}
 				]
 			},
 			{
@@ -323,6 +327,47 @@ export default [
 		]
 	},
 	{
+		path: '/doctors',
+		component: Layout,
+		meta: {requiresAuth: true, title: 'Doctors', icon: 'fa fa-prescription', permission: 'doctor list' },
+		children: [
+/* 			{
+				path: '/doctorlists',
+				name: 'doctorlists.index',
+				component: DoctorlistsIndex,
+				meta: {requiresAuth: true, title: 'Doctors List', permission: 'doctors list' },
+
+			}, */
+			{
+				path: '/doctorlists/create',
+				name: 'doctorlists.create',
+				component:DoctorlistsCreate,
+				//hidden: true,
+				meta: {requiresAuth: true, title: 'Add Doctor', permission: 'doctor create' },
+			},
+			{
+				path: '/doctorlists/:id',
+				name: '/doctorlists.show',
+				component: DoctorlistsShow,
+				meta: {requiresAuth: true, title: 'View Doctor List', permission: 'doctors view' },
+			},
+			{
+				path: 'doc-vendor',
+				component:DoctorVendors,
+				name: 'doctorlists.index',
+
+				meta: {requiresAuth: true, title: 'Doctor List', permission: 'doctor list' },
+			},
+			{
+				path: 'doctorlists/:id/edit',
+				name: 'doctorlists.edit',
+				component: DoctorlistsEdit,
+				//hidden: true,
+				meta: {requiresAuth: true, title: 'Edit Doctor', permission: 'doctor edit' },
+			},
+		]
+	},
+	{
 		path: '/bookings',
 		component: Layout,
 		meta: {requiresAuth: true, title: 'Bookings', icon: 'fa fa-clock', permission: 'booking create' },
@@ -355,16 +400,21 @@ export default [
 	},
 
 	{
-		path: 'doctor-care',
-		meta: { title: 'Continuous Care', icon: 'fa fa-leaf' },
+		path: '/continuous-care',
+		component:Layout,
+		meta: { requiresAuth: true, title: 'Continuous Care', icon: 'fa fa-leaf' },
 		children: [
 			{
-				path: '/gccv1/doctor/feedback',
-				meta: { title: 'Feedback' }
+				path: 'feedback',
+				component: Feedback,
+				name: 'feedback',
+				meta: {requiresAuth: true, title: 'Feedback', permission: 'cms feedback' }
 			},
 			{
-				path: '/gccv1/doctor/survey',
-				meta: { title: 'Survey' }
+				path: 'feedback/add',
+				component: AddFeedback,
+				name: 'add feedback',
+				meta: {requiresAuth: true, title: 'Add Feedback', permission: 'add feedback' }
 			}
 		]
 	},
@@ -378,7 +428,6 @@ export default [
 				path: 'manage-products',
 				component:Products,
 				name: 'catalog.manageProducts',
-
 				meta: {requiresAuth: true, title: 'Products', permission: 'product list' },
 			},
 			{
@@ -594,19 +643,6 @@ export default [
 		component:Layout,
 		meta: {requiresAuth: true, title: 'CMS', icon: 'fa fa-file-prescription', permission: 'cms feedback' },
 		children: [
-			{
-				path: 'feedback',
-				component: Feedback,
-				name: 'feedback',
-				meta: {requiresAuth: true, title: 'Feedback', permission: 'cms feedback' },
-			},
-			{
-				path: 'feedback/add',
-				component: AddFeedback,
-				name: 'add feedback',
-				meta: {requiresAuth: true, title: 'Add Feedback', permission: 'add feedback' },
-
-			},
 			{
 				path: 'survey',
 				name: 'survey',
