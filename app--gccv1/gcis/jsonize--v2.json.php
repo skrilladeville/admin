@@ -131,6 +131,6 @@ if( is_array( $tableData ) )
 	}
 
 if( $page['mode'] != 'normal' )
-	$tableData = array( 'data' => $tableData );
+	$tableData = array( 'errors' => $page['errors'],'data' => $tableData );
 echo json_encode( $tableData,JSON_PRETTY_PRINT );
 ?>

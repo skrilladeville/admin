@@ -1,5 +1,5 @@
 <?php
-$sqlDB['table'] = 'patient_information';
+$sqlDB['table'] = 'patient_profiles';
 
 if( $page['term'] ){
 	$whereFirst = ' WHERE lastname LIKE "'.$page['term'].'%"';
@@ -13,7 +13,7 @@ $sql = queryAndTell( "SELECT * FROM ".$sqlDB['table'].$whereFirst." LIMIT 8" );
 /*`id`
 `firstname`
 `lastname`
-`birth_date`
+`birthday`
 `home_phone`
 `cell_phone`
 `email`

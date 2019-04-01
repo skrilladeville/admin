@@ -8,7 +8,7 @@
 
   if(isset($_GET['delete'])){
     $delete_id = sanitize($_GET['delete']);
-    $query = $db->query("UPDATE patient_information SET archive = '1' WHERE id = '$delete_id'");
+    $query = $db->query("UPDATE patient_profiles SET archive = '1' WHERE id = '$delete_id'");
     echo '<script language="javascript">';
     echo 'alert("Patient has been transfered to Archive Data!")';
     echo '</script>';
@@ -21,7 +21,7 @@
 		die();
 	}
 
-  $sql = $db->query("SELECT * FROM patient_information AS p
+  $sql = $db->query("SELECT * FROM patient_profiles AS p
                      JOIN indication_of_cannabis       AS a ON a.health_card = p.health_card
                      JOIN psychiatric_history          AS b ON b.health_card = p.health_card
                      JOIN medical_history              AS c ON c.health_card = p.health_card

@@ -20,11 +20,9 @@ include('includes/init.php');
 // default page values
 $page = array(
 	'content' => '',
-    'scriptSubmit' => '',
-    'formDataStoreIn' => ''
+	'scriptSubmit' => '',
+	'formDataStoreIn' => ''
 );
-
-//include $page['configFile'];
 
 $page['contentFile'] = $user['role'].'/content/'.$pagename.'.php';
 

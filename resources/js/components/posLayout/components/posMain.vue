@@ -1,15 +1,7 @@
 <template>
-  
-  
-      <!-- or name="fade" -->
-      <!-- <router-view :key="key"></router-view> -->
-
-
-     <router-view/>
-     
-  
-
-  
+  <!-- or name="fade" -->
+  <!-- <router-view :key="key"></router-view> -->
+  <router-view/>
 </template>
 
 <script>

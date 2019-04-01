@@ -5,6 +5,6 @@
 $newPage = array( 
 	'content' => $pagename,
 	'formDataStoreIn' => array( 
-		'patient_information' => array( 'id' => $_POST['id'] )
+		'patient_profiles' => array( 'id' => $_POST['id'] )
 	)
 );
