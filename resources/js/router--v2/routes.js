@@ -50,11 +50,9 @@ import BillingInfo from '../pages/onlineStore/billingInfo'
 /* Pos */
 import LayoutPOS from '../components/posLayout/LayoutPos'
 import posHome from '../pages/pos/posHome'
-
 import posStart from '../pages/pos/posStart'
 import posTrans from '../pages/pos/posTrans'
 import posHomeTrans from '../pages/pos/posHomeTrans'
-
 import posLogin  from '../pages/pos/loginpos'
 
 
@@ -177,19 +175,18 @@ export default [
 				component: posHome,
 				meta: {requiresGuestPOS: true, title: 'POS'},
 				children:[
-
-						{
+					{
 						path: '',
 						name: 'POS home trans',
 						component: posHomeTrans,
 						meta: {requireAuthPOS: true, title: 'POS'},
-						},
-						{
-							path: 'trans/:transid/order/:orderid',
-							name: 'POS  trans',
-							component: posTrans,
-							meta: {requireAuthPOS: true, title: 'POS'},
-						}
+					},
+					{
+						path: 'trans/:transid/order/:orderid',
+						name: 'POS  trans',
+						component: posTrans,
+						meta: {requireAuthPOS: true, title: 'POS'},
+					}
 				]
 			},
 			{
@@ -368,8 +365,6 @@ export default [
 				//hidden: true,
 				meta: {requiresAuth: true, title: 'Edit Doctor', permission: 'doctor edit' },
 			},
-			
-			
 		]
 	},
 	{
@@ -405,16 +400,21 @@ export default [
 	},
 
 	{
-		path: 'doctor-care',
-		meta: { title: 'Continuous Care', icon: 'fa fa-leaf' },
+		path: '/continuous-care',
+		component:Layout,
+		meta: { requiresAuth: true, title: 'Continuous Care', icon: 'fa fa-leaf' },
 		children: [
 			{
-				path: '/gccv1/doctor/feedback',
-				meta: { title: 'Feedback' }
+				path: 'feedback',
+				component: Feedback,
+				name: 'feedback',
+				meta: {requiresAuth: true, title: 'Feedback', permission: 'cms feedback' }
 			},
 			{
-				path: '/gccv1/doctor/survey',
-				meta: { title: 'Survey' }
+				path: 'feedback/add',
+				component: AddFeedback,
+				name: 'add feedback',
+				meta: {requiresAuth: true, title: 'Add Feedback', permission: 'add feedback' }
 			}
 		]
 	},
@@ -428,7 +428,6 @@ export default [
 				path: 'manage-products',
 				component:Products,
 				name: 'catalog.manageProducts',
-
 				meta: {requiresAuth: true, title: 'Products', permission: 'product list' },
 			},
 			{
@@ -644,19 +643,6 @@ export default [
 		component:Layout,
 		meta: {requiresAuth: true, title: 'CMS', icon: 'fa fa-file-prescription', permission: 'cms feedback' },
 		children: [
-			{
-				path: 'feedback',
-				component: Feedback,
-				name: 'feedback',
-				meta: {requiresAuth: true, title: 'Feedback', permission: 'cms feedback' },
-			},
-			{
-				path: 'feedback/add',
-				component: AddFeedback,
-				name: 'add feedback',
-				meta: {requiresAuth: true, title: 'Add Feedback', permission: 'add feedback' },
-
-			},
 			{
 				path: 'survey',
 				name: 'survey',

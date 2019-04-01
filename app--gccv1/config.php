@@ -12,6 +12,12 @@ $homeDirPath = dirname(__FILE__) . '/';
 $homeDirPath = str_replace('\\', '/', $homeDirPath);
 
 define('HOMEDIR_PATH',$homeDirPath);
+if( function_exists( 'env' ) ){
+	define('DB_NAME', env('DB_DATABASE') );
+	define('DB_USER', env('DB_USERNAME') );
+	define('DB_PASSWORD', env('DB_PASSWORD') );
+	define('DB_HOST', env('DB_HOST') );
+}
 if( 1 === strpos($_SERVER['DOCUMENT_ROOT'], ':/') ){
 	$siteRootSubdirDepth = 2;
 	define('AT_LOCALHOST',true);
