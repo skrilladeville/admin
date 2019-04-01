@@ -2,7 +2,9 @@
 $newPage = array( 
 	'titleContent' => 'View Prescription List',
 	// DataTables Editor
-	'dataTablesEdit' => 1
+	'dataTablesEdit' => 1,
+	'modalOn' => 1,
+	'scriptEnd' => $pagename
 );
 
 $data = array(

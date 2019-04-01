@@ -39,14 +39,34 @@ class DatabaseSeeder extends Seeder
         $this->call(TransactionsSeeder::class);
         //$this->call(PrescriptionSeeder::class);
         //$this->call(DiagnosisSeeder::class);
-
         $this->call(ProductSeeder::class);
         $this->call(PriceSeeder::class);
         $this->call(CategorySeeder::class);
 
         $this->call([
-            // UsersTableSeeder::class,
-            ReportsTableSeeder::class,
+            GCCv1TablesSeeder::class,
+            ReportsTableSeeder::class
         ]);
+    }
+
+    /**
+     * Import data from sql files.
+     *
+     * @return void
+     */
+    public function import($dumps)
+    {
+      foreach ($dumps as $dump) {
+        Schema::dropIfExists( $dump );
+
+        if( $query = @file_get_contents( base_path( 'database\\dumps\\' ) . $dump. '.sql' ) ){
+            DB::unprepared( $query );
+            print( '+ Imported '. $dump . '.sql.
+');
+        }else{
+            print( '! Failed seeding '. $dump .'.sql. Pls check if that file exists in database\dumps folder. 
+' );
+        }
+      }
     }
 }

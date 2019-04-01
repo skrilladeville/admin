@@ -207,6 +207,7 @@ function validateFormData( $data = array() ){
 function queryAndTell( $query = '',$successMsg = '' ){
 	global $ezSQL,$EZSQL_ERROR,$page;
 
+	//echo $query;
 	/* ezSQL
 	 * instead of native mySQLi
 	 * $result = mysqli_query( $db,$query );
@@ -231,7 +232,7 @@ function queryAndTell( $query = '',$successMsg = '' ){
 			foreach( $EZSQL_ERROR as $key => $err )
 				$page['errors'][] = $query . '<br><br>' . $err['error_str'];
 
-		//$page['errors'][] = $query . '<br><br>' . $db->error;}
+	//$page['errors'][] = $query . '<br><br>' . $db->error;}
 }
 
 /*
