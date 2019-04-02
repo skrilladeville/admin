@@ -22,11 +22,12 @@ yarn-error.log
 .env
 .phpunit.result.cache
 bootstrap/cache/**
+!bootstrap/cache/READme.md
 /storage/framework/cache/**/b
 /storage/framework/views
 /storage/logs
 /storage/framework/sessions/**
-!/storage/framework/sessions/README.md
+!/storage/framework/sessions/READme.md
 public/js/app.js
 public/js/robust-admin.js
 public/js/robust-admin-init.js
