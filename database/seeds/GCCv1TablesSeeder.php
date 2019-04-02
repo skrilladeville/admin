@@ -5,6 +5,7 @@ class GCCv1TablesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * php artisan db:seed --class=GCCv1TablesSeeder
      *
      * @return void
      */
