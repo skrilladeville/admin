@@ -57,7 +57,8 @@ class DatabaseSeeder extends Seeder
     public function import($dumps)
     {
       foreach ($dumps as $dump) {
-        Schema::dropIfExists( $dump );
+        $table = ltrim( $dump,'gccv1_' );
+        Schema::dropIfExists( $table );
 
         if( $query = @file_get_contents( base_path( 'database\\dumps\\' ) . $dump. '.sql' ) ){
             DB::unprepared( $query );
