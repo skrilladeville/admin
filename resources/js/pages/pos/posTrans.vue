@@ -889,7 +889,7 @@ RealexRemote() {
 
 
     validate(){
-      alert('naka abot')
+
   var cardNumberCheck = this.RealexRemote().validateCardNumber(document.getElementById('cardNumber').value);
   var cardHolderNameCheck = this.RealexRemote().validateCardHolderName(document.getElementById('cardholderName').value);
   var expiryDate = document.getElementById('expiryDateMM').value.concat(document.getElementById('expiryDateYY').value);
@@ -907,7 +907,8 @@ RealexRemote() {
   } else {
     this.formcard.amount=this.total
        axios.post('/api/globalpayments/pay',this.formcard).then(res=>{
-        console.log(res.data)
+        this.dialogCard=false
+        	this.$noty.success('Successfully process the payments');
       })
   }
     },
