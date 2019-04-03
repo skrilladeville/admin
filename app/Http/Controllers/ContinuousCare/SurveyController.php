@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ContinuousCare;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SurveyController extends Controller
 {

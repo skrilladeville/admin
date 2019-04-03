@@ -1,37 +1,21 @@
 <template>
-    <div>
-   
-
- 
+<div>
 <v-toolbar
-      dark
-      fixed 
-      app
-      color="success"
+  dark
+  fixed 
+  app
+  color="success"
 >
-   <v-btn icon>
-      <v-icon>local_mall</v-icon>
-    </v-btn>
-
-
-
-    <v-toolbar-title class="white--text">POS</v-toolbar-title>
- 
-    
-      
-    </v-toolbar>
-
-
-
-    
-      
- 
-
-
-
-
-
-    </div>
+  <v-btn icon>
+    <v-icon>local_mall</v-icon>
+  </v-btn>
+  <v-toolbar-title class="white--text">POS</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-toolbar-items>
+      <v-btn flat>{{user.email}}</v-btn>
+    </v-toolbar-items>
+  </v-toolbar>
+</div>
 </template>
 
 <style scoped>
@@ -62,7 +46,7 @@ html body.fixed-navbar {
 </style>
 
 <script>
-import {mapGetters,mapMutations,mapState} from 'vuex'
+//import jwtToken from '~/helpers/jwt-token';
 
 
 
@@ -74,6 +58,7 @@ name:'Navbar',
         dialogCart:false,
         drawer:null,
         plant_type:'',
+        user:{},
 menu: [
         { icon: 'home', title: 'Home',link:'' },
         { icon: 'shopping_cart', title: 'Canabis',link:'' },

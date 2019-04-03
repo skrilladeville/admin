@@ -6,11 +6,15 @@
 		<products v-if="$route.params.pagename=='products'"/>
 		<inventory v-if="$route.params.pagename=='inventory'"/>
 		<StateCompliance v-if="$route.params.pagename=='state-compliance'"/>
+		<MarketingStatistics v-if="$route.params.pagename=='marketing-statistics'"/>
+		<Registers v-if="$route.params.pagename=='registers'"/>
+		<Expenses v-if="$route.params.pagename=='expenses'"/>
+		<ShoppingCarts v-if="$route.params.pagename=='shopping-carts'"/>
   </div>
 </template>
 
 <script>
-import { Sales, Patients, PatientActions, Products, Inventory, StateCompliance } from './pages'
+import { Sales, Patients,	PatientActions, Products,	Inventory, StateCompliance,	MarketingStatistics, Registers,	Expenses,	ShoppingCarts } from './pages'
 
 export default {
 	name: 'Reporter',
@@ -20,7 +24,11 @@ export default {
 		PatientActions,
 		Products,
 		Inventory,
-		StateCompliance
+		StateCompliance,
+		MarketingStatistics,
+		Registers,
+		Expenses,
+		ShoppingCarts
 	},
 	methods: {
 		emitt(){

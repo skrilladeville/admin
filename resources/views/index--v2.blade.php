@@ -37,6 +37,7 @@
 		<script src="{{ mix('js/app.js') }}"></script>
 	@endif
 	<script id="robustjs" src="{{ mix('js/robust-admin.js') }}"></script>
+	<script  src="/js/rpx.js"></script>
 	<link id="gcis" href="{{ mix('/css/gcis.css') }}" rel="stylesheet">
 
 </body>

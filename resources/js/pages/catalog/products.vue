@@ -252,7 +252,7 @@
             v-model="form.product_id"
             placeholder="please select a product"
           >
-            <el-option :label="prod.name" v-for="prod in products" :value="prod.id" :key="prod.id"></el-option>
+            <el-option :label="prod.name" v-for="prod in getProducts" :value="prod.id" :key="prod.id"></el-option>
           </el-select>
         </el-form-item>
 
@@ -812,6 +812,7 @@ export default {
   computed: {
     getProducts(){
       console.log(this.$store.getters.getProducts)
+      this.products=this.$store.getters.getProducts
       return this.$store.getters.getProducts
     },
     getVendorName: function() {
@@ -927,7 +928,7 @@ export default {
 
           if(this.price_measurement=='Weight'){
           this.inventory={
-            product_id: res.data.product_id,
+        product_id: res.data.product_id,
         branch_id: res.data.branch_id,
         jar_g_total: res.data.jar_g,
         one_g_total: res.data.one_g,

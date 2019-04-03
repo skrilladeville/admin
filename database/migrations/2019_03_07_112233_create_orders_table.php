@@ -16,17 +16,17 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');   
             $table->integer('user_id');
-            $table->integer('order_type');
-            $table->string('customer_type');
-            $table->string('delivery_address');
-            $table->integer('status');
-            $table->integer('fulfillment');
-            $table->text('note');
-            $table->float('shipping');
-            $table->float('sales_tax');
-            $table->float('total');
-            $table->float('balance');
-            $table->float('discount');
+            $table->integer('order_type')->nullable();
+            $table->string('customer_type')->nullable();
+            $table->string('delivery_address')->nullable();
+            $table->integer('status')->nullable();
+            $table->integer('fulfillment')->nullable();
+            $table->text('note')->nullable();
+            $table->float('shipping')->nullable();
+            $table->float('sales_tax')->nullable();
+            $table->float('total')->default(0.0);
+            $table->float('balance')->default(0.0);
+            $table->float('discount')->nullable();
             $table->timestamps();
         });
     }

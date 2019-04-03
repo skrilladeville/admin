@@ -19,6 +19,9 @@ class CreateTransactionsTable extends Migration
             $table->unsignedInteger('transaction_type');
             $table->unsignedInteger('order_id');
             $table->float('amount');
+            $table->dateTime('completed')->nullable();
+            $table->dateTime('last_edit')->nullable(); 
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

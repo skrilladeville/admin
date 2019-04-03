@@ -77,12 +77,12 @@ if( ( $colCount = count( $fields ) ) > 0 )
         return <?php 
 					if( !in_array( $col,$sqlDB['hideInColumn'] ) ){
 						?>data.<?= $col ?>+<?php } 
-					?>'<a id="<?= $src ?>-btn-'+data.id+'" class="btn edit" title="<?= $opt['editTitle'] ?>" <?php
+					?>'<!-- <a id="<?= $src ?>-btn-'+data.id+'" class="btn edit" title="<?= $opt['editTitle'] ?>" <?php
 					if( $opt['editModal'] ){
 						?>data-toggle="modal" data-target="#modal" data-id="'+data.id+'" <?php } 
 					?>href="<?= $opt['editPage'] ?>?id='+data.id+'"><?= $opt['editLabel'] ?><?php if( $opt['editLabelAppend'] == '+' ){ 
 					?>'+(1+Math.floor(Math.random() * 6))+'<?php } 
-					?></a>';
+					?></a> -->';
 				}
       }
 			<?php }

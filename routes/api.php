@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
+
+php artisan make:controller ControllerName
+
+@see https://laravel.com/docs/5.8/controllers
 */
 
 Route::post('authenticate', 'Auth\AuthController@authenticate');
@@ -77,6 +81,8 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::get('catalog/product/view/{id}', 'Catalog\ProductController@show');
     Route::get('reports/{role}/{pagename}','Reports\ReporterController@index');
     
+    //pos register
+    Route::get('pos/register/all','pos\PosRegisterController@index');
 
     // GCCv1 pages and files
     Route::get('gccv1/{role}/{pagename}','GCCv1\PageController@gccPage');
@@ -104,6 +110,8 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::get('users/patientsCount/{doctor_id}', 'Users\ProfilePatientController@patientsCount');
     Route::resource('users', 'Users\ProfilePatientController');
 
+    // patient v2
+    Route::get('patient/profiles', 'Patients\PatientProfilesController@data');
 
 //Route::group(['middleware' => 'jwt.auth'], function () {
     /* User */
@@ -150,9 +158,20 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     /*Sales*/
     Route::post('sales/sales', 'Sales\SalesController@index');
     Route::post('sales/orders', 'Sales\OrderController@filter');
+    Route::post('sales/order/create', 'sales\OrderController@store');
+    Route::post('sales/orderItem/create', 'sales\OrderItemController@store');
+    Route::get('sales/orderItem/byOrder/{id}', 'sales\OrderItemController@showbyOrderId');
+    Route::post('sales/orderItem/delete/{id}', 'sales\OrderItemController@destroy');
+    Route::post('sales/payments/create','sales\PaymentController@store');
+    Route::get('sales/paymentMethod/all','sales\PaymentController@getPaymentMethods');
     Route::get('sales/orders', 'Sales\OrderController@index');
     Route::get('sales/order/{order_id}', 'Sales\OrderController@show');
+    Route::get('sales/order/show/{id}', 'Sales\OrderController@showOrder');
+    Route::post('sales/order/void/{id}', 'Sales\OrderController@voidOrder');
     Route::get('sales/transactions', 'Sales\TransactionController@index');
+    Route::get('sales/transaction/show/{id}', 'Sales\TransactionController@show');
+    Route::post('sales/transaction/void/{id}', 'Sales\TransactionController@voidTransaction');
+    Route::post('sales/transaction/create', 'Sales\TransactionController@store');
     Route::get('sales/transactions/{filter}', 'Sales\TransactionController@show');
     Route::get('sales/shipments', 'Sales\ShipmentController@index');
     Route::put('sales/shipment/cancel/{shipment_id}', 'Sales\ShipmentController@update');
@@ -174,3 +193,16 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::put('sales/tax_settings/update', 'Sales\TaxController@updateTaxSettings');
     Route::delete('sales/tax_tier/delete/{id}', 'Sales\TaxController@deleteTaxTier');
 //});
+    Route::get('sales/tax', 'Sales\TaxController@index');
+    Route::post('globalpayments/pay', 'GlobalPaymentController@pay');
+    
+    /* Doctors*/
+    //Route::apiResource('doctorlists', 'DoctorlistsController');
+    Route::group(['prefix' => '/v1', 'middleware' => ['auth:api'], 'namespace' => 'Api\V1', 'as' => 'api.'], function () {
+    //Route::post('change-password', 'ChangePasswordController@changePassword')->name('auth.change_password');
+    //Route::apiResource('rules', 'RulesController', ['only' => ['index']]);
+    //Route::apiResource('permissions', 'PermissionsController');
+    //Route::apiResource('roles', 'RolesController');
+    //Route::apiResource('users', 'UsersController');
+    Route::apiResource('doctorlists', 'DoctorlistsController');
+});

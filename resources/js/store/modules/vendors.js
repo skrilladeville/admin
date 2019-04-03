@@ -6,7 +6,7 @@ export default {
     
     mutations: {
         SET_VENDOR:function(state,payload){  
-            console.log('naka abot dri') 
+            console.log('naka abot dri oh') 
             state.vendors.push(payload)
         },
         DELETE_VENDOR:function(state,payload){

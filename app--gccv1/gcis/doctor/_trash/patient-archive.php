@@ -8,7 +8,7 @@
 
   if(isset($_GET['restore'])){
     $restore_id = sanitize($_GET['restore']);
-    $query = $db->query("UPDATE patient_information SET archive = '0' WHERE id = '$restore_id'");
+    $query = $db->query("UPDATE patient_profiles SET archive = '0' WHERE id = '$restore_id'");
     echo '<script language="javascript">';
     echo 'alert("Patient data has been restored!")';
     echo '</script>';
@@ -21,7 +21,7 @@
 		die();
 	}
 
-  $sql = $db->query("SELECT * FROM patient_information AS p
+  $sql = $db->query("SELECT * FROM patient_profiles AS p
                      JOIN indication_of_cannabis       AS a ON a.health_card = p.health_card
                      JOIN psychiatric_history          AS b ON b.health_card = p.health_card
                      JOIN medical_history              AS c ON c.health_card = p.health_card

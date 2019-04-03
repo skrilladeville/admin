@@ -38,6 +38,7 @@
 		<script src="<?php echo e(mix('js/app.js')); ?>"></script>
 	<?php endif; ?>
 	<script id="robustjs" src="<?php echo e(mix('js/robust-admin.js')); ?>"></script>
+	<script  src="/js/rpx.js"></script>
 	<link id="gcis" href="<?php echo e(mix('/css/gcis.css')); ?>" rel="stylesheet">
 
 </body>
