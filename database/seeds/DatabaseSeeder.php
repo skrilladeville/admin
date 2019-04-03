@@ -37,6 +37,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PaymentMethodsSeeder::class);
         $this->call(ShipmentsSeeder::class);
         $this->call(TransactionsSeeder::class);
+        $this->call(TaxRatesSeeder::class);
+        $this->call(TaxTierSeeder::class);
+        $this->call(ShipmentTaxSeeder::class);
         //$this->call(PrescriptionSeeder::class);
         //$this->call(DiagnosisSeeder::class);
 
