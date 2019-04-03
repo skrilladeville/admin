@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<el-form ref="form" :model="form" :rules="rules" label-width="120px" label-position="top" v-if="user_role=='patient'" index="patient">
-			<personal-info :form = form index="personal-info"></personal-info>
+		<el-form ref="form" :model="form" :rules="rules" label-width="120px" label-position="top" v-if="user_role=='Patient'" index="patient">
+			<personal-info :form = form ></personal-info>
 			<contact-info :form = form></contact-info>
 			<el-row type="flex" justify="center">
 				<el-form-item>
@@ -104,7 +104,7 @@
 			var checkPhone = (rule, value, callback) => {
 				 var re = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
 				 if (!value) {
-					return callback(new Error('This field is required.'));
+					return callback();
 				}
 
 				 setTimeout(() => {
@@ -117,11 +117,11 @@
 			};
 			return {
 			 get_url: {
-				 patient: '/api/users/profilePatient/',
+				 Patient: '/api/users/profilePatient/',
 				 doctor: '/api/users/profileDoctor/'
 			 },
 			 put_url: {
-				 patient: '/api/users/profilePatient/',
+				 Patient: '/api/users/profilePatient/edit/',
 				 doctor: '/api/users/profileDoctor/'
 			 },
 			 user_id: this.$store.getters.user_id,
@@ -227,7 +227,7 @@
 						message: 'Successfully saved!',
 						type: 'success'
 						});
-					}).catch(err=>this.$message.error('Please check your fields.'))
+					}).catch(err=>console.log(this.form))
 				} else {
 					this.$message.error('Please check your fields.')
 					return false;

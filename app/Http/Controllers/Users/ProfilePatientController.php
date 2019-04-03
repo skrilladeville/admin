@@ -7,6 +7,7 @@ use App\ProfilePatient;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfilePatientStoreRequest;
+use Illuminate\Support\Facades\DB;
 
 class ProfilePatientController extends Controller
 {
@@ -105,7 +106,8 @@ class ProfilePatientController extends Controller
     {
         //
 
-        $profile = ProfilePatient::where('user_id', $id)->firstOrFail();
+        // $profile = ProfilePatient::where('user_id', $id)->firstOrFail();
+        $profile = DB::table('profile_patient')->firstOrFail();
         $data = $request->except('_token');
         foreach($data as $key => $value){
             if(array_key_exists($key, $profile)){

@@ -1,6 +1,6 @@
 <template>
     <el-row :gutter="20" class="row">
-        <el-col :span="24" :key="index">
+        <el-col :span="24">
             <el-card class="box-card">
             <div slot="header" class="clearfix">
                 <span>Personal Information</span>
