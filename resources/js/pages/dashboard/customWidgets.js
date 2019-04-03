@@ -94,7 +94,7 @@ customWidgets['branch-admin'] = [
 ]
     
 
-customWidgets['patient'] = [
+customWidgets['Patient'] = [
 [{
     title: 'Notifications',
     widgetType: 'notification-card',
