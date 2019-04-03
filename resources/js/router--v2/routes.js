@@ -83,6 +83,7 @@ import EditShipmentMethod from '../pages/sales/EditShipmentMethod'
 import AddShipmentMethod from '../pages/sales/AddShipmentMethod'
 import EditTaxTier from '../pages/sales/EditTaxTier'
 import NewTaxTier from '../pages/sales/NewTaxTier'
+import ShipmentTax from '../pages/sales/ShipmentTax'
 
 /* Reports Folder */
 import CustomerReport from '../pages/reports/CustomerReport'
@@ -549,7 +550,7 @@ export default [
 				meta: {requiresAuth: true, title: 'Tax', permission: 'sales tax' },
 			},
 			{
-				path: 'edit-tax-tier',
+				path: 'edit-tax-tier/:id',
 				name: 'sales.edit-tax-tier',
 				component: EditTaxTier,
 				hidden: true,
@@ -560,7 +561,14 @@ export default [
 				name: 'sales.new-tax-tier',
 				component: NewTaxTier,
 				hidden: true,
-				meta: {requiresAuth: true, title: 'Edit Tax Tier', permission: 'sales tax' },
+				meta: {requiresAuth: true, title: 'New Tax Tier', permission: 'sales tax' },
+			},
+			{
+				path: 'shipment-tax-tier',
+				name: 'sales.shipment-tax-tier',
+				component: ShipmentTax,
+				hidden: true,
+				meta: {requiresAuth: true, title: 'Shipment Tax Tier', permission: 'sales tax' },
 			}
 		]
 	},
