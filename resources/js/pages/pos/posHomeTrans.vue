@@ -35,7 +35,7 @@ methods:{
         order_type:0,
         customer_type:0,
         delivery_address:'',
-        status:1,
+        status:4,
         fulfillment:0,
         note:'',
         shipping:'',

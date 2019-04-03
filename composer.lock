@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba0ad5ec02169bba310a40ca8724bf4e",
+    "content-hash": "80659e797d9fee0f4f7caf43d4e6506c",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -365,6 +365,51 @@
                 "trusted proxy"
             ],
             "time": "2019-01-10T14:06:47+00:00"
+        },
+        {
+            "name": "globalpayments/php-sdk",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/globalpayments/php-sdk.git",
+                "reference": "7c5910817c7f44f6a687b6e7f68343c35ed23c64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/globalpayments/php-sdk/zipball/7c5910817c7f44f6a687b6e7f68343c35ed23c64",
+                "reference": "7c5910817c7f44f6a687b6e7f68343c35ed23c64",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-dom": "*",
+                "ext-openssl": "*",
+                "php": ">= 5.5.9"
+            },
+            "require-dev": {
+                "brianium/paratest": "dev-master",
+                "phpstan/phpstan-shim": "^0.8.4",
+                "phpunit/phpunit": "~5.0",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GlobalPayments\\Api\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Heartland Payment Systems"
+                }
+            ],
+            "description": "PHP SDK for processing payments with Global Payments, including Heartland Payment Systems and Realex Payments",
+            "homepage": "https://developer.heartlandpaymentsystems.com/documentation",
+            "time": "2019-03-28T15:52:19+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

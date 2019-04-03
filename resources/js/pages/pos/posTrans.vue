@@ -4,7 +4,7 @@
       
     <v-layout row>
         
-            <v-dialog v-model="tender" persistent max-width="700">
+            <v-dialog v-model="tenderCash" persistent max-width="700">
  
          
             
@@ -89,7 +89,7 @@
                           <v-layout row wrap ml-3 pa-2>
                <v-flex md8><h6>Total Due</h6></v-flex>
         <v-flex md4><h5><b>{{(total).toFixed(2)}}</b></h5></v-flex> 
-                      <v-flex md8><h6>Amount Tender</h6></v-flex>
+                      <v-flex md8><h6>Amount tenderCash</h6></v-flex>
         <v-flex md4><h5><b>{{value}}</b></h5></v-flex> 
                             <v-flex md8><h6>Change</h6></v-flex>
         <v-flex md4><h5><b>{{(value-total).toFixed(2)}}</b></h5></v-flex> 
@@ -97,7 +97,7 @@
       </v-layout>
     
      
-      <v-btn block style="color:white !important;" @click="pdfgen" color="success">Finish Transaction</v-btn>
+      <v-btn block style="color:white !important;" @click="tenderCashAndPrintReciept" color="success">Tender Cash</v-btn>
            
        
 
@@ -299,10 +299,10 @@
   <v-btn color="success" dark  block style="color:white !important;" @click="dialogCancelTrans=true">F5-Void Transaction</v-btn>
   </v-flex>
       <v-flex md3>
-  <v-btn color="error" dark @click="tender=true" block style="color:white !important;">F6-Cash</v-btn>
+  <v-btn color="error" dark @click="tenderCash=true" block style="color:white !important;">F6-Cash</v-btn>
   </v-flex>
      <v-flex md3>
-  <v-btn color="primary" dark block style="color:white !important;">F7-Credit/Debit Card</v-btn>
+  <v-btn color="primary" @click="dialogCard=true" dark block style="color:white !important;">F7-Credit/Debit Card</v-btn>
   </v-flex>
 
    </v-layout>       
@@ -402,6 +402,46 @@
       </v-card>
     </v-dialog>
   </v-layout>
+<v-layout row justify-center>
+  <v-dialog v-model="dialogCard" max-width="400">
+    <v-card>
+
+      <v-card-title>Card Transaction</v-card-title>
+  <v-card-text>
+
+
+        <el-form label-position="top" size="small" :model="formcard" status-icon  ref="formcard" label-width="120px" class="demo-ruleForm">
+  <el-form-item  label="Card Number">
+    <el-input type="tel" id="cardNumber" v-model="formcard.cardnumber" autocomplete="off"></el-input>
+  </el-form-item>
+  <el-form-item label="Card Holder Name">
+    <el-input type="text" id="cardholderName" v-model="formcard.cardholdername" autocomplete="off"></el-input>
+  </el-form-item>
+  <el-form-item label="Expiry">
+<el-row :gutter="5">
+  <el-col :md="12">
+  <el-input  type="tel" id="expiryDateMM" v-model="formcard.expirydatemm" placeholder="MM" ></el-input><br><br>
+    </el-col>
+        <el-col :md="12">
+  <el-input    type="tel" id="expiryDateYY" v-model="formcard.expirydateyy" placeholder="YY"></el-input>
+  </el-col>
+</el-row>
+  </el-form-item>
+  <el-form-item label="Security Code">
+     <el-input  type="tel" id="cvn" v-model="formcard.cvn"></el-input>
+    </el-form-item>
+  <el-form-item>
+    <v-btn color="primary" style="color:white !important;" @click="validate" block>Pay</v-btn>
+
+  </el-form-item>
+</el-form>
+        </v-card-text>
+    </v-card>
+    
+
+  </v-dialog>
+
+</v-layout>
 
 <v-layout row justify-center>
     <v-dialog v-model="dialogVoidLine" persistent max-width="350">
@@ -441,6 +481,10 @@
 </template>
 
 <style scoped>
+
+.el-form-item--mini.el-form-item, .el-form-item--small.el-form-item {
+    margin-bottom: 0px;
+}
 
 *, ::after, ::before {
   box-sizing: border-box;
@@ -583,12 +627,21 @@ body {
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+//import * as rpx  from "rpx.js"
+//resources\js\utils\rpx.js
 
 export default {
 
   data() {
     return {
-      tender:false,
+      dialogCard:false,
+      formcard:{cardnumber:'',
+    cardholdername:'',
+    expirydatemm:'',
+    expirydateyy:'',
+    cvn:'',
+    amount:0},
+      tenderCash:false,
       dialogAdd:false,
       products: [],
       product_query:'',
@@ -607,12 +660,24 @@ export default {
       dialogVoidLine:false,
       dialogCancelTrans:false,
        currentRow: null,
+       payment_method:'',
         activeIndex: -1,
         order:{},
-        payment_type:''
+    
+        payment_methods:[]
         }
+
+
   },
   mounted(){
+     const rpx = document.createElement("script");
+    rpx.setAttribute(
+      "src",
+      "/js/rpx.js"
+    );
+    rpx.async = true;
+    document.head.appendChild(rpx);
+
     axios.get('/api/sales/transaction/show/'+this.$route.params.transid).then(res=>{
         if(res.data.status==2){
             this.$router.push('/pos/terminal/'+this.$route.params.terminalId)
@@ -622,6 +687,10 @@ export default {
 
   },
   created() {
+
+    axios.get('/api/sales/paymentMethod/all').then(res=>{
+      this.payment_methods=res.data
+    })
 
     axios.get('/api/sales/order/show/'+this.$route.params.orderid).then(res=>{
      this.order=res.data 
@@ -656,7 +725,7 @@ export default {
 
      window.addEventListener('keydown', (e) => {
       if (e.key == 'Escape') {
-        this.tender = false
+        this.tenderCash = false
       }
     });
          window.addEventListener('keydown', (e) => {
@@ -667,54 +736,484 @@ export default {
     
   },
   methods:{
-        pdfgen: function () {
+
+RealexRemote() {
+
+    'use strict';
+
+    /*
+     * Validate Card Number. Returns true if card number valid. Only allows
+     * non-empty numeric values between 12 and 19 characters. A Luhn check is
+     * also run against the card number.
+     */
+    var validateCardNumber = function(cardNumber) {
+        // test numeric and length between 12 and 19
+        if (!/^\d{12,19}$/.test(cardNumber)) {
+            return false;
+        }
+
+        // luhn check
+        var sum = 0;
+        var digit = 0;
+        var addend = 0;
+        var timesTwo = false;
+
+        for (var i = cardNumber.length - 1; i >= 0; i--) {
+            digit = parseInt(cardNumber.substring(i, i + 1), 10);
+            if (timesTwo) {
+                addend = digit * 2;
+                if (addend > 9) {
+                    addend -= 9;
+                }
+            } else {
+                addend = digit;
+            }
+            sum += addend;
+            timesTwo = !timesTwo;
+        }
+
+        var modulus = sum % 10;
+        if (modulus !== 0) {
+            return false;
+        }
+
+        return true;
+    };
+
+    /*
+     * Validate Card Holder Name. Returns true if card holder valid. Only allows
+     * non-empty ISO/IEC 8859-1 values 100 characters or less.
+     */
+    var validateCardHolderName = function(cardHolderName) {
+        // test for undefined
+        if (!cardHolderName) {
+            return false;
+        }
+
+        // test white space only
+        if (!cardHolderName.trim()) {
+            return false;
+        }
+
+        // test ISO/IEC 8859-1 characters between 1 and 100
+        if (!/^[\u0020-\u007E\u00A0-\u00FF]{1,100}$/.test(cardHolderName)) {
+            return false;
+        }
+
+        return true;
+    };
+
+    /*
+     * Validate CVN. Applies to non-Amex card types. Only allows 3 numeric
+     * characters.
+     */
+    var validateCvn = function(cvn) {
+        // test numeric length 3
+        if (!/^\d{3}$/.test(cvn)) {
+            return false;
+        }
+
+        return true;
+    };
+
+    /*
+     * Validate Amex CVN. Applies to Amex card types. Only allows 4 numeric
+     * characters.
+     */
+    var validateAmexCvn = function(cvn) {
+        // test numeric length 4
+        if (!/^\d{4}$/.test(cvn)) {
+            return false;
+        }
+
+        return true;
+    };
+
+    /*
+     * Validate Expiry Date Format. Only allows 4 numeric characters. Month must
+     * be between 1 and 12.
+     */
+    var validateExpiryDateFormat = function(expiryDate) {
+
+        // test numeric of length 4
+        if (!/^\d{4}$/.test(expiryDate)) {
+            return false;
+        }
+
+        var month = parseInt(expiryDate.substring(0, 2), 10);
+        var year = parseInt(expiryDate.substring(2, 4), 10);
+
+        // test month range is 1-12
+        if (month < 1 || month > 12) {
+            return false;
+        }
+
+        return true;
+    };
+
+    /*
+     * Validate Expiry Date Not In Past. Also runs checks from
+     * validateExpiryDateFormat.
+     */
+    var validateExpiryDateNotInPast = function(expiryDate) {
+        // test valid format
+        if (!validateExpiryDateFormat(expiryDate)) {
+            return false;
+        }
+
+        var month = parseInt(expiryDate.substring(0, 2), 10);
+        var year = parseInt(expiryDate.substring(2, 4), 10);
+
+        // test date is not in the past
+        var now = new Date();
+        var currentMonth = now.getMonth() + 1;
+        var currentYear = now.getFullYear();
+        if (year < (currentYear % 100)) {
+            return false;
+        } else if (year === (currentYear % 100) && month < currentMonth) {
+            return false;
+        }
+
+        return true;
+    };
+
+    return {
+        validateCardNumber : validateCardNumber,
+        validateCardHolderName : validateCardHolderName,
+        validateCvn : validateCvn,
+        validateAmexCvn : validateAmexCvn,
+        validateExpiryDateFormat : validateExpiryDateFormat,
+        validateExpiryDateNotInPast : validateExpiryDateNotInPast
+    };
+},
+
+
+    validate(){
+      alert('naka abot')
+  var cardNumberCheck = this.RealexRemote().validateCardNumber(document.getElementById('cardNumber').value);
+  var cardHolderNameCheck = this.RealexRemote().validateCardHolderName(document.getElementById('cardholderName').value);
+  var expiryDate = document.getElementById('expiryDateMM').value.concat(document.getElementById('expiryDateYY').value);
+  var expiryDateFormatCheck = this.RealexRemote().validateExpiryDateFormat(expiryDate);
+  var expiryDatePastCheck = this.RealexRemote().validateExpiryDateNotInPast(expiryDate);
+  if (document.getElementById('cardNumber').value.charAt(0) == "3") {
+    var cvnCheck = this.RealexRemote().validateAmexCvn(document.getElementById('cvn').value);
+  } else {
+    var cvnCheck = this.RealexRemote().validateCvn(document.getElementById('cvn').value);
+  }
+  if (cardNumberCheck == false || cardHolderNameCheck == false || expiryDateFormatCheck == false || expiryDatePastCheck == false || cvnCheck == false) {
+    // code here to inform the cardholder of an input error and prevent the form submitting
+    
+    alert('error')
+  } else {
+    this.formcard.amount=this.total
+       axios.post('/api/globalpayments/pay',this.formcard).then(res=>{
+        console.log(res.data)
+      })
+  }
+    },
+    payCredit(){
+   
+    },
+        finishCashTransaction(){
+
+          //axios.post('/api/sales/payments/create',)
+        },
+        tenderCashAndPrintReciept: function () {
 
           // playground requires you to assign document definition to a variable called dd
 
+          this.value=0
+          this.tenderCash=true
+
+let currentdate = new Date(); 
+var date = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear()
+var time =  currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds(); 
+//var testImageDataUrl = 'data:image/png;base64,/images/indica_active.png'
 var dd = {
+  
   pageSize:{
 		width: 100.28,
 		height: 'auto'
   },
-   pageMargins: [ 0, 0, 0, 0 ],
+   pageMargins: [ 5, 5, 5, 5 ],
 	content: [
+    // 	{
+		// 	image: 'indica_active.png',
+	
+		// },
 { text: 'Indica Online', fontSize: 8,alignment: 'center' },
-{ text: 'This paragraph will have a bigger font', fontSize: 6 },
-{ text: 'This paragraph will have a bigger font', fontSize: 6 },
-
-{ text: 'This paragraph will have a bigger font', fontSize: 6 },
-{ text: 'This paragraph will have a bigger font', fontSize: 6 },
-{ text: 'This paragraph will have a bigger font', fontSize: 6 },
-{ text: 'This paragraph will have a bigger font', fontSize: 6 },
-{ text: 'This paragraph will have a bigger font', fontSize: 6 },
-{ text: 'This paragraph will have a bigger font', fontSize: 6 },
-{ text: 'This paragraph will have a bigger font', fontSize: 6 },
-
-		// {
-		// 	style: 'tableExample',
-		// 	table: {
-		
-		// 		body: [
-		// 			['width=100', 'star-sized', 'width=200', 'star-sized'],
-		// 			['fixed-width cells have exactly the specified width', {text: 'nothing interesting here', }, {text: 'nothing interesting here', italics: true, color: 'gray'}, {text: 'nothing interesting here', italics: true, color: 'gray'}]
-		// 		]
-		// 	}		
-		// }
-	],
-	styles: {
+{
+  columns: [
+				{
+					width: 65,
+          text: `TRANS NO: ${this.$route.params.transid}`,
+          fontSize: 3
+				},
+				{
+					width: "*",
+          text: `DATE:${date}`,
+          fontSize: 3 ,
+          // alignment: 'right'
+         
+        },
+        
+      ]
+},
+{
+  columns: [
+				{
+					width: 65,
+          text: `ORDER NO: ${this.$route.params.orderid}`,
+          fontSize: 3 
+				},
+				{
+					width: "*",
+          text: `TIME:${time}`,
+          fontSize: 3 ,
+          // alignment: 'right'
+         
+        },
+        
+      ]
+},
+{ text: '-----------------------------------------------------------------', fontSize: 5},
+{
+  columns: [
+				{
+					width: 5,
+          text: '#',
+          fontSize: 4 
+				},
+				{
+					width: 45,
+          text: 'item',
+          fontSize: 4 
+        },
+        {
+					width: 10,
+          text: 'qty',
+          fontSize: 4 
+				},
+				{
+					width: '*',
+          text: 'price',
+          fontSize: 4,
+          alignment: 'right'
+        },
+        	{
+					width: '*',
+          text: 'amount',
+          fontSize: 4,
+            alignment: 'right'
+        
+				}
+			
+			]
+},
+{ text: '-----------------------------------------------------------------', fontSize: 5},
+],
+styles: {
 
 		style: {
       fontSize: 8,
 
 		},
-	},
+  },
+  
+  
 	
 }
+
+
+
+
+this.addProducts.forEach((el, i)=>{
+  
+  dd.content.push({
+    
+  columns: [
+				{
+					width: 5,
+          text: i+1,
+          fontSize: 4 
+				},
+				{
+					width: 45,
+          text: el.product,
+          fontSize: 4
+        },
+        	{
+					width: 10,
+          text: el.qty,
+          fontSize: 4,
+          alignment:'center'
+
+				},
+				{
+					width: '*',
+          text: (el.price).toFixed(2),
+          fontSize: 4 ,
+            alignment: 'right'
+        },
+        	{
+					width: '*',
+          text: (el.amount).toFixed(2),
+          fontSize: 4,
+            alignment: 'right'
+        }]
+      })
+      
+})
+
+dd.content.push(
+  [{ text: '-----------------------------------------------------------------', fontSize: 5},
+  {
+  columns: [
+				{
+					width: 50,
+          text: 'Sub Total',
+          fontSize: 5 ,
+        alignment: 'left'
+				},
+				{
+					width: "*",
+          text: (this.total-this.taxtotal).toFixed(2),
+          fontSize: 5 ,
+           alignment: 'right'
+         
+        },
+        
+      ]
+}, {
+  columns: [
+				{
+					width: 50,
+          text: 'Discount',
+          fontSize: 5 ,
+        alignment: 'left'
+				},
+				{
+					width: "*",
+          text:'0.00',
+          fontSize: 5 ,
+           alignment: 'right'
+         
+        },
+        
+      ]
+},
+{
+  columns: [
+				{
+					width: 50,
+          text: 'Tax',
+          fontSize: 5 ,
+        alignment: 'left'
+				},
+				{
+					width: "*",
+          text:(this.taxtotal).toFixed(2),
+          fontSize: 5 ,
+           alignment: 'right'
+         
+        },
+        
+      ]
+},
+{
+  columns: [
+				{
+					width: 50,
+          text: 'Total',
+          fontSize: 5 ,
+        alignment: 'left'
+				},
+				{
+					width: "*",
+          text:(this.total).toFixed(2),
+          fontSize: 5 ,
+           alignment: 'right'
+         
+        },
+        
+      ]
+},
+{ text: '-----------------------------------------------------------------', fontSize: 5},
+{
+  columns: [
+				{
+					width: 50,
+          text: 'Amount tenderCash',
+          fontSize: 5 ,
+        alignment: 'left'
+				},
+				{
+					width: "*",
+          text:(this.value-0).toFixed(2),
+          fontSize: 5 ,
+           alignment: 'right'
+         
+        },
+        
+      ]
+},
+{
+  columns: [
+				{
+					width: 50,
+          text: 'Change',
+          fontSize: 5 ,
+        alignment: 'left'
+				},
+				{
+					width: "*",
+          text:(this.value-this.total).toFixed(2),
+          fontSize: 5 ,
+           alignment: 'right'
+         
+        },
+        
+      ]
+},
+{ text: '*****************************************', fontSize: 5},
+{ text: 'Thank you for Shopping with Us', fontSize: 5, alignment:'center'},
+{ text: '*****************************************', fontSize: 5},
+
+
+  ]
+)
 
     
     
       pdfMake.createPdf(dd).open();
     },
+
+
+    getBase64FromImageUrl(url) {
+      console.log('dsgsdg')
+    // var img = new Image();
+
+    // img.setAttribute('crossOrigin', 'anonymous');
+
+    // img.onload = function () {
+    //     var canvas = document.createElement("canvas");
+    //     canvas.width =this.width;
+    //     canvas.height =this.height;
+
+    //     var ctx = canvas.getContext("2d");
+    //     ctx.drawImage(this, 0, 0);
+
+    //     var dataURL = canvas.toDataURL("image/png");
+
+    //     alert(dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
+    // };
+
+    // img.src = url;
+},
 
     addProductbyBarcode(){
       console.log('ni abot')
@@ -837,8 +1336,11 @@ this.category_id=id
 
     canceltrans(){
       axios.post('/api/sales/transaction/void/'+this.$route.params.transid).then(res=>{ 
-      this.$router.push('/pos/terminal/'+this.$route.params.terminalId) 
+      axios.post('/api/sales/order/void/'+this.$route.params.orderid).then(res=>{
+            this.$router.push('/pos/terminal/'+this.$route.params.terminalId)
           	this.$noty.error('Void transaction successfully'); 
+      })
+ 
       })
     },
     del(){
@@ -953,6 +1455,7 @@ addProd(index){
 }
   },
   computed:{
+    
     username(){
   
         return this.$store.getters.name

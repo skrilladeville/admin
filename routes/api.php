@@ -161,7 +161,8 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::post('sales/orderItem/create', 'sales\OrderItemController@store');
     Route::get('sales/orderItem/byOrder/{id}', 'sales\OrderItemController@showbyOrderId');
     Route::post('sales/orderItem/delete/{id}', 'sales\OrderItemController@destroy');
-    
+    Route::post('sales/payments/create','sales\PaymentController@store');
+    Route::get('sales/paymentMethod/all','sales\PaymentController@getPaymentMethods');
     Route::get('sales/orders', 'Sales\OrderController@index');
     Route::get('sales/order/{order_id}', 'Sales\OrderController@show');
     Route::get('sales/order/show/{id}', 'Sales\OrderController@showOrder');
@@ -180,4 +181,8 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::delete('sales/shipmentMethod/delete/{id}', 'Sales\ShipmentController@deleteShipmentMethod');
     Route::put('sales/shipmentMethod/is_active/{id}', 'Sales\ShipmentController@updateIsActive');
     Route::get('sales/tax', 'Sales\TaxController@index');
+
+    Route::post('globalpayments/pay', 'GlobalPaymentController@pay');
+   
+
 //});

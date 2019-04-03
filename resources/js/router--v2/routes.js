@@ -43,11 +43,9 @@ import BillingInfo from '../pages/onlineStore/billingInfo'
 /* Pos */
 import LayoutPOS from '../components/posLayout/LayoutPos'
 import posHome from '../pages/pos/posHome'
-
 import posStart from '../pages/pos/posStart'
 import posTrans from '../pages/pos/posTrans'
 import posHomeTrans from '../pages/pos/posHomeTrans'
-
 import posLogin  from '../pages/pos/loginpos'
 
 
