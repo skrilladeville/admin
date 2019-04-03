@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
+
+php artisan make:controller ControllerName
+
+@see https://laravel.com/docs/5.8/controllers
 */
 
 Route::post('authenticate', 'Auth\AuthController@authenticate');
@@ -40,9 +44,7 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
   //branch
   Route::get('user/branch/all', 'Users\BranchController@index');
   Route::get('user/branch/view/{id}', 'Users\BranchController@show');
-
-
-   
+  
 
 
 
@@ -78,12 +80,9 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::get('catalog/product', 'Catalog\ProductController@index');
     Route::get('catalog/product/view/{id}', 'Catalog\ProductController@show');
     Route::get('reports/{role}/{pagename}','Reports\ReporterController@index');
-
-
-    //pos register
-
-    Route::get('pos/register/all','pos\PosRegisterController@index');
     
+    //pos register
+    Route::get('pos/register/all','pos\PosRegisterController@index');
 
     // GCCv1 pages and files
     Route::get('gccv1/{role}/{pagename}','GCCv1\PageController@gccPage');
@@ -111,6 +110,8 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::get('users/patientsCount/{doctor_id}', 'Users\ProfilePatientController@patientsCount');
     Route::resource('users', 'Users\ProfilePatientController');
 
+    // patient v2
+    Route::get('patient/profiles', 'Patients\PatientProfilesController@data');
 
 //Route::group(['middleware' => 'jwt.auth'], function () {
     /* User */
@@ -181,8 +182,15 @@ Route::post('authenticate', 'Auth\AuthController@authenticate');
     Route::delete('sales/shipmentMethod/delete/{id}', 'Sales\ShipmentController@deleteShipmentMethod');
     Route::put('sales/shipmentMethod/is_active/{id}', 'Sales\ShipmentController@updateIsActive');
     Route::get('sales/tax', 'Sales\TaxController@index');
-
     Route::post('globalpayments/pay', 'GlobalPaymentController@pay');
-   
-
-//});
+    
+    /* Doctors*/
+    //Route::apiResource('doctorlists', 'DoctorlistsController');
+    Route::group(['prefix' => '/v1', 'middleware' => ['auth:api'], 'namespace' => 'Api\V1', 'as' => 'api.'], function () {
+    //Route::post('change-password', 'ChangePasswordController@changePassword')->name('auth.change_password');
+    //Route::apiResource('rules', 'RulesController', ['only' => ['index']]);
+    //Route::apiResource('permissions', 'PermissionsController');
+    //Route::apiResource('roles', 'RolesController');
+    //Route::apiResource('users', 'UsersController');
+    Route::apiResource('doctorlists', 'DoctorlistsController');
+});

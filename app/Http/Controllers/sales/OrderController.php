@@ -63,7 +63,7 @@ class OrderController extends Controller
     public function voidOrder($id)
     {
         $order=Order::find($id);
-        $order->status=4;
+        $order->status=2;
         $order->save();
         return $order;
     }

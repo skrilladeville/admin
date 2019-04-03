@@ -141,7 +141,7 @@ import {api} from '../../config'
               .then(res=>{
                //this.feedbacks.push(res.data.feedback)
 
-               this.$router.push('/cms/feedback')
+               this.$router.push('../feedback')
                console.log('ni abot dri')
                 }).catch(err=>console.log(err));
 

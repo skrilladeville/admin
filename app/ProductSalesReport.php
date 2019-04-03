@@ -33,7 +33,7 @@ class ProductSalesReport extends SalesReport
         return ucwords($prod->name);
       else
         return '(missing product)';
-}
+  }
 
   public function getOrderTimeAttribute()
   {

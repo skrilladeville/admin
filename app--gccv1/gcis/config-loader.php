@@ -43,7 +43,8 @@ $pageDefault = array(
 	   can be $pagename or a js file shared with other pages */
 	'scriptEnd' => ''
 );
-$page = array_merge( $page, $pageDefault );
+if( is_array( $page ) )
+	$page = array_merge( $page, $pageDefault );
 
 if( is_array( $dbcon['errors'] ) )
 	if( is_array( $page['errors'] ) )
@@ -51,15 +52,23 @@ if( is_array( $dbcon['errors'] ) )
 	else
 		$page['errors'] = $dbcon['errors'];
 
-// customize default page values with config/* files
-if( in_array( $pagename,array( 'login--v2','register--v2' ) ) )
-	$page['configFile'] = 'common/config/'.$pagename.'.php';
-else
-	$page['configFile'] = $user['role'].'/config/'.$pagename.'.php';
-//echo 'cf: '.$page['configFile'];
+		$page['navFile'] = $user['role'].'/nav.html.php';
+		$page['dataFile'] = $user['role'].'/data/'.$pagename.'.php';
+		
+		// customize default page values with config/* files
+		if( in_array( $pagename,array( 'login--v2','register--v2' ) ) ){
+			$page['configFile'] = __DIR__. '/common/config/'.$pagename.'.php';
+			$page['contentFile'] = __DIR__. '/common/content/'.$pagename.'.php';
+			$page['scriptEndFile'] = __DIR__. '/common/scripts/'.$pagename.'.js.php';
+		} else {
+			$page['configFile'] = __DIR__. '/'. $user['role'].'/config/'.$pagename.'.php';
+			$page['contentFile'] = __DIR__. '/'. $user['role'].'/content/'.$pagename.'.php';
+			$page['scriptEndFile'] = __DIR__. '/'. $user['role'].'/scripts/'.$pagename.'.js.php';
+		}
+		//echo 'cf: '.$page['configFile'];
 
 // NOTE: file_exists works using full path only
-if( file_exists( __DIR__. '/'. $page['configFile'] ) ){
+if( file_exists( $page['configFile'] ) ){
 	include( $page['configFile'] );
 	
 	if( is_array( $newPage ) )
@@ -82,6 +91,18 @@ function enableIfListed( $enableItem = '',$list = array() ){
 		foreach( $list as $item )
 			if( $page[ $item ] )
 				$page[ $enableItem ] = 1;
+}
+
+function scriptEnder( $tagMeNot = false ){
+	global $page;
+
+	if( !$tagMeNot ){ ?>
+	<script language="javascript">
+	<?php }
+	include ( $page['scriptEndFile'] );
+	if( !$tagMeNot ){ ?>
+	</script>
+	<?php }
 }
 
 // auto-load dependencies

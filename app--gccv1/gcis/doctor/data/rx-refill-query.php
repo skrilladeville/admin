@@ -18,9 +18,9 @@ foreach( $fields as $colname )
 		$joinTableColNames[] = $sqlDB['table'].".".$colname;
 
 // doctor_rx.user_id='".$user['id']."' AND 
-$query = "SELECT patient_information.lastname,patient_feedback.refill_qty,doctor_diagnosis.fill_balance,". implode(',',$joinTableColNames) ." FROM ".$sqlDB['table']." 
+$query = "SELECT patient_profiles.lastname,patient_feedback.refill_qty,doctor_diagnosis.fill_balance,". implode(',',$joinTableColNames) ." FROM ".$sqlDB['table']." 
 LEFT JOIN doctor_rx ON doctor_diagnosis.rx_id=doctor_rx.id 
-LEFT JOIN patient_information ON doctor_rx.patient_id=patient_information.id 
+LEFT JOIN patient_profiles ON doctor_rx.patient_id=patient_profiles.id 
 LEFT JOIN patient_feedback ON doctor_diagnosis.id=patient_feedback.diagnosis_id
 WHERE doctor_diagnosis.active IS ". $sqlDB['active'] ."";
 

@@ -3,7 +3,7 @@
   $output = '';
   
   if($_POST['search'] == ''){
-    $sql = $db->query("SELECT * FROM patient_information AS p
+    $sql = $db->query("SELECT * FROM patient_profiles AS p
                        JOIN indication_of_cannabis       AS a ON a.health_card = p.health_card
                        JOIN psychiatric_history          AS b ON b.health_card = p.health_card
                        JOIN medical_history              AS c ON c.health_card = p.health_card
@@ -16,7 +16,7 @@
                        JOIN hear_about_us                AS j ON j.health_card = p.health_card
                        WHERE archive = '1'");
   }else{
-    $sql = $db->query("SELECT * FROM patient_information AS p
+    $sql = $db->query("SELECT * FROM patient_profiles AS p
                        JOIN indication_of_cannabis       AS a ON a.health_card = p.health_card
                        JOIN psychiatric_history          AS b ON b.health_card = p.health_card
                        JOIN medical_history              AS c ON c.health_card = p.health_card

@@ -1,44 +1,21 @@
 <template>
-    <div>
-   
-
- 
+<div>
 <v-toolbar
-      dark
-      fixed 
-      app
-      color="success"
+  dark
+  fixed 
+  app
+  color="success"
 >
-   <v-btn icon>
-      <v-icon>local_mall</v-icon>
-    </v-btn>
-
-
-
-    <v-toolbar-title class="white--text">POS</v-toolbar-title>
-
+  <v-btn icon>
+    <v-icon>local_mall</v-icon>
+  </v-btn>
+  <v-toolbar-title class="white--text">POS</v-toolbar-title>
     <v-spacer></v-spacer>
-
     <v-toolbar-items>
       <v-btn flat>{{user.email}}</v-btn>
-  
     </v-toolbar-items>
- 
-    
-      
-    </v-toolbar>
-
-
-
-    
-      
- 
-
-
-
-
-
-    </div>
+  </v-toolbar>
+</div>
 </template>
 
 <style scoped>
@@ -69,12 +46,11 @@ html body.fixed-navbar {
 </style>
 
 <script>
-
-
 //import jwtToken from '~/helpers/jwt-token';
 
+
+
 export default {
-  
 name:'Navbar',
   data(){
     return{
@@ -95,13 +71,6 @@ menu: [
         
     }
   },
-
-  computed:{
-
-  },
-  created(){
-
-  }
   
   
 }

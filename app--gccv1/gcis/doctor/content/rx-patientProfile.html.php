@@ -1,5 +1,5 @@
 <?php
-$fv = $page['formValues']['patient_information'];
+$fv = $page['formValues']['patient_profiles'];
 //print_r( $fv );
 
 //$page['imgPath'] = '../../images/gccv1/';
@@ -32,7 +32,7 @@ if( !$page['imgPath'] )
 			<div class="row headboard">
 				<div class="col-md-auto">
 					Age
-					<h5><?= $fv['birth_date'] ?></h5>
+					<h5><?= $fv['birthday'] ?></h5>
 				</div>
 				<div class="col">
 					Home Phone
