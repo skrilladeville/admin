@@ -4,6 +4,7 @@
 widgetize('Opioid Risks','intake-opioidRisks.html');
 widgetize('Survey','intake-survey.html');
 ?>
+	<?php if( !defined( 'AT_LARAVUE' ) ){ ?>
 		<div class="form-actions center">
 			<button formaction="<?php echo $page['baseName'].'--p'.($page['number']-1).'.html'; ?>" type="submit" class="btn btn-primary mr-1">
 				<i class="ft-x"></i>Prev
@@ -12,5 +13,6 @@ widgetize('Survey','intake-survey.html');
 				<i class="fa fa-check-square-o"></i>Submit
 			</button>
 		</div>
+		<?php } ?>
 	</div>
 </form>

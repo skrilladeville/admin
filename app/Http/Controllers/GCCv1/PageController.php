@@ -15,10 +15,15 @@ class PageController extends Controller
      * @return Response
      */
     public function gccPage(Request $request, $role, $pagename)
-    {       
-        //$uri = $request->path();
-        include( base_path() .'\app--gccv1\gcis\vuer.html.php' );
+    {   
+        ob_start();
+        include( base_path() .'/app--gccv1/gcis/vuer.html.php' );
+        $html = ob_get_contents();
+        ob_end_clean();
 
-        return;
-	}
+        return response()->json([
+            'page' => $page,
+            'html' => $html
+        ]);
+    }
 }

@@ -27,8 +27,17 @@ $page = array(
 $page['contentFile'] = $user['role'].'/content/'.$pagename.'.php';
 
 include_once('config-loader.php');
-include( 'content.html.php' );
+// include( 'content.html.php' );
+?>
 
+<div class="helpbox">
+<?php echo errorsAndHelpHTML(); ?>
+</div>
+
+<?php 
+if($page['contentFile'])
+	@include($page['contentFile']);
+		
 if( $page['scriptSubmit'] || $page['modalOn'] ){
 	modalize( $page['titleContent'] );
 }

@@ -2,9 +2,9 @@
 // PAGE
 $pagename = isset($_REQUEST['pagename']) ? $_REQUEST['pagename'] : 'dashboard';
 
+/* moved to config-loader.php
 list( $page['baseName'],$page['number'] ) = explode( '--p',$pagename );
 
-/* moved to config-loader.php
 $page['configFile'] = $user['role'].'/config/'.$pagename.'.php';
 $page['contentFile'] = $user['role'].'/content/'.$pagename.'.php';
 $page['dataFile'] = $user['role'].'/data/'.$pagename.'.php';
@@ -26,7 +26,7 @@ if( !file_exists( $page['contentFile' ] ) )
 if( !file_exists( $page['contentFile' ] ) )
 	$page['errors'][] = 'Page content file <strong>'.$page['contentFile'].'</strong> does not exist.<br />If the world must know, fill this page with the content file.';
 
-
+/* moved to config-loader.php
 // just to save us the trouble
 if( $page['formSwitch'] )
 	// of finding out that formCheckBoxesRadios is needed by formSwitch
@@ -41,6 +41,7 @@ if( $page['number'] ){
 }
 if( $page['titleContent'] )
 	$page['title'] = $page['titleContent'] . $pgNumAppend . ' | GCIS';
+ */
 
 include_once( 'head.html.php' );
 ?>

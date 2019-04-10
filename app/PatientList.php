@@ -23,6 +23,6 @@ class PatientList extends Model
      */
     public function getNameAttribute($value)
     {
-        return $this->lastname. ', ' .$this->firstname;
+        return $this->lastname. ', ' .$this->firstname . ' / ' .$this->health_card ;
     }
 }
