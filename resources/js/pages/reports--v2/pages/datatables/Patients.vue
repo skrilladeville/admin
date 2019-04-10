@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Widgetize from '../../../../components/common/widgetize.vue'
+import Widgetize from '../../../../components/common/robust-admin/widgetize.vue'
 import JqxGrid from 'jqwidgets-scripts/jqwidgets-vue/vue_jqxgrid.vue'
 import ExportButtons from '../../ExportButtons.vue'
 import LineChart from '../../../../components/common/vue-chartjs/LineChart.vue'

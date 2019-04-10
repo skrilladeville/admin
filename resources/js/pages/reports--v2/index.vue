@@ -33,7 +33,8 @@ export default {
 	methods: {
 		emitt(){
 			let rt = this.$route.params.pagename
-			this.$emit('childToParent', rt.charAt(0).toUpperCase()+rt.slice(1)+ ' Report')
+			let page = { titleContent: rt.charAt(0).toUpperCase()+rt.slice(1)+ ' Report' }
+			this.$emit('tellAppMain',page)
 		}
 	},
 	watch: {

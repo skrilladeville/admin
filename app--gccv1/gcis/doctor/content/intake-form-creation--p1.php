@@ -5,6 +5,7 @@ widgetize('Personal Information','intake-patientPersonalInfo.html');
 widgetize('Contact Information','intake-patientContactInfo.html');
 widgetize('Emergency Contact Information','intake-patientEmergencyContactInfo.html');
 ?>
+	<?php if( !defined( 'AT_LARAVUE' ) ){ ?>
 		<div class="form-actions center">
 			<button formaction="<?php echo $pagename.'.html'; ?>" type="submit" class="btn btn-primary mr-1">
 				<i class="ft-x"></i>Prev
@@ -13,5 +14,6 @@ widgetize('Emergency Contact Information','intake-patientEmergencyContactInfo.ht
 				<i class="fa fa-check-square-o"></i>Next
 			</button>
 		</div>
+	<?php } ?>
 	</div>
 </form>

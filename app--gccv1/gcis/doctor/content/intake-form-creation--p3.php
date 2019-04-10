@@ -3,6 +3,7 @@
 <?php
 widgetize('Psychiatric History','intake-psychiatricHistory.html');
 ?>
+	<?php if( !defined( 'AT_LARAVUE' ) ){ ?>
 		<div class="form-actions center">
 			<button formaction="<?php echo $page['baseName'].'--p'.($page['number']-1).'.html'; ?>" type="submit" class="btn btn-primary mr-1">
 				<i class="ft-x"></i>Prev
@@ -11,5 +12,6 @@ widgetize('Psychiatric History','intake-psychiatricHistory.html');
 				<i class="fa fa-check-square-o"></i>Next
 			</button>
 		</div>
+		<?php } ?>
 	</div>
 </form>

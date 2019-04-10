@@ -13,6 +13,8 @@ $homeDirPath = str_replace('\\', '/', $homeDirPath);
 
 define('HOMEDIR_PATH',$homeDirPath);
 if( function_exists( 'env' ) ){
+	define('AT_LARAVUE', true );
+
 	define('DB_NAME', env('DB_DATABASE') );
 	define('DB_USER', env('DB_USERNAME') );
 	define('DB_PASSWORD', env('DB_PASSWORD') );
@@ -33,10 +35,10 @@ if( 1 === strpos($_SERVER['DOCUMENT_ROOT'], ':/') ){
 if( !defined( 'DB_NAME' ) ){
 	// ** Default MySQL settings ** //
 	// need grant all user? 'localhost','greencar_arn','p@$$123456', 'greencar_regpatient'
-	define('DB_NAME', 'greencar_gcis');
-	define('DB_USER', 'greencar_pxs');
-	define('DB_PASSWORD', 'QTlC{3Wbj*rt');
-	define('DB_HOST', 'localhost');
+	define('DB_NAME', 'primie_laravel');
+	define('DB_USER', 'gcis');
+	define('DB_PASSWORD', 'P@ssw0rd123');
+	define('DB_HOST', '127.0.0.1');
 }
 	
 date_default_timezone_set('Asia/Manila');
