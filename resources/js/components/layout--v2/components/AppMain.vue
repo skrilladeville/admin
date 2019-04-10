@@ -2,23 +2,24 @@
 <div class="app-content content">
 	<div class="content-wrapper">
     <section class="xapp-main">
-      <div class="content-header row" v-if="pageTitle">
+      <div class="content-header row" v-if="page.titleContent">
         <div class="content-header-left col-md-8 col-12 mb-2 breadcrumb-new">
-          <h3 class="content-header-title mb-0 d-inline-block">{{pageTitle}}</h3>
+          <h3 class="content-header-title mb-0 d-inline-block">{{page.titleContent}}</h3>
         </div>
         <div class="content-header-right col-md-4 col-12">
           <div class="btn-group float-md-right">
-            <h3>{{pageSubtitle}}</h3>
+            <h3>{{page.titleSub}}</h3>
           </div>
         </div>
       </div>
       <transition name="fade-transform" mode="out-in">
         <!-- or name="fade" -->
-        <!-- <router-view :key="key"></router-view> -->
+        <!-- <router-view :key="key"></router-view>
+        v-on:gccv1loading="childPreload" -->
         <router-view 
           @hook:beforeCreate="childPreload" 
-          v-on:gccv1loading="childPreload"
-          @childToParent="onChildLoad"
+          @tellAppMain="onChildLoad"
+          :page="page"
         />
       </transition>
     </section>
@@ -30,16 +31,12 @@
 export default {
   data () {
     return {
-      pageTitle: '',
-      pageSubtitle: ''
+      page: {}
     }
   },
   name: 'AppMain',
   props: [],
   computed: {
-    // key() {
-    //   return this.$route.name !== undefined ? this.$route.name + +new Date() : this.$route + +new Date()
-    // }
   },
   methods: {
     insertScriptTag(){
@@ -62,21 +59,21 @@ export default {
       }
     },
     childPreload() {
-      this.moveProgressBar()
       //alert("Child was mounted")
     },
-    // Triggered when `childToParent` event is emitted by the child.
-    onChildLoad(value) {
-      this.pageTitle = value
+    // Triggered when `tellAppMain` event is emitted by the child.
+    onChildLoad( pg ) {
+      this.page = pg
       this.insertScriptTag()
     },
-    emptyTitles() {
-       this.pageTitle = ''
+    emptyPage() {
+      this.moveProgressBar()
+      this.page = {}
     }
   },
   watch: {
     // call again the method if the route changes
-    '$route': 'emptyTitles'
+    '$route': 'emptyPage'
   },
   created() {
   },

@@ -8,7 +8,7 @@ h3, .h3{font-size:2.51rem}
 a,.text-danger,.help-block,.el-submenu__title,.jqx-widget-header{font-weight:bold}
 .help-block em{font-weight:normal;font-style:normal}
 
-/* .navigation,.el-submenu__title */li.el-menu-item.nav-item,li .el-submenu__title{font-size:1.4rem}
+li.el-menu-item.nav-item,li .el-submenu__title{font-size:1.4rem}
 .main-menu.menu-dark .navigation > li ul{font-size:1.2rem}
 .card .card-title{font-size:1.82rem;margin:0}
 .card .el-tabs__nav{float: right;}.card .el-tabs__item{line-height:50px}.card .fa{line-height:normal}
@@ -16,29 +16,20 @@ a,.text-danger,.help-block,.el-submenu__title,.jqx-widget-header{font-weight:bol
 label{text-transform:uppercase}
 
 /* LAYOUT */
-/* h5{margin-bottom: 2rem;} */
 input[type="radio"],input[type="checkbox"]{margin:-4px 1em 0 0;vertical-align: middle;}
-/* h4{margin:3.2rem 0 1rem} */
 label{margin:1.2rem 0 0.2rem}
 
 [class*=" ft-"], [class^=ft-],.ft-align-center:before{margin:0 0.5em}
 
-/* Hide the browser's default checkbox
-.checkbox input{opacity:0;cursor:pointer;} */
-/* and replace it with a dummy checkbox
-.checkbox .skin{position:absolute;cursor:pointer;height:1.5em;width:1.5em;margin:0 0 0 -2.5em;} */
-/* with a magical checkmark
-.checkbox .skin:after{content:"";position:absolute;left:0.5em;top:0.2em;width:5px;height:10px;border:solid white;border-width:0 3px 3px 0;-webkit-transform: rotate(45deg);-ms-transform: rotate(45deg);transform: rotate(45deg);} */
-.door{text-align:center}.door .col-12{padding:0}.door .mr-1{margin:1rem}
+.door,.form-actions.center{text-align:center}.door .col-12{padding:0}.door .mr-1{margin:1rem}
 .helpbox{text-align:center}.help{padding:1rem}
 .door label{display:none}label#rememberMe{display:inline;}.door fieldset p{width:70%;margin:auto}
 
 html body.fixed-navbar{padding-top:7.57rem}
-/*.header-navbar{min-height:7.57rem}*/
 body.vertical-layout.vertical-menu.menu-collapsed .navbar .navbar-brand{/*height:4.57em*/padding:0}
 .navbar-nav .d-md-none{margin:1.5rem}
 .pace .pace-progress{position:relative;margin-top:-0.4rem;height:0.4rem}
-/* .app-content.content{position:absolute} */
+.app-content.content .nav-top{padding:0.5rem 0}
 
 div[role="columnheader"],div[role="gridcell"]{line-height:initial}
 /* .jqx-grid-column-header,.jqx-grid-column-header div div,.jqx-grid-cell{} */
@@ -61,9 +52,11 @@ body.vertical-layout.vertical-menu.menu-expanded .content, body.vertical-layout.
 .nav a i:before{font-size:1.8em}
 .navigation > li > a > i:before{font-size:1.8em;margin:8px -7px 0;display:block}
 .input-group-text{padding:0.5rem 0.7rem;font-size:2rem}
+.fa{margin:0 0.8rem 0.5rem -0.9rem;font-size:2.1rem;width:2.6rem;text-align:center;}
+button .fa{margin:-0.1rem 0.1rem 0.2rem -0.5rem;font-size:1.6rem;line-height:1rem;vertical-align:middle;}
+button .fa.right{margin:-0.1rem -0.5rem 0rem 0.5rem}
 
 .card form.sign{margin:4rem 0}
-.fa{margin:0 0.8rem 0.5rem -0.9rem;font-size:2.1rem;width:2.6rem;text-align:center;}
 #patientInfo .card-profile-image{width:18.2%;position:relative;z-index:10;margin-top:-2.5%;}
 .avatar-sm{width: 64px;}
 .board{padding:1rem 1rem 0.5rem 1rem;text-align:center}
@@ -112,9 +105,10 @@ body.vertical-layout.vertical-menu.menu-expanded .main-menu,.navbar-nav .dropdow
 input:required::placeholder,.help-block{color:red}input:required{border-color:red !important}
 
 .navbar,.main-menu.menu-dark .navigation > li.active > a,.main-menu.menu-dark .navigation > li .active > a,button.btn,thead,a.btn,.board,.headboard.first,.el-menu-item.is-active,.jqx-widget-header{background:#067144;color:#D3FFC9 !important}
+button a:link,button a:visited{color:#D3FFC9 !important}
 .board h2,.headboard.first h2,.headboard.first h5{color:white}
 .main-menu.menu-dark .navigation > li.open > a,li.is-opened{background:#9CD192}
-.main-menu.menu-dark .navigation > li.active > a span,.main-menu.menu-dark .navigation > li .active > a{color:#D3FFC9 !important}
+.main-menu.menu-dark .navigation > li.active > a span,.main-menu.menu-dark .navigation > li .active > a,button .fa{color:#99d0bb !important}
 .main-menu.menu-dark .navigation > li.hover > a, .main-menu.menu-dark .navigation > li:hover > a, .main-menu.menu-dark .navigation > li.active > a,
 .main-menu.menu-dark .navigation > li.open .hover > a,.dropdown-item:hover,#app .el-submenu__title:hover,.page-link:hover,.table-striped tbody tr.odd.selected, .table-striped tbody tr.even.selected,.el-menu-item:hover{background:#8CB160 !important}
 body.vertical-layout.vertical-menu.menu-expanded .main-menu .navigation > li > a > i:before {
@@ -125,7 +119,6 @@ body.vertical-layout.vertical-menu.menu-expanded .main-menu .navigation > li > a
 .header-navbar{display:block; border-bottom:0.4rem solid #D3FFC9}.table thead th{border-bottom:0.2rem solid #D3FFC9;cursor:pointer}
 .dropdown-item:focus,.dropdown-item:hover{background:#3D5D51;cursor:pointer;color:#B2F61F}
 /* .main-menu.menu-dark .navigation > li.open > ul, */.main-menu ul ul{background:#D2FEC9;}
-
 
 .header-navbar a,.navbar-nav .dropdown-menu a:hover{color:wheat !important}
 .navbar-nav .dropdown-menu a,.help-block.good,.input-group-text{color:#097244 !important}

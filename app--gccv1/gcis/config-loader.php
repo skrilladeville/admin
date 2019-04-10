@@ -2,6 +2,11 @@
 /*
  * Tweak page configuration using available configuration settings
  */
+list( $page['baseName'],$page['number'] ) = explode( '--p',$pagename );
+if( $page['baseName'] == 'intake-form-creation' && $page['number'] ){
+	$page['qty'] = 8;
+	$page['titleSub'] = 'Step '. $page['number'] .' of '.$page['qty'];
+}
 
 // default page values
 $pageDefault = array( 
@@ -55,17 +60,17 @@ if( is_array( $dbcon['errors'] ) )
 		$page['navFile'] = $user['role'].'/nav.html.php';
 		$page['dataFile'] = $user['role'].'/data/'.$pagename.'.php';
 		
-		// customize default page values with config/* files
-		if( in_array( $pagename,array( 'login--v2','register--v2' ) ) ){
-			$page['configFile'] = __DIR__. '/common/config/'.$pagename.'.php';
-			$page['contentFile'] = __DIR__. '/common/content/'.$pagename.'.php';
-			$page['scriptEndFile'] = __DIR__. '/common/scripts/'.$pagename.'.js.php';
-		} else {
-			$page['configFile'] = __DIR__. '/'. $user['role'].'/config/'.$pagename.'.php';
-			$page['contentFile'] = __DIR__. '/'. $user['role'].'/content/'.$pagename.'.php';
-			$page['scriptEndFile'] = __DIR__. '/'. $user['role'].'/scripts/'.$pagename.'.js.php';
-		}
-		//echo 'cf: '.$page['configFile'];
+// customize default page values with config/* files
+if( in_array( $pagename,array( 'login--v2','register--v2' ) ) ){
+	$page['configFile'] = __DIR__. '/common/config/'.$pagename.'.php';
+	$page['contentFile'] = __DIR__. '/common/content/'.$pagename.'.php';
+	$page['scriptEndFile'] = __DIR__. '/common/scripts/'.$pagename.'.js.php';
+} else {
+	$page['configFile'] = __DIR__. '/'. $user['role'].'/config/'.$pagename.'.php';
+	$page['contentFile'] = __DIR__. '/'. $user['role'].'/content/'.$pagename.'.php';
+	$page['scriptEndFile'] = __DIR__. '/'. $user['role'].'/scripts/'.$pagename.'.js.php';
+}
+//echo 'cf: '.$page['configFile'];
 
 // NOTE: file_exists works using full path only
 if( file_exists( $page['configFile'] ) ){
@@ -128,3 +133,19 @@ if( is_array( $page['formDataStoreIn'] ) ){
 	// additional data e.g. for repeater forms
 	@include( $page['dataFile'] );
 }
+
+
+// just to save us the trouble
+if( $page['formSwitch'] )
+	// of finding out that formCheckBoxesRadios is needed by formSwitch
+	$page['formCheckBoxesRadios'] = 1;
+if( $page['errors'] ){
+	$pgErrPrepend = 'Error: ';
+	$page['titleContent'] = $pgErrPrepend . $pagename;
+}
+if( $page['number'] ){
+	$page['titleSub'] = 'Step ' . $page['number'] . ' of 8';
+	$pgNumAppend = ': ' . $page['number'];
+}
+if( $page['titleContent'] )
+	$page['title'] = $page['titleContent'] . $pgNumAppend . ' | GCIS';

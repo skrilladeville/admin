@@ -11,6 +11,7 @@
   </v-btn>
   <v-toolbar-title class="white--text">POS</v-toolbar-title>
     <v-spacer></v-spacer>
+    <rxSearchBar v-if="$route.params.transid"/>
     <v-toolbar-items>
       <v-btn flat>{{user.email}}</v-btn>
     </v-toolbar-items>
@@ -47,11 +48,14 @@ html body.fixed-navbar {
 
 <script>
 //import jwtToken from '~/helpers/jwt-token';
-
+import rxSearchBar from './rxSearchBar';
 
 
 export default {
-name:'Navbar',
+  name:'Navbar',
+ 	components: {
+     rxSearchBar
+  },
   data(){
     return{
         productCount:'',
@@ -59,19 +63,14 @@ name:'Navbar',
         drawer:null,
         plant_type:'',
         user:{},
-menu: [
-        { icon: 'home', title: 'Home',link:'' },
-        { icon: 'shopping_cart', title: 'Canabis',link:'' },
-        { icon: 'info', title: 'About',link:'t' }
-      ],
-      mini: false,
-      right: null
-        
-        
-        
+        menu: [
+          { icon: 'home', title: 'Home',link:'' },
+          { icon: 'shopping_cart', title: 'Canabis',link:'' },
+          { icon: 'info', title: 'About',link:'t' }
+        ],
+        mini: false,
+        right: null
     }
   },
-  
-  
 }
 </script>

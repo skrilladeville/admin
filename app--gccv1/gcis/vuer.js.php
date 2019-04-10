@@ -18,19 +18,19 @@ $page['jsFiles'] = array(
     'app-assets/js/core/libraries/jquery_ui/jquery-ui.min.js'
   ),
   /* 'dataTablesEdit' => array(
-    'assets\datatables-editor\js\jquery.dataTables.min.js',
-    'assets\datatables-editor\js\dataTables.buttons.min.js',
-    'assets\datatables-editor\js\dataTables.select.min.js',
-    'assets\datatables-editor\js\buttons.html5.min.js',
-    'assets\datatables-editor\js\buttons.print.min.js',
-    'assets\datatables-editor\js\dataTables.editor.min.js'
+    'assets/datatables-editor/js/jquery.dataTables.min.js',
+    'assets/datatables-editor/js/dataTables.buttons.min.js',
+    'assets/datatables-editor/js/dataTables.select.min.js',
+    'assets/datatables-editor/js/buttons.html5.min.js',
+    'assets/datatables-editor/js/buttons.print.min.js',
+    'assets/datatables-editor/js/dataTables.editor.min.js'
   ), */
   'formRepeater' => array(
     'app-assets/vendors/js/forms/repeater/jquery.repeater.min.js',
     'gcis/common/scripts/forms/form-repeater.js'
   ),
   'robustAdmin' => array(
-    'assets\js\robust-admin-init.js'
+    'assets/js/robust-admin-init.js'
   )
 );
 
@@ -38,7 +38,7 @@ header("Content-type: application/javascript; charset=utf-8");
 foreach( $page['jsFiles'] as $opt => $jsFiles ){
   if( $page[$opt] ){
     foreach( $jsFiles as $jsFile ){
-      $jsContent .= file_get_contents( base_path() .'\\app--gccv1\\'. $jsFile );
+      $jsContent .= file_get_contents( base_path() .'/app--gccv1/'. $jsFile );
     }
   }
 }

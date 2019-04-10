@@ -93,14 +93,14 @@ import EditTaxTier from '../pages/sales/EditTaxTier'
 import NewTaxTier from '../pages/sales/NewTaxTier'
 import ShipmentTax from '../pages/sales/ShipmentTax'
 
-/* Reports Folder */
+/* Reports Folder 
 import CustomerReport from '../pages/reports/CustomerReport'
 import ProductReport from '../pages/reports/ProductReport'
 import Reviews from '../pages/reports/Reviews'
 import SalesReport from '../pages/reports/SalesReport'
 import SearchTerm from '../pages/reports/SearchTerm'
 import ShoppingCard from '../pages/reports/ShoppingCard'
-import Tags from '../pages/reports/Tags'
+import Tags from '../pages/reports/Tags' */
 
 /* System Folder */
 import Configuration from '../pages/system/Configuration'

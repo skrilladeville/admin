@@ -37,9 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PaymentMethodsSeeder::class);
         $this->call(ShipmentsSeeder::class);
         $this->call(TransactionsSeeder::class);
-        $this->call(TaxRatesSeeder::class);
-        $this->call(TaxTierSeeder::class);
-        $this->call(ShipmentTaxSeeder::class);
         //$this->call(PrescriptionSeeder::class);
         //$this->call(DiagnosisSeeder::class);
         $this->call(ProductSeeder::class);
@@ -63,12 +60,12 @@ class DatabaseSeeder extends Seeder
         $table = ltrim( $dump,'gccv1_' );
         Schema::dropIfExists( $table );
 
-        if( $query = @file_get_contents( base_path( 'database\\dumps\\' ) . $dump. '.sql' ) ){
+        if( $query = @file_get_contents( base_path( 'database/dumps/' ) . $dump. '.sql' ) ){
             DB::unprepared( $query );
             print( '+ Imported '. $dump . '.sql.
 ');
         }else{
-            print( '! Failed seeding '. $dump .'.sql. Pls check if that file exists in database\dumps folder. 
+            print( '! Failed seeding '. $dump .'.sql. Pls check if that file exists in database/dumps folder. 
 ' );
         }
       }
